@@ -1,0 +1,68 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="Site1.master.vb" Inherits="SistemaDeParqueos.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Sistema de Parqueos - OIJ</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Cognate Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<link href="public/css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link href="public/css/style.css" rel='stylesheet' type='text/css' />
+	<script src="../public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../public/js/bootstrap.js"></script>
+	<link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Cabin:400,700,500,600' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Pacifico|Prata' rel='stylesheet' type='text/css'>
+	<script src="../public/js/main.js"></script>
+	<link href="public/css/animate.min.css" rel="stylesheet"> 
+	<script src="../public/js/wow.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <div class="top-bar w3agile-1" id="home">
+		<div class="container">
+			<div class="row">
+				<nav class="navbar navbar-default">
+					<div class="navbar-header wow fadeInLeft animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<h1><a href="index.aspx"><img src="../public/images/placa.png" alt=" "/></a></h1>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
+						<br>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="index.aspx">Ver parqueo</a></li>
+							<li><a href="index.aspx">Administrar parqueo</a></li>
+							<li><a href="index.aspx">Administrar solicitudes</a></li>
+							<li><a href="index.aspx">Registrar usuarios</a></li>
+							<li><a href="index.aspx">Reportes</a></li>
+							<li><a href="index.aspx">Cerrar sesión</li>
+							</ul>	
+							<div class="clearfix"> </div>	
+						</div>
+					</nav>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        <footer>
+			<p class="copy-right wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">Organismo de Investigaci&oacute;n Judicial - Poder Judicial - San Jos&eacute; - Costa Rica- Copyright ©</p><br><br>
+		</footer>
+    </div>
+    </form>
+</body>
+</html>
