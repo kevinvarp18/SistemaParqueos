@@ -10,7 +10,7 @@
     'FECHA DE CREACIÓN                               05-Octubre-2017
     'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
     '******************************************************************
-    'Declaracion de Varaiables.
+    'Declaracion de Varaiables. 
     Public gstrconnString As String
 
     'Declaracion de constrcutor.
