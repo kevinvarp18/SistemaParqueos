@@ -95,13 +95,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entidad\SistemaDeParqueos.BizLayer.vbproj">
+    <ProjectReference Include="..\Entidad\Parqueos.Dominio.vbproj">
       <Project>{4eafba6d-265c-49ac-8c3f-dc168d2c745d}</Project>
-      <Name>SistemaDeParqueos.BizLayer</Name>
+      <Name>Parqueos.Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Negocios\SistemaDeParqueos.Servicios.vbproj">
+    <ProjectReference Include="..\Negocios\Parqueos.Negocios.vbproj">
       <Project>{4f82073b-58f2-497d-80f7-7e94c1865824}</Project>
-      <Name>SistemaDeParqueos.Servicios</Name>
+      <Name>Parqueos.Negocios</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

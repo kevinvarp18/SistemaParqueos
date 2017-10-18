@@ -78,9 +78,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SP_Parqueo_Servicios.vb" />
-    <Compile Include="SP_Solicitud_Parqueo.vb" />
-    <Compile Include="SP_Usuario_Servicios.vb" />
+    <Compile Include="SP_Parqueo_Negocios.vb" />
+    <Compile Include="SP_Solicitud_Parqueo_Negocios.vb" />
+    <Compile Include="SP_Usuario_Negocios.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -102,13 +102,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Datos\SistemaDeParqueos.Acceso_a_Datos.vbproj">
+    <ProjectReference Include="..\Datos\Parqueos.Datos.vbproj">
       <Project>{ba68012b-c0a7-467e-8bd3-547d7e3e2fee}</Project>
-      <Name>SistemaDeParqueos.Acceso_a_Datos</Name>
+      <Name>Parqueos.Datos</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Entidad\SistemaDeParqueos.BizLayer.vbproj">
+    <ProjectReference Include="..\Entidad\Parqueos.Dominio.vbproj">
       <Project>{4eafba6d-265c-49ac-8c3f-dc168d2c745d}</Project>
-      <Name>SistemaDeParqueos.BizLayer</Name>
+      <Name>Parqueos.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

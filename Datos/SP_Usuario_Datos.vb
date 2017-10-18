@@ -1,11 +1,9 @@
-﻿Imports Datos
-
-Public Class SP_Parqueo_Servicios
+﻿Public Class SP_Usuario_Datos
     '**********************************************************************
     'NOMBRE DEL SISTEMA:  SistemaDeParqueos.
-    'NOMBRE DEL PAQUETE:  SistemaDeParqueos.Servicios.
+    'NOMBRE DEL PAQUETE:  SistemaDeParqueos.Acceso_a_Datos.
     'DESCRIPCIÓN:
-    ' Esta clase maneja la logica de negocios de las entidades del sistema.
+    ' Esta clase maneja las coneciones de las entidades del sistema.
 
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
@@ -13,10 +11,10 @@ Public Class SP_Parqueo_Servicios
     'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
     '******************************************************************
     'Declaracion de Varaiables.
-    Public parqueo_Acceso_a_Datos As SP_Parqueo_Acceso_a_Datos
+    Public gstrconnString As String
 
     'Declaracion de constrcutor.
     Public Sub New(gstrconnString As String)
-        Me.parqueo_Acceso_a_Datos = New SP_Parqueo_Acceso_a_Datos(gstrconnString)
+        Me.gstrconnString = gstrconnString
     End Sub
 End Class

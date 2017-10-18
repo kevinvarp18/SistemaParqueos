@@ -1,6 +1,6 @@
 ﻿Imports Datos
 
-Public Class SP_Usuario_Servicios
+Public Class SP_Parqueo_Negocios
     '**********************************************************************
     'NOMBRE DEL SISTEMA:  SistemaDeParqueos.
     'NOMBRE DEL PAQUETE:  SistemaDeParqueos.Servicios.
@@ -13,10 +13,10 @@ Public Class SP_Usuario_Servicios
     'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
     '******************************************************************
     'Declaracion de Varaiables.
-    Public parqueo_Acceso_a_Datos As SP_Usuario_Acceso_a_Datos
+    Public parqueo_Acceso_a_Datos As SP_Parqueo_Datos
 
     'Declaracion de constrcutor.
     Public Sub New(gstrconnString As String)
-        Me.parqueo_Acceso_a_Datos = New SP_Usuario_Acceso_a_Datos(gstrconnString)
+        Me.parqueo_Acceso_a_Datos = New SP_Parqueo_Datos(gstrconnString)
     End Sub
 End Class
