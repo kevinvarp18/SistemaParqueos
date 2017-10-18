@@ -128,7 +128,10 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="view\index.aspx" />
+    <Content Include="view\frm_AdministrarParqueo.aspx" />
+    <Content Include="view\frm_index.aspx" />
+    <Content Include="view\frm_IniciarSesion.aspx" />
+    <Content Include="view\frm_RegistrarVisitante.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -158,11 +161,32 @@
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="view\index.aspx.designer.vb">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="view\frm_AdministrarParqueo.aspx.designer.vb">
+      <DependentUpon>frm_AdministrarParqueo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="view\index.aspx.vb">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="view\frm_AdministrarParqueo.aspx.vb">
+      <DependentUpon>frm_AdministrarParqueo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_index.aspx.designer.vb">
+      <DependentUpon>frm_index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_index.aspx.vb">
+      <DependentUpon>frm_index.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_IniciarSesion.aspx.designer.vb">
+      <DependentUpon>frm_IniciarSesion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_IniciarSesion.aspx.vb">
+      <DependentUpon>frm_IniciarSesion.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_RegistrarVisitante.aspx.designer.vb">
+      <DependentUpon>frm_RegistrarVisitante.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_RegistrarVisitante.aspx.vb">
+      <DependentUpon>frm_RegistrarVisitante.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
