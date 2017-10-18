@@ -5,11 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SistemaDeParqueos", "SistemaDeParqueos\SistemaDeParqueos.vbproj", "{175FAB04-7BB5-45A3-B3DC-5F9D66AAE927}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SistemaDeParqueos.BizLayer", "Entidad\SistemaDeParqueos.BizLayer.vbproj", "{4EAFBA6D-265C-49AC-8C3F-DC168D2C745D}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Parqueos.Dominio", "Entidad\Parqueos.Dominio.vbproj", "{4EAFBA6D-265C-49AC-8C3F-DC168D2C745D}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SistemaDeParqueos.Acceso_a_Datos", "Datos\SistemaDeParqueos.Acceso_a_Datos.vbproj", "{BA68012B-C0A7-467E-8BD3-547D7E3E2FEE}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Parqueos.Datos", "Datos\Parqueos.Datos.vbproj", "{BA68012B-C0A7-467E-8BD3-547D7E3E2FEE}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SistemaDeParqueos.Servicios", "Negocios\SistemaDeParqueos.Servicios.vbproj", "{4F82073B-58F2-497D-80F7-7E94C1865824}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Parqueos.Negocios", "Negocios\Parqueos.Negocios.vbproj", "{4F82073B-58F2-497D-80F7-7E94C1865824}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

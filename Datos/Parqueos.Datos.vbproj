@@ -102,9 +102,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Entidad\SistemaDeParqueos.BizLayer.vbproj">
+    <ProjectReference Include="..\Entidad\Parqueos.Dominio.vbproj">
       <Project>{4eafba6d-265c-49ac-8c3f-dc168d2c745d}</Project>
-      <Name>SistemaDeParqueos.BizLayer</Name>
+      <Name>Parqueos.Dominio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
