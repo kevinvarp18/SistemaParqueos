@@ -78,9 +78,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SP_Parqueo_Servicios.vb" />
-    <Compile Include="SP_Solicitud_Parqueo.vb" />
-    <Compile Include="SP_Usuario_Servicios.vb" />
+    <Compile Include="SP_Parqueo_Negocios.vb" />
+    <Compile Include="SP_Solicitud_Parqueo_Negocios.vb" />
+    <Compile Include="SP_Usuario_Negocios.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

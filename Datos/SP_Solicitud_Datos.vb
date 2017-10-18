@@ -1,4 +1,4 @@
-﻿Public Class SP_Parqueo_Acceso_a_Datos
+﻿Public Class SP_Solicitud_Datos
     '**********************************************************************
     'NOMBRE DEL SISTEMA:  SistemaDeParqueos.
     'NOMBRE DEL PAQUETE:  SistemaDeParqueos.Acceso_a_Datos.
@@ -10,7 +10,7 @@
     'FECHA DE CREACIÓN                               05-Octubre-2017
     'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
     '******************************************************************
-    'Declaracion de Varaiables. 
+    'Declaracion de Varaiables.
     Public gstrconnString As String
 
     'Declaracion de constrcutor.
