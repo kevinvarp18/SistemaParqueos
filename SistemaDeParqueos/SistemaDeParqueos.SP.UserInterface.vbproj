@@ -128,13 +128,62 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="view\frm_AdministrarSolicitudes.aspx" />
+    <Content Include="view\frm_BrindarAcceso.aspx" />
+    <Content Include="view\frm_ListaVisitantes.aspx" />
+    <Content Include="view\frm_RegistrarUsuario.aspx" />
+    <Content Include="view\frm_Reporte.aspx" />
+    <Content Include="view\frm_SolicitarParqueo.aspx" />
     <Content Include="view\frm_AdministrarParqueo.aspx" />
     <Content Include="view\frm_index.aspx" />
     <Content Include="view\frm_IniciarSesion.aspx" />
     <Content Include="view\frm_RegistrarVisitante.aspx" />
+    <Content Include="view\frm_VerParqueo.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="view\frm_AdministrarSolicitudes.aspx.designer.vb">
+      <DependentUpon>frm_AdministrarSolicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_AdministrarSolicitudes.aspx.vb">
+      <DependentUpon>frm_AdministrarSolicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_BrindarAcceso.aspx.designer.vb">
+      <DependentUpon>frm_BrindarAcceso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_BrindarAcceso.aspx.vb">
+      <DependentUpon>frm_BrindarAcceso.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_ListaVisitantes.aspx.designer.vb">
+      <DependentUpon>frm_ListaVisitantes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_ListaVisitantes.aspx.vb">
+      <DependentUpon>frm_ListaVisitantes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_RegistrarUsuario.aspx.designer.vb">
+      <DependentUpon>frm_RegistrarUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_RegistrarUsuario.aspx.vb">
+      <DependentUpon>frm_RegistrarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_Reporte.aspx.designer.vb">
+      <DependentUpon>frm_Reporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_Reporte.aspx.vb">
+      <DependentUpon>frm_Reporte.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_SolicitarParqueo.aspx.designer.vb">
+      <DependentUpon>frm_SolicitarParqueo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_SolicitarParqueo.aspx.vb">
+      <DependentUpon>frm_SolicitarParqueo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -187,6 +236,13 @@
     </Compile>
     <Compile Include="view\frm_RegistrarVisitante.aspx.vb">
       <DependentUpon>frm_RegistrarVisitante.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_VerParqueo.aspx.designer.vb">
+      <DependentUpon>frm_VerParqueo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_VerParqueo.aspx.vb">
+      <DependentUpon>frm_VerParqueo.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
