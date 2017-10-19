@@ -25,7 +25,7 @@
                     <asp:TextBox ID="tbModelo" type="text" required="" runat="server" style="margin-left:8.5%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblDepartamento" runat="server" Text="Departamento:"></asp:Label>
                     <asp:DropDownList ID="DwnLstDepartamento" runat="server" style="margin-left:4.3%; width:27%;" AutoPostBack="false" ></asp:DropDownList><br />
-                    <asp:Label ID="lblInstitucion" runat="server" Text="Institucion:"></asp:Label>
+                    <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>
                     <asp:TextBox ID="tbInstitucion" type="text" required="" runat="server" style="margin-left:6.9%; width:27%;"></asp:TextBox><br />
                     <asp:Button ID="btnSolicitar" runat="server" CssClass="singleTextBox" OnClick="btnSolicitar_Click" Text="Solicitar" />
                     <br />

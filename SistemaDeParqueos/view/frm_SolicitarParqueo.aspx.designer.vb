@@ -185,13 +185,13 @@ Partial Public Class frm_SolicitarParqueo
     Protected WithEvents DwnLstDepartamento As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''lblInstitucion control.
+    '''lblNombre control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblInstitucion As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblNombre As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''tbInstitucion control.
