@@ -36,5 +36,63 @@ Public Class SP_Parqueo_Datos
 
         Return parqueo
     End Function
+    Public Function actualizarParqueo(parqueo As Parqueo) As Parqueo
+
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlStoredProcedure As [String] = "PA_ActualizaParqueo"
+        Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
+
+        cmdInsert.Parameters.Add(New SqlParameter("@NumeroParqueo", parqueo.GintIdentificadorSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Estado", parqueo.GintDisponibleSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Tipo", parqueo.GstrTipoSG))
+
+        cmdInsert.Connection.Open()
+        cmdInsert.ExecuteNonQuery()
+        cmdInsert.Connection.Close()
+
+        Return parqueo
+    End Function
+
+    Public Function eliminarParqueo(parqueo As Parqueo) As Parqueo
+
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlStoredProcedure As [String] = "PA_EliminaParqueo"
+        Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
+
+        cmdInsert.Parameters.Add(New SqlParameter("@NumeroParqueo", parqueo.GintIdentificadorSG))
+
+        cmdInsert.Connection.Open()
+        cmdInsert.ExecuteNonQuery()
+        cmdInsert.Connection.Close()
+
+        Return parqueo
+    End Function
+
+    Public Function obtenerParqueo() As LinkedList(Of Parqueo)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_VerParqueo;"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Parqueo")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Parqueo").Rows
+        Dim parqueo As New LinkedList(Of Parqueo)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim parqueoActual As New Parqueo()
+            parqueoActual.GintIdentificadorSG = Integer.Parse(currentRow("TN_Identificador_TSP_Parqueo").ToString())
+            parqueoActual.GintDisponibleSG = Byte.Parse(currentRow("TB_Disponible_TSP_Parqueo").ToString())
+            parqueoActual.GstrTipoSG = currentRow("TC_Tipo_TSP_Parqueo").ToString()
+
+            parqueo.AddLast(parqueoActual)
+        Next
+        Return Parqueo
+    End Function
 
 End Class
