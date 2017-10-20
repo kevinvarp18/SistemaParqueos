@@ -6,6 +6,8 @@ Public Class administrarParqueo
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        DwnLstTipos.Items.Clear()
+        DwnLstEstado.Items.Clear()
         DwnLstTipos.Items.Add("Seleccione una opción")
         DwnLstTipos.Items.Add("Jefatura")
         DwnLstTipos.Items.Add("PIP")
@@ -28,7 +30,6 @@ Public Class administrarParqueo
             Blnestado = 1
         End If
         parqueoNegocios.insertarParqueo(New Parqueo(0, Blnestado, DwnLstTipos.Text))
-        tbEspacio.Text = "Registro"
     End Sub
 
     Protected Sub btnActualizar_Click(sender As Object, e As EventArgs) Handles btnActualizar.Click
@@ -38,15 +39,13 @@ Public Class administrarParqueo
         If (DwnLstEstado.Text.Equals("Habilitado")) Then
             Blnestado = 1
         End If
-        parqueoNegocios.actualizarParqueo(New Parqueo(tbEspacio.Text, Blnestado, DwnLstTipos.Text))
-        tbEspacio.Text = "Actualizado"
+        parqueoNegocios.actualizarParqueo(New Parqueo(DwnEspacio.Text, Blnestado, DwnLstTipos.Text))
     End Sub
 
     Protected Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim Blnestado As Byte = 0
         Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
-        parqueoNegocios.eliminarParqueo(New Parqueo(tbEspacio.Text, 0, ""))
-        tbEspacio.Text = "Eliminado"
+        parqueoNegocios.eliminarParqueo(New Parqueo(DwnEspacio.Text, 0, ""))
     End Sub
 End Class

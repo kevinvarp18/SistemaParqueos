@@ -32,13 +32,13 @@ Partial Public Class administrarParqueo
     Protected WithEvents lblNumEspacio As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''tbEspacio control.
+    '''DwnEspacio control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbEspacio As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents DwnEspacio As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''lblTipo control.

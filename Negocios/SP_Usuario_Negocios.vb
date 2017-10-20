@@ -13,10 +13,10 @@ Public Class SP_Usuario_Negocios
     'FECHA DE ULTIMA ACTUALIZACIÓN:                  19-Octubre-2017
     '******************************************************************
     'Declaracion de Varaiables.
-    Public parqueo_Datos As SP_Usuario_Datos
+    Public solicitud_Acceso_a_Datos As SP_Usuario_Datos
 
     'Declaracion de constrcutor.
     Public Sub New(gstrconnString As String)
-        Me.parqueo_Datos = New SP_Usuario_Datos(gstrconnString)
+        Me.solicitud_Acceso_a_Datos = New SP_Usuario_Datos(gstrconnString)
     End Sub
 End Class
