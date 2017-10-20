@@ -10,13 +10,13 @@ Public Class SP_Usuario_Negocios
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  19-Octubre-2017
     '******************************************************************
     'Declaracion de Varaiables.
-    Public parqueo_Acceso_a_Datos As SP_Usuario_Datos
+    Public parqueo_Datos As SP_Usuario_Datos
 
     'Declaracion de constrcutor.
     Public Sub New(gstrconnString As String)
-        Me.parqueo_Acceso_a_Datos = New SP_Usuario_Datos(gstrconnString)
+        Me.parqueo_Datos = New SP_Usuario_Datos(gstrconnString)
     End Sub
 End Class
