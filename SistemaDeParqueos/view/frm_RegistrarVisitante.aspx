@@ -23,6 +23,10 @@
                     <asp:DropDownList ID="DwnLstTipoIdentificacion" runat="server" AutoPostBack="false" style="margin-left: 6.7%; width:27%;"></asp:DropDownList><br />
                     <asp:Label ID="lblIdentificacion" runat="server" Text="Identificación:"></asp:Label>
                     <asp:TextBox ID="tbIdentificacion" type="text" required="" runat="server" style="width: 27%;"></asp:TextBox><br />
+                    <asp:Label ID="lblDepartamento" runat="server" Text="Departamento:"></asp:Label>
+                    <asp:DropDownList ID="DwnLstDepartamento" runat="server" style="margin-left:4.3%; width:27%;" AutoPostBack="false" ></asp:DropDownList><br />
+                    <asp:Label ID="Label1" runat="server" Text="Nombre:"></asp:Label>
+                    <asp:TextBox ID="tbInstitucion" type="text" required="" runat="server" style="margin-left:6.9%; width:27%;"></asp:TextBox><br />
                     <asp:Button ID="btnRegistrar" runat="server" CssClass="singleTextBox" OnClick="btnRegistrar_Click" Text="Registrarse" />
                     <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
                     <asp:ScriptManager ID="ScriptManager2" runat="server">
