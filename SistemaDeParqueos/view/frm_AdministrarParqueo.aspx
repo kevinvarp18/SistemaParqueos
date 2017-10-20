@@ -8,7 +8,7 @@
                 <ContentTemplate>
                     <h3>Administrar Parqueo</h3>
                     <asp:Label ID="lblNumEspacio" runat="server" Text="Número Espacio:"></asp:Label>
-                    <asp:DropDownList ID="DwnEspacio" runat="server" style="margin-left: 8.4%;" AutoPostBack="false"></asp:DropDownList><br />
+                    <asp:DropDownList ID="DwnEspacio" runat="server" style="margin-left: 1%;" AutoPostBack="false"></asp:DropDownList><br />
                     <asp:Label ID="lblTipo" runat="server" Text="Tipo:"></asp:Label>
                     <asp:DropDownList ID="DwnLstTipos" runat="server" style="margin-left: 8.4%;" AutoPostBack="false"></asp:DropDownList><br />
                     <asp:Label ID="lblEstado" runat="server" Text="Estado:"></asp:Label>

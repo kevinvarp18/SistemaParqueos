@@ -86,8 +86,8 @@ Public Class SP_Parqueo_Datos
 
         For Each currentRow As DataRow In dataRowCollection
             Dim parqueoActual As New Parqueo()
-            parqueoActual.GintIdentificadorSG = Integer.Parse(currentRow("TN_Identificador_TSP_Parqueo").ToString())
-            parqueoActual.GintDisponibleSG = Byte.Parse(currentRow("TB_Disponible_TSP_Parqueo").ToString())
+            parqueoActual.GintIdentificadorSG = Long.Parse(currentRow("TN_Identificador_TSP_Parqueo").ToString())
+            parqueoActual.GintDisponibleSG = Boolean.Parse(currentRow("TB_Disponible_TSP_Parqueo").ToString())
             parqueoActual.GstrTipoSG = currentRow("TC_Tipo_TSP_Parqueo").ToString()
 
             parqueo.AddLast(parqueoActual)

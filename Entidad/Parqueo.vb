@@ -12,8 +12,8 @@
     '******************************************************************
 
     'Declaracion de variables.
-    Private gintIdentificador As Integer
-    Private gintDisponible As Byte
+    Private gintIdentificador As Long
+    Private gintDisponible As Boolean
     Private gstrTipo As String
 
     'Declaracion de constructor default.
@@ -24,27 +24,27 @@
     End Sub
 
     'Declaracion de constructor sobrecargado.
-    Public Sub New(gintIdentificador As Integer, gintDisponible As Byte, gstrTipo As String)
+    Public Sub New(gintIdentificador As Long, gintDisponible As Boolean, gstrTipo As String)
         Me.gintIdentificador = gintIdentificador
         Me.gintDisponible = gintDisponible
         Me.gstrTipo = gstrTipo
     End Sub
 
     'Declaracion de set y Get.
-    Public Property GintIdentificadorSG As Integer
+    Public Property GintIdentificadorSG As Long
         Get
             Return gintIdentificador
         End Get
-        Set(value As Integer)
+        Set(value As Long)
             gintIdentificador = value
         End Set
     End Property
 
-    Public Property GintDisponibleSG As Byte
+    Public Property GintDisponibleSG As Boolean
         Get
             Return gintDisponible
         End Get
-        Set(value As Byte)
+        Set(value As Boolean)
             gintDisponible = value
         End Set
     End Property
