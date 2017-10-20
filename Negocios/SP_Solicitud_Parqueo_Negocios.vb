@@ -1,4 +1,5 @@
 ﻿Imports Datos
+Imports Entidad
 
 Public Class SP_Solicitud_Parqueo_Negocios
     '**********************************************************************
@@ -13,10 +14,17 @@ Public Class SP_Solicitud_Parqueo_Negocios
     'FECHA DE ULTIMA ACTUALIZACIÓN:                  19-Octubre-2017
     '******************************************************************
     'Declaracion de Varaiables.
-    Public parqueo_Datos As SP_Solicitud_Datos
+    Public solicitud_Acceso_a_Datos As SP_Solicitud_Datos
 
     'Declaracion de constrcutor.
     Public Sub New(gstrconnString As String)
-        Me.parqueo_Datos = New SP_Solicitud_Datos(gstrconnString)
+        Me.solicitud_Acceso_a_Datos = New SP_Solicitud_Datos(gstrconnString)
     End Sub
+    Public Function insertarSolicitud(solicitud As Solicitud) As Solicitud
+        Return Me.solicitud_Acceso_a_Datos.insertarSolicitud(solicitud)
+    End Function
+    Public Function obtenerSolicitudes() As LinkedList(Of Solicitud)
+        Return Me.solicitud_Acceso_a_Datos.obtenerSolicitud()
+    End Function
+
 End Class
