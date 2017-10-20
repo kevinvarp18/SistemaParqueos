@@ -49,7 +49,7 @@
 
                                         If String.Equals(Session("Login"), "N") Then
                                     %>
-                                    <li><a href="frm_IniciarSesion.aspx">Iniciar Sesión</a></li>
+                                    <li><a href="frm_AdministrarParqueo.aspx">Iniciar Sesión</a></li>
                                     <li><a href="frm_RegistrarVisitante.aspx">Registrarse</a></li>
                                     <%
                 Else
