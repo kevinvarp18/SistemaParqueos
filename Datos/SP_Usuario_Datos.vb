@@ -24,7 +24,7 @@ Public Class SP_Usuario_Datos
     Public Function insertarOficial(oficial As Oficial) As Boolean
 
         Dim connection As New SqlConnection(Me.gstrconnString)
-        Dim sqlStoredProcedure As [String] = "PA_InsertaOficial"
+        Dim sqlStoredProcedure As [String] = "PA_InsertaUsuarios"
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
 

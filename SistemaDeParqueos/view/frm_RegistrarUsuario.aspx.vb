@@ -1,4 +1,6 @@
-﻿Imports Entidad
+﻿Imports System.Web.Configuration
+Imports Entidad
+Imports Negocios
 
 Public Class frm_RegistrarUsuario
     Inherits System.Web.UI.Page
@@ -13,13 +15,18 @@ Public Class frm_RegistrarUsuario
         Dim oficial As New Oficial
 
         oficial.CedulaOficialSG = tbCedula.Text
-        oficial.NombreOficialSG = tbCedula.Text
-        oficial.ApellidosOficialSG = tbCedula.Text
-        oficial.CorreoOficialSG = tbCedula.Text
-        oficial.ContraseniaOficialSG = tbCedula.Text
-        oficial.RolOficialSG = tbCedula.Text
+        oficial.NombreOficialSG = tbNombre.Text
+        oficial.ApellidosOficialSG = tbApelidos.Text
+        oficial.CorreoOficialSG = tbEmail.Text
+        oficial.ContraseniaOficialSG = tbContrasena.Text
+        oficial.RolOficialSG = DwnLstRol.Text
 
+        Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+        Dim usuarioNegocios As New SP_Usuario_Negocios(strconnectionString)
 
+        If usuarioNegocios.insertarOficial(oficial) Then
+            lblMensaje.Text = "Se ha insertado correctamente el " + oficial.RolOficialSG
+        End If
 
 
     End Sub
