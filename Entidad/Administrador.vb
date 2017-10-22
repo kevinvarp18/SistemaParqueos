@@ -1,14 +1,15 @@
 ﻿Public Class Administrador
+    Inherits Usuario
     '**********************************************************************
     'NOMBRE DEL SISTEMA:  SistemaDeParqueos.
-    'NOMBRE DEL PAQUETE:  SistemaDeParqueos.BizLayer.
+    'NOMBRE DEL PAQUETE:  SistemaDeParqueos.Dominio.
     'DESCRIPCIÓN:
     ' Esta clase de las entidades del sistema.
 
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  21-Octubre-2017
     '******************************************************************
 
     'Declaracion de Variables.
@@ -20,8 +21,9 @@
     End Sub
 
     'Declaracion de Constructor Sobrecargado.
-    Public Sub New(gintAdministrador As Integer)
-        Me.gintAdministrador = gintAdministrador
+    Public Sub New(gstrId As String, gstrNombre As String, gstrApellido As String, gstrCorreo As String,
+                   gstrContrasenna As String, gstrTipoId As String, gstrTipoUsuario As String)
+        MyBase.New(gstrId, gstrNombre, gstrApellido, gstrCorreo, gstrContrasenna, gstrTipoId, gstrTipoUsuario)
     End Sub
 
     'Declaracion set y get.

@@ -4,7 +4,7 @@ Imports Entidad
 Public Class SP_Usuario_Negocios
     '**********************************************************************
     'NOMBRE DEL SISTEMA:  SistemaDeParqueos.
-    'NOMBRE DEL PAQUETE:  SistemaDeParqueos.Servicios.
+    'NOMBRE DEL PAQUETE:  SistemaDeParqueos.Negocios.
     'DESCRIPCIÓN:
     ' Esta clase maneja la logica de negocios de las entidades del sistema.
 
@@ -21,12 +21,16 @@ Public Class SP_Usuario_Negocios
         Me.usuario_Acceso_a_Datos = New SP_Usuario_Datos(gstrconnString)
     End Sub
 
-    Public Function insertarOficial(tipoId As Tipoid, oficial As Oficial) As Boolean
-        Return Me.usuario_Acceso_a_Datos.insertarOficial(tipoId, oficial)
+    Public Function insertarOficial(oficial As Oficial) As Boolean
+        Return Me.usuario_Acceso_a_Datos.insertarOficial(oficial)
     End Function
 
     Public Function insertarVisitante(visitante As Visitante) As Boolean
         Return Me.usuario_Acceso_a_Datos.insertarVisitante(visitante)
+    End Function
+
+    Public Function insertarAdministrador(administrador As Administrador) As Boolean
+        Return Me.usuario_Acceso_a_Datos.insertarAdministrador(administrador)
     End Function
     Public Function obtenerUsuarios(correo As String, contrasenna As String) As LinkedList(Of Usuario)
         Return Me.usuario_Acceso_a_Datos.obtenerUsuarios(correo, contrasenna)

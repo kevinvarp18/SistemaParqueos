@@ -37,7 +37,7 @@
     End Sub
 
     'Set y get.
-    Public Property TelefonoSG As Integer
+    Public Property GintTelefonoSG As Integer
         Get
             Return gintTelefono
         End Get
@@ -46,7 +46,7 @@
         End Set
     End Property
 
-    Public Property UbicacionSG As String
+    Public Property GstrUbicacionSG As String
         Get
             Return gstrUbicacion
         End Get
@@ -55,7 +55,7 @@
         End Set
     End Property
 
-    Public Property TipoVisitanteSG As String
+    Public Property GstrTipoVisitanteSG As String
         Get
             Return gstrTipoVisitante
         End Get

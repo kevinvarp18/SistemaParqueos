@@ -21,7 +21,7 @@ Public Class SP_Usuario_Datos
         Me.gstrconnString = gstrconnString
     End Sub
 
-    Public Function insertarOficial(tipoId As Tipoid, oficial As Oficial) As Boolean
+    Public Function insertarOficial(oficial As Oficial) As Boolean
 
 
         Dim connection As New SqlConnection(Me.gstrconnString)
@@ -29,13 +29,36 @@ Public Class SP_Usuario_Datos
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
 
-        cmdInsert.Parameters.Add(New SqlParameter("@Tipo", tipoId.GstrTipoSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Cedula", tipoId.GstrIdentificacionSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Nombre", oficial.NombreOficialSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Apellidos", oficial.ApellidosOficialSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Correo", oficial.CorreoOficialSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Contrasenia", oficial.ContraseniaOficialSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Rol", oficial.RolOficialSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Tipo", oficial.GstrTipoIdSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Cedula", oficial.GstrApellidoSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Nombre", oficial.GstrNombreSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Apellidos", oficial.GstrApellidoSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Correo", oficial.GstrCorreoSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Contrasenia", oficial.GstrContrasennaSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Rol", oficial.GstrTipoIdSG))
+
+        cmdInsert.Connection.Open()
+        cmdInsert.ExecuteNonQuery()
+        cmdInsert.Connection.Close()
+
+        Return True
+    End Function
+
+    Public Function insertarAdministrador(administrador As Administrador) As Boolean
+
+
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlStoredProcedure As [String] = "PA_InsertaUsuarios"
+        Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
+
+        cmdInsert.Parameters.Add(New SqlParameter("@Tipo", administrador.GstrTipoIdSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Cedula", administrador.GstrApellidoSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Nombre", administrador.GstrNombreSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Apellidos", administrador.GstrApellidoSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Correo", administrador.GstrCorreoSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Contrasenia", administrador.GstrContrasennaSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Rol", administrador.GstrTipoIdSG))
 
         cmdInsert.Connection.Open()
         cmdInsert.ExecuteNonQuery()
@@ -54,10 +77,10 @@ Public Class SP_Usuario_Datos
         cmdInsert.Parameters.Add(New SqlParameter("@apellidos", visitante.GstrApellidoSG))
         cmdInsert.Parameters.Add(New SqlParameter("@correo", visitante.GstrCorreoSG))
         cmdInsert.Parameters.Add(New SqlParameter("@contrasena", visitante.GstrContrasennaSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@tel", visitante.gintTelefono))
-        cmdInsert.Parameters.Add(New SqlParameter("@ubicacion", visitante.gstrUbicacion))
-        cmdInsert.Parameters.Add(New SqlParameter("@tipoVisitante", visitante.gstrTipoVisitante))
-        cmdInsert.Parameters.Add(New SqlParameter("@tipoId", visitante.gstrTipoId))
+        cmdInsert.Parameters.Add(New SqlParameter("@tel", visitante.gintTelefonoSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@ubicacion", visitante.GstrUbicacionSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@tipoVisitante", visitante.GstrTipoVisitanteSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@tipoId", visitante.GstrTipoIdSG))
         cmdInsert.Parameters.Add(New SqlParameter("@id", visitante.gstrId))
         cmdInsert.Parameters.Add(New SqlParameter("@procedencia", visitante.gstrProcedencia))
         cmdInsert.Connection.Open()
