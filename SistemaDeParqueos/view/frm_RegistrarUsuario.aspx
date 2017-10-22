@@ -7,7 +7,10 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Registrar Usuario</h3>
-                    <asp:Label ID="lblCedula" runat="server" Text="Cédula:"></asp:Label>
+                    <asp:Label ID="lblTipo" runat="server" Text="Tipo:"></asp:Label>
+                    <asp:DropDownList ID="DwnLstTipoIdentificacion" runat="server" AutoPostBack="false" style="margin-left: 6.7%; width:27%;"></asp:DropDownList><br />
+
+                    <asp:Label ID="lblCedula" runat="server" Text="Identificacion:"></asp:Label>
                     <asp:TextBox ID="tbCedula" type="text" required="" runat="server" style="margin-left:3.8%; width:27%;"></asp:TextBox><br />
                     
                     <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>

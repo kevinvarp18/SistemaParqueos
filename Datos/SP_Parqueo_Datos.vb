@@ -16,7 +16,7 @@ Public Class SP_Parqueo_Datos
     'Declaracion de Varaiables. 
     Public gstrconnString As String
 
-    'Declaracion de constrcutor.
+    'Declaracion de constructor.
     Public Sub New(gstrconnString As String)
         Me.gstrconnString = gstrconnString
     End Sub

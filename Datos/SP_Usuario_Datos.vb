@@ -21,19 +21,21 @@ Public Class SP_Usuario_Datos
         Me.gstrconnString = gstrconnString
     End Sub
 
-    Public Function insertarOficial(oficial As Oficial) As Boolean
+    Public Function insertarOficial(tipoId As Tipoid, oficial As Oficial) As Boolean
+
 
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_InsertaUsuarios"
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
 
-        cmdInsert.Parameters.Add(New SqlParameter("@Cedula", oficial.CedulaOficialSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Nombre", oficial.CedulaOficialSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Apellidos", oficial.CedulaOficialSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Correo", oficial.CedulaOficialSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Contrasenia", oficial.CedulaOficialSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@Rol", oficial.CedulaOficialSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Tipo", tipoId.GstrTipoSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Cedula", tipoId.GstrIdentificacionSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Nombre", oficial.NombreOficialSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Apellidos", oficial.ApellidosOficialSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Correo", oficial.CorreoOficialSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Contrasenia", oficial.ContraseniaOficialSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@Rol", oficial.RolOficialSG))
 
         cmdInsert.Connection.Open()
         cmdInsert.ExecuteNonQuery()
