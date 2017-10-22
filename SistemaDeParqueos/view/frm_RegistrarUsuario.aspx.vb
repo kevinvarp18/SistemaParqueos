@@ -8,17 +8,22 @@ Public Class frm_RegistrarUsuario
     Dim connectionString As String
     Dim usuarioNegocios As SP_Usuario_Negocios
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
+        If String.Equals(Session("Usuario"), "a") Then
+            Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
 
-        DwnLstRol.Items.Add("Seleccione una opción")
-        DwnLstRol.Items.Add("Administrador")
-        DwnLstRol.Items.Add("Oficial de Seguridad")
+            DwnLstRol.Items.Add("Seleccione una opción")
+            DwnLstRol.Items.Add("Administrador")
+            DwnLstRol.Items.Add("Oficial de Seguridad")
 
-        DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
-        DwnLstTipoIdentificacion.Items.Add("Numero de Cedula")
-        DwnLstTipoIdentificacion.Items.Add("Pasaporte")
-        DwnLstTipoIdentificacion.Items.Add("Licencia")
+            DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
+            DwnLstTipoIdentificacion.Items.Add("Numero de Cedula")
+            DwnLstTipoIdentificacion.Items.Add("Pasaporte")
+            DwnLstTipoIdentificacion.Items.Add("Licencia")
+        Else
+            Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+        End If
     End Sub
 
     Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click

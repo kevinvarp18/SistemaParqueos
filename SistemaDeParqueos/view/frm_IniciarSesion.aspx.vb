@@ -8,8 +8,17 @@ Public Class loginView
     Dim connectionString As String
     Dim usuarioNegocios As SP_Usuario_Negocios
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
+        If String.Equals(Session("Usuario"), "N") Then
+            Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
+            Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_IniciarSesion.aspx")
+        Else
+            Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+
+        End If
+
     End Sub
 
     Protected Sub btnIngresar_Click(sender As Object, e As EventArgs) Handles btnIngresar.Click

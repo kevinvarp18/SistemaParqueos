@@ -9,16 +9,21 @@ Public Class registrarVisitante
     Dim usuarioNegocios As SP_Usuario_Negocios
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
+        If String.Equals(Session("Usuario"), "a") Then
+            Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
 
-        DwnLstDepartamento.Items.Add("Seleccione una opción")
-        DwnLstDepartamento.Items.Add("Externo")
-        DwnLstDepartamento.Items.Add("Interno")
-        DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
-        DwnLstTipoIdentificacion.Items.Add("Cédula")
-        DwnLstTipoIdentificacion.Items.Add("Pasaporte")
-        DwnLstTipoIdentificacion.Items.Add("Licencia de conducir")
+            DwnLstDepartamento.Items.Add("Seleccione una opción")
+            DwnLstDepartamento.Items.Add("Externo")
+            DwnLstDepartamento.Items.Add("Interno")
+            DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
+            DwnLstTipoIdentificacion.Items.Add("Cédula")
+            DwnLstTipoIdentificacion.Items.Add("Pasaporte")
+            DwnLstTipoIdentificacion.Items.Add("Licencia de conducir")
+        Else
+            Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+        End If
     End Sub
 
     Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
