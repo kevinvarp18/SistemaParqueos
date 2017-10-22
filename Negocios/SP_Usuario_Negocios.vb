@@ -11,7 +11,7 @@ Public Class SP_Usuario_Negocios
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  21-Octubre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public usuario_Acceso_a_Datos As SP_Usuario_Datos
@@ -25,5 +25,10 @@ Public Class SP_Usuario_Negocios
         Return Me.usuario_Acceso_a_Datos.insertarOficial(oficial)
     End Function
 
-
+    Public Function insertarVisitante(visitante As Visitante) As Boolean
+        Return Me.usuario_Acceso_a_Datos.insertarVisitante(visitante)
+    End Function
+    Public Function obtenerUsuarios(correo As String, contrasenna As String) As LinkedList(Of Usuario)
+        Return Me.usuario_Acceso_a_Datos.obtenerUsuarios(correo, contrasenna)
+    End Function
 End Class

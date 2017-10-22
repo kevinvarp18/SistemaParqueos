@@ -8,44 +8,47 @@
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  21-Octubre-2017
     '******************************************************************
 
     'Declaracionde Variables.
-    Private gintId As Integer
-    Private gstrNombre As String
-    Private gstrApellido As String
-    Private gstrCorreo As String
-    Private gstrContrasenna As String
-    Private gstrTipoUsuario As String
+    Public gstrId As String
+    Public gstrNombre As String
+    Public gstrApellido As String
+    Public gstrCorreo As String
+    Public gstrContrasenna As String
+    Public gstrTipoId As String
+    Public gstrTipoUsuario As String
 
     'Declarion de constructor default.
     Public Sub New()
-        Me.gintId = 0
+        Me.gstrId = ""
         Me.gstrNombre = ""
         Me.gstrApellido = ""
         Me.gstrCorreo = ""
         Me.gstrContrasenna = ""
+        Me.gstrTipoId = ""
         Me.gstrTipoUsuario = ""
     End Sub
 
     'Declaraccion Constructor Sobrecargado.
-    Public Sub New(gintId As Integer, gstrNombre As String, gstrApellido As String, gstrCorreo As String, gstrContrasenna As String, gstrTipoUsuario As String)
-        Me.gintId = gintId
+    Public Sub New(gstrId As String, gstrNombre As String, gstrApellido As String, gstrCorreo As String, gstrContrasenna As String, gstrTipoId As String, gstrTipoUsuario As String)
+        Me.gstrId = gstrId
         Me.gstrNombre = gstrNombre
         Me.gstrApellido = gstrApellido
         Me.gstrCorreo = gstrCorreo
         Me.gstrContrasenna = gstrContrasenna
+        Me.gstrTipoId = gstrTipoId
         Me.gstrTipoUsuario = gstrTipoUsuario
     End Sub
 
     'Set y Get.
-    Public Property GintIdSG As Integer
+    Public Property GintIdSG As String
         Get
-            Return gintId
+            Return gstrId
         End Get
-        Set(value As Integer)
-            gintId = value
+        Set(value As String)
+            gstrId = value
         End Set
     End Property
 
@@ -82,6 +85,15 @@
         End Get
         Set(value As String)
             gstrContrasenna = value
+        End Set
+    End Property
+
+    Public Property GstrTipoIdSG As String
+        Get
+            Return gstrTipoId
+        End Get
+        Set(value As String)
+            gstrTipoId = value
         End Set
     End Property
 

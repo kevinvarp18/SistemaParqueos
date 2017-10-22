@@ -13,7 +13,7 @@
                     <asp:Label ID="lblContrasena" runat="server" Text="Contraseña:"></asp:Label>
                     <asp:TextBox ID="tbContrasena" type="password" required="" runat="server"></asp:TextBox><br />
                     <asp:Button ID="btnIngresar" runat="server" CssClass="singleTextBox" OnClick="btnIngresar_Click" Text="Ingresar" />
-                    <br />
+                    <br /><br />
                     <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
                     <asp:ScriptManager ID="ScriptManager2" runat="server">
                     </asp:ScriptManager>
