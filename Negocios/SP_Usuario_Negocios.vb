@@ -21,8 +21,8 @@ Public Class SP_Usuario_Negocios
         Me.usuario_Acceso_a_Datos = New SP_Usuario_Datos(gstrconnString)
     End Sub
 
-    Public Function insertarOficial(oficial As Oficial) As Boolean
-        Return Me.usuario_Acceso_a_Datos.insertarOficial(oficial)
+    Public Function insertarOficial(tipoId As Tipoid, oficial As Oficial) As Boolean
+        Return Me.usuario_Acceso_a_Datos.insertarOficial(tipoId, oficial)
     End Function
 
     Public Function insertarVisitante(visitante As Visitante) As Boolean

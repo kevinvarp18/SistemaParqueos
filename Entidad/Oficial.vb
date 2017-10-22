@@ -1,4 +1,5 @@
-﻿Public Class Oficial
+﻿
+Public Class Oficial : Inherits Usuario
     '**********************************************************************
     'NOMBRE DEL SISTEMA:  SistemaDeParqueos.
     'NOMBRE DEL PAQUETE:  SistemaDeParqueos.BizLayer.

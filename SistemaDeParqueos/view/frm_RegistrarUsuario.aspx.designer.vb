@@ -23,6 +23,24 @@ Partial Public Class frm_RegistrarUsuario
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblTipo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTipo As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''DwnLstTipoIdentificacion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DwnLstTipoIdentificacion As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''lblCedula control.
     '''</summary>
     '''<remarks>
