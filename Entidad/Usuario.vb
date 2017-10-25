@@ -43,7 +43,7 @@
     End Sub
 
     'Set y Get.
-    Public Property GintIdSG As String
+    Public Property GstrIdSG As String
         Get
             Return gstrId
         End Get

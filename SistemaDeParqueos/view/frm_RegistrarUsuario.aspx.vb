@@ -30,15 +30,14 @@ Public Class frm_RegistrarUsuario
         Dim resultado As Boolean
 
         If (DwnLstRol.SelectedItem.ToString().Equals("Administrador")) Then
-            resultado = Me.usuarioNegocios.insertarAdministrador(New Administrador(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
-                                                           tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "a"))
+            resultado = Me.usuarioNegocios.insertarAdministrador(New Administrador(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "a"))
         ElseIf (DwnLstRol.SelectedItem.ToString().Equals("Oficial de Seguridad")) Then
             resultado = Me.usuarioNegocios.insertarOficial(New Oficial(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
                                                            tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "o"))
         End If
 
         If resultado Then
-            lblMensaje.Text = "El usuario se ha insertado exitosamente"
+            lblMensaje.Text = "Se ha registrado el usuario correctamente"
         End If
 
 
