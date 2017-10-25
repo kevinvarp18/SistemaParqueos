@@ -9,7 +9,7 @@ Public Class registrarVisitante
     Dim usuarioNegocios As SP_Usuario_Negocios
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If String.Equals(Session("Usuario"), "a") Then
+        If String.Equals(Session("Usuario"), "N") Then
             Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
 

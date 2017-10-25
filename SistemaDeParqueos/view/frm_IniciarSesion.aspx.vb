@@ -12,7 +12,6 @@ Public Class loginView
             Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
             Response.BufferOutput = True
-            Response.Redirect("http://localhost:52086/view/frm_IniciarSesion.aspx")
         Else
             Response.BufferOutput = True
             Response.Redirect("http://localhost:52086/view/frm_index.aspx")
