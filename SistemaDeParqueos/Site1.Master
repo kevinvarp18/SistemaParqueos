@@ -42,7 +42,7 @@
                                     <li><a href="frm_IniciarSesion.aspx">Iniciar Sesión</a></li>
                                     <li><a href="frm_RegistrarVisitante.aspx">Registrarse</a></li>
                                     <%
-                ElseIf String.Equals(Session("Usuario"), "V") Then
+                ElseIf String.Equals(Session("Usuario"), "v") Then
                                     %>
                                     <li><a href="frm_SolicitarParqueo.aspx">Solicitar parqueo</a></li>
                                     <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>

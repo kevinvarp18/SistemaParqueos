@@ -46,6 +46,7 @@ Public Class SP_Usuario_Datos
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_InsertaUsuarios"
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        Dim result As Integer
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
 
         cmdInsert.Parameters.Add(New SqlParameter("@Tipo", administrador.GstrTipoIdSG))
@@ -57,16 +58,17 @@ Public Class SP_Usuario_Datos
         cmdInsert.Parameters.Add(New SqlParameter("@Rol", administrador.GstrTipoUsuarioSG))
 
         cmdInsert.Connection.Open()
-        cmdInsert.ExecuteNonQuery()
+        result = cmdInsert.ExecuteScalar()
         cmdInsert.Connection.Close()
 
-        Return True
+        Return result
     End Function
 
     Public Function insertarVisitante(visitante As Visitante) As Boolean
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_RegistrarVisitante"
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        Dim result As Integer
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
 
         cmdInsert.Parameters.Add(New SqlParameter("@nombre", visitante.GstrNombreSG))
@@ -80,7 +82,7 @@ Public Class SP_Usuario_Datos
         cmdInsert.Parameters.Add(New SqlParameter("@id", visitante.gstrId))
         cmdInsert.Parameters.Add(New SqlParameter("@procedencia", visitante.gstrProcedencia))
         cmdInsert.Connection.Open()
-        cmdInsert.ExecuteNonQuery()
+        result = cmdInsert.ExecuteScalar()
         cmdInsert.Connection.Close()
 
         Return True
