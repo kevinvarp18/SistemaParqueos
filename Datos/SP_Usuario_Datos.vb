@@ -25,6 +25,7 @@ Public Class SP_Usuario_Datos
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_InsertaUsuarios"
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        Dim result As Integer
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
 
         cmdInsert.Parameters.Add(New SqlParameter("@Tipo", oficial.GstrTipoIdSG))
@@ -34,12 +35,12 @@ Public Class SP_Usuario_Datos
         cmdInsert.Parameters.Add(New SqlParameter("@Correo", oficial.GstrCorreoSG))
         cmdInsert.Parameters.Add(New SqlParameter("@Contrasenia", oficial.GstrContrasennaSG))
         cmdInsert.Parameters.Add(New SqlParameter("@Rol", oficial.GstrTipoUsuarioSG))
-
+        cmdInsert.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output
         cmdInsert.Connection.Open()
         cmdInsert.ExecuteNonQuery()
+        result = Convert.ToInt32(cmdInsert.Parameters("@resultado").Value)
         cmdInsert.Connection.Close()
-
-        Return True
+        Return result
     End Function
 
     Public Function insertarAdministrador(administrador As Administrador) As Boolean
@@ -56,9 +57,10 @@ Public Class SP_Usuario_Datos
         cmdInsert.Parameters.Add(New SqlParameter("@Correo", administrador.GstrCorreoSG))
         cmdInsert.Parameters.Add(New SqlParameter("@Contrasenia", administrador.GstrContrasennaSG))
         cmdInsert.Parameters.Add(New SqlParameter("@Rol", administrador.GstrTipoUsuarioSG))
-
+        cmdInsert.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output
         cmdInsert.Connection.Open()
-        result = cmdInsert.ExecuteScalar()
+        cmdInsert.ExecuteNonQuery()
+        result = Convert.ToInt32(cmdInsert.Parameters("@resultado").Value)
         cmdInsert.Connection.Close()
 
         Return result

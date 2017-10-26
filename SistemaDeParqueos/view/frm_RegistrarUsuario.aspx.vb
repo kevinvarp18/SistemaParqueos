@@ -38,6 +38,8 @@ Public Class frm_RegistrarUsuario
 
         If resultado Then
             lblMensaje.Text = "Se ha registrado el usuario correctamente"
+        Else
+            lblMensaje.Text = "No se pudo registrar el usuario"
         End If
 
 
