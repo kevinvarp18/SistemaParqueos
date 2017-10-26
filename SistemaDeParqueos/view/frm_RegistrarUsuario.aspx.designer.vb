@@ -41,22 +41,22 @@ Partial Public Class frm_RegistrarUsuario
     Protected WithEvents DwnLstTipoIdentificacion As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''lblCedula control.
+    '''lblIdentificacion control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblCedula As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblIdentificacion As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''tbCedula control.
+    '''tbIdentificacion control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbCedula As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents tbIdentificacion As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lblNombre control.
@@ -86,13 +86,13 @@ Partial Public Class frm_RegistrarUsuario
     Protected WithEvents lblApellidos As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''tbApelidos control.
+    '''tbApellidos control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbApelidos As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents tbApellidos As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lblEmail control.

@@ -9,43 +9,48 @@ Public Class administrarParqueo
     Public gstrParqueoSelecion As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim connectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Dim parqueoNegocios As New SP_Parqueo_Negocios(connectionString)
-        If IsPostBack Then
-            Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
-            Me.gstrParqueoSelecion = DwnEspacio.SelectedItem.ToString()
-            For Each parqueoActual As Parqueo In parqueo
-                If Me.gstrParqueoSelecion.Equals("Numero Parqueo: " + parqueoActual.GintIdentificadorSG.ToString()) Then
-                    Me.gintParqueoIdentificador = parqueoActual.GintIdentificadorSG
-                End If
-            Next
+        If String.Equals(Session("Usuario"), "a") Then
+            Dim connectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Dim parqueoNegocios As New SP_Parqueo_Negocios(connectionString)
+            If IsPostBack Then
+                Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
+                Me.gstrParqueoSelecion = DwnEspacio.SelectedItem.ToString()
+                For Each parqueoActual As Parqueo In parqueo
+                    If Me.gstrParqueoSelecion.Equals("Numero Parqueo: " + parqueoActual.GintIdentificadorSG.ToString()) Then
+                        Me.gintParqueoIdentificador = parqueoActual.GintIdentificadorSG
+                    End If
+                Next
+            Else
+                DwnEspacio.Items.Clear()
+                DwnEspacio.Items.Add("Sin Seleccionar")
+                Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
+                For Each item As Parqueo In parqueo
+                    DwnEspacio.Items.Add("Numero Parqueo: " + item.GintIdentificadorSG.ToString)
+                Next
+                DwnLstTipos.Items.Clear()
+                DwnLstEstado.Items.Clear()
+                DwnLstTipos.Items.Add("Seleccione una opción")
+                DwnLstTipos.Items.Add("Jefatura")
+                DwnLstTipos.Items.Add("PIP")
+                DwnLstTipos.Items.Add("UPRO")
+                DwnLstTipos.Items.Add("OPO")
+                DwnLstTipos.Items.Add("SERT")
+                DwnLstTipos.Items.Add("UPROV")
+                DwnLstTipos.Items.Add("UVISE")
+                DwnLstTipos.Items.Add("Visitas")
+                DwnLstEstado.Items.Add("Seleccione una opción")
+                DwnLstEstado.Items.Add("Habilitado")
+                DwnLstEstado.Items.Add("Deshabilitado")
+                Me.gstrParqueoSelecion = DwnEspacio.SelectedItem.ToString()
+                For Each parqueoActual As Parqueo In parqueo
+                    If Me.gstrParqueoSelecion.Equals("Numero Parqueo: " + parqueoActual.GintIdentificadorSG.ToString()) Then
+                        Me.gintParqueoIdentificador = parqueoActual.GintIdentificadorSG
+                    End If
+                Next
+            End If
         Else
-            DwnEspacio.Items.Clear()
-            DwnEspacio.Items.Add("Sin Seleccionar")
-            Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
-            For Each item As Parqueo In parqueo
-                DwnEspacio.Items.Add("Numero Parqueo: " + item.GintIdentificadorSG.ToString)
-            Next
-            DwnLstTipos.Items.Clear()
-            DwnLstEstado.Items.Clear()
-            DwnLstTipos.Items.Add("Seleccione una opción")
-            DwnLstTipos.Items.Add("Jefatura")
-            DwnLstTipos.Items.Add("PIP")
-            DwnLstTipos.Items.Add("UPRO")
-            DwnLstTipos.Items.Add("OPO")
-            DwnLstTipos.Items.Add("SERT")
-            DwnLstTipos.Items.Add("UPROV")
-            DwnLstTipos.Items.Add("UVISE")
-            DwnLstTipos.Items.Add("Visitas")
-            DwnLstEstado.Items.Add("Seleccione una opción")
-            DwnLstEstado.Items.Add("Habilitado")
-            DwnLstEstado.Items.Add("Deshabilitado")
-            Me.gstrParqueoSelecion = DwnEspacio.SelectedItem.ToString()
-            For Each parqueoActual As Parqueo In parqueo
-                If Me.gstrParqueoSelecion.Equals("Numero Parqueo: " + parqueoActual.GintIdentificadorSG.ToString()) Then
-                    Me.gintParqueoIdentificador = parqueoActual.GintIdentificadorSG
-                End If
-            Next
+            Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
         End If
     End Sub
 

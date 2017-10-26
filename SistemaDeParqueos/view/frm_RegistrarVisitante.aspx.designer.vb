@@ -113,31 +113,31 @@ Partial Public Class registrarVisitante
     Protected WithEvents tbContrasena As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lblUbicación control.
+    '''lblUbicacion control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblUbicación As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblUbicacion As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''tbUbicación control.
+    '''tbUbicacion control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbUbicación As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents tbUbicacion As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lblTipo control.
+    '''lblTipoIdentificacion control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblTipo As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblTipoIdentificacion As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''DwnLstTipoIdentificacion control.
@@ -185,13 +185,13 @@ Partial Public Class registrarVisitante
     Protected WithEvents DwnLstDepartamento As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''Label1 control.
+    '''lblInstitucion control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblInstitucion As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''tbInstitucion control.

@@ -448,9 +448,7 @@ ul.top-icons li a.drib{
     color: #000000;
     font-size: 1em;
     margin-top: 1em;
-    margin-bottom: 1em;
-	margin-left: 1em;
-	margin-right: 1em;
+    text-align: center;
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {

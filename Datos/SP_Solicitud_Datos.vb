@@ -20,7 +20,7 @@ Public Class SP_Solicitud_Datos
         Me.gstrconnString = gstrconnString
     End Sub
 
-    Public Function insertarSolicitud(solicitud As Solicitud) As Solicitud
+    Public Function insertarSolicitud(correo As String, solicitud As Solicitud) As Solicitud
 
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_RegistrarSolicitud"
@@ -28,7 +28,7 @@ Public Class SP_Solicitud_Datos
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
 
         'correo se agarra de sesion
-        cmdInsert.Parameters.Add(New SqlParameter("@correo", "prueba"))
+        cmdInsert.Parameters.Add(New SqlParameter("@correo", correo))
         cmdInsert.Parameters.Add(New SqlParameter("@hora_i", solicitud.GstrHoraISG))
         cmdInsert.Parameters.Add(New SqlParameter("@hora_f", solicitud.GstrHoraFSG))
         cmdInsert.Parameters.Add(New SqlParameter("@placa", solicitud.GstrPlacaSG))

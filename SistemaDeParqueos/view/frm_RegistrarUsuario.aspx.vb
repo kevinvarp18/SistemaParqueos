@@ -5,35 +5,41 @@ Imports Negocios
 Public Class frm_RegistrarUsuario
     Inherits System.Web.UI.Page
 
+    Dim connectionString As String
+    Dim usuarioNegocios As SP_Usuario_Negocios
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        DwnLstRol.Items.Add("Seleccione una opción")
-        DwnLstRol.Items.Add("Administrador")
-        DwnLstRol.Items.Add("Oficial de Seguridad")
+        If String.Equals(Session("Usuario"), "a") Then
+            Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
 
-        DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
-        DwnLstTipoIdentificacion.Items.Add("Numero de Cedula")
-        DwnLstTipoIdentificacion.Items.Add("Pasaporte")
-        DwnLstTipoIdentificacion.Items.Add("Licencia")
+            DwnLstRol.Items.Add("Seleccione una opción")
+            DwnLstRol.Items.Add("Administrador")
+            DwnLstRol.Items.Add("Oficial de Seguridad")
+
+            DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
+            DwnLstTipoIdentificacion.Items.Add("Numero de Cedula")
+            DwnLstTipoIdentificacion.Items.Add("Pasaporte")
+            DwnLstTipoIdentificacion.Items.Add("Licencia")
+        Else
+            Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+        End If
     End Sub
 
     Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
-        Dim oficial As New Oficial
-        Dim tipoId As New Tipoid
+        Dim resultado As Boolean
 
-        oficial.NombreOficialSG = tbNombre.Text
-        oficial.ApellidosOficialSG = tbApelidos.Text
-        oficial.CorreoOficialSG = tbEmail.Text
-        oficial.ContraseniaOficialSG = tbContrasena.Text
-        oficial.RolOficialSG = DwnLstRol.Text
+        If (DwnLstRol.SelectedItem.ToString().Equals("Administrador")) Then
+            resultado = Me.usuarioNegocios.insertarAdministrador(New Administrador(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "a"))
+        ElseIf (DwnLstRol.SelectedItem.ToString().Equals("Oficial de Seguridad")) Then
+            resultado = Me.usuarioNegocios.insertarOficial(New Oficial(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
+                                                           tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "o"))
+        End If
 
-        tipoId.GstrIdentificacionSG = tbCedula.Text
-        tipoId.GstrTipoSG = DwnLstTipoIdentificacion.Text
-
-        Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Dim usuarioNegocios As New SP_Usuario_Negocios(strconnectionString)
-
-        If usuarioNegocios.insertarOficial(tipoId, oficial) Then
-            lblMensaje.Text = "Se ha insertado correctamente el " + oficial.RolOficialSG
+        If resultado Then
+            lblMensaje.Text = "Se ha registrado el usuario correctamente"
+        Else
+            lblMensaje.Text = "No se pudo registrar el usuario"
         End If
 
 

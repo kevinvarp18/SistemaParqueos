@@ -8,7 +8,6 @@
                 <ContentTemplate>
                     <h3>Ver Parqueo</h3>
                     </div>
-                    </div>
                     <div class="container">
                         <div class="page w3-4">
                             <div class="bs-example " data-example-id="simple-table">

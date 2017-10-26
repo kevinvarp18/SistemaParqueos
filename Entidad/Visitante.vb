@@ -1,48 +1,43 @@
 ﻿Public Class Visitante
+    Inherits Usuario
     '**********************************************************************
     'NOMBRE DEL SISTEMA:  SistemaDeParqueos.
-    'NOMBRE DEL PAQUETE:  SistemaDeParqueos.BizLayer.
+    'NOMBRE DEL PAQUETE:  SistemaDeParqueos.Dominio.
     'DESCRIPCIÓN:
     ' Esta clase de las entidades del sistema.
 
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  21-Octubre-2017
     '******************************************************************
     'Declaracion de variables.
-    Public gintId As Integer
     Public gintTelefono As Integer
     Public gstrUbicacion As String
     Public gstrTipoVisitante As String
+    Public gstrProcedencia As String
 
     'Constructor Default.
     Public Sub New()
-        Me.gintId = 0
         Me.gintTelefono = 0
         Me.gstrUbicacion = ""
         Me.gstrTipoVisitante = ""
+        Me.gstrProcedencia = ""
     End Sub
 
     'Constructor sobrecargado.
-    Public Sub New(ByVal id As Integer, ByVal telefono As Integer, ByVal ubicacion As String, ByVal tipoVisitante As String)
-        Me.gintId = id
+    Public Sub New(gstrId As String, gstrNombre As String, gstrApellido As String, gstrCorreo As String,
+                   gstrContrasenna As String, gstrTipoId As String, gstrTipoUsuario As String, telefono As Integer,
+                   ubicacion As String, tipoVisitante As String, procedencia As String)
+        MyBase.New(gstrId, gstrNombre, gstrApellido, gstrCorreo, gstrContrasenna, gstrTipoId, gstrTipoUsuario)
         Me.gintTelefono = telefono
         Me.gstrUbicacion = ubicacion
         Me.gstrTipoVisitante = tipoVisitante
+        Me.gstrProcedencia = procedencia
     End Sub
 
     'Set y get.
-    Public Property IdSG As Integer
-        Get
-            Return gintId
-        End Get
-        Set(value As Integer)
-            gintId = value
-        End Set
-    End Property
-
-    Public Property TelefonoSG As Integer
+    Public Property GintTelefonoSG As Integer
         Get
             Return gintTelefono
         End Get
@@ -51,7 +46,7 @@
         End Set
     End Property
 
-    Public Property UbicacionSG As String
+    Public Property GstrUbicacionSG As String
         Get
             Return gstrUbicacion
         End Get
@@ -60,7 +55,7 @@
         End Set
     End Property
 
-    Public Property TipoVisitanteSG As String
+    Public Property GstrTipoVisitanteSG As String
         Get
             Return gstrTipoVisitante
         End Get
