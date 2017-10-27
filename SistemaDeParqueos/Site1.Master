@@ -20,6 +20,7 @@
     <script src="../public/js/main.js"></script>
     <link href="public/css/animate.min.css" rel="stylesheet">
     <script src="../public/js/wow.min.js"></script>
+    <script src="../public/js/sweetalert2.all.min.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

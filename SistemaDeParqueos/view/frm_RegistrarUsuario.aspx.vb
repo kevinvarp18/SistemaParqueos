@@ -8,9 +8,9 @@ Public Class frm_RegistrarUsuario
     Dim connectionString As String
     Dim usuarioNegocios As SP_Usuario_Negocios
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If String.Equals(Session("Usuario"), "a") Then
-            Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-            Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
+        'If String.Equals(Session("Usuario"), "a") Then
+        Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+        Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
 
             DwnLstRol.Items.Add("Seleccione una opción")
             DwnLstRol.Items.Add("Administrador")
@@ -20,28 +20,37 @@ Public Class frm_RegistrarUsuario
             DwnLstTipoIdentificacion.Items.Add("Numero de Cedula")
             DwnLstTipoIdentificacion.Items.Add("Pasaporte")
             DwnLstTipoIdentificacion.Items.Add("Licencia")
-        Else
-            Response.BufferOutput = True
-            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
-        End If
+        'Else
+        'Response.BufferOutput = True
+        'Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+        'End If
     End Sub
 
     Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
-        Dim resultado As Boolean
+        Dim resultado As Boolean = True
+        Dim titulo As String
+        Dim mensaje As String
+        Dim tipo As String
 
         If (DwnLstRol.SelectedItem.ToString().Equals("Administrador")) Then
             resultado = Me.usuarioNegocios.insertarAdministrador(New Administrador(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "a"))
         ElseIf (DwnLstRol.SelectedItem.ToString().Equals("Oficial de Seguridad")) Then
             resultado = Me.usuarioNegocios.insertarOficial(New Oficial(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
-                                                           tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "o"))
+            tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "o"))
         End If
 
         If resultado Then
-            lblMensaje.Text = "Se ha registrado el usuario correctamente"
+            titulo = "Correcto"
+            mensaje = "Se ha registrado el usuario correctamente"
+            tipo = "success"
         Else
-            lblMensaje.Text = "No se pudo registrar el usuario"
+            titulo = "Error"
+            mensaje = "No se pudo registrar el usuario"
+            tipo = "error"
         End If
 
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
 
     End Sub
+
 End Class
