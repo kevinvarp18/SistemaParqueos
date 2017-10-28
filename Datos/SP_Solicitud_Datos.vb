@@ -46,7 +46,7 @@ Public Class SP_Solicitud_Datos
 
     Public Function obtenerSolicitud() As LinkedList(Of Solicitud)
         Dim connection As New SqlConnection(Me.gstrconnString)
-        Dim sqlSelect As [String] = "PA_VerSolicitud;"
+        Dim sqlSelect As [String] = "PA_VerSolicitud;" 'hay q hacer otro procedimiento
 
         Dim sqlDataAdapterClient As New SqlDataAdapter()
         sqlDataAdapterClient.SelectCommand = New SqlCommand()
@@ -56,7 +56,7 @@ Public Class SP_Solicitud_Datos
         sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Solicitud")
         sqlDataAdapterClient.SelectCommand.Connection.Close()
         Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Solicitud").Rows
-        Dim parqueo As New LinkedList(Of Solicitud)()
+        Dim solicitud As New LinkedList(Of Solicitud)()
 
         For Each currentRow As DataRow In dataRowCollection
             Dim solicitudActual As New Solicitud()
@@ -70,9 +70,38 @@ Public Class SP_Solicitud_Datos
             solicitudActual.GstrMarcaSG = currentRow("TC_Marca_TSP_Solicitud").ToString()
             solicitudActual.GstrFechaISG = currentRow("TF_Fechai_TSP_Solicitud").ToString()
             solicitudActual.GstrFechaFSG = currentRow("TF_Fechaf_TSP_Solicitud").ToString()
-            parqueo.AddLast(solicitudActual)
+            solicitud.AddLast(solicitudActual)
 
         Next
-        Return parqueo
+        Return solicitud
+    End Function
+    Public Function obtenerAdSolicitud() As LinkedList(Of Solicitud)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_VerSolicitud;"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Solicitud")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Solicitud").Rows
+        Dim solicitud As New LinkedList(Of Solicitud)()
+
+        'nombre,placa,fecha_e,hora_e,fecha_s,hora_s
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim solicitudActual As New Solicitud()
+            solicitudActual.GstrHoraISG = currentRow("hora_e").ToString()
+            solicitudActual.GstrHoraFSG = currentRow("hora_s").ToString()
+            solicitudActual.GstrPlacaSG = currentRow("placa").ToString()
+            solicitudActual.GstrMarcaSG = currentRow("nombre").ToString() 'voy a usar este para el nombre
+            solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
+            solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
+            solicitud.AddLast(solicitudActual)
+
+        Next
+        Return solicitud
     End Function
 End Class
