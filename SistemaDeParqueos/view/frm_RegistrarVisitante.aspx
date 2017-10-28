@@ -7,6 +7,10 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Registrar Visitante</h3>
+                    <asp:Label ID="lblTipoIdentificacion" runat="server" Text="Tipo Identificación:"></asp:Label>
+                    <asp:DropDownList ID="DwnLstTipoIdentificacion" runat="server" AutoPostBack="false" style="width:27%;"></asp:DropDownList><br />
+                    <asp:Label ID="lblIdentificacion" runat="server" Text="# Identificación:"></asp:Label>
+                    <asp:TextBox ID="tbIdentificacion" type="text" required="" runat="server" style="width: 27%; margin-left: 3%;"></asp:TextBox><br />
                     <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>
                     <asp:TextBox ID="tbNombre" type="text" required="" runat="server" style="margin-left:7.3%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblApellidos" runat="server" Text="Apellidos:"></asp:Label>
@@ -19,10 +23,6 @@
                     <asp:TextBox ID="tbContrasena" type="password" required="" runat="server" style="margin-left:5.4%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblUbicacion" runat="server" Text="Ubicación:"></asp:Label>
                     <asp:TextBox ID="tbUbicacion" type="text" required="" runat="server" style="margin-left: 6.4%; width:27%;"></asp:TextBox><br />
-                    <asp:Label ID="lblTipoIdentificacion" runat="server" Text="Tipo Identificación:"></asp:Label>
-                    <asp:DropDownList ID="DwnLstTipoIdentificacion" runat="server" AutoPostBack="false" style="width:27%;"></asp:DropDownList><br />
-                    <asp:Label ID="lblIdentificacion" runat="server" Text="# Identificación:"></asp:Label>
-                    <asp:TextBox ID="tbIdentificacion" type="text" required="" runat="server" style="width: 27%; margin-left: 3%;"></asp:TextBox><br />
                     <asp:Label ID="lblDepartamento" runat="server" Text="Departamento:"></asp:Label>
                     <asp:DropDownList ID="DwnLstDepartamento" runat="server" style="margin-left:3.5%; width:27%;" AutoPostBack="false" ></asp:DropDownList><br />
                     <asp:Label ID="lblInstitucion" runat="server" Text="Nombre Dept:"></asp:Label>

@@ -32,6 +32,24 @@ Partial Public Class frm_RegistrarUsuario
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblUsuario control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUsuario As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''DwnLstTipoUsuario control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DwnLstTipoUsuario As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''lblTipo control.
     '''</summary>
     '''<remarks>
@@ -140,22 +158,76 @@ Partial Public Class frm_RegistrarUsuario
     Protected WithEvents tbContrasena As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lblRol control.
+    '''UpdatePanel2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblRol As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''DwnLstRol control.
+    '''lblUbicacion control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DwnLstRol As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblUbicacion As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''tbUbicacion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tbUbicacion As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''lblDepartamento control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDepartamento As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''DwnLstDepartamento control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DwnLstDepartamento As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''lblInstitucion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblInstitucion As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''tbInstitucion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tbInstitucion As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''UpdatePanel3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
     '''btnRegistrar control.

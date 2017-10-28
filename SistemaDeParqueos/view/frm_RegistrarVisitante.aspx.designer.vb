@@ -23,6 +23,42 @@ Partial Public Class registrarVisitante
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblTipoIdentificacion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTipoIdentificacion As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''DwnLstTipoIdentificacion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DwnLstTipoIdentificacion As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''lblIdentificacion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblIdentificacion As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''tbIdentificacion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tbIdentificacion As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''lblNombre control.
     '''</summary>
     '''<remarks>
@@ -129,42 +165,6 @@ Partial Public Class registrarVisitante
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents tbUbicacion As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lblTipoIdentificacion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblTipoIdentificacion As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''DwnLstTipoIdentificacion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents DwnLstTipoIdentificacion As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''lblIdentificacion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblIdentificacion As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''tbIdentificacion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents tbIdentificacion As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lblDepartamento control.
