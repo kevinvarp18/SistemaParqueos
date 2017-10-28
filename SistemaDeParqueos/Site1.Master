@@ -17,6 +17,7 @@
     <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Cabin:400,700,500,600' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Pacifico|Prata' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="images/png" href="public/images/placa.png">
     <script src="../public/js/main.js"></script>
     <link href="public/css/animate.min.css" rel="stylesheet">
     <script src="../public/js/wow.min.js"></script>
