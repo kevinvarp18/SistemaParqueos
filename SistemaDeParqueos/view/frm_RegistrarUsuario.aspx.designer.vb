@@ -32,24 +32,6 @@ Partial Public Class frm_RegistrarUsuario
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''Label1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''UpdatePanel2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
-    
-    '''<summary>
     '''lblTipo control.
     '''</summary>
     '''<remarks>
@@ -183,13 +165,4 @@ Partial Public Class frm_RegistrarUsuario
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRegistrar As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''lblMensaje control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
 End Class
