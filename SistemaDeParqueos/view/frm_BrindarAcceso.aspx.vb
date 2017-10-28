@@ -3,6 +3,7 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If String.Equals(Session("Usuario"), "o") Then
+            DwnLstDepartamento.Items.Clear()
             DwnLstDepartamento.Items.Add("Seleccione una opción")
             DwnLstDepartamento.Items.Add("Externo")
             DwnLstDepartamento.Items.Add("Interno")
