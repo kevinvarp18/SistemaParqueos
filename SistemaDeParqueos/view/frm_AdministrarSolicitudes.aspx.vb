@@ -6,6 +6,7 @@ Public Class frm_AdministrarSolicitudes
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+        Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
         If String.Equals(Session("Usuario"), "a") Then
 
         Else
@@ -58,6 +59,19 @@ Public Class frm_AdministrarSolicitudes
                 h2.NavigateUrl = "#"
 
                 Dim d As New DropDownList()
+                d.Width = 75%
+                If IsPostBack Then
+                    Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoHabilitado()
+                    For Each item As Parqueo In parqueo
+                        d.Items.Add(item.GintIdentificadorSG.ToString)
+                    Next
+                Else
+                    d.Items.Clear()
+                    Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
+                    For Each item As Parqueo In parqueo
+                        d.Items.Add(item.GintIdentificadorSG.ToString)
+                    Next
+                End If
                 'la llamada y el fill de este drop hay q hacerlo aqui
 
                 tCell7.Controls.Add(d)
