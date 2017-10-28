@@ -31,26 +31,15 @@
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server" Visible="false">
                         <ContentTemplate>
                             <asp:Label ID="lblUbicacion" runat="server" Text="Ubicación:"></asp:Label>
-                            <asp:TextBox ID="tbUbicacion" type="text" required="" runat="server" Style="margin-left: 6.4%; width: 27%;"></asp:TextBox><br />
-                            <asp:Label ID="lblDepartamento" runat="server" Text="Departamento:"></asp:Label>
-                            <asp:DropDownList ID="DwnLstDepartamento" runat="server" Style="margin-left: 3.5%; width: 27%;" AutoPostBack="true"></asp:DropDownList><br />
-                            <asp:Label ID="lblInstitucion" runat="server" Text="Nombre Dept:"></asp:Label>
+                            <asp:TextBox ID="tbUbicacion" type="text" required="" runat="server" Style="margin-left: 5.9%; width: 27%;"></asp:TextBox><br />
+                            <asp:Label ID="lblProcedencia1" runat="server" Text="Procedencia:"></asp:Label>
+                            <asp:DropDownList ID="DwnLstProcedencia" runat="server" Style="margin-left: 4.3%; width: 27%;" AutoPostBack="true"></asp:DropDownList><br />
+                            <asp:Label ID="lblProcedencia2" runat="server" Text="Nombre Dept:"></asp:Label>
                             <asp:TextBox ID="tbInstitucion" type="text" required="" runat="server" Style="margin-left: 4%; width: 27%;"></asp:TextBox><br />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </ContentTemplate>
             </asp:UpdatePanel>
-
-            <%--<asp:UpdatePanel ID="UpdatePanel2" runat="server" Visible="false">
-                <ContentTemplate>
-                    <asp:Label ID="lblUbicacion" runat="server" Text="Ubicación:"></asp:Label>
-                    <asp:TextBox ID="tbUbicacion" type="text" required="" runat="server" Style="margin-left: 6.4%; width: 27%;"></asp:TextBox><br />
-                    <asp:Label ID="lblDepartamento" runat="server" Text="Departamento:"></asp:Label>
-                    <asp:DropDownList ID="DwnLstDepartamento" runat="server" Style="margin-left: 3.5%; width: 27%;" AutoPostBack="true"></asp:DropDownList><br />
-                    <asp:Label ID="lblInstitucion" runat="server" Text="Nombre Dept:"></asp:Label>
-                    <asp:TextBox ID="tbInstitucion" type="text" required="" runat="server" Style="margin-left: 4%; width: 27%;"></asp:TextBox><br />
-                </ContentTemplate>
-            </asp:UpdatePanel>--%>
 
             <asp:UpdatePanel ID="UpdatePanel3" runat="server" Visible="true">
                 <ContentTemplate>

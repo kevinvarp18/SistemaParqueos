@@ -23,10 +23,10 @@
                     <asp:TextBox ID="tbContrasena" type="password" required="" runat="server" style="margin-left:5.4%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblUbicacion" runat="server" Text="Ubicación:"></asp:Label>
                     <asp:TextBox ID="tbUbicacion" type="text" required="" runat="server" style="margin-left: 6.4%; width:27%;"></asp:TextBox><br />
-                    <asp:Label ID="lblDepartamento" runat="server" Text="Departamento:"></asp:Label>
-                    <asp:DropDownList ID="DwnLstDepartamento" runat="server" style="margin-left:3.5%; width:27%;" AutoPostBack="false" ></asp:DropDownList><br />
-                    <asp:Label ID="lblInstitucion" runat="server" Text="Nombre Dept:"></asp:Label>
-                    <asp:TextBox ID="tbInstitucion" type="text" required="" runat="server" style="margin-left:4%; width:27%;"></asp:TextBox><br />
+                    <asp:Label ID="lblProcedenciaDwnLst" runat="server" Text="Procedencia:"></asp:Label>
+                    <asp:DropDownList ID="DwnLstProcedencia" runat="server" style="margin-left:3.5%; width:27%;" AutoPostBack="false" ></asp:DropDownList><br />
+                    <asp:Label ID="lblProcedenciatb" runat="server" Text="Nombre Dept:"></asp:Label>
+                    <asp:TextBox ID="tbProcedencia" type="text" required="" runat="server" style="margin-left:4%; width:27%;"></asp:TextBox><br />
                     <asp:Button ID="btnRegistrar" runat="server" CssClass="singleTextBox" OnClick="btnRegistrar_Click" Text="Registrarse" /><br /><br />
                     <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
                     <asp:ScriptManager ID="ScriptManager2" runat="server">

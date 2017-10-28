@@ -23,15 +23,26 @@ Public Class frm_RegistrarUsuario
                 Else
                     updatePanel.Visible = False
                 End If
+
+                If (DwnLstProcedencia.SelectedItem.ToString().Equals("Interno")) Then
+                    lblProcedencia2.Text = "Nombre Dept:"
+                Else
+                    lblProcedencia2.Text = "Institución:"
+                End If
             Else
                 DwnLstTipoUsuario.Items.Add("Seleccione una opción")
                 DwnLstTipoUsuario.Items.Add("Visitante")
                 DwnLstTipoUsuario.Items.Add("Administrador")
                 DwnLstTipoUsuario.Items.Add("Oficial de Seguridad")
+
                 DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
                 DwnLstTipoIdentificacion.Items.Add("Numero de Cedula")
                 DwnLstTipoIdentificacion.Items.Add("Pasaporte")
                 DwnLstTipoIdentificacion.Items.Add("Licencia")
+
+                DwnLstProcedencia.Items.Add("Seleccione una opción")
+                DwnLstProcedencia.Items.Add("Externo")
+                DwnLstProcedencia.Items.Add("Interno")
             End If
         Else
             Response.BufferOutput = True
@@ -67,6 +78,10 @@ Public Class frm_RegistrarUsuario
     End Sub
 
     Protected Sub DwnLstTipoUsuario_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DwnLstTipoUsuario.SelectedIndexChanged
+
+    End Sub
+
+    Protected Sub DwnLstProcedencia_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DwnLstProcedencia.SelectedIndexChanged
 
     End Sub
 End Class

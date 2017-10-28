@@ -185,31 +185,31 @@ Partial Public Class frm_RegistrarUsuario
     Protected WithEvents tbUbicacion As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lblDepartamento control.
+    '''lblProcedencia1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblDepartamento As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblProcedencia1 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''DwnLstDepartamento control.
+    '''DwnLstProcedencia control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DwnLstDepartamento As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents DwnLstProcedencia As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''lblInstitucion control.
+    '''lblProcedencia2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblInstitucion As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblProcedencia2 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''tbInstitucion control.
