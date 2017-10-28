@@ -27,7 +27,6 @@ Public Class SP_Usuario_Datos
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
         Dim result As Integer
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
-
         cmdInsert.Parameters.Add(New SqlParameter("@Tipo", oficial.GstrTipoIdSG))
         cmdInsert.Parameters.Add(New SqlParameter("@Identificacion", oficial.GstrIdSG))
         cmdInsert.Parameters.Add(New SqlParameter("@Nombre", oficial.GstrNombreSG))
@@ -49,7 +48,6 @@ Public Class SP_Usuario_Datos
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
         Dim result As Integer
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
-
         cmdInsert.Parameters.Add(New SqlParameter("@Tipo", administrador.GstrTipoIdSG))
         cmdInsert.Parameters.Add(New SqlParameter("@Identificacion", administrador.GstrIdSG))
         cmdInsert.Parameters.Add(New SqlParameter("@Nombre", administrador.GstrNombreSG))
@@ -62,7 +60,6 @@ Public Class SP_Usuario_Datos
         cmdInsert.ExecuteNonQuery()
         result = Convert.ToInt32(cmdInsert.Parameters("@resultado").Value)
         cmdInsert.Connection.Close()
-
         Return result
     End Function
 
@@ -72,7 +69,6 @@ Public Class SP_Usuario_Datos
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
         Dim result As Integer
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
-
         cmdInsert.Parameters.Add(New SqlParameter("@nombre", visitante.GstrNombreSG))
         cmdInsert.Parameters.Add(New SqlParameter("@apellidos", visitante.GstrApellidoSG))
         cmdInsert.Parameters.Add(New SqlParameter("@correo", visitante.GstrCorreoSG))
@@ -83,11 +79,12 @@ Public Class SP_Usuario_Datos
         cmdInsert.Parameters.Add(New SqlParameter("@tipoId", visitante.GstrTipoIdSG))
         cmdInsert.Parameters.Add(New SqlParameter("@id", visitante.gstrId))
         cmdInsert.Parameters.Add(New SqlParameter("@procedencia", visitante.gstrProcedencia))
+        cmdInsert.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output
         cmdInsert.Connection.Open()
-        result = cmdInsert.ExecuteScalar()
+        cmdInsert.ExecuteNonQuery()
+        result = Convert.ToInt32(cmdInsert.Parameters("@resultado").Value)
         cmdInsert.Connection.Close()
-
-        Return True
+        Return result
     End Function
 
     Public Function obtenerUsuarios(correo As String, contrasenna As String) As LinkedList(Of Usuario)
