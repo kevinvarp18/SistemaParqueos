@@ -12,10 +12,11 @@ Public Class registrarVisitante
         If String.Equals(Session("Usuario"), "N") Then
             Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
-
+            DwnLstDepartamento.Items.Clear()
             DwnLstDepartamento.Items.Add("Seleccione una opción")
             DwnLstDepartamento.Items.Add("Externo")
             DwnLstDepartamento.Items.Add("Interno")
+            DwnLstTipoIdentificacion.Items.Clear()
             DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
             DwnLstTipoIdentificacion.Items.Add("Cédula")
             DwnLstTipoIdentificacion.Items.Add("Pasaporte")
@@ -27,16 +28,16 @@ Public Class registrarVisitante
     End Sub
 
     Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
-        Dim tipoVisitante As String
-        If (DwnLstDepartamento.SelectedItem.ToString().Equals("Externo")) Then
-            tipoVisitante = "Externo"
-        Else
-            tipoVisitante = "Interno"
-        End If
-        Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
-                                                           tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v",
-                                                           Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, tbInstitucion.Text))
-        lblMensaje.Text = "El usuario se ha registrado exitosamente"
+        'Dim tipoVisitante As String
+        'If (DwnLstDepartamento.SelectedItem.ToString().Equals("Externo")) Then
+        'tipoVisitante = "Externo"
+        'Else
+        'tipoVisitante = "Interno"
+        'End If
+        'Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
+        'tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v",
+        'Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, tbInstitucion.Text))
+        'lblMensaje.Text = "El usuario se ha registrado exitosamente"
 
     End Sub
 
