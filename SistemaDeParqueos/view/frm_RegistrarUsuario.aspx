@@ -38,6 +38,11 @@
                             <asp:TextBox ID="tbInstitucion" type="text" required="" runat="server" Style="margin-left: 4%; width: 27%;"></asp:TextBox><br />
                         </ContentTemplate>
                     </asp:UpdatePanel>
+
+                    <br/>
+                        <asp:Label ID="lblMensaje" runat="server" Text="" style="color:red"></asp:Label>
+                    <br/>
+
                 </ContentTemplate>
             </asp:UpdatePanel>
 
@@ -48,15 +53,6 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
 
-            <script>
-                function muestraMensaje(titulo, mensaje, tipo) {
-                    swal(
-                      titulo,
-                      mensaje,
-                      tipo
-                    )
-                }
-            </script>
         </div>
     </div>
 </asp:Content>

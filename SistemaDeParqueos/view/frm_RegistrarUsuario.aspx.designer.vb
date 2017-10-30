@@ -221,6 +221,15 @@ Partial Public Class frm_RegistrarUsuario
     Protected WithEvents tbInstitucion As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''lblMensaje control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''UpdatePanel3 control.
     '''</summary>
     '''<remarks>
