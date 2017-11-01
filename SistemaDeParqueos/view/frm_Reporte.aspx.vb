@@ -19,26 +19,40 @@ Public Class frm_Reporte
         Dim sn As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
 
         If tbFechaI.Text <> "" AndAlso tbFechaF.Text <> "" Then
-            Dim fecha_i As String
-            Dim fecha_f As String
-            ' fecha_i = tbFechaI.ToString("dd/MM/yyyy") ' hay q arreglar estas dos para ver xq no me deja pasar esto como string
-            'fecha_f = tbFechaF.ToString("dd/MM/yyyy")
-            fecha_i = tbFechaI.Text ' hay q arreglar estas dos para ver xq no me deja pasar esto como string
-            fecha_f = tbFechaF.Text
-
-            lblDesde.Text = fecha_i + " " + fecha_f
-
-            Dim solicitudes As LinkedList(Of Solicitud) = sn.obtenerReporte(fecha_i, fecha_f)
-            ' Total number of rows.
+            Dim solicitudes As LinkedList(Of Solicitud) = sn.obtenerReporte(tbFechaI.Text, tbFechaF.Text)
             Dim rowCnt As Integer
-            ' Current row count
             Dim rowCtr As Integer
-            ' Total number of cells (columns).
             Dim cellCnt As Integer
 
             rowCnt = 1
             cellCnt = 7
+            Dim tERow As New TableRow()
+            Dim nom As New TableHeaderCell()
+            Dim inst As New TableHeaderCell()
+            Dim pla As New TableHeaderCell()
+            Dim fecha_e As New TableHeaderCell()
+            Dim hora_e As New TableHeaderCell()
+            Dim fecha_s As New TableHeaderCell()
+            Dim hora_s As New TableHeaderCell()
+            Dim num_p As New TableHeaderCell()
+            nom.Text = "Nombre"
+            inst.Text = "Institución"
+            pla.Text = "Placa"
+            fecha_e.Text = "Fecha Entrada"
+            hora_e.Text = "Hora Entrada"
+            fecha_s.Text = "Fecha Salida"
+            hora_s.Text = "Hora Salida"
+            num_p.Text = "Espacio"
 
+            tERow.Cells.Add(nom)
+            tERow.Cells.Add(inst)
+            tERow.Cells.Add(pla)
+            tERow.Cells.Add(fecha_e)
+            tERow.Cells.Add(hora_e)
+            tERow.Cells.Add(fecha_s)
+            tERow.Cells.Add(hora_s)
+            tERow.Cells.Add(num_p)
+            table.Rows.Add(tERow)
             For Each solicitudAct As Solicitud In solicitudes
 
                 For rowCtr = 1 To rowCnt
@@ -50,15 +64,16 @@ Public Class frm_Reporte
                     Dim tCell5 As New TableCell()
                     Dim tCell6 As New TableCell()
                     Dim tCell7 As New TableCell()
+                    Dim tCell8 As New TableCell()
 
                     tCell.Text = solicitudAct.GstrMarcaSG
                     tCell2.Text = " "
                     tCell3.Text = solicitudAct.GstrPlacaSG
                     tCell4.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
                     tCell5.Text = solicitudAct.GstrHoraISG
-                    tCell5.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
-                    tCell6.Text = solicitudAct.GstrHoraFSG
-                    tCell7.Text = solicitudAct.GintIdParqueoSG
+                    tCell6.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
+                    tCell7.Text = solicitudAct.GstrHoraFSG
+                    tCell8.Text = solicitudAct.GintIdParqueoSG
 
                     tRow.Cells.Add(tCell)
                     tRow.Cells.Add(tCell2)
@@ -67,10 +82,10 @@ Public Class frm_Reporte
                     tRow.Cells.Add(tCell5)
                     tRow.Cells.Add(tCell6)
                     tRow.Cells.Add(tCell7)
+                    tRow.Cells.Add(tCell8)
                     table.Rows.Add(tRow)
                 Next
             Next
         End If
-
     End Sub
 End Class

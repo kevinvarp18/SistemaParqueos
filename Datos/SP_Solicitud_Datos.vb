@@ -147,7 +147,7 @@ Public Class SP_Solicitud_Datos
             solicitudActual.GstrHoraISG = currentRow("hora_e").ToString()
             solicitudActual.GstrHoraFSG = currentRow("hora_s").ToString()
             solicitudActual.GstrPlacaSG = currentRow("placa").ToString()
-            solicitudActual.GstrMarcaSG = currentRow("nombre").ToString() 'voy a usar este para el nombre
+            solicitudActual.GstrMarcaSG = currentRow("nombre").ToString()
             solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
             solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
             solicitud.AddLast(solicitudActual)
