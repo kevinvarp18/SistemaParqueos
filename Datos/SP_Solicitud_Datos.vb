@@ -123,4 +123,37 @@ Public Class SP_Solicitud_Datos
         Next
         Return cantidad
     End Function
+    Public Function obtenerReporte(fecha_i As String, fecha_f As String) As LinkedList(Of Solicitud)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_ReporteFechas"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@fecha_i", fecha_i))
+        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@fecha_f", fecha_f))
+
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Solicitud")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Solicitud").Rows
+        Dim solicitud As New LinkedList(Of Solicitud)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim solicitudActual As New Solicitud()
+            solicitudActual.GintIdParqueoSG = Integer.Parse(currentRow("num_parqueo").ToString())
+            solicitudActual.GstrHoraISG = currentRow("hora_e").ToString()
+            solicitudActual.GstrHoraFSG = currentRow("hora_s").ToString()
+            solicitudActual.GstrPlacaSG = currentRow("placa").ToString()
+            solicitudActual.GstrMarcaSG = currentRow("nombre").ToString() 'voy a usar este para el nombre
+            solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
+            solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
+            solicitud.AddLast(solicitudActual)
+
+        Next
+        Return solicitud
+    End Function
+
 End Class
