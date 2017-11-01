@@ -73,7 +73,7 @@ Public Class SP_Usuario_Datos
         cmdInsert.Parameters.Add(New SqlParameter("@apellidos", visitante.GstrApellidoSG))
         cmdInsert.Parameters.Add(New SqlParameter("@correo", visitante.GstrCorreoSG))
         cmdInsert.Parameters.Add(New SqlParameter("@contrasena", visitante.GstrContrasennaSG))
-        cmdInsert.Parameters.Add(New SqlParameter("@tel", visitante.gintTelefonoSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@tel", visitante.GintTelefonoSG))
         cmdInsert.Parameters.Add(New SqlParameter("@ubicacion", visitante.GstrUbicacionSG))
         cmdInsert.Parameters.Add(New SqlParameter("@tipoVisitante", visitante.GstrTipoVisitanteSG))
         cmdInsert.Parameters.Add(New SqlParameter("@tipoId", visitante.GstrTipoIdSG))
@@ -114,5 +114,28 @@ Public Class SP_Usuario_Datos
         Next
         Return usuarios
     End Function
+
+    Public Sub EnvioMail()
+
+        Dim correo As New MailMessage
+        Dim smtp As New SmtpClient()
+
+        correo.From = New MailAddress("Correo remitente", "Nombre Remitente", System.Text.Encoding.UTF8)
+        correo.To.Add("Correo destinatario")
+        correo.SubjectEncoding = System.Text.Encoding.UTF8
+        correo.Subject = "Asunto de tu mensaje"
+        correo.Body = "Cuerpo del mensaje"
+        correo.BodyEncoding = System.Text.Encoding.UTF8
+        correo.IsBodyHtml = False(formato tipo web o normal:               true = web)
+ correo.Priority = MailPriority.High >> prioridad
+
+        smtp.Credentials = New System.Net.NetworkCredential("Correo remitente", "Contraseña del correo remitente")
+        smtp.Port = 465
+        smtp.Host = smtp.gmail.com
+        smtp.EnableSsl = True
+
+        smtp.Send(correo)
+
+    End Sub
 
 End Class
