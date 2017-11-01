@@ -100,8 +100,27 @@ Public Class SP_Solicitud_Datos
             solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
             solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
             solicitud.AddLast(solicitudActual)
-
         Next
         Return solicitud
+    End Function
+    Public Function obtenerNumeroSolicitudes() As String
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As String = "PA_CantSolicitudNotif"
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        Dim dataSetEstudiantes As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetEstudiantes, "SP.TSP_Usuario")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetEstudiantes.Tables("SP.TSP_Usuario").Rows
+        Dim cantidad As String
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim usuarioActual As New Usuario()
+            cantidad = currentRow("Cantidad").ToString()
+        Next
+        Return cantidad
     End Function
 End Class
