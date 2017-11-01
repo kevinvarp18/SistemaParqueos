@@ -8,7 +8,7 @@
                 <ContentTemplate>
                     <h3>Administrar Solicitudes</h3>
                     </div>
-                    <asp:HyperLink id="lblParqueoModal" class="new-gri" data-toggle="modal" data-target="#myModal1" NavigateUrl="#" Text="Ver Parqueo" runat="server"/>
+                    <asp:HyperLink id="lblParqueoModal" class="new-gri" data-toggle="modal" style="color:#0000FF; font-size: 1.5em; font-family: 'Cabin', sans-serif;" data-target="#myModal1" NavigateUrl="#" Text="Ver Parqueo" runat="server"/>
                     <div class="container">
                         <div class="page w3-4">
                             <div class="bs-example " data-example-id="simple-table">
@@ -23,7 +23,6 @@
                                         <asp:TableHeaderCell>Espacio</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>Acción</asp:TableHeaderCell>
                                     </asp:TableHeaderRow>
-                                
                                 </asp:Table>
                             </div>
                         </div>

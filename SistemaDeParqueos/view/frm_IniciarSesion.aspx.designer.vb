@@ -59,6 +59,15 @@ Partial Public Class loginView
     Protected WithEvents tbContrasena As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''lblRecordatorio control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblRecordatorio As Global.System.Web.UI.WebControls.HyperLink
+    
+    '''<summary>
     '''btnIngresar control.
     '''</summary>
     '''<remarks>

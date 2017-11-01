@@ -57,4 +57,76 @@ Partial Public Class Site1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents table As Global.System.Web.UI.WebControls.Table
+    
+    '''<summary>
+    '''hyperlink1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hyperlink1 As Global.System.Web.UI.WebControls.HyperLink
+    
+    '''<summary>
+    '''hyperlink2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hyperlink2 As Global.System.Web.UI.WebControls.HyperLink
+    
+    '''<summary>
+    '''hyperlink3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hyperlink3 As Global.System.Web.UI.WebControls.HyperLink
+    
+    '''<summary>
+    '''hyperlink4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hyperlink4 As Global.System.Web.UI.WebControls.HyperLink
+    
+    '''<summary>
+    '''hyperlink5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hyperlink5 As Global.System.Web.UI.WebControls.HyperLink
+    
+    '''<summary>
+    '''hyperlink6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hyperlink6 As Global.System.Web.UI.WebControls.HyperLink
+    
+    '''<summary>
+    '''hyperlink7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hyperlink7 As Global.System.Web.UI.WebControls.HyperLink
+    
+    '''<summary>
+    '''hyperlink8 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hyperlink8 As Global.System.Web.UI.WebControls.HyperLink
 End Class
