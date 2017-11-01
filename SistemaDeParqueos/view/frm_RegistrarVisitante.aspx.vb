@@ -28,16 +28,16 @@ Public Class registrarVisitante
     End Sub
 
     Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
-        'Dim tipoVisitante As String
-        'If (DwnLstDepartamento.SelectedItem.ToString().Equals("Externo")) Then
-        'tipoVisitante = "Externo"
-        'Else
-        'tipoVisitante = "Interno"
-        'End If
-        'Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
-        'tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v",
-        'Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, tbInstitucion.Text))
-        'lblMensaje.Text = "El usuario se ha registrado exitosamente"
+        Dim tipoVisitante As String
+        If (DwnLstProcedencia.SelectedItem.ToString().Equals("Externo")) Then
+            tipoVisitante = "Externo"
+        Else
+            tipoVisitante = "Interno"
+        End If
+        Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
+        tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v",
+        Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, tbInstitucion.Text))
+        lblMensaje.Text = "El usuario se ha registrado exitosamente"
 
     End Sub
 

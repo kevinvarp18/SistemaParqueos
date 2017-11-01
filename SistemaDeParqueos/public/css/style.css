@@ -63,9 +63,7 @@ label{
     display: inline-block;
     vertical-align: middle;
 }
-span.email a:hover{
-  color: #F9DB55;
-}
+
 .head-right {
     float: right;
 }
@@ -82,9 +80,7 @@ width:24px;
 height:24px;
 display:block;
 }
-ul.top-icons li a:hover{
- opacity:0.4;
-}
+
 ul.top-icons li a.fb{
  background:url('../images/icons.png') no-repeat 0px 0px;
 }
@@ -121,7 +117,6 @@ ul.top-icons li a.drib{
 	margin: 0;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    color: #99abd5;
     background: none;
 }
 .navbar-nav > li {
@@ -416,13 +411,7 @@ ul.top-icons li a.drib{
 	color: #016773;
 	padding: 1em 3em;
 }
-.nav-tabs>li>a:hover, .nav>li>a:focus {
-	text-decoration: none;
-	color: red;
-}
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-	color: #212121;
-}
+
 .tab-info p {
     line-height: 1.9em;
     margin-bottom: 1em;
@@ -452,7 +441,6 @@ ul.top-icons li a.drib{
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-    color: #555;
     cursor: default;
     background-color: #fff;
     border: 2px solid #fff;
@@ -1771,6 +1759,7 @@ color: #111;
     width: 100%;
 }
 /*-- //gallery --*/
+
 /*--responsive--*/
 @media (max-width:1680px){
 

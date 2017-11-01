@@ -23,13 +23,13 @@ Partial Public Class frm_AdministrarSolicitudes
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''table control.
+    '''tabla control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents table As Global.System.Web.UI.WebControls.Table
+    Protected WithEvents tabla As Global.System.Web.UI.WebControls.Table
     
     '''<summary>
     '''ScriptManager2 control.

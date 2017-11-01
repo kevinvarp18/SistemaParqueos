@@ -12,7 +12,7 @@
                     <div class="container">
                         <div class="page w3-4">
                             <div class="bs-example " data-example-id="simple-table">
-                                <asp:Table ID="table" runat="server" CssClass="table">
+                                <asp:Table ID="tabla" runat="server" CssClass="table">
                                     <asp:TableHeaderRow>
                                         <asp:TableHeaderCell>Nombre</asp:TableHeaderCell>                                        
                                         <asp:TableHeaderCell>Placa</asp:TableHeaderCell>

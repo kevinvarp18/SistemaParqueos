@@ -4,9 +4,12 @@ Imports Negocios
 Public Class frm_AdministrarSolicitudes
     Inherits System.Web.UI.Page
 
+    Dim strConnectionString As String
+    Dim parqueoNegocios As SP_Parqueo_Negocios
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
+        Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+        Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
         If String.Equals(Session("Usuario"), "a") Then
 
         Else
@@ -16,80 +19,79 @@ Public Class frm_AdministrarSolicitudes
 
         Dim sn As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
         Dim solicitudes As LinkedList(Of Solicitud) = sn.obtenerAdSolicitud()
+        llenarTabla(solicitudes)
+    End Sub
 
-        ' Total number of rows.
+    Public Function llenarTabla(solicitudes As LinkedList(Of Solicitud))
         Dim rowCnt As Integer
-        ' Current row count
         Dim rowCtr As Integer
-        ' Total number of cells (columns).
-        Dim cellCnt As Integer
-
         rowCnt = 1
-        cellCnt = 8
 
         For Each solicitudAct As Solicitud In solicitudes
-
             For rowCtr = 1 To rowCnt
-                Dim tRow As New TableRow()
-                Dim tCell As New TableCell()
-                Dim tCell2 As New TableCell()
-                Dim tCell3 As New TableCell()
-                Dim tCell4 As New TableCell()
-                Dim tCell5 As New TableCell()
-                Dim tCell6 As New TableCell()
-                Dim tCell7 As New TableCell()
-                Dim tCell8 As New TableCell()
+                Dim filaTabla As New TableRow()
+                Dim columnaMarca As New TableCell()
+                Dim columnaPlaca As New TableCell()
+                Dim columnaFechaI As New TableCell()
+                Dim columnaHoraI As New TableCell()
+                Dim columnaFechaS As New TableCell()
+                Dim columnaHoraS As New TableCell()
+                Dim columnaEspaciosD As New TableCell()
+                Dim columnaHypLnk As New TableCell()
 
-                tCell.Text = solicitudAct.GstrMarcaSG
-                tCell2.Text = solicitudAct.GstrPlacaSG
-                tCell3.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
-                tCell4.Text = solicitudAct.GstrHoraISG
-                tCell5.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
-                tCell6.Text = solicitudAct.GstrHoraFSG
+                columnaMarca.Text = solicitudAct.GstrMarcaSG
+                columnaPlaca.Text = solicitudAct.GstrPlacaSG
+                columnaFechaI.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
+                columnaHoraI.Text = solicitudAct.GstrHoraISG
+                columnaFechaS.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
+                columnaHoraS.Text = solicitudAct.GstrHoraFSG
 
-                Dim s As New LiteralControl()
-                s.Text = ""
-                tCell7.Controls.Add(s)
-                tCell8.Controls.Add(s)
-                Dim h As New HyperLink()
-                h.Text = "(Rechazar)"
-                h.NavigateUrl = "#"
-                Dim h2 As New HyperLink()
-                h2.Text = "(Aceptar)"
-                h2.NavigateUrl = "#"
+                Dim literalControl As New LiteralControl()
+                literalControl.Text = ""
+                columnaEspaciosD.Controls.Add(literalControl)
+                columnaHypLnk.Controls.Add(literalControl)
 
-                Dim d As New DropDownList()
-                d.Width = 75%
+                Dim hyperLinkRechazar As New HyperLink()
+                hyperLinkRechazar.Text = "(Rechazar)"
+                hyperLinkRechazar.NavigateUrl = "#"
+                hyperLinkRechazar.Style("color") = "#ff0000"
+
+                Dim hyperLinkAceptar As New HyperLink()
+                hyperLinkAceptar.Text = "(Aceptar)"
+                hyperLinkAceptar.NavigateUrl = "#"
+                hyperLinkAceptar.Style("color") = "#00fe00"
+
+                Dim DwnLstParqueos As New DropDownList()
+                DwnLstParqueos.Width = 75%
                 If IsPostBack Then
-                    Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoHabilitado()
+                    Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueoHabilitado()
                     For Each item As Parqueo In parqueo
-                        d.Items.Add(item.GintIdentificadorSG.ToString)
+                        DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
                     Next
                 Else
-                    d.Items.Clear()
-                    Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
+                    DwnLstParqueos.Items.Clear()
+                    Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueo()
                     For Each item As Parqueo In parqueo
-                        d.Items.Add(item.GintIdentificadorSG.ToString)
+                        DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
                     Next
                 End If
                 'la llamada y el fill de este drop hay q hacerlo aqui
 
-                tCell7.Controls.Add(d)
-                tCell8.Controls.Add(h)
-                tCell8.Controls.Add(h2)
+                columnaEspaciosD.Controls.Add(DwnLstParqueos)
+                columnaHypLnk.Controls.Add(hyperLinkRechazar)
+                columnaHypLnk.Controls.Add(hyperLinkAceptar)
 
-                tRow.Cells.Add(tCell)
-                tRow.Cells.Add(tCell2)
-                tRow.Cells.Add(tCell3)
-                tRow.Cells.Add(tCell4)
-                tRow.Cells.Add(tCell5)
-                tRow.Cells.Add(tCell6)
-                tRow.Cells.Add(tCell7)
-                tRow.Cells.Add(tCell8)
-                table.Rows.Add(tRow)
+                filaTabla.Cells.Add(columnaMarca)
+                filaTabla.Cells.Add(columnaPlaca)
+                filaTabla.Cells.Add(columnaFechaI)
+                filaTabla.Cells.Add(columnaHoraI)
+                filaTabla.Cells.Add(columnaFechaS)
+                filaTabla.Cells.Add(columnaHoraS)
+                filaTabla.Cells.Add(columnaEspaciosD)
+                filaTabla.Cells.Add(columnaHypLnk)
+                tabla.Rows.Add(filaTabla)
             Next
         Next
-
-    End Sub
+    End Function
 
 End Class
