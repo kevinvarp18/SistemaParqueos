@@ -1,5 +1,8 @@
 ﻿Imports System.Data.SqlClient
 Imports Entidad
+Imports System.Net.Mail
+Imports System.Net
+Imports System.Web.Configuration
 
 Public Class SP_Usuario_Datos
     '**********************************************************************
@@ -11,7 +14,7 @@ Public Class SP_Usuario_Datos
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  21-Octubre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  11-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public gstrconnString As String
@@ -115,26 +118,30 @@ Public Class SP_Usuario_Datos
         Return usuarios
     End Function
 
-    Public Sub EnvioMail()
+    Public Sub EnvioMail(strCorreo As String)
 
         Dim correo As New MailMessage
         Dim smtp As New SmtpClient()
 
-        correo.From = New MailAddress("Correo remitente", "Nombre Remitente", System.Text.Encoding.UTF8)
-        correo.To.Add("Correo destinatario")
+        correo.From = New MailAddress("sistemaparqueosoij@gmail.com", "Sistema Parqueos OIJ", System.Text.Encoding.UTF8)
+        correo.[To].Add(strCorreo)
         correo.SubjectEncoding = System.Text.Encoding.UTF8
-        correo.Subject = "Asunto de tu mensaje"
-        correo.Body = "Cuerpo del mensaje"
+        correo.Subject = "Recordar Contraseña"
+        correo.Body = Convert.ToString("")
         correo.BodyEncoding = System.Text.Encoding.UTF8
-        correo.IsBodyHtml = False(formato tipo web o normal:               true = web)
- correo.Priority = MailPriority.High >> prioridad
-
-        smtp.Credentials = New System.Net.NetworkCredential("Correo remitente", "Contraseña del correo remitente")
+        correo.IsBodyHtml = (True)
+        correo.Priority = MailPriority.High
+        smtp.Credentials = New System.Net.NetworkCredential("sistemaparqueosoij@gmail.com", "OIJ.SistemaParqueos")
         smtp.Port = 465
-        smtp.Host = smtp.gmail.com
+        smtp.Host = "smtp.gmail.com"
         smtp.EnableSsl = True
 
-        smtp.Send(correo)
+        Try
+            smtp.Send(correo)
+
+        Catch
+
+        End Try
 
     End Sub
 
