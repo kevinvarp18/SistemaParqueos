@@ -36,7 +36,7 @@ Public Class registrarVisitante
         End If
         Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
         tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v",
-        Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, tbInstitucion.Text))
+        Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, tbProcedencia.Text))
         lblMensaje.Text = "El usuario se ha registrado exitosamente"
 
     End Sub
