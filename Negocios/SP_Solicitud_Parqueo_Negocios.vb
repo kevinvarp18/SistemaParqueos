@@ -30,4 +30,8 @@ Public Class SP_Solicitud_Parqueo_Negocios
     Public Function obtenerAdSolicitud() As LinkedList(Of Solicitud)
         Return Me.solicitud_Acceso_a_Datos.obtenerAdSolicitud()
     End Function
+    Public Function obtenerReporte(fecha_i As String, fecha_f As String) As LinkedList(Of Solicitud)
+        Return Me.solicitud_Acceso_a_Datos.obtenerReporte(fecha_i, fecha_f)
+    End Function
+
 End Class
