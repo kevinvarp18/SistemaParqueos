@@ -23,6 +23,15 @@ Partial Public Class frm_AdministrarSolicitudes
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblParqueoModal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblParqueoModal As Global.System.Web.UI.WebControls.HyperLink
+    
+    '''<summary>
     '''tabla control.
     '''</summary>
     '''<remarks>

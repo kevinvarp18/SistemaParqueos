@@ -8,7 +8,7 @@
                 <ContentTemplate>
                     <h3>Administrar Solicitudes</h3>
                     </div>
-                    </div>
+                    <asp:HyperLink id="lblParqueoModal" class="new-gri" data-toggle="modal" data-target="#myModal1" NavigateUrl="#" Text="Ver Parqueo" runat="server"/>
                     <div class="container">
                         <div class="page w3-4">
                             <div class="bs-example " data-example-id="simple-table">
