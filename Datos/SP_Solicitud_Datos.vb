@@ -100,41 +100,27 @@ Public Class SP_Solicitud_Datos
             solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
             solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
             solicitud.AddLast(solicitudActual)
-
         Next
         Return solicitud
     End Function
-
-    Public Function obtenerReporte(fecha_i As String, fecha_f As String) As LinkedList(Of Solicitud)
+    Public Function obtenerNumeroSolicitudes() As String
         Dim connection As New SqlConnection(Me.gstrconnString)
-        Dim sqlSelect As [String] = "PA_ReporteFechas"
-
+        Dim sqlSelect As String = "PA_CantSolicitudNotif"
         Dim sqlDataAdapterClient As New SqlDataAdapter()
         sqlDataAdapterClient.SelectCommand = New SqlCommand()
         sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
         sqlDataAdapterClient.SelectCommand.Connection = connection
         sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
-        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@fecha_i", fecha_i))
-        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@fecha_f", fecha_f))
-
-        Dim dataSetAttendant As New DataSet()
-        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Solicitud")
+        Dim dataSetEstudiantes As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetEstudiantes, "SP.TSP_Usuario")
         sqlDataAdapterClient.SelectCommand.Connection.Close()
-        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Solicitud").Rows
-        Dim solicitud As New LinkedList(Of Solicitud)()
+        Dim dataRowCollection As DataRowCollection = dataSetEstudiantes.Tables("SP.TSP_Usuario").Rows
+        Dim cantidad As String
 
         For Each currentRow As DataRow In dataRowCollection
-            Dim solicitudActual As New Solicitud()
-            solicitudActual.GintIdParqueoSG = Integer.Parse(currentRow("num_parqueo").ToString())
-            solicitudActual.GstrHoraISG = currentRow("hora_e").ToString()
-            solicitudActual.GstrHoraFSG = currentRow("hora_s").ToString()
-            solicitudActual.GstrPlacaSG = currentRow("placa").ToString()
-            solicitudActual.GstrMarcaSG = currentRow("nombre").ToString() 'voy a usar este para el nombre
-            solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
-            solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
-            solicitud.AddLast(solicitudActual)
-
+            Dim usuarioActual As New Usuario()
+            cantidad = currentRow("Cantidad").ToString()
         Next
-        Return solicitud
+        Return cantidad
     End Function
 End Class

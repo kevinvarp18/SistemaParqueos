@@ -33,9 +33,19 @@
                     <div class="row">
                         <nav class="navbar navbar-default">
                             <div class="navbar-header wow fadeInLeft animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
-                                <a href="frm_index.aspx"><img src="../public/images/placa.png" alt=" "/></a>
+                                <a href="frm_index.aspx">
+                                    <img src="../public/images/placa.png" alt=" " /></a>
                             </div>
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
+                                <%
+                If String.Equals(Session("Usuario"), "a") Then
+                                %>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <asp:HyperLink ID="HypLnkSolicitudes" style="color:#efd12f" NavigateUrl="http://localhost:52086/view/frm_AdministrarSolicitudes.aspx" Text="Pendientes: " runat="server" />
+                                </ul>
+                                <%
+                End If
+                                %>
                                 <br>
                                 <ul class="nav navbar-nav navbar-right">
                                     <%

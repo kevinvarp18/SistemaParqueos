@@ -11,7 +11,7 @@ Public Class SP_Solicitud_Parqueo_Negocios
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  19-Octubre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  28-Octubre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public solicitud_Acceso_a_Datos As SP_Solicitud_Datos
@@ -26,12 +26,10 @@ Public Class SP_Solicitud_Parqueo_Negocios
     Public Function obtenerSolicitudes() As LinkedList(Of Solicitud)
         Return Me.solicitud_Acceso_a_Datos.obtenerSolicitud()
     End Function
-
     Public Function obtenerAdSolicitud() As LinkedList(Of Solicitud)
         Return Me.solicitud_Acceso_a_Datos.obtenerAdSolicitud()
     End Function
-    Public Function obtenerReporte(fecha_i As String, fecha_f As String) As LinkedList(Of Solicitud)
-        Return Me.solicitud_Acceso_a_Datos.obtenerReporte(fecha_i, fecha_f)
+    Public Function obtenerNumeroSolicitudes() As String
+        Return Me.solicitud_Acceso_a_Datos.obtenerNumeroSolicitudes()
     End Function
-
 End Class
