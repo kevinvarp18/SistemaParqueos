@@ -116,4 +116,26 @@ Public Class SP_Parqueo_Datos
         Return parqueo
     End Function
 
+    Public Function obtenerParqueoOcupado() As LinkedList(Of Parqueo)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_VerParqueosOcupados;"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Disponibilidad_Parqueo_X_TSP_Parqueo")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Disponibilidad_Parqueo_X_TSP_Parqueo").Rows
+        Dim parqueo As New LinkedList(Of Parqueo)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim parqueoActual As New Parqueo()
+            parqueoActual.GintIdentificadorSG = Long.Parse(currentRow("TN_Idparqueo_TSP_Disponibilidad_Parqueo_X_TSP_Parqueo").ToString())
+            parqueo.AddLast(parqueoActual)
+        Next
+        Return parqueo
+    End Function
+
 End Class
