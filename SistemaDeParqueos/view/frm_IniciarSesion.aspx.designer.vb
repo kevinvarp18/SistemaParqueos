@@ -59,13 +59,13 @@ Partial Public Class loginView
     Protected WithEvents tbContrasena As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''LinkButton1 control.
+    '''lblRecordar control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LinkButton1 As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents lblRecordar As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnIngresar control.

@@ -36,7 +36,7 @@ Public Class loginView
         End If
     End Sub
 
-    Protected Sub LinkButton1_Click(sender As Object, e As EventArgs) Handles LinkButton1.Click
+    Protected Sub LinkButton1_Click(sender As Object, e As EventArgs) Handles lblRecordar.Click
         Dim strCorreo = tbUsuario.Text
         tbContrasena.Text = "C re mamo"
         Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
