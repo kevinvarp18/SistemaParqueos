@@ -118,31 +118,68 @@ Public Class SP_Usuario_Datos
         Return usuarios
     End Function
 
-    Public Sub EnvioMail(strCorreo As String)
+    Public Function obtenerCorreosUsuarios(strcorreo As String) As LinkedList(Of Usuario)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As String = "PA_VerCorreosExistentes"
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@correo", strcorreo))
+        Dim dataSetEstudiantes As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetEstudiantes, "SP.TSP_Usuario")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetEstudiantes.Tables("SP.TSP_Usuario").Rows
+        Dim usuarios As New LinkedList(Of Usuario)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim usuarioActual As New Usuario()
+            usuarioActual.gstrNombre = currentRow("TC_Nombre_TSP_Usuario").ToString()
+            usuarioActual.gstrApellido = currentRow("TC_Apellido_TSP_Usuario").ToString()
+            usuarioActual.gstrCorreo = currentRow("TC_Correo_TSP_Usuario").ToString()
+            usuarioActual.gstrContrasenna = currentRow("TC_Contrasenna_TSP_Usuario").ToString()
+            usuarioActual.gstrTipoUsuario = 0
+            usuarios.AddLast(usuarioActual)
+        Next
+        Return usuarios
+    End Function
+
+    Public Function EnvioMail(strCorreo As String) As Boolean
 
         Dim correo As New MailMessage
         Dim smtp As New SmtpClient()
 
-        correo.From = New MailAddress("sistemaparqueosoij@gmail.com", "Sistema Parqueos OIJ", System.Text.Encoding.UTF8)
-        correo.[To].Add(strCorreo)
-        correo.SubjectEncoding = System.Text.Encoding.UTF8
-        correo.Subject = "Recordar Contraseña"
-        correo.Body = Convert.ToString("")
-        correo.BodyEncoding = System.Text.Encoding.UTF8
-        correo.IsBodyHtml = (True)
-        correo.Priority = MailPriority.High
-        smtp.Credentials = New System.Net.NetworkCredential("sistemaparqueosoij@gmail.com", "OIJ.SistemaParqueos")
-        smtp.Port = 465
-        smtp.Host = "smtp.gmail.com"
-        smtp.EnableSsl = True
+        Dim blnExite = False
 
-        Try
-            smtp.Send(correo)
+        Dim usuarios As New LinkedList(Of Usuario)
+        usuarios = obtenerCorreosUsuarios(strCorreo)
 
-        Catch
+        If (usuarios.Count > 0) Then
+            For Each usuarioActual As Usuario In usuarios
+                correo.From = New MailAddress("sistemaparqueosoij@gmail.com", "Sistema Parqueos OIJ", System.Text.Encoding.UTF8)
+                correo.[To].Add(usuarioActual.gstrCorreo)
+                correo.SubjectEncoding = System.Text.Encoding.UTF8
+                correo.Subject = "Recuperación de Contraseña"
+                correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "\n" + " Su contraseña para el Sistema de Parqueos del OIJ es:" + usuarioActual.gstrContrasenna)
+                correo.BodyEncoding = System.Text.Encoding.UTF8
+                correo.IsBodyHtml = (True)
+                correo.Priority = MailPriority.High
+                smtp.Credentials = New System.Net.NetworkCredential("sistemaparqueosoij@gmail.com", "OIJ.SistemaParqueos")
+                smtp.Port = 465
+                smtp.Host = "smtp.gmail.com"
+                smtp.EnableSsl = True
 
-        End Try
+                Try
+                    smtp.Send(correo)
 
-    End Sub
+                Catch
+
+                End Try
+            Next
+        End If
+
+        Return blnExite
+    End Function
 
 End Class

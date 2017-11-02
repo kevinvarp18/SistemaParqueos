@@ -35,4 +35,13 @@ Public Class SP_Usuario_Negocios
     Public Function obtenerUsuarios(correo As String, contrasenna As String) As LinkedList(Of Usuario)
         Return Me.usuario_Acceso_a_Datos.obtenerUsuarios(correo, contrasenna)
     End Function
+
+    Public Function obtenerCorreosUsuarios(strcorreo As String) As LinkedList(Of Usuario)
+        Return Me.usuario_Acceso_a_Datos.obtenerCorreosUsuarios(strcorreo)
+    End Function
+
+    Public Function EnvioMail(strCorreo As String) As Boolean
+        Return Me.usuario_Acceso_a_Datos.EnvioMail(strCorreo)
+    End Function
+
 End Class

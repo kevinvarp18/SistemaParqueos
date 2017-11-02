@@ -12,7 +12,8 @@
                     <asp:TextBox ID="tbUsuario" type="email" style="margin-left: 4.9%;" required="" runat="server"></asp:TextBox><br />
                     <asp:Label ID="lblContrasena" runat="server" Text="Contraseña:"></asp:Label>
                     <asp:TextBox ID="tbContrasena" type="password" required="" runat="server"></asp:TextBox><br />
-                    <asp:HyperLink id="lblRecordatorio" NavigateUrl="#" style="margin-left: 42%;" Text="¿Olvidaste la contraseña?" runat="server"/><br />
+                    <asp:LinkButton ID="LinkButton1" style="margin-left: 42%;" runat="server">¿Olvidaste la contraseña?</asp:LinkButton>
+                    <br />
                     <asp:Button ID="btnIngresar" runat="server" CssClass="singleTextBox" OnClick="btnIngresar_Click" Text="Ingresar" />
                     <br /><br />
                     <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
