@@ -38,16 +38,15 @@ Public Class loginView
 
     Protected Sub LinkButton1_Click(sender As Object, e As EventArgs) Handles lblRecordar.Click
         Dim strCorreo = tbUsuario.Text
-        tbContrasena.Text = "C re mamo"
-        Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+        Dim connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Dim usuario_Negocios = New SP_Usuario_Negocios(Me.connectionString)
         Dim blnRespuesta = usuarioNegocios.EnvioMail(strCorreo)
         If (blnRespuesta) Then
-            tbContrasena.Text = "Funco"
+            tbUsuario.Text = "Funco"
             'Avisar si funco
         Else
             'Avisar si no funco
-            tbContrasena.Text = "C mamo"
+            tbUsuario.Text = "C mamo" + tbUsuario.Text
         End If
     End Sub
 End Class

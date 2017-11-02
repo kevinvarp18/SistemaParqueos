@@ -126,7 +126,7 @@ Public Class SP_Usuario_Datos
         sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
         sqlDataAdapterClient.SelectCommand.Connection = connection
         sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
-        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@correo", strcorreo))
+        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@Correo", strcorreo))
         Dim dataSetEstudiantes As New DataSet()
         sqlDataAdapterClient.Fill(dataSetEstudiantes, "SP.TSP_Usuario")
         sqlDataAdapterClient.SelectCommand.Connection.Close()
@@ -161,20 +161,20 @@ Public Class SP_Usuario_Datos
                 correo.[To].Add(usuarioActual.gstrCorreo)
                 correo.SubjectEncoding = System.Text.Encoding.UTF8
                 correo.Subject = "Recuperación de Contraseña"
-                correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "\n" + " Su contraseña para el Sistema de Parqueos del OIJ es:" + usuarioActual.gstrContrasenna)
+                correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + ", su contraseña para el Sistema de Parqueos del OIJ es:" + usuarioActual.gstrContrasenna)
                 correo.BodyEncoding = System.Text.Encoding.UTF8
                 correo.IsBodyHtml = (True)
                 correo.Priority = MailPriority.High
                 smtp.Credentials = New System.Net.NetworkCredential("sistemaparqueosoij@gmail.com", "OIJ.SistemaParqueos")
-                smtp.Port = 465
+                smtp.Port = 587
                 smtp.Host = "smtp.gmail.com"
                 smtp.EnableSsl = True
 
                 Try
                     smtp.Send(correo)
-
+                    blnExite = True
                 Catch
-
+                    blnExite = False
                 End Try
             Next
         End If
