@@ -40,8 +40,8 @@ Public Class SP_Parqueo_Negocios
         Return Me.parqueo_Acceso_a_Datos.obtenerParqueoHabilitado()
     End Function
 
-    Public Function obtenerParqueoOcupado() As LinkedList(Of Parqueo)
-        Return Me.parqueo_Acceso_a_Datos.obtenerParqueoOcupado()
+    Public Function obtenerParqueoOcupado(strfecha As String, strHorai As String, strHoraf As String) As LinkedList(Of Parqueo)
+        Return Me.parqueo_Acceso_a_Datos.obtenerParqueoOcupado(strfecha, strHorai, strHoraf)
     End Function
 
 End Class

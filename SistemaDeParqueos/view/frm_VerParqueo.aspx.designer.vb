@@ -23,6 +23,69 @@ Partial Public Class VerParqueo
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblDesde control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDesde As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''tbFechaI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tbFechaI As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Label1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''tbHoraI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tbHoraI As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Label2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''tbHoraF control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tbHoraF As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnBuscarP control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBuscarP As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''table control.
     '''</summary>
     '''<remarks>
@@ -30,78 +93,6 @@ Partial Public Class VerParqueo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents table As Global.System.Web.UI.WebControls.Table
-    
-    '''<summary>
-    '''hyperlink1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hyperlink1 As Global.System.Web.UI.WebControls.HyperLink
-    
-    '''<summary>
-    '''hyperlink2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hyperlink2 As Global.System.Web.UI.WebControls.HyperLink
-    
-    '''<summary>
-    '''hyperlink3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hyperlink3 As Global.System.Web.UI.WebControls.HyperLink
-    
-    '''<summary>
-    '''hyperlink4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hyperlink4 As Global.System.Web.UI.WebControls.HyperLink
-    
-    '''<summary>
-    '''hyperlink5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hyperlink5 As Global.System.Web.UI.WebControls.HyperLink
-    
-    '''<summary>
-    '''hyperlink6 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hyperlink6 As Global.System.Web.UI.WebControls.HyperLink
-    
-    '''<summary>
-    '''hyperlink7 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hyperlink7 As Global.System.Web.UI.WebControls.HyperLink
-    
-    '''<summary>
-    '''hyperlink8 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hyperlink8 As Global.System.Web.UI.WebControls.HyperLink
     
     '''<summary>
     '''ScriptManager2 control.

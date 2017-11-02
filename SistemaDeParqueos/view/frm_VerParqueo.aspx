@@ -7,12 +7,19 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Ver Parqueo</h3>
+                    <asp:Label ID="lblDesde" runat="server" style="margin-left: 10%;" Text="Desde:"></asp:Label>
+                    <asp:TextBox ID="tbFechaI" type="date" runat="server" style="margin-left: 2%; width: 13%;"></asp:TextBox>
+                    <asp:Label ID="Label1" runat="server" style="margin-left: 10%;" Text="Desde:"></asp:Label>
+                    <asp:TextBox ID="tbHoraI" type="time" runat="server" style="margin-left: 2%; width: 13%;"></asp:TextBox>
+                    <asp:Label ID="Label2" runat="server" style="margin-left: 10%;" Text="Hasta:"></asp:Label>
+                    <asp:TextBox ID="tbHoraF" type="time" runat="server" style="margin-left: 2%; width: 13%;"></asp:TextBox>                    
+                    <asp:Button ID="btnBuscarP" runat="server" style="width: 15%; margin-left: 10%;"  Text="Ver" />
                     </div>
                     <div class="container">
                         <div class="page w3-4">
                             <div class="bs-example " data-example-id="simple-table">
                                 <asp:Table ID="table" runat="server" CssClass="table">
-                                    <asp:TableHeaderRow>
+                                    <%--<asp:TableHeaderRow>
                                         <asp:TableHeaderCell>Jefatura</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>PIP</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>UPRO</asp:TableHeaderCell>
@@ -21,7 +28,7 @@
                                         <asp:TableHeaderCell>UPROV</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>UVISE</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>Visitas</asp:TableHeaderCell>
-                                    </asp:TableHeaderRow>
+                                    </asp:TableHeaderRow
                                     <asp:TableRow>
                                         <asp:TableCell><asp:HyperLink id="hyperlink1" NavigateUrl="#" Text="Espacio 1" runat="server"/> </asp:TableCell>
                                         <asp:TableCell><asp:HyperLink id="hyperlink2" NavigateUrl="#" Text="Espacio 7" runat="server"/> </asp:TableCell>
@@ -31,7 +38,7 @@
                                         <asp:TableCell><asp:HyperLink id="hyperlink6" NavigateUrl="#" Text="Espacio 24" runat="server"/> </asp:TableCell>
                                         <asp:TableCell><asp:HyperLink id="hyperlink7" NavigateUrl="#" Text="Espacio 44" runat="server"/> </asp:TableCell>
                                         <asp:TableCell><asp:HyperLink id="hyperlink8" NavigateUrl="#" Text="Espacio 58" runat="server"/> </asp:TableCell>
-                                    </asp:TableRow>
+                                    </asp:TableRow>>--%>
                                 </asp:Table>
                             </div>
                         </div>
@@ -41,4 +48,5 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
+    </div>
 </asp:Content>
