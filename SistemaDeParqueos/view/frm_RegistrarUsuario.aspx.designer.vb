@@ -212,31 +212,13 @@ Partial Public Class frm_RegistrarUsuario
     Protected WithEvents lblProcedencia2 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''tbInstitucion control.
+    '''tbProcedencia control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbInstitucion As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lblMensaje control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''UpdatePanel3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents tbProcedencia As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''btnRegistrar control.

@@ -36,7 +36,7 @@ Public Class loginView
         End If
     End Sub
 
-    Protected Sub LinkButton1_Click(sender As Object, e As EventArgs) Handles lblRecordar.Click
+    Protected Sub enviarCorreo()
         Dim strCorreo = tbUsuario.Text
         Dim connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Dim usuario_Negocios = New SP_Usuario_Negocios(Me.connectionString)

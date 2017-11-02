@@ -4,8 +4,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-
     <div class="newsletter wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
         <div class="container">
             <asp:ScriptManager ID="ScriptManager2" runat="server">
@@ -34,25 +32,29 @@
                             <asp:TextBox ID="tbUbicacion" type="text" required="" runat="server" Style="margin-left: 5.9%; width: 27%;"></asp:TextBox><br />
                             <asp:Label ID="lblProcedencia1" runat="server" Text="Procedencia:"></asp:Label>
                             <asp:DropDownList ID="DwnLstProcedencia" runat="server" Style="margin-left: 4.3%; width: 27%;" AutoPostBack="true"></asp:DropDownList><br />
-                            <asp:Label ID="lblProcedencia2" runat="server" Text="Nombre Dept:"></asp:Label>
-                            <asp:TextBox ID="tbInstitucion" type="text" required="" runat="server" Style="margin-left: 4%; width: 27%;"></asp:TextBox><br />
+                            <asp:Label ID="lblProcedencia2" runat="server" Text="Nombre Dept:" Visible="false"></asp:Label>
+                            <asp:TextBox ID="tbProcedencia" type="text" required="" runat="server" Style="margin-left: 3.5%; width: 27%;" Visible="false"></asp:TextBox><br />
                         </ContentTemplate>
                     </asp:UpdatePanel>
-
-                    <br/>
-                        <asp:Label ID="lblMensaje" runat="server" Text="" style="color:red"></asp:Label>
-                    <br/>
-
+                    <asp:Button ID="btnRegistrar" runat="server" CssClass="singleTextBox" OnClick="btnRegistrar_Click" Text="Registrar" /><br />
+                    <script>
+                        function muestraMensaje(titulo, mensaje, tipo) {
+                            swal(
+                              titulo,
+                              mensaje,
+                              tipo
+                            )
+                        }
+                    </script>
                 </ContentTemplate>
             </asp:UpdatePanel>
 
-            <asp:UpdatePanel ID="UpdatePanel3" runat="server" Visible="true">
+            <%--<asp:UpdatePanel ID="UpdatePanel3" runat="server" Visible="true">
                 <ContentTemplate>
                     <asp:Button ID="btnRegistrar" runat="server" CssClass="singleTextBox" OnClick="btnRegistrar_Click" Text="Registrar" /><br />
                     <br />
                 </ContentTemplate>
-            </asp:UpdatePanel>
-
+            </asp:UpdatePanel>--%>
         </div>
     </div>
 </asp:Content>
