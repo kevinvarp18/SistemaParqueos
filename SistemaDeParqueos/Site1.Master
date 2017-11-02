@@ -38,28 +38,28 @@
                             </div>
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
                                 <%
-                If String.Equals(Session("Usuario"), "a") Then
+                                    If String.Equals(Session("Usuario"), "a") Then
                                 %>
                                 <ul class="nav navbar-nav navbar-right">
                                     <asp:HyperLink ID="HypLnkSolicitudes" Style="color: #efd12f" NavigateUrl="http://localhost:52086/view/frm_AdministrarSolicitudes.aspx" Text="Pendientes: " runat="server" />
                                 </ul>
                                 <%
-                End If
+                                    End If
                                 %>
                                 <br>
                                 <ul class="nav navbar-nav navbar-right">
                                     <%
-                If String.Equals(Session("Usuario"), "N") Then
+                                        If String.Equals(Session("Usuario"), "N") Then
                                     %>
                                     <li><a href="frm_IniciarSesion.aspx">Iniciar Sesión</a></li>
                                     <li><a href="frm_RegistrarVisitante.aspx">Registrarse</a></li>
                                     <%
-                ElseIf String.Equals(Session("Usuario"), "v") Then
+                                        ElseIf String.Equals(Session("Usuario"), "v") Then
                                     %>
                                     <li><a href="frm_SolicitarParqueo.aspx">Solicitar parqueo</a></li>
                                     <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>
                                     <%
-                ElseIf String.Equals(Session("Usuario"), "a") Then
+                                        ElseIf String.Equals(Session("Usuario"), "a") Then
                                     %>
                                     <li><a href="frm_VerParqueo.aspx">Ver parqueo</a></li>
                                     <li><a href="frm_AdministrarParqueo.aspx">Administrar parqueo</a></li>
@@ -68,13 +68,13 @@
                                     <li><a href="frm_Reporte.aspx">Reportes</a></li>
                                     <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>
                                     <%
-                ElseIf String.Equals(Session("Usuario"), "o") Then
+                                        ElseIf String.Equals(Session("Usuario"), "o") Then
                                     %>
                                     <li><a href="frm_ListaVisitantes.aspx">Lista visitantes</a></li>
                                     <li><a href="frm_BrindarParqueo.aspx">Brindar parqueo</a></li>
                                     <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>
                                     <%
-                End If
+                                        End If
                                     %>
                                 </ul>
                                 <div class="clearfix"></div>
@@ -95,12 +95,31 @@
             <div class="modal fade" id="myModal1" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content modal-info">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class="top-bar w3agile-1" id="home">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <nav class="navbar navbar-default">
+                                        <div class="navbar-header wow fadeInLeft animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+                                            <a href="frm_index.aspx" style="margin-left: 30%;">
+                                                <img src="../public/images/placa.png" alt=" " /></a>
+                                        </div>
+                                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
+                                            <br />
+                                            <br />
+                                            <h1>Ver Parqueo</h1>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </nav>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-body">
+
                             <div class="newsletter wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-                                    <h3>Ver Parqueo</h3>
                                 <div class="container">
                                     <div class="page w3-4">
                                         <div class="bs-example " data-example-id="simple-table">
@@ -116,14 +135,30 @@
                                                     <asp:TableHeaderCell>Visitas</asp:TableHeaderCell>
                                                 </asp:TableHeaderRow>
                                                 <asp:TableRow>
-                                                    <asp:TableCell><asp:HyperLink id="hyperlink1" NavigateUrl="#" Text="Espacio 1" runat="server"/> </asp:TableCell>
-                                                    <asp:TableCell><asp:HyperLink id="hyperlink2" NavigateUrl="#" Text="Espacio 7" runat="server"/> </asp:TableCell>
-                                                    <asp:TableCell><asp:HyperLink id="hyperlink3" NavigateUrl="#" Text="Espacio 8" runat="server"/> </asp:TableCell>
-                                                    <asp:TableCell><asp:HyperLink id="hyperlink4" NavigateUrl="#" Text="Espacio 13" runat="server"/> </asp:TableCell>
-                                                    <asp:TableCell><asp:HyperLink id="hyperlink5" NavigateUrl="#" Text="Espacio 19" runat="server"/> </asp:TableCell>
-                                                    <asp:TableCell><asp:HyperLink id="hyperlink6" NavigateUrl="#" Text="Espacio 24" runat="server"/> </asp:TableCell>
-                                                    <asp:TableCell><asp:HyperLink id="hyperlink7" NavigateUrl="#" Text="Espacio 44" runat="server"/> </asp:TableCell>
-                                                    <asp:TableCell><asp:HyperLink id="hyperlink8" NavigateUrl="#" Text="Espacio 58" runat="server"/> </asp:TableCell>
+                                                    <asp:TableCell>
+                                                        <asp:HyperLink ID="hyperlink1" NavigateUrl="#" Text="Espacio 1" runat="server" />
+                                                    </asp:TableCell>
+                                                    <asp:TableCell>
+                                                        <asp:HyperLink ID="hyperlink2" NavigateUrl="#" Text="Espacio 7" runat="server" />
+                                                    </asp:TableCell>
+                                                    <asp:TableCell>
+                                                        <asp:HyperLink ID="hyperlink3" NavigateUrl="#" Text="Espacio 8" runat="server" />
+                                                    </asp:TableCell>
+                                                    <asp:TableCell>
+                                                        <asp:HyperLink ID="hyperlink4" NavigateUrl="#" Text="Espacio 13" runat="server" />
+                                                    </asp:TableCell>
+                                                    <asp:TableCell>
+                                                        <asp:HyperLink ID="hyperlink5" NavigateUrl="#" Text="Espacio 19" runat="server" />
+                                                    </asp:TableCell>
+                                                    <asp:TableCell>
+                                                        <asp:HyperLink ID="hyperlink6" NavigateUrl="#" Text="Espacio 24" runat="server" />
+                                                    </asp:TableCell>
+                                                    <asp:TableCell>
+                                                        <asp:HyperLink ID="hyperlink7" NavigateUrl="#" Text="Espacio 44" runat="server" />
+                                                    </asp:TableCell>
+                                                    <asp:TableCell>
+                                                        <asp:HyperLink ID="hyperlink8" NavigateUrl="#" Text="Espacio 58" runat="server" />
+                                                    </asp:TableCell>
                                                 </asp:TableRow>
                                             </asp:Table>
                                         </div>
@@ -132,6 +167,11 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
+                        <footer>
+                            <p class="copy-right wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">Organismo de Investigaci&oacute;n Judicial - Poder Judicial - San Jos&eacute; - Costa Rica- Copyright ©</p>
+                            <br />
+                            <br />
+                        </footer>
                     </div>
                 </div>
             </div>
