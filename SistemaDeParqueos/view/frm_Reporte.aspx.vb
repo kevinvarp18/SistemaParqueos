@@ -35,14 +35,14 @@ Public Class frm_Reporte
             Dim fecha_s As New TableHeaderCell()
             Dim hora_s As New TableHeaderCell()
             Dim num_p As New TableHeaderCell()
-            nom.Text = "Jefatura"
-            inst.Text = "PIP"
-            pla.Text = "UPRO"
-            fecha_e.Text = "OPD"
-            hora_e.Text = "SERT"
-            fecha_s.Text = "UPROV"
-            hora_s.Text = "UVISE"
-            num_p.Text = "VISITAS"
+            nom.Text = "Nombre"
+            inst.Text = "Institución"
+            pla.Text = "Placa"
+            fecha_e.Text = "Fecha Entrada"
+            hora_e.Text = "Hora Entrada"
+            fecha_s.Text = "Fecha Salida"
+            hora_s.Text = "Hora Salida"
+            num_p.Text = "Espacio"
 
             tERow.Cells.Add(nom)
             tERow.Cells.Add(inst)
