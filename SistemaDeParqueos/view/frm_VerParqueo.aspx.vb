@@ -56,10 +56,12 @@ Public Class VerParqueo
                                 hyperLink.Style("color") = "#00fe00"
                                 tCell.Controls.Add(hyperLink)
                             End If
-                            tRow.Cells.Add(tCell)
-                            table.Rows.Add(tRow)
+
                         End If
+                        tRow.Cells.Add(tCell)
+
                     Next
+                    table.Rows.Add(tRow)
                 Next
             Next
 

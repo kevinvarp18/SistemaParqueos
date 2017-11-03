@@ -10,9 +10,9 @@
                     <asp:Label ID="lblDesde" runat="server" style="margin-left: 10%;" Text="Desde:"></asp:Label>
                     <asp:TextBox ID="tbFechaI" type="date" required="" runat="server" style="margin-left: 2%; width: 13%;"></asp:TextBox>
                     <asp:Label ID="Label1" runat="server" style="margin-left: 10%;" Text="Desde:"></asp:Label>
-                    <asp:TextBox ID="tbHoraI" type="time" required="" runat="server" style="margin-left: 2%; width: 13%;"></asp:TextBox>
+                    <asp:TextBox ID="tbHoraI" TextMode="Time" required="" runat="server" style="margin-left: 2%; width: 13%;"></asp:TextBox>
                     <asp:Label ID="Label2" runat="server" style="margin-left: 10%;" Text="Hasta:"></asp:Label>
-                    <asp:TextBox ID="tbHoraF" type="time" required="" runat="server" style="margin-left: 2%; width: 13%;"></asp:TextBox>                    
+                    <asp:TextBox ID="tbHoraF" TextMode="Time" required="" runat="server" style="margin-left: 2%; width: 13%;"></asp:TextBox>                    
                     <asp:Button ID="btnBuscarP" runat="server" style="width: 15%; margin-left: 10%;"  Text="Ver" />
                     </div>
                     <div class="container">
