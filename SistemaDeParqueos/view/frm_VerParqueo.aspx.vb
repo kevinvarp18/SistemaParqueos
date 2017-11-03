@@ -46,12 +46,12 @@ Public Class VerParqueo
                                 End If
                             Next
                             If ocu = True Then
-                                hyperLink.Text = parqueosAct.GintIdentificadorSG
+                                hyperLink.Text = "Espacio " + parqueosAct.GintIdentificadorSG.ToString()
                                 hyperLink.NavigateUrl = ""
                                 hyperLink.Style("color") = "#ff0000"
                                 tCell.Controls.Add(hyperLink)
                             Else
-                                hyperLink.Text = parqueosAct.GintIdentificadorSG
+                                hyperLink.Text = "Espacio " + parqueosAct.GintIdentificadorSG.ToString()
                                 hyperLink.NavigateUrl = ""
                                 hyperLink.Style("color") = "#00fe00"
                                 tCell.Controls.Add(hyperLink)
