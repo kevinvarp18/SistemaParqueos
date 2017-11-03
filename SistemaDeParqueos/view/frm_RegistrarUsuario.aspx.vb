@@ -9,8 +9,8 @@ Public Class frm_RegistrarUsuario
     Dim usuarioNegocios As SP_Usuario_Negocios
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'If String.Equals(Session("Usuario"), "a") Then
-        Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+        If String.Equals(Session("Usuario"), "a") Then
+            Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_RegistrarUsuario", ResolveUrl("~") + "public/js/" + "script.js")
 
@@ -41,24 +41,24 @@ Public Class frm_RegistrarUsuario
                     tbProcedencia.Style("margin-left") = "5.3%"
                 End If
             Else
-            DwnLstTipoUsuario.Items.Add("Seleccione una opción")
-            DwnLstTipoUsuario.Items.Add("Visitante")
+                DwnLstTipoUsuario.Items.Add("Seleccione una opción")
+                DwnLstTipoUsuario.Items.Add("Visitante")
                 DwnLstTipoUsuario.Items.Add("Administrador")
                 DwnLstTipoUsuario.Items.Add("Oficial de Seguridad")
 
-            DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
-            DwnLstTipoIdentificacion.Items.Add("Numero de Cedula")
+                DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
+                DwnLstTipoIdentificacion.Items.Add("Numero de Cedula")
                 DwnLstTipoIdentificacion.Items.Add("Pasaporte")
                 DwnLstTipoIdentificacion.Items.Add("Licencia")
 
-            DwnLstProcedencia.Items.Add("Seleccione una opción")
-            DwnLstProcedencia.Items.Add("Externo")
+                DwnLstProcedencia.Items.Add("Seleccione una opción")
+                DwnLstProcedencia.Items.Add("Externo")
                 DwnLstProcedencia.Items.Add("Interno")
             End If
-        'Else
-        'Response.BufferOutput = True
-        'Response.Redirect("http://localhost:52086/view/frm_index.aspx")
-        'End If
+        Else
+            Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+        End If
     End Sub
 
     Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click

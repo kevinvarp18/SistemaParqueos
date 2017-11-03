@@ -6,6 +6,7 @@ Public Class frm_Reporte
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If String.Equals(Session("Usuario"), "a") Then
+            ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
         Else
             Response.BufferOutput = True
             Response.Redirect("http://localhost:52086/view/frm_index.aspx")
@@ -15,7 +16,7 @@ Public Class frm_Reporte
     Protected Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
-
+        Dim titulo, mensaje, tipo As String
         Dim sn As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
 
         If tbFechaI.Text <> "" AndAlso tbFechaF.Text <> "" Then
@@ -86,6 +87,12 @@ Public Class frm_Reporte
                     table.Rows.Add(tRow)
                 Next
             Next
+        Else
+            titulo = "ERROR"
+            mensaje = "Debe completar todos los campos"
+            tipo = "error"
+
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
         End If
     End Sub
 End Class
