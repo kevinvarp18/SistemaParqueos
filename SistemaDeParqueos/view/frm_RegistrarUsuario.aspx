@@ -29,23 +29,18 @@
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server" Visible="false">
                         <ContentTemplate>
                             <asp:Label ID="lblUbicacion" runat="server" Text="Ubicación:"></asp:Label>
-                            <asp:TextBox ID="tbUbicacion" type="text" required="" runat="server" Style="margin-left: 5.9%; width: 27%;"></asp:TextBox><br />
+                            <asp:TextBox ID="tbUbicacion" type="text" runat="server" Style="margin-left: 5.9%; width: 27%;"></asp:TextBox><br />
+
+                            <asp:Label ID="lblTelefono" runat="server" Text="Teléfono:"></asp:Label>
+                            <asp:TextBox ID="tbTelefono" type="text" runat="server" Style="margin-left: 5.9%; width: 27%;"></asp:TextBox><br />
+
                             <asp:Label ID="lblProcedencia1" runat="server" Text="Procedencia:"></asp:Label>
                             <asp:DropDownList ID="DwnLstProcedencia" runat="server" Style="margin-left: 4.3%; width: 27%;" AutoPostBack="true"></asp:DropDownList><br />
                             <asp:Label ID="lblProcedencia2" runat="server" Text="Nombre Dept:" Visible="false"></asp:Label>
-                            <asp:TextBox ID="tbProcedencia" type="text" required="" runat="server" Style="margin-left: 3.5%; width: 27%;" Visible="false"></asp:TextBox><br />
+                            <asp:TextBox ID="tbProcedencia" type="text" runat="server" Style="margin-left: 3.5%; width: 27%;" Visible="false"></asp:TextBox><br />
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     <asp:Button ID="btnRegistrar" runat="server" CssClass="singleTextBox" OnClick="btnRegistrar_Click" Text="Registrar" /><br />
-                    <script>
-                        function muestraMensaje(titulo, mensaje, tipo) {
-                            swal(
-                              titulo,
-                              mensaje,
-                              tipo
-                            )
-                        }
-                    </script>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

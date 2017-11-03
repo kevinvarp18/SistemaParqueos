@@ -19,7 +19,7 @@
 
     'Constructor Default.
     Public Sub New()
-        Me.gintTelefono = 0
+        Me.gintTelefono = ""
         Me.gstrUbicacion = ""
         Me.gstrTipoVisitante = ""
         Me.gstrProcedencia = ""
@@ -27,7 +27,7 @@
 
     'Constructor sobrecargado.
     Public Sub New(gstrId As String, gstrNombre As String, gstrApellido As String, gstrCorreo As String,
-                   gstrContrasenna As String, gstrTipoId As String, gstrTipoUsuario As String, telefono As Integer,
+                   gstrContrasenna As String, gstrTipoId As String, gstrTipoUsuario As String, telefono As String,
                    ubicacion As String, tipoVisitante As String, procedencia As String)
         MyBase.New(gstrId, gstrNombre, gstrApellido, gstrCorreo, gstrContrasenna, gstrTipoId, gstrTipoUsuario)
         Me.gintTelefono = telefono
@@ -37,11 +37,11 @@
     End Sub
 
     'Set y get.
-    Public Property GintTelefonoSG As Integer
+    Public Property GintTelefonoSG As String
         Get
             Return gintTelefono
         End Get
-        Set(value As Integer)
+        Set(value As String)
             gintTelefono = value
         End Set
     End Property

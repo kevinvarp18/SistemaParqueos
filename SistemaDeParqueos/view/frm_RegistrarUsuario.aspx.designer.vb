@@ -185,6 +185,24 @@ Partial Public Class frm_RegistrarUsuario
     Protected WithEvents tbUbicacion As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''lblTelefono control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTelefono As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''tbTelefono control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tbTelefono As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''lblProcedencia1 control.
     '''</summary>
     '''<remarks>
