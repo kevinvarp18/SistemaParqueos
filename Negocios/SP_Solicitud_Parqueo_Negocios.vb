@@ -11,7 +11,7 @@ Public Class SP_Solicitud_Parqueo_Negocios
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  28-Octubre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  02-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public solicitud_Acceso_a_Datos As SP_Solicitud_Datos
@@ -36,5 +36,8 @@ Public Class SP_Solicitud_Parqueo_Negocios
         Return Me.solicitud_Acceso_a_Datos.obtenerReporte(fecha_i, fecha_f)
     End Function
 
+    Public Function decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String)
+        Return Me.solicitud_Acceso_a_Datos.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
+    End Function
 
 End Class

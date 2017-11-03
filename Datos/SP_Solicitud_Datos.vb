@@ -10,7 +10,7 @@ Public Class SP_Solicitud_Datos
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  2-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public gstrconnString As String
@@ -27,7 +27,6 @@ Public Class SP_Solicitud_Datos
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
 
-        'correo se agarra de sesion
         cmdInsert.Parameters.Add(New SqlParameter("@correo", correo))
         cmdInsert.Parameters.Add(New SqlParameter("@hora_i", solicitud.GstrHoraISG))
         cmdInsert.Parameters.Add(New SqlParameter("@hora_f", solicitud.GstrHoraFSG))
@@ -154,6 +153,27 @@ Public Class SP_Solicitud_Datos
 
         Next
         Return solicitud
+    End Function
+
+    Public Function decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlStoredProcedure As [String] = "PA_DecidirSolicitud"
+        Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
+
+        cmdInsert.Parameters.Add(New SqlParameter("@marca", marca))
+        cmdInsert.Parameters.Add(New SqlParameter("@placa", placa))
+        cmdInsert.Parameters.Add(New SqlParameter("@horaEntrada", horaI))
+        cmdInsert.Parameters.Add(New SqlParameter("@horaSalida", horaF))
+        cmdInsert.Parameters.Add(New SqlParameter("@fechaEntrada", fechaI))
+        cmdInsert.Parameters.Add(New SqlParameter("@fechaSalida", fechaF))
+        cmdInsert.Parameters.Add(New SqlParameter("@idParqueo", Integer.Parse(idParqueo)))
+        cmdInsert.Parameters.Add(New SqlParameter("@accion", Integer.Parse(accion)))
+
+        cmdInsert.Connection.Open()
+        cmdInsert.ExecuteNonQuery()
+        cmdInsert.Connection.Close()
+
     End Function
 
 End Class

@@ -53,7 +53,6 @@ Public Class loginView
 
 
     End Sub
-
     Protected Sub enviarCorreo()
         If (tbUsuario.Text.Equals("")) Then
             titulo = "ERROR"
