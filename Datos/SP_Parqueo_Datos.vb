@@ -111,6 +111,7 @@ Public Class SP_Parqueo_Datos
         For Each currentRow As DataRow In dataRowCollection
             Dim parqueoActual As New Parqueo()
             parqueoActual.GintIdentificadorSG = Long.Parse(currentRow("TN_Identificador_TSP_Parqueo").ToString())
+            parqueoActual.GstrTipoSG = currentRow("TC_Tipo_TSP_Parqueo").ToString()
             parqueo.AddLast(parqueoActual)
         Next
         Return parqueo
@@ -119,7 +120,7 @@ Public Class SP_Parqueo_Datos
     Public Function obtenerParqueoOcupado(strFecha As String, strHorai As String, strHoraf As String) As LinkedList(Of Parqueo)
 
         Dim connection As New SqlConnection(Me.gstrconnString)
-        Dim sqlSelect As [String] = "PA_VerParqueosOcupados;"
+        Dim sqlSelect As [String] = "PA_VerParqueosOcupados"
 
         Dim sqlDataAdapterClient As New SqlDataAdapter()
         sqlDataAdapterClient.SelectCommand = New SqlCommand()
@@ -140,6 +141,28 @@ Public Class SP_Parqueo_Datos
             Dim parqueoActual As New Parqueo()
             parqueoActual.GintIdentificadorSG = Long.Parse(currentRow("TN_Idparqueo_TSP_Disponibilidad_Parqueo_X_TSP_Parqueo").ToString())
             parqueo.AddLast(parqueoActual)
+        Next
+        Return parqueo
+    End Function
+
+    Public Function cantidadTiposParqueo() As LinkedList(Of String)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_VerTiposParqueo;"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Parqueo")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Parqueo").Rows
+
+        Dim parqueo As New LinkedList(Of String)()
+        For Each currentRow As DataRow In dataRowCollection
+            Dim tipoParqueo As String
+            tipoParqueo = currentRow("TC_Tipo_TSP_Parqueo").ToString()
+            parqueo.AddLast(tipoParqueo)
         Next
         Return parqueo
     End Function
