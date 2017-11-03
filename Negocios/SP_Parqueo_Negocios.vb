@@ -44,4 +44,8 @@ Public Class SP_Parqueo_Negocios
         Return Me.parqueo_Acceso_a_Datos.obtenerParqueoOcupado(strfecha, strHorai, strHoraf)
     End Function
 
+    Public Function cantidadTiposParqueo() As LinkedList(Of String)
+        Return Me.parqueo_Acceso_a_Datos.cantidadTiposParqueo()
+    End Function
+
 End Class
