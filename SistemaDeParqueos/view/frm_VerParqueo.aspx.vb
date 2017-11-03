@@ -18,7 +18,8 @@ Public Class VerParqueo
         Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
         Dim sn As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
         If tbFechaI.Text <> "" AndAlso tbHoraI.Text <> "" AndAlso tbHoraF.Text <> "" Then
-            'Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(tbFechaI.Text, tbHoraI.Text, tbHoraF.Text)
+
+            Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(tbFechaI.Text, tbHoraI.Text, tbHoraF.Text)
             Dim parqueosTotales As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoHabilitado()
             Dim cantidadTiposParqueo As LinkedList(Of String) = parqueoNegocios.cantidadTiposParqueo()
 
@@ -35,10 +36,26 @@ Public Class VerParqueo
                 Dim tRow As New TableRow()
                 For Each parqueosAct As Parqueo In parqueosTotales
                     For rowCtr = 1 To rowCnt
-
                         Dim tCell As New TableCell()
                         If parqueosAct.GstrTipoSG.Equals(nom.Text) Then
-                            tCell.Text = parqueosAct.GintIdentificadorSG
+                            Dim hyperLink As New HyperLink()
+                            Dim ocu = False
+                            For Each parqueosOcu As Parqueo In parqueosOcupados
+                                If parqueosAct.GintIdentificadorSG = parqueosOcu.GintIdentificadorSG Then
+                                    ocu = True
+                                End If
+                            Next
+                            If ocu = True Then
+                                hyperLink.Text = parqueosAct.GintIdentificadorSG
+                                hyperLink.NavigateUrl = ""
+                                hyperLink.Style("color") = "#ff0000"
+                                tCell.Controls.Add(hyperLink)
+                            Else
+                                hyperLink.Text = parqueosAct.GintIdentificadorSG
+                                hyperLink.NavigateUrl = ""
+                                hyperLink.Style("color") = "#00fe00"
+                                tCell.Controls.Add(hyperLink)
+                            End If
                             tRow.Cells.Add(tCell)
                             table.Rows.Add(tRow)
                         End If
