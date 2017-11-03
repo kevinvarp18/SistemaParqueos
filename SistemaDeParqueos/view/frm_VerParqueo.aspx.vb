@@ -27,43 +27,42 @@ Public Class VerParqueo
 
             rowCnt = 1
 
-            Dim tERow As New TableRow()
+            Dim tableHeaderRow As New TableHeaderRow()
             For Each tipos As String In cantidadTiposParqueo
-                Dim nom As New TableHeaderCell()
-                nom.Text = tipos
-                tERow.Cells.Add(nom)
-                table.Rows.Add(tERow)
-                Dim tRow As New TableRow()
-                For Each parqueosAct As Parqueo In parqueosTotales
-                    For rowCtr = 1 To rowCnt
-                        Dim tCell As New TableCell()
-                        If parqueosAct.GstrTipoSG.Equals(nom.Text) Then
-                            Dim hyperLink As New HyperLink()
-                            Dim ocu = False
-                            For Each parqueosOcu As Parqueo In parqueosOcupados
-                                If parqueosAct.GintIdentificadorSG = parqueosOcu.GintIdentificadorSG Then
-                                    ocu = True
-                                End If
-                            Next
-                            If ocu = True Then
-                                hyperLink.Text = "Espacio " + parqueosAct.GintIdentificadorSG.ToString()
-                                hyperLink.NavigateUrl = ""
-                                hyperLink.Style("color") = "#ff0000"
-                                tCell.Controls.Add(hyperLink)
-                            Else
-                                hyperLink.Text = "Espacio " + parqueosAct.GintIdentificadorSG.ToString()
-                                hyperLink.NavigateUrl = ""
-                                hyperLink.Style("color") = "#00fe00"
-                                tCell.Controls.Add(hyperLink)
+                Dim tableHeaderCell As New TableHeaderCell()
+                tableHeaderCell.Text = tipos
+                tableHeaderCell.ID = tipos
+                tableHeaderRow.Cells.Add(tableHeaderCell)
+            Next 'Agrega los tipos de parqueos a la primera fila.
+            table.Rows.Add(tableHeaderRow)
+
+            For Each parqueoActual As Parqueo In parqueosTotales
+                Dim tableRow As New TableRow()
+                For rowCtr = 0 To cantidadTiposParqueo.Count - 1
+                    Dim tableCell As New TableCell()
+                    Dim tipoParqueo As String
+                    tipoParqueo = table.Rows.Item(0).Cells.Item(rowCtr).ID
+                    If parqueoActual.GstrTipoSG.Equals(tipoParqueo) Then
+                        Dim hyperLink As New HyperLink()
+                        Dim ocu = False
+                        For Each parqueoOcupado As Parqueo In parqueosOcupados
+                            If parqueoActual.GintIdentificadorSG = parqueoOcupado.GintIdentificadorSG Then
+                                ocu = True
                             End If
-
+                        Next 'Busca en todos los parqueos ocupados, para ver si el parqueo actual está ocupado.
+                        hyperLink.Text = "Espacio " + parqueoActual.GintIdentificadorSG.ToString()
+                        hyperLink.NavigateUrl = ""
+                        If ocu = True Then
+                            hyperLink.Style("color") = "#ff0000"
+                        Else
+                            hyperLink.Style("color") = "#00fe00"
                         End If
-                        tRow.Cells.Add(tCell)
-
-                    Next
-                    table.Rows.Add(tRow)
-                Next
-            Next
+                        tableCell.Controls.Add(hyperLink)
+                    End If
+                    tableRow.Cells.Add(tableCell)
+                Next 'For rowCtr = 0 To rowCnt
+                table.Rows.Add(TableRow)
+            Next 'For Each parqueosAct As Parqueo In parqueosTotales
 
         End If
 
