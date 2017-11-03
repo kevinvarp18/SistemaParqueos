@@ -155,7 +155,7 @@ Public Class SP_Solicitud_Datos
         Return solicitud
     End Function
 
-    Public Function decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String)
+    Public Sub decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_DecidirSolicitud"
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
@@ -174,6 +174,6 @@ Public Class SP_Solicitud_Datos
         cmdInsert.ExecuteNonQuery()
         cmdInsert.Connection.Close()
 
-    End Function
+    End Sub
 
 End Class

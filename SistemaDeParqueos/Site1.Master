@@ -41,7 +41,7 @@
         If String.Equals(Session("Usuario"), "a") Then
                                 %>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <asp:HyperLink ID="HypLnkSolicitudes" Style="color: #efd12f" NavigateUrl="http://localhost:52086/view/frm_AdministrarSolicitudes.aspx" Text="Pendientes: " runat="server" />
+                                    <asp:HyperLink ID="HypLnkSolicitudes" Style="color: #efd12f" NavigateUrl="http://localhost:52086/view/frm_AdministrarSolicitudes.aspx?id=0" Text="Pendientes: " runat="server" />
                                 </ul>
                                 <%
         End If
@@ -71,7 +71,7 @@
                 ElseIf String.Equals(Session("Usuario"), "o") Then
                                     %>
                                     <li><a href="frm_ListaVisitantes.aspx">Lista visitantes</a></li>
-                                    <li><a href="frm_BrindarParqueo.aspx">Brindar parqueo</a></li>
+                                    <li><a href="frm_BrindarAcceso.aspx">Brindar parqueo</a></li>
                                     <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>
                                     <%
                 End If

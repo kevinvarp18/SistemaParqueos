@@ -29,7 +29,7 @@ Public Class frm_AdministrarSolicitudes
         End If
     End Sub
 
-    Public Function llenarTabla()
+    Public Sub llenarTabla()
         Dim rowCnt As Integer
         Dim rowCtr As Integer
         Dim contador As Integer
@@ -60,6 +60,7 @@ Public Class frm_AdministrarSolicitudes
 
                 Dim DwnLstParqueos As New DropDownList()
                 DwnLstParqueos.Width = 75%
+                DwnLstParqueos.AutoPostBack = False
                 DwnLstParqueos.ID = "DwnLstParqueo" + contador.ToString()
                 If IsPostBack Then
                     Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueoHabilitado()
@@ -107,9 +108,9 @@ Public Class frm_AdministrarSolicitudes
                 contador = contador + 1
             Next
         Next
-    End Function
+    End Sub
 
-    Public Function decidirSolicitud(idControl As String, marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, accion As String)
+    Public Sub decidirSolicitud(idControl As String, marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, accion As String)
         Dim contentPlaceHolder As ContentPlaceHolder
         contentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
         Dim updatePanel As UpdatePanel
@@ -123,9 +124,9 @@ Public Class frm_AdministrarSolicitudes
         Dim dwnLstParqueo As DropDownList
         dwnLstParqueo = DirectCast(columnaEspacioD.FindControl("DwnLstParqueo" + idControl), DropDownList)
         Dim idParqueo As String
-        idParqueo = dwnLstParqueo.SelectedItem.Text
+        idParqueo = dwnLstParqueo.SelectedItem.Value
         Me.solicitudNegocios.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
         tabla.Rows.Remove(fila)
-    End Function
+    End Sub
 
 End Class
