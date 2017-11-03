@@ -115,7 +115,7 @@ Public Class SP_Solicitud_Datos
         sqlDataAdapterClient.SelectCommand.Connection.Close()
         Dim dataRowCollection As DataRowCollection = dataSetEstudiantes.Tables("SP.TSP_Usuario").Rows
         Dim cantidad As String
-
+        cantidad = ""
         For Each currentRow As DataRow In dataRowCollection
             Dim usuarioActual As New Usuario()
             cantidad = currentRow("Cantidad").ToString()

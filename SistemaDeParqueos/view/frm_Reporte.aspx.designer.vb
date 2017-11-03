@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class frm_Reporte
     
     '''<summary>
+    '''ScriptManager2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ScriptManager2 As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
     '''UpdatePanel1 control.
     '''</summary>
     '''<remarks>
@@ -75,13 +84,4 @@ Partial Public Class frm_Reporte
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents table As Global.System.Web.UI.WebControls.Table
-    
-    '''<summary>
-    '''ScriptManager2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ScriptManager2 As Global.System.Web.UI.ScriptManager
 End Class

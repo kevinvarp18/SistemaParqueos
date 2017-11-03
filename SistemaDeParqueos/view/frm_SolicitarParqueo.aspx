@@ -4,6 +4,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="newsletter wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
         <div class="container">
+            <asp:ScriptManager ID="ScriptManager2" runat="server">
+                    </asp:ScriptManager>
+
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Solicitar Parqueo</h3>
@@ -18,17 +21,16 @@
                     <asp:Label ID="lblHoraS" runat="server" Text="Hora Salida:"></asp:Label>
                     <asp:TextBox ID="tbHoraS" type="time" required="" runat="server" style="margin-left:6.1%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblPlaca" runat="server" Text="Placa:"></asp:Label>
-                    <asp:TextBox ID="tbPlaca" type="text" required="" runat="server" style="margin-left:9.8%; width:27%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbPlaca" type="text" runat="server" style="margin-left:9.8%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblMarca" runat="server" Text="Marca:"></asp:Label>
-                    <asp:TextBox ID="tbMarca" type="text" required="" runat="server" style="margin-left:9.2%; width:27%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbMarca" type="text" runat="server" style="margin-left:9.2%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblModelo" runat="server" Text="Modelo:"></asp:Label>
-                    <asp:TextBox ID="tbModelo" type="text" required="" runat="server" style="margin-left:8.5%; width:27%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbModelo" type="text" runat="server" style="margin-left:8.5%; width:27%;"></asp:TextBox><br />
                     
                     <asp:Button ID="btnSolicitar" runat="server" CssClass="singleTextBox" OnClick="btnSolicitar_Click" Text="Solicitar" />
                     <br />
                     <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
-                    <asp:ScriptManager ID="ScriptManager2" runat="server">
-                    </asp:ScriptManager>
+                   
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

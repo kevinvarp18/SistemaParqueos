@@ -4,6 +4,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="newsletter wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
         <div class="container">
+            <asp:ScriptManager ID="ScriptManager2" runat="server">
+                    </asp:ScriptManager>
+
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Administrar Parqueo</h3>
@@ -18,8 +21,6 @@
                     <asp:Button ID="btnEliminar" runat="server" CssClass="multipleTextBox" OnClick="btnEliminar_Click" Text="Eliminar" />
                     <br />
                     <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
-                    <asp:ScriptManager ID="ScriptManager2" runat="server">
-                    </asp:ScriptManager>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

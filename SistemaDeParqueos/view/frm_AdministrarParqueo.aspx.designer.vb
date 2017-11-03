@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class administrarParqueo
     
     '''<summary>
+    '''ScriptManager2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ScriptManager2 As Global.System.Web.UI.ScriptManager
+    
+    '''<summary>
     '''UpdatePanel1 control.
     '''</summary>
     '''<remarks>
@@ -111,13 +120,4 @@ Partial Public Class administrarParqueo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''ScriptManager2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ScriptManager2 As Global.System.Web.UI.ScriptManager
 End Class

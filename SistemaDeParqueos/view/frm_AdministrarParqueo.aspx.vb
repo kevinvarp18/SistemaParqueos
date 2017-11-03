@@ -11,6 +11,8 @@ Public Class administrarParqueo
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If String.Equals(Session("Usuario"), "a") Then
             Dim connectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_AdministrarParqueo", ResolveUrl("~") + "public/js/" + "script.js")
+
             Dim parqueoNegocios As New SP_Parqueo_Negocios(connectionString)
             If IsPostBack Then
                 Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
@@ -55,29 +57,82 @@ Public Class administrarParqueo
     End Sub
 
     Protected Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
-        Dim Blnestado As Byte = 0
-        Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
-        If (DwnLstEstado.Text.Equals("Habilitado")) Then
-            Blnestado = 1
+        Dim titulo, mensaje, tipo As String
+
+        If (DwnEspacio.SelectedItem.ToString().Equals("Sin Seleccionar") Or DwnLstTipos.SelectedItem.ToString.Equals("Seleccione una opción") Or
+            DwnLstEstado.SelectedItem.ToString.Equals("Seleccione una opción")) Then
+
+            titulo = "ERROR"
+            mensaje = "Debe completar todos los campos"
+            tipo = "error"
+
+        Else
+            Dim Blnestado As Byte = 0
+            Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
+            If (DwnLstEstado.Text.Equals("Habilitado")) Then
+                Blnestado = 1
+            End If
+            parqueoNegocios.insertarParqueo(New Parqueo(0, Blnestado, DwnLstTipos.Text))
+
+            titulo = "Correcto"
+            mensaje = "Se ha creado el parqueo exitosamente"
+            tipo = "success"
         End If
-        parqueoNegocios.insertarParqueo(New Parqueo(0, Blnestado, DwnLstTipos.Text))
+
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
     End Sub
 
     Protected Sub btnActualizar_Click(sender As Object, e As EventArgs) Handles btnActualizar.Click
-        Dim Blnestado As Byte = 0
-        Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
-        If (DwnLstEstado.Text.Equals("Habilitado")) Then
-            Blnestado = 1
+        Dim titulo, mensaje, tipo As String
+
+        If (DwnEspacio.SelectedItem.ToString().Equals("Sin Seleccionar") Or DwnLstTipos.SelectedItem.ToString.Equals("Seleccione una opción") Or
+            DwnLstEstado.SelectedItem.ToString.Equals("Seleccione una opción")) Then
+
+            titulo = "ERROR"
+            mensaje = "Debe completar todos los campos"
+            tipo = "error"
+
+        Else
+
+            Dim Blnestado As Byte = 0
+            Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
+            If (DwnLstEstado.Text.Equals("Habilitado")) Then
+                Blnestado = 1
+            End If
+            parqueoNegocios.actualizarParqueo(New Parqueo(Me.gintParqueoIdentificador, Blnestado, DwnLstTipos.Text))
+
+            titulo = "Correcto"
+            mensaje = "Se ha actualizado el parqueo exitosamente"
+            tipo = "success"
         End If
-        parqueoNegocios.actualizarParqueo(New Parqueo(Me.gintParqueoIdentificador, Blnestado, DwnLstTipos.Text))
+
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
     End Sub
 
     Protected Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        Dim Blnestado As Byte = 0
-        Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
-        parqueoNegocios.eliminarParqueo(New Parqueo(Me.gintParqueoIdentificador, 0, ""))
+        Dim titulo, mensaje, tipo As String
+
+        If (DwnEspacio.SelectedItem.ToString().Equals("Sin Seleccionar") Or DwnLstTipos.SelectedItem.ToString.Equals("Seleccione una opción") Or
+            DwnLstEstado.SelectedItem.ToString.Equals("Seleccione una opción")) Then
+
+            titulo = "ERROR"
+            mensaje = "Debe completar todos los campos"
+            tipo = "error"
+
+        Else
+
+            Dim Blnestado As Byte = 0
+            Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
+            parqueoNegocios.eliminarParqueo(New Parqueo(Me.gintParqueoIdentificador, 0, ""))
+
+            titulo = "Correcto"
+            mensaje = "Se ha eliminado el parqueo exitosamente"
+            tipo = "success"
+        End If
+
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
     End Sub
 End Class

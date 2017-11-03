@@ -4,33 +4,35 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="newsletter wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
         <div class="container">
+            <asp:ScriptManager ID="ScriptManager2" runat="server">
+                    </asp:ScriptManager>
+
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Registrar Visitante</h3>
                     <asp:Label ID="lblTipoIdentificacion" runat="server" Text="Tipo Identificación:"></asp:Label>
                     <asp:DropDownList ID="DwnLstTipoIdentificacion" runat="server" AutoPostBack="false" style="width:27%;"></asp:DropDownList><br />
                     <asp:Label ID="lblIdentificacion" runat="server" Text="# Identificación:"></asp:Label>
-                    <asp:TextBox ID="tbIdentificacion" type="text" required="" runat="server" style="width: 27%; margin-left: 3%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbIdentificacion" type="text" runat="server" style="width: 27%; margin-left: 3%;"></asp:TextBox><br />
                     <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>
-                    <asp:TextBox ID="tbNombre" type="text" required="" runat="server" style="margin-left:7.3%; width:27%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbNombre" type="text" runat="server" style="margin-left:7.3%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblApellidos" runat="server" Text="Apellidos:"></asp:Label>
-                    <asp:TextBox ID="tbApellidos" type="text" required="" style="margin-left:6.8%; width:27%;" runat="server"></asp:TextBox><br />
+                    <asp:TextBox ID="tbApellidos" type="text" style="margin-left:6.8%; width:27%;" runat="server"></asp:TextBox><br />
                     <asp:Label ID="lblTelefono" runat="server" Text="Teléfono:"></asp:Label>
-                    <asp:TextBox ID="tbTelefono" type="text" required="" runat="server" style="margin-left:7.2%; width:27%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbTelefono" type="text" runat="server" style="margin-left:7.2%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label>
-                    <asp:TextBox ID="tbEmail" type="email" required="" runat="server" style="margin-left:9.1%; width:27%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbEmail" type="text" runat="server" style="margin-left:9.1%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblContrasena" runat="server" Text="Contraseña:"></asp:Label>
-                    <asp:TextBox ID="tbContrasena" type="password" required="" runat="server" style="margin-left:5.4%; width:27%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbContrasena" type="password" runat="server" style="margin-left:5.4%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblUbicacion" runat="server" Text="Ubicación:"></asp:Label>
-                    <asp:TextBox ID="tbUbicacion" type="text" required="" runat="server" style="margin-left: 6.4%; width:27%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbUbicacion" type="text" runat="server" style="margin-left: 6.4%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblProcedenciaDwnLst" runat="server" Text="Procedencia:"></asp:Label>
                     <asp:DropDownList ID="DwnLstProcedencia" runat="server" style="margin-left:3.5%; width:27%;" AutoPostBack="false" ></asp:DropDownList><br />
                     <asp:Label ID="lblProcedenciatb" runat="server" Text="Nombre Dept:"></asp:Label>
-                    <asp:TextBox ID="tbProcedencia" type="text" required="" runat="server" style="margin-left:4%; width:27%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbProcedencia" type="text" runat="server" style="margin-left:4%; width:27%;"></asp:TextBox><br />
                     <asp:Button ID="btnRegistrar" runat="server" CssClass="singleTextBox" OnClick="btnRegistrar_Click" Text="Registrarse" /><br /><br />
-                    <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
-                    <asp:ScriptManager ID="ScriptManager2" runat="server">
-                    </asp:ScriptManager>
+                    
+                    
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

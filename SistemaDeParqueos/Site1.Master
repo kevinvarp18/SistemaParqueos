@@ -38,28 +38,28 @@
                             </div>
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
                                 <%
-                                    If String.Equals(Session("Usuario"), "a") Then
+        If String.Equals(Session("Usuario"), "a") Then
                                 %>
                                 <ul class="nav navbar-nav navbar-right">
                                     <asp:HyperLink ID="HypLnkSolicitudes" Style="color: #efd12f" NavigateUrl="http://localhost:52086/view/frm_AdministrarSolicitudes.aspx" Text="Pendientes: " runat="server" />
                                 </ul>
                                 <%
-                                    End If
+        End If
                                 %>
                                 <br>
                                 <ul class="nav navbar-nav navbar-right">
                                     <%
-                                        If String.Equals(Session("Usuario"), "N") Then
+                If String.Equals(Session("Usuario"), "N") Then
                                     %>
                                     <li><a href="frm_IniciarSesion.aspx">Iniciar Sesión</a></li>
                                     <li><a href="frm_RegistrarVisitante.aspx">Registrarse</a></li>
                                     <%
-                                        ElseIf String.Equals(Session("Usuario"), "v") Then
+                ElseIf String.Equals(Session("Usuario"), "v") Then
                                     %>
                                     <li><a href="frm_SolicitarParqueo.aspx">Solicitar parqueo</a></li>
                                     <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>
                                     <%
-                                        ElseIf String.Equals(Session("Usuario"), "a") Then
+                ElseIf String.Equals(Session("Usuario"), "a") Then
                                     %>
                                     <li><a href="frm_VerParqueo.aspx">Ver parqueo</a></li>
                                     <li><a href="frm_AdministrarParqueo.aspx">Administrar parqueo</a></li>
@@ -68,13 +68,13 @@
                                     <li><a href="frm_Reporte.aspx">Reportes</a></li>
                                     <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>
                                     <%
-                                        ElseIf String.Equals(Session("Usuario"), "o") Then
+                ElseIf String.Equals(Session("Usuario"), "o") Then
                                     %>
                                     <li><a href="frm_ListaVisitantes.aspx">Lista visitantes</a></li>
                                     <li><a href="frm_BrindarParqueo.aspx">Brindar parqueo</a></li>
                                     <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>
                                     <%
-                                        End If
+                End If
                                     %>
                                 </ul>
                                 <div class="clearfix"></div>
