@@ -48,13 +48,6 @@
                     </script>
                 </ContentTemplate>
             </asp:UpdatePanel>
-
-            <%--<asp:UpdatePanel ID="UpdatePanel3" runat="server" Visible="true">
-                <ContentTemplate>
-                    <asp:Button ID="btnRegistrar" runat="server" CssClass="singleTextBox" OnClick="btnRegistrar_Click" Text="Registrar" /><br />
-                    <br />
-                </ContentTemplate>
-            </asp:UpdatePanel>--%>
         </div>
     </div>
 </asp:Content>
