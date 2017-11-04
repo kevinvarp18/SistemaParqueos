@@ -67,7 +67,7 @@ Public Class frm_AdministrarSolicitudes
                 DwnLstParqueos.AutoPostBack = False
                 DwnLstParqueos.ID = "DwnLstParqueo" + contador.ToString()
                 If IsPostBack Then
-                    Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueoHabilitado()
+                    Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueo()
                     For Each item As Parqueo In parqueo
                         If item.GintDisponibleSG <> 0 Then
                             DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)

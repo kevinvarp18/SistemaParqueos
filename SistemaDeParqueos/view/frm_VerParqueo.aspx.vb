@@ -20,7 +20,7 @@ Public Class VerParqueo
         If tbFechaI.Text <> "" AndAlso tbHoraI.Text <> "" AndAlso tbHoraF.Text <> "" Then
 
             Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(tbFechaI.Text, tbHoraI.Text, tbHoraF.Text)
-            Dim parqueosTotales As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoHabilitado()
+            Dim parqueosTotales As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
             Dim cantidadTiposParqueo As LinkedList(Of String) = parqueoNegocios.cantidadTiposParqueo()
 
             Dim rowCnt As Integer
@@ -46,7 +46,7 @@ Public Class VerParqueo
                         Dim hyperLink As New HyperLink()
                         Dim ocu = False
                         For Each parqueoOcupado As Parqueo In parqueosOcupados
-                            If parqueoActual.GintIdentificadorSG = parqueoOcupado.GintIdentificadorSG Then
+                            If parqueoActual.GintIdentificadorSG = parqueoOcupado.GintIdentificadorSG Or parqueoActual.GintDisponibleSG = 0 Then
                                 ocu = True
                             End If
                         Next 'Busca en todos los parqueos ocupados, para ver si el parqueo actual está ocupado.
