@@ -8,7 +8,7 @@
                 <ContentTemplate>
                     <h3>Brindar Acceso</h3>
                     <asp:Label ID="lblSolicitante" runat="server" Text="Nombre Solicitante:"></asp:Label>
-                    <asp:TextBox ID="tbSolicitante" type="text" runat="server" style="width:27%;"></asp:TextBox><br />
+                    <asp:DropDownList ID="dropSolicitante" runat="server" style="margin-left: 1%;" AutoPostBack="false"></asp:DropDownList><br />
                     <asp:Label ID="lblFechaE" runat="server" Text="Fecha Entrada:"></asp:Label>
                     <asp:TextBox ID="tbFechaE" type="date" runat="server" style="margin-left:4.3%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblHoraE" runat="server" Text="Hora Entrada:"></asp:Label>

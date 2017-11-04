@@ -44,4 +44,8 @@ Public Class SP_Usuario_Negocios
         Return Me.usuario_Acceso_a_Datos.EnvioMail(strCorreo)
     End Function
 
+    Public Function obtenerCorreoUsuariosVisitantes() As LinkedList(Of Usuario)
+        Return Me.usuario_Acceso_a_Datos.obtenerCorreoUsuariosVisitantes()
+    End Function
+
 End Class

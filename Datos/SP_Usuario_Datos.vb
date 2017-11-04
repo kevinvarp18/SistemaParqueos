@@ -182,4 +182,26 @@ Public Class SP_Usuario_Datos
         Return blnExite
     End Function
 
+    Public Function obtenerCorreoUsuariosVisitantes() As LinkedList(Of Usuario)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_Vercorreos;"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Usuario")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Usuario").Rows
+        Dim usuarios As New LinkedList(Of Usuario)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim usuarioActual As New Usuario()
+            usuarioActual.gstrCorreo = currentRow("TC_Correo_TSP_Usuario").ToString()
+            usuarios.AddLast(usuarioActual)
+        Next
+        Return usuarios
+    End Function
+
 End Class

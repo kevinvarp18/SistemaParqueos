@@ -32,13 +32,13 @@ Partial Public Class frm_BrindarAcceso
     Protected WithEvents lblSolicitante As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''tbSolicitante control.
+    '''dropSolicitante control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbSolicitante As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents dropSolicitante As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''lblFechaE control.
