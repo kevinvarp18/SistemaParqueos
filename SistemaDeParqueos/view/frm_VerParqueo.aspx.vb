@@ -46,7 +46,7 @@ Public Class VerParqueo
                         Dim hyperLink As New HyperLink()
                         Dim ocu = False
                         For Each parqueoOcupado As Parqueo In parqueosOcupados
-                            If parqueoActual.GintIdentificadorSG = parqueoOcupado.GintIdentificadorSG Or Not parqueoActual.GstrTipoSG.Equals("Visitas") Or parqueoActual.GintDisponibleSG = 0 Then
+                            If parqueoActual.GintIdentificadorSG = parqueoOcupado.GintIdentificadorSG Or parqueoActual.GintDisponibleSG = 0 Then
                                 ocu = True
                             End If
                         Next 'Busca en todos los parqueos ocupados, para ver si el parqueo actual está ocupado.
