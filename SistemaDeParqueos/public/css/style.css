@@ -1287,6 +1287,7 @@ h2.short {
     line-height: 1.42857143;
     vertical-align: top;
     border-top: none;
+    text-align: center;
 }
 
 .grid1 {

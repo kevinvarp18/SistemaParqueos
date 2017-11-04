@@ -23,20 +23,11 @@ Partial Public Class frm_ListaVisitantes
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''table control.
+    '''tabla control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents table As Global.System.Web.UI.WebControls.Table
-    
-    '''<summary>
-    '''hyperlink1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hyperlink1 As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents tabla As Global.System.Web.UI.WebControls.Table
 End Class

@@ -10,7 +10,7 @@ Public Class SP_Solicitud_Datos
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  2-Noviembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  04-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public gstrconnString As String
@@ -154,7 +154,6 @@ Public Class SP_Solicitud_Datos
         Next
         Return solicitud
     End Function
-
     Public Sub decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_DecidirSolicitud"
@@ -173,7 +172,35 @@ Public Class SP_Solicitud_Datos
         cmdInsert.Connection.Open()
         cmdInsert.ExecuteNonQuery()
         cmdInsert.Connection.Close()
-
     End Sub
+    Public Function obtenerSolicitudesHoy() As LinkedList(Of Solicitud)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_VerSolicitudesHoy"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Solicitud")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Solicitud").Rows
+        Dim solicitudes As New LinkedList(Of Solicitud)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim solicitudActual As New Solicitud()
+            solicitudActual.GstrFechaISG = currentRow("TC_Nombre_TSP_Usuario").ToString() 'Se usa este para el nombre
+            solicitudActual.GstrMarcaSG = currentRow("TC_Marca_TSP_Solicitud").ToString()
+            solicitudActual.GstrPlacaSG = currentRow("TC_Placa_TSP_Solicitud").ToString()
+            solicitudActual.GstrModelaSG = currentRow("TC_Modelo_TSP_Solicitud").ToString()
+            solicitudActual.GintIdParqueoSG = Integer.Parse(currentRow("TN_Idparqueo_TSP_Solicitud").ToString())
+            solicitudActual.GstrHoraISG = currentRow("TF_Horai_TSP_Solicitud").ToString()
+            solicitudActual.GstrHoraFSG = currentRow("TF_Horaf_TSP_Solicitud").ToString()
+            solicitudes.AddLast(solicitudActual)
+        Next
+        Return solicitudes
+    End Function
 
 End Class

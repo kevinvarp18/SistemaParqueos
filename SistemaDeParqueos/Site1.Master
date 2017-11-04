@@ -130,7 +130,7 @@
                                             <asp:TextBox ID="tbFechaI" type="date" required="" runat="server" Style="width: 13%;"></asp:TextBox>
                                             <asp:Label ID="lblDesde" runat="server" Style="margin-left: 18%;" Text="Desde:"></asp:Label>
                                             <asp:TextBox ID="tbHoraI" TextMode="Time" required="" runat="server" Style="margin-left: 2%; width: 13%;"></asp:TextBox>
-                                            <asp:Label ID="lblHasta" runat="server" Style="margin-left: 15%;" Text="Hasta:"></asp:Label>
+                                            <asp:Label ID="lblHasta" runat="server" Style="margin-left: 11%;" Text="Hasta:"></asp:Label>
                                             <asp:TextBox ID="tbHoraF" TextMode="Time" required="" runat="server" Style="width: 13%;"></asp:TextBox>
                                             <asp:Button ID="btnBuscarP" runat="server" Style="margin-left: 43%; width: 15%;" Text="Ver" />
                                         </ContentTemplate>
