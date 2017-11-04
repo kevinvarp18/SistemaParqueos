@@ -63,9 +63,7 @@ Public Class VerParqueo
                 Next 'For rowCtr = 0 To rowCnt
                 table.Rows.Add(tableRow)
             Next 'For Each parqueosAct As Parqueo In parqueosTotales
-
         End If
-
     End Sub
 
 End Class

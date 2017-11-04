@@ -9,24 +9,29 @@ Public Class frm_AdministrarSolicitudes
     Dim solicitudNegocios As SP_Solicitud_Parqueo_Negocios
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
-        Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
 
-        If String.Equals(Session("Usuario"), "a") Then
-            llenarTabla()
-            Dim idPagina As String
-            idPagina = Request.QueryString("id")
-            Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
-            idPagina = datosSolicitud(0)
-
-            If (idPagina.Equals("1")) Then
-                decidirSolicitud(datosSolicitud(1), datosSolicitud(2), datosSolicitud(3), datosSolicitud(4), datosSolicitud(5), datosSolicitud(6), datosSolicitud(7), datosSolicitud(8))
-            End If
+        If IsPostBack Then
         Else
-            Response.BufferOutput = True
-            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+            Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
+            Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
+
+            If String.Equals(Session("Usuario"), "a") Then
+                llenarTabla()
+                Dim idPagina As String
+                idPagina = Request.QueryString("id")
+                Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
+                idPagina = datosSolicitud(0)
+
+                If (idPagina.Equals("1")) Then
+                    decidirSolicitud(datosSolicitud(1), datosSolicitud(2), datosSolicitud(3), datosSolicitud(4), datosSolicitud(5), datosSolicitud(6), datosSolicitud(7), datosSolicitud(8))
+                End If
+            Else
+                Response.BufferOutput = True
+                Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+            End If
         End If
+
     End Sub
 
     Public Sub llenarTabla()

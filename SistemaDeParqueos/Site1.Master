@@ -132,7 +132,7 @@
                                             <asp:TextBox ID="tbHoraI" TextMode="Time" required="" runat="server" Style="margin-left: 2%; width: 13%;"></asp:TextBox>
                                             <asp:Label ID="lblHasta" runat="server" Style="margin-left: 11%;" Text="Hasta:"></asp:Label>
                                             <asp:TextBox ID="tbHoraF" TextMode="Time" required="" runat="server" Style="width: 13%;"></asp:TextBox>
-                                            <asp:Button ID="btnBuscarP" runat="server" Style="margin-left: 43%; width: 15%;" Text="Ver" />
+                                            <asp:Button ID="btnBuscarP" runat="server" Style="margin-left: 43%; width: 15%;" Text="Ver" OnClick="llenarTabla" />
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                     <div class="page w3-4">
