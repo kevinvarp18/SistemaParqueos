@@ -68,24 +68,14 @@
                                     <asp:Label ID="lblHasta" runat="server" Style="margin-left: 11%;" Text="Hasta:"></asp:Label>
                                     <asp:TextBox ID="tbHoraF" TextMode="Time" required="" runat="server" Style="width: 13%;"></asp:TextBox>
                                     <asp:Button ID="btnBuscarP" runat="server" Style="margin-left: 40%; margin-top: 2%; width: 15%;" Text="Ver" OnClick="llenarTablaParqueos" />
+                                    <div class="page w3-4">
+                                        <div class="bs-example " data-example-id="simple-table">
+                                            <asp:Table ID="tablaParqueos" runat="server" Style="margin-left: -3%;" CssClass="table">
+                                            </asp:Table>
+                                        </div>
+                                    </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                            <div class="page w3-4">
-                                <div class="bs-example " data-example-id="simple-table">
-                                    <asp:Table ID="tablaParqueos" runat="server" style="margin-left: -3%;" CssClass="table">
-                                        <asp:TableHeaderRow>
-                                        <asp:TableHeaderCell>Nombre</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Placa</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Fecha Entrada</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Hora Entrada</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Fecha Salida</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Hora Salida</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Espacio</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Acción</asp:TableHeaderCell>
-                                    </asp:TableHeaderRow>
-                                    </asp:Table>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>

@@ -9,15 +9,12 @@ Public Class frm_AdministrarSolicitudes
     Dim solicitudNegocios As SP_Solicitud_Parqueo_Negocios
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
-
         Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
         Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
 
         If String.Equals(Session("Usuario"), "a") Then
             llenarTablaSolicitudes()
-            llenarTablaParqueos()
             Dim idPagina As String
             idPagina = Request.QueryString("id")
             Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
@@ -37,7 +34,7 @@ Public Class frm_AdministrarSolicitudes
         Dim rowCnt As Integer
         Dim rowCtr As Integer
         Dim contador As Integer
-        Dim solicitudes As LinkedList(Of Solicitud) = solicitudNegocios.obtenerAdSolicitud()
+        Dim solicitudes As LinkedList(Of Solicitud) = Me.solicitudNegocios.obtenerAdSolicitud()
         rowCnt = 1
         contador = 1
 
@@ -138,14 +135,11 @@ Public Class frm_AdministrarSolicitudes
     End Sub
 
     Public Sub llenarTablaParqueos()
-        Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
-        Dim sn As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
         If tbFechaI.Text <> "" AndAlso tbHoraI.Text <> "" AndAlso tbHoraF.Text <> "" Then
 
-            Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(tbFechaI.Text, tbHoraI.Text, tbHoraF.Text)
-            Dim parqueosTotales As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoHabilitado()
-            Dim cantidadTiposParqueo As LinkedList(Of String) = parqueoNegocios.cantidadTiposParqueo()
+            Dim parqueosOcupados As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueoOcupado(tbFechaI.Text, tbHoraI.Text, tbHoraF.Text)
+            Dim parqueosTotales As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueoHabilitado()
+            Dim cantidadTiposParqueo As LinkedList(Of String) = Me.parqueoNegocios.cantidadTiposParqueo()
 
             Dim rowCnt As Integer
 
