@@ -110,10 +110,10 @@ Public Class SP_Solicitud_Datos
         sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
         sqlDataAdapterClient.SelectCommand.Connection = connection
         sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
-        Dim dataSetEstudiantes As New DataSet()
-        sqlDataAdapterClient.Fill(dataSetEstudiantes, "SP.TSP_Usuario")
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Usuario")
         sqlDataAdapterClient.SelectCommand.Connection.Close()
-        Dim dataRowCollection As DataRowCollection = dataSetEstudiantes.Tables("SP.TSP_Usuario").Rows
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Usuario").Rows
         Dim cantidad As String
         cantidad = ""
         For Each currentRow As DataRow In dataRowCollection

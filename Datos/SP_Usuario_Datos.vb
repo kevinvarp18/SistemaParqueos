@@ -14,7 +14,7 @@ Public Class SP_Usuario_Datos
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  11-Noviembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  04-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public gstrconnString As String
@@ -100,10 +100,10 @@ Public Class SP_Usuario_Datos
         sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
         sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@correo", correo))
         sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@contrasena", contrasenna))
-        Dim dataSetEstudiantes As New DataSet()
-        sqlDataAdapterClient.Fill(dataSetEstudiantes, "SP.TSP_Usuario")
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Usuario")
         sqlDataAdapterClient.SelectCommand.Connection.Close()
-        Dim dataRowCollection As DataRowCollection = dataSetEstudiantes.Tables("SP.TSP_Usuario").Rows
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Usuario").Rows
         Dim usuarios As New LinkedList(Of Usuario)()
 
         For Each currentRow As DataRow In dataRowCollection
@@ -127,10 +127,10 @@ Public Class SP_Usuario_Datos
         sqlDataAdapterClient.SelectCommand.Connection = connection
         sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
         sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@Correo", strcorreo))
-        Dim dataSetEstudiantes As New DataSet()
-        sqlDataAdapterClient.Fill(dataSetEstudiantes, "SP.TSP_Usuario")
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Usuario")
         sqlDataAdapterClient.SelectCommand.Connection.Close()
-        Dim dataRowCollection As DataRowCollection = dataSetEstudiantes.Tables("SP.TSP_Usuario").Rows
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Usuario").Rows
         Dim usuarios As New LinkedList(Of Usuario)()
 
         For Each currentRow As DataRow In dataRowCollection
