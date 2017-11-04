@@ -6,10 +6,6 @@
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_BrindarAcceso", ResolveUrl("~") + "public/js/" + "script.js")
 
             If Not IsPostBack Then
-                DwnLstDepartamento.Items.Clear()
-                DwnLstDepartamento.Items.Add("Seleccione una opción")
-                DwnLstDepartamento.Items.Add("Externo")
-                DwnLstDepartamento.Items.Add("Interno")
             End If
         Else
             Response.BufferOutput = True
@@ -24,10 +20,9 @@
         Dim tbPlaca_ As String = Trim(tbPlaca.Text)
         Dim tbMarca_ As String = Trim(tbMarca.Text)
         Dim tbModelo_ As String = Trim(tbModelo.Text)
-        Dim tbInstitucion_ As String = Trim(tbInstitucion.Text)
 
 
-        If (tbSolicitante_.Equals("") Or tbPlaca_.Equals("") Or tbMarca_.Equals("") Or tbModelo_.Equals("") Or tbInstitucion_.Equals("")) Then
+        If (tbSolicitante_.Equals("") Or tbPlaca_.Equals("") Or tbMarca_.Equals("") Or tbModelo_.Equals("")) Then
             titulo = "ERROR"
             mensaje = "Debe completar todos los campos"
             tipo = "error"

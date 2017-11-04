@@ -176,42 +176,6 @@ Partial Public Class frm_BrindarAcceso
     Protected WithEvents tbModelo As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lblDepartamento control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblDepartamento As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''DwnLstDepartamento control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents DwnLstDepartamento As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''lblInstitucion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblInstitucion As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''tbInstitucion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents tbInstitucion As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''btnSolicitar control.
     '''</summary>
     '''<remarks>
