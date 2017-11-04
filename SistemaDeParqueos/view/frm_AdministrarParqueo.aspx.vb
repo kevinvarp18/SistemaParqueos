@@ -59,7 +59,7 @@ Public Class administrarParqueo
     Protected Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
         Dim titulo, mensaje, tipo As String
 
-        If (DwnEspacio.SelectedItem.ToString().Equals("Sin Seleccionar") Or DwnLstTipos.SelectedItem.ToString.Equals("Seleccione una opción") Or
+        If (DwnLstTipos.SelectedItem.ToString.Equals("Seleccione una opción") Or
             DwnLstEstado.SelectedItem.ToString.Equals("Seleccione una opción")) Then
 
             titulo = "ERROR"

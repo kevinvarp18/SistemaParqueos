@@ -7,8 +7,51 @@ Public Class frm_Reporte
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If String.Equals(Session("Usuario"), "a") Then
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
+
+            If IsPostBack Then
+
+                Dim contentPlaceHolder As ContentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
+                Dim updatePanelPlaca As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel2"), UpdatePanel)
+                Dim updatePanelCorreo As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel3"), UpdatePanel)
+                Dim updatePanelInstitucion As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel4"), UpdatePanel)
+                Dim updatePanelFecha As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel5"), UpdatePanel)
+                Dim updatePanelTabla As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel6"), UpdatePanel)
+
+                If (DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa")) Then
+                    updatePanelPlaca.Visible = True
+                    updatePanelCorreo.Visible = False
+                    updatePanelInstitucion.Visible = False
+                    updatePanelFecha.Visible = False
+                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo")) Then
+                    updatePanelPlaca.Visible = False
+                    updatePanelCorreo.Visible = True
+                    updatePanelInstitucion.Visible = False
+                    updatePanelFecha.Visible = False
+                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Institución")) Then
+                    updatePanelPlaca.Visible = False
+                    updatePanelCorreo.Visible = False
+                    updatePanelInstitucion.Visible = True
+                    updatePanelFecha.Visible = False
+                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Fecha")) Then
+                    updatePanelPlaca.Visible = False
+                    updatePanelCorreo.Visible = False
+                    updatePanelInstitucion.Visible = False
+                    updatePanelFecha.Visible = True
+                End If
+            Else
+                DwnLstTipoReporte.Items.Add("Seleccione una opción")
+                DwnLstTipoReporte.Items.Add("Placa")
+                DwnLstTipoReporte.Items.Add("Correo")
+                DwnLstTipoReporte.Items.Add("Institución")
+                DwnLstTipoReporte.Items.Add("Fecha")
+
+                DwnLstPlaca.Items.Add("Seleccione una opción")
+                DwnLstCorreo.Items.Add("Seleccione una opción")
+                DwnLstInstitucion.Items.Add("Seleccione una opción")
+
+            End If
         Else
-            Response.BufferOutput = True
+                Response.BufferOutput = True
             Response.Redirect("http://localhost:52086/view/frm_index.aspx")
         End If
     End Sub
@@ -19,7 +62,7 @@ Public Class frm_Reporte
         Dim titulo, mensaje, tipo As String
         Dim sn As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
 
-        If tbFechaI.Text <> "" AndAlso tbFechaF.Text <> "" Then
+        If tbFechaI.Text <> "" AndAlso tbFechaF.Text <> "" AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Fecha") Then
             Dim solicitudes As LinkedList(Of Solicitud) = sn.obtenerReporte(tbFechaI.Text, tbFechaF.Text)
             Dim rowCnt As Integer
             Dim rowCtr As Integer

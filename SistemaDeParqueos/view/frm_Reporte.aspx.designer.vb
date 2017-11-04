@@ -23,6 +23,123 @@ Partial Public Class frm_Reporte
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblTipoReporte control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTipoReporte As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''DwnLstTipoReporte control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DwnLstTipoReporte As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''UpdatePanel2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''lblPlaca control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblPlaca As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''DwnLstPlaca control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DwnLstPlaca As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''UpdatePanel3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''lblCorreo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCorreo As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''DwnLstCorreo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DwnLstCorreo As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''UpdatePanel4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel4 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''lblInstitucion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblInstitucion As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''DwnLstInstitucion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DwnLstInstitucion As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''UpdatePanel5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel5 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''lblFecha control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblFecha As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lblDesde control.
     '''</summary>
     '''<remarks>
@@ -59,6 +176,15 @@ Partial Public Class frm_Reporte
     Protected WithEvents tbFechaF As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''UpdatePanel7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel7 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
     '''btnBuscar control.
     '''</summary>
     '''<remarks>
@@ -66,6 +192,15 @@ Partial Public Class frm_Reporte
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnBuscar As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''UpdatePanel6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel6 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
     '''table control.
