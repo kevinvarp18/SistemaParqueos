@@ -68,15 +68,19 @@ Public Class frm_AdministrarSolicitudes
                 DwnLstParqueos.AutoPostBack = False
                 DwnLstParqueos.ID = "DwnLstParqueo" + contador.ToString()
                 If IsPostBack Then
-                    Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueoHabilitado()
+                    Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueo()
                     For Each item As Parqueo In parqueo
-                        DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
+                        If item.GintDisponibleSG <> 0 Then
+                            DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
+                        End If
                     Next
                 Else
                     DwnLstParqueos.Items.Clear()
                     Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueo()
                     For Each item As Parqueo In parqueo
-                        DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
+                        If item.GintDisponibleSG <> 0 Then
+                            DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
+                        End If
                     Next
                 End If
                 'la llamada y el fill de este drop hay q hacerlo aqui
