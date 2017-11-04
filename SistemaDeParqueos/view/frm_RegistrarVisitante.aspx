@@ -4,9 +4,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="newsletter wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
         <div class="container">
-            <asp:ScriptManager ID="ScriptManager2" runat="server">
-                    </asp:ScriptManager>
-
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Registrar Visitante</h3>
@@ -31,8 +28,6 @@
                     <asp:Label ID="lblProcedenciatb" runat="server" Text="Nombre Dept:"></asp:Label>
                     <asp:TextBox ID="tbProcedencia" type="text" runat="server" style="margin-left:4%; width:27%;"></asp:TextBox><br />
                     <asp:Button ID="btnRegistrar" runat="server" CssClass="singleTextBox" OnClick="btnRegistrar_Click" Text="Registrarse" /><br /><br />
-                    
-                    
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

@@ -26,8 +26,11 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" novalidate>
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
         <div>
+
             <div class="top-bar w3agile-1" id="home">
                 <div class="container">
                     <div class="row">
@@ -38,13 +41,13 @@
                             </div>
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
                                 <%
-        If String.Equals(Session("Usuario"), "a") Then
+                If String.Equals(Session("Usuario"), "a") Then
                                 %>
                                 <ul class="nav navbar-nav navbar-right">
                                     <asp:HyperLink ID="HypLnkSolicitudes" Style="color: #efd12f" NavigateUrl="http://localhost:52086/view/frm_AdministrarSolicitudes.aspx?id=0" Text="Pendientes: " runat="server" />
                                 </ul>
                                 <%
-        End If
+                End If
                                 %>
                                 <br>
                                 <ul class="nav navbar-nav navbar-right">
@@ -121,45 +124,20 @@
 
                             <div class="newsletter wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
                                 <div class="container">
+                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server" Visible="true">
+                                        <ContentTemplate>
+                                            <asp:Label ID="lblFecha" runat="server" Style="margin-left: 0%;" Text="Fecha:"></asp:Label>
+                                            <asp:TextBox ID="tbFechaI" type="date" required="" runat="server" Style="width: 13%;"></asp:TextBox>
+                                            <asp:Label ID="lblDesde" runat="server" Style="margin-left: 18%;" Text="Desde:"></asp:Label>
+                                            <asp:TextBox ID="tbHoraI" TextMode="Time" required="" runat="server" Style="margin-left: 2%; width: 13%;"></asp:TextBox>
+                                            <asp:Label ID="lblHasta" runat="server" Style="margin-left: 15%;" Text="Hasta:"></asp:Label>
+                                            <asp:TextBox ID="tbHoraF" TextMode="Time" required="" runat="server" Style="width: 13%;"></asp:TextBox>
+                                            <asp:Button ID="btnBuscarP" runat="server" Style="margin-left: 43%; width: 15%;" Text="Ver" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                     <div class="page w3-4">
                                         <div class="bs-example " data-example-id="simple-table">
                                             <asp:Table ID="table" runat="server" CssClass="table">
-                                                <asp:TableHeaderRow>
-                                                    <asp:TableHeaderCell>Jefatura</asp:TableHeaderCell>
-                                                    <asp:TableHeaderCell>PIP</asp:TableHeaderCell>
-                                                    <asp:TableHeaderCell>UPRO</asp:TableHeaderCell>
-                                                    <asp:TableHeaderCell>OPO</asp:TableHeaderCell>
-                                                    <asp:TableHeaderCell>SERT</asp:TableHeaderCell>
-                                                    <asp:TableHeaderCell>UPROV</asp:TableHeaderCell>
-                                                    <asp:TableHeaderCell>UVISE</asp:TableHeaderCell>
-                                                    <asp:TableHeaderCell>Visitas</asp:TableHeaderCell>
-                                                </asp:TableHeaderRow>
-                                                <asp:TableRow>
-                                                    <asp:TableCell>
-                                                        <asp:HyperLink ID="hyperlink1" NavigateUrl="#" Text="Espacio 1" runat="server" />
-                                                    </asp:TableCell>
-                                                    <asp:TableCell>
-                                                        <asp:HyperLink ID="hyperlink2" NavigateUrl="#" Text="Espacio 7" runat="server" />
-                                                    </asp:TableCell>
-                                                    <asp:TableCell>
-                                                        <asp:HyperLink ID="hyperlink3" NavigateUrl="#" Text="Espacio 8" runat="server" />
-                                                    </asp:TableCell>
-                                                    <asp:TableCell>
-                                                        <asp:HyperLink ID="hyperlink4" NavigateUrl="#" Text="Espacio 13" runat="server" />
-                                                    </asp:TableCell>
-                                                    <asp:TableCell>
-                                                        <asp:HyperLink ID="hyperlink5" NavigateUrl="#" Text="Espacio 19" runat="server" />
-                                                    </asp:TableCell>
-                                                    <asp:TableCell>
-                                                        <asp:HyperLink ID="hyperlink6" NavigateUrl="#" Text="Espacio 24" runat="server" />
-                                                    </asp:TableCell>
-                                                    <asp:TableCell>
-                                                        <asp:HyperLink ID="hyperlink7" NavigateUrl="#" Text="Espacio 44" runat="server" />
-                                                    </asp:TableCell>
-                                                    <asp:TableCell>
-                                                        <asp:HyperLink ID="hyperlink8" NavigateUrl="#" Text="Espacio 58" runat="server" />
-                                                    </asp:TableCell>
-                                                </asp:TableRow>
                                             </asp:Table>
                                         </div>
                                     </div>

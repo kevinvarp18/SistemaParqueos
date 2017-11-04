@@ -27,8 +27,6 @@
                             </div>
                         </div>
                     </div>
-                    <asp:ScriptManager ID="ScriptManager2" runat="server">
-                    </asp:ScriptManager>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

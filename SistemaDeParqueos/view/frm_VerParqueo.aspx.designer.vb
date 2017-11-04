@@ -23,13 +23,13 @@ Partial Public Class VerParqueo
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''lblDesde control.
+    '''lblFecha control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblDesde As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblFecha As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''tbFechaI control.
@@ -41,13 +41,13 @@ Partial Public Class VerParqueo
     Protected WithEvents tbFechaI As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''Label1 control.
+    '''lblDesde control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblDesde As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''tbHoraI control.
@@ -59,13 +59,13 @@ Partial Public Class VerParqueo
     Protected WithEvents tbHoraI As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''Label2 control.
+    '''lblHasta control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblHasta As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''tbHoraF control.
@@ -93,13 +93,4 @@ Partial Public Class VerParqueo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents table As Global.System.Web.UI.WebControls.Table
-    
-    '''<summary>
-    '''ScriptManager2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ScriptManager2 As Global.System.Web.UI.ScriptManager
 End Class

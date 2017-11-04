@@ -39,13 +39,4 @@ Partial Public Class frm_AdministrarSolicitudes
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents tabla As Global.System.Web.UI.WebControls.Table
-    
-    '''<summary>
-    '''ScriptManager2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ScriptManager2 As Global.System.Web.UI.ScriptManager
 End Class
