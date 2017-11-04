@@ -51,14 +51,14 @@ Public Class VerParqueo
                             End If
                         Next 'Busca en todos los parqueos ocupados, para ver si el parqueo actual está ocupado.
                         hyperLink.Text = "Espacio " + parqueoActual.GintIdentificadorSG.ToString()
-                        hyperLink.NavigateUrl = ""
+                        hyperLink.NavigateUrl = "frm_ActualizarEliminarParqueo.aspx"
                         If parqueoActual.GintDisponibleSG = 0 Then
                             ocu = True
                         End If
                         If ocu = True Then
-                            hyperLink.Style("color") = "#ff0000"
+                            hyperLink.Style("color") = "#a30404"
                         Else
-                            hyperLink.Style("color") = "#00fe00"
+                            hyperLink.Style("color") = "#03ba03"
                         End If
                         tableCell.Controls.Add(hyperLink)
                     End If

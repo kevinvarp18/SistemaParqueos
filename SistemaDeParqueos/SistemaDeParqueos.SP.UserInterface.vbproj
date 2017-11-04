@@ -129,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="public\js\script.js" />
+    <Content Include="view\frm_ActualizarEliminarParqueo.aspx" />
     <Content Include="view\frm_AdministrarSolicitudes.aspx" />
     <Content Include="view\frm_BrindarAcceso.aspx" />
     <Content Include="view\frm_ListaVisitantes.aspx" />
@@ -143,6 +144,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="view\frm_ActualizarEliminarParqueo.aspx.designer.vb">
+      <DependentUpon>frm_ActualizarEliminarParqueo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_ActualizarEliminarParqueo.aspx.vb">
+      <DependentUpon>frm_ActualizarEliminarParqueo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="view\frm_AdministrarSolicitudes.aspx.designer.vb">
       <DependentUpon>frm_AdministrarSolicitudes.aspx</DependentUpon>
     </Compile>
