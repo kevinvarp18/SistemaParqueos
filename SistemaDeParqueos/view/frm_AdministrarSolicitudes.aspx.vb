@@ -9,36 +9,32 @@ Public Class frm_AdministrarSolicitudes
     Dim solicitudNegocios As SP_Solicitud_Parqueo_Negocios
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+        Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
+        Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
 
-        If IsPostBack Then
-        Else
-            Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-            Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
-            Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
+        If String.Equals(Session("Usuario"), "a") Then
+            llenarTablaSolicitudes()
+            Dim idPagina As String
+            idPagina = Request.QueryString("id")
+            Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
+            idPagina = datosSolicitud(0)
 
-            If String.Equals(Session("Usuario"), "a") Then
-                llenarTabla()
-                Dim idPagina As String
-                idPagina = Request.QueryString("id")
-                Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
-                idPagina = datosSolicitud(0)
-
-                If (idPagina.Equals("1")) Then
-                    decidirSolicitud(datosSolicitud(1), datosSolicitud(2), datosSolicitud(3), datosSolicitud(4), datosSolicitud(5), datosSolicitud(6), datosSolicitud(7), datosSolicitud(8))
-                End If
-            Else
-                Response.BufferOutput = True
-                Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+            If (idPagina.Equals("1")) Then
+                decidirSolicitud(datosSolicitud(1), datosSolicitud(2), datosSolicitud(3), datosSolicitud(4), datosSolicitud(5), datosSolicitud(6), datosSolicitud(7), datosSolicitud(8))
             End If
+        Else
+            Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
         End If
 
     End Sub
 
-    Public Sub llenarTabla()
+    Public Sub llenarTablaSolicitudes()
         Dim rowCnt As Integer
         Dim rowCtr As Integer
         Dim contador As Integer
-        Dim solicitudes As LinkedList(Of Solicitud) = solicitudNegocios.obtenerAdSolicitud()
+        Dim solicitudes As LinkedList(Of Solicitud) = Me.solicitudNegocios.obtenerAdSolicitud()
         rowCnt = 1
         contador = 1
 
@@ -68,15 +64,19 @@ Public Class frm_AdministrarSolicitudes
                 DwnLstParqueos.AutoPostBack = False
                 DwnLstParqueos.ID = "DwnLstParqueo" + contador.ToString()
                 If IsPostBack Then
-                    Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueoHabilitado()
+                    Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueo()
                     For Each item As Parqueo In parqueo
-                        DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
+                        If item.GintDisponibleSG <> 0 Then
+                            DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
+                        End If
                     Next
                 Else
                     DwnLstParqueos.Items.Clear()
                     Dim parqueo As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueo()
                     For Each item As Parqueo In parqueo
-                        DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
+                        If item.GintDisponibleSG <> 0 Then
+                            DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
+                        End If
                     Next
                 End If
                 'la llamada y el fill de este drop hay q hacerlo aqui
@@ -108,7 +108,7 @@ Public Class frm_AdministrarSolicitudes
                 filaTabla.Cells.Add(columnaHoraS)
                 filaTabla.Cells.Add(columnaEspaciosD)
                 filaTabla.Cells.Add(columnaHypLnk)
-                tabla.Rows.Add(filaTabla)
+                tablaSolicitudes.Rows.Add(filaTabla)
 
                 contador = contador + 1
             Next
@@ -123,7 +123,7 @@ Public Class frm_AdministrarSolicitudes
         Dim tabla As Table
         tabla = DirectCast(updatePanel.FindControl("tabla"), Table)
         Dim fila As TableRow
-        fila = tabla.Rows.Item(Integer.Parse(idControl))
+        fila = tablaSolicitudes.Rows.Item(Integer.Parse(idControl))
         Dim columnaEspacioD As TableCell
         columnaEspacioD = DirectCast(fila.FindControl("columnaParqueo" + idControl), TableCell)
         Dim dwnLstParqueo As DropDownList
@@ -131,7 +131,57 @@ Public Class frm_AdministrarSolicitudes
         Dim idParqueo As String
         idParqueo = dwnLstParqueo.SelectedItem.Value
         Me.solicitudNegocios.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
-        tabla.Rows.Remove(fila)
+        tablaSolicitudes.Rows.Remove(fila)
+    End Sub
+
+    Public Sub llenarTablaParqueos()
+        If tbFechaI.Text <> "" AndAlso tbHoraI.Text <> "" AndAlso tbHoraF.Text <> "" Then
+
+            Dim parqueosOcupados As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueoOcupado(tbFechaI.Text, tbHoraI.Text, tbHoraF.Text)
+            Dim parqueosTotales As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueoHabilitado()
+            Dim cantidadTiposParqueo As LinkedList(Of String) = Me.parqueoNegocios.cantidadTiposParqueo()
+
+            Dim rowCnt As Integer
+
+            rowCnt = 1
+
+            Dim tableHeaderRow As New TableHeaderRow()
+            For Each tipos As String In cantidadTiposParqueo
+                Dim tableHeaderCell As New TableHeaderCell()
+                tableHeaderCell.Text = tipos
+                tableHeaderCell.ID = tipos
+                tableHeaderRow.Cells.Add(tableHeaderCell)
+            Next 'Agrega los tipos de parqueos a la primera fila.
+            tablaParqueos.Rows.Add(tableHeaderRow)
+
+            For Each parqueoActual As Parqueo In parqueosTotales
+                Dim tableRow As New TableRow()
+                For rowCtr = 0 To cantidadTiposParqueo.Count - 1
+                    Dim tableCell As New TableCell()
+                    Dim tipoParqueo As String
+                    tipoParqueo = tablaParqueos.Rows.Item(0).Cells.Item(rowCtr).ID
+                    If parqueoActual.GstrTipoSG.Equals(tipoParqueo) Then
+                        Dim hyperLink As New HyperLink()
+                        Dim ocu = False
+                        For Each parqueoOcupado As Parqueo In parqueosOcupados
+                            If parqueoActual.GintIdentificadorSG = parqueoOcupado.GintIdentificadorSG Then
+                                ocu = True
+                            End If
+                        Next 'Busca en todos los parqueos ocupados, para ver si el parqueo actual está ocupado.
+                        hyperLink.Text = "Espacio " + parqueoActual.GintIdentificadorSG.ToString()
+                        hyperLink.NavigateUrl = ""
+                        If ocu = True Then
+                            hyperLink.Style("color") = "#ff0000"
+                        Else
+                            hyperLink.Style("color") = "#00fe00"
+                        End If
+                        tableCell.Controls.Add(hyperLink)
+                    End If
+                    tableRow.Cells.Add(tableCell)
+                Next 'For rowCtr = 0 To rowCnt
+                tablaParqueos.Rows.Add(tableRow)
+            Next 'For Each parqueosAct As Parqueo In parqueosTotales
+        End If
     End Sub
 
 End Class
