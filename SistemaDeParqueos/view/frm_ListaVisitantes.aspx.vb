@@ -43,7 +43,7 @@ Public Class frm_ListaVisitantes
                 columnaNombre.Text = solicitudAct.GstrFechaISG
                 columnaMarca.Text = solicitudAct.GstrMarcaSG
                 columnaPlaca.Text = solicitudAct.GstrPlacaSG
-                columnaModelo.Text = solicitudAct.GstrModelaSG
+                columnaModelo.Text = solicitudAct.GstrModeloSG
                 columnaEspacio.Text = solicitudAct.GintIdParqueoSG
                 columnaHoraE.Text = solicitudAct.GstrHoraISG
                 columnaHoraS.Text = solicitudAct.GstrHoraFSG
@@ -54,13 +54,13 @@ Public Class frm_ListaVisitantes
 
                 Dim lnkMarcarEntrada As New HyperLink()
                 lnkMarcarEntrada.Text = "(Marcar Entrada)"
-                lnkMarcarEntrada.NavigateUrl = "http://localhost:52086/view/frm_ListaVisitantes.aspx?id=1;" + contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModelaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";1"
+                lnkMarcarEntrada.NavigateUrl = "http://localhost:52086/view/frm_ListaVisitantes.aspx?id=1;" + contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";1"
                 lnkMarcarEntrada.Style("font-weight") = "bold"
                 lnkMarcarEntrada.Style("color") = "#0000ff"
 
                 Dim lnkMarcarSalida As New HyperLink()
                 lnkMarcarSalida.Text = "(Marcar Salida)"
-                lnkMarcarSalida.NavigateUrl = "http://localhost:52086/view/frm_ListaVisitantes.aspx?id=1;" + contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModelaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";0"
+                lnkMarcarSalida.NavigateUrl = "http://localhost:52086/view/frm_ListaVisitantes.aspx?id=1;" + contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";0"
                 lnkMarcarSalida.Style("font-weight") = "bold"
                 lnkMarcarSalida.Style("color") = "#0000ff"
 

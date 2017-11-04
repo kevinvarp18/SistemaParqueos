@@ -18,7 +18,7 @@
     Private gstrHoraI As String
     Private gstrHoraF As String
     Private gstrPlaca As String
-    Private gstrModela As String
+    Private gstrModelo As String
     Private gstrMarca As String
     Private gstrFechaI As String
     Private gstrFechaF As String
@@ -31,21 +31,21 @@
         Me.gstrHoraI = ""
         Me.gstrHoraF = ""
         Me.gstrPlaca = ""
-        Me.gstrModela = ""
+        Me.gstrModelo = ""
         Me.gstrMarca = ""
         Me.gstrFechaI = ""
         Me.gstrFechaF = ""
     End Sub
 
     'Declaracion de constructor sobrecargado.
-    Public Sub New(gintIdSolicutud As Integer, gintIdVisitante As Integer, gintIdParqueo As Integer, gstrHoraI As String, gstrHoraF As String, gstrPlaca As String, gstrModela As String, gstrMarca As String, gstrFechaI As String, gstrFechaF As String)
+    Public Sub New(gintIdSolicutud As Integer, gintIdVisitante As Integer, gintIdParqueo As Integer, gstrHoraI As String, gstrHoraF As String, gstrPlaca As String, gstrModelo As String, gstrMarca As String, gstrFechaI As String, gstrFechaF As String)
         Me.gintIdSolicutud = gintIdSolicutud
         Me.gintIdVisitante = gintIdVisitante
         Me.gintIdParqueo = gintIdParqueo
         Me.gstrHoraI = gstrHoraI
         Me.gstrHoraF = gstrHoraF
         Me.gstrPlaca = gstrPlaca
-        Me.gstrModela = gstrModela
+        Me.gstrModelo = gstrModelo
         Me.gstrMarca = gstrMarca
         Me.gstrFechaI = gstrFechaI
         Me.gstrFechaF = gstrFechaF
@@ -106,12 +106,12 @@
         End Set
     End Property
 
-    Public Property GstrModelaSG As String
+    Public Property GstrModeloSG As String
         Get
-            Return gstrModela
+            Return gstrModelo
         End Get
         Set(value As String)
-            gstrModela = value
+            gstrModelo = value
         End Set
     End Property
 
