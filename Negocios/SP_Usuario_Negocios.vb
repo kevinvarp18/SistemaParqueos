@@ -48,4 +48,7 @@ Public Class SP_Usuario_Negocios
         Return Me.usuario_Acceso_a_Datos.obtenerCorreoUsuariosVisitantes()
     End Function
 
+    Public Function obtenerPlacas() As LinkedList(Of String)
+        Return Me.usuario_Acceso_a_Datos.obtenerPlacas()
+    End Function
 End Class

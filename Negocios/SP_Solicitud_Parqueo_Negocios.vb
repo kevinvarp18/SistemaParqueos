@@ -35,6 +35,11 @@ Public Class SP_Solicitud_Parqueo_Negocios
     Public Function obtenerReporte(fecha_i As String, fecha_f As String) As LinkedList(Of Solicitud)
         Return Me.solicitud_Acceso_a_Datos.obtenerReporte(fecha_i, fecha_f)
     End Function
+
+    Public Function obtenerReportePlaca(placa As String) As LinkedList(Of Solicitud)
+        Return Me.solicitud_Acceso_a_Datos.obtenerReportePlaca(placa)
+    End Function
+
     Public Sub decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String)
         Me.solicitud_Acceso_a_Datos.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
     End Sub

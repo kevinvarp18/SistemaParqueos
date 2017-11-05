@@ -204,4 +204,24 @@ Public Class SP_Usuario_Datos
         Return usuarios
     End Function
 
+    Public Function obtenerPlacas() As LinkedList(Of String)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_VerPlacas;"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "[TSP_Solicitud]")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("[TSP_Solicitud]").Rows
+        Dim placas As New LinkedList(Of String)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            placas.AddLast(currentRow("TC_Placa_TSP_Solicitud").ToString())
+        Next
+        Return placas
+    End Function
+
 End Class
