@@ -24,9 +24,6 @@ Public Class frm_Reporte
                     updatePanelCorreo.Visible = False
                     updatePanelInstitucion.Visible = False
                     updatePanelFecha.Visible = False
-
-
-
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = True
@@ -62,6 +59,12 @@ Public Class frm_Reporte
                 Next
 
                 DwnLstCorreo.Items.Add("Seleccione una opción")
+                Dim usuariosCorreo As LinkedList(Of Usuario) = sn.obtenerCorreoUsuariosVisitantes()
+                For Each usuarioCorreo As Usuario In usuariosCorreo
+                    DwnLstCorreo.Items.Add(usuarioCorreo.GstrCorreoSG)
+                Next
+
+
                 DwnLstInstitucion.Items.Add("Seleccione una opción")
 
             End If
@@ -87,23 +90,41 @@ Public Class frm_Reporte
             tipo = "warning"
             faltanDatos = True
         ElseIf tbFechaI.Text <> "" AndAlso tbFechaF.Text <> "" AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Fecha") Then
-            solicitudes = sn.obtenerReporte(tbFechaI.Text, tbFechaF.Text)
 
+            If (tbFechaI.Text <= tbFechaF.Text) Then
+                solicitudes = sn.obtenerReporte(tbFechaI.Text, tbFechaF.Text)
+
+                If solicitudes.Count.Equals(0) Then
+                    titulo = "Vacio"
+                    mensaje = "No se encontraron datos para las fecha seleccionadas"
+                    tipo = "info"
+                    faltanDatos = True
+                Else
+                    Me.construyeTabla(solicitudes)
+                    faltanDatos = False
+                End If
+            Else
+                titulo = "ERROR"
+                mensaje = "La fecha de salida debe ser mayor a la fecha de ingreso"
+                tipo = "error"
+                faltanDatos = True
+            End If
+        ElseIf (Not DwnLstPlaca.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa") Then
+            solicitudes = sn.obtenerReportePlaca(DwnLstPlaca.SelectedItem.ToString())
             If solicitudes.Count.Equals(0) Then
                 titulo = "Vacio"
-                mensaje = "No se encontraron datos para las fecha seleccionadas"
+                mensaje = "No se encontraron datos para la placa seleccionada"
                 tipo = "info"
                 faltanDatos = True
             Else
                 Me.construyeTabla(solicitudes)
                 faltanDatos = False
             End If
-
-        ElseIf (Not DwnLstPlaca.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa") Then
-            solicitudes = sn.obtenerReportePlaca(DwnLstPlaca.SelectedItem.ToString())
+        ElseIf (Not DwnLstCorreo.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo") Then
+            solicitudes = sn.obtenerReporteCorreo(DwnLstCorreo.SelectedItem.ToString())
             If solicitudes.Count.Equals(0) Then
                 titulo = "Vacio"
-                mensaje = "No se encontraron datos para la placa seleccionada"
+                mensaje = "No se encontraron entradas para el correo seleccionado"
                 tipo = "info"
                 faltanDatos = True
             Else

@@ -187,6 +187,38 @@ Public Class SP_Solicitud_Datos
         Return solicitudes
     End Function
 
+    Public Function obtenerReporteCorreo(correo As String) As LinkedList(Of Solicitud)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_ReporteCorreo"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@correo_", correo))
+
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Solicitud")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Solicitud").Rows
+        Dim solicitudes As New LinkedList(Of Solicitud)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim solicitudActual As New Solicitud()
+            solicitudActual.GintIdParqueoSG = Integer.Parse(currentRow("num_parqueo").ToString())
+            solicitudActual.GstrHoraISG = currentRow("hora_e").ToString()
+            solicitudActual.GstrHoraFSG = currentRow("hora_s").ToString()
+            solicitudActual.GstrPlacaSG = currentRow("placa").ToString()
+            solicitudActual.GstrMarcaSG = currentRow("nombre").ToString()
+            solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
+            solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
+            solicitudes.AddLast(solicitudActual)
+
+        Next
+        Return solicitudes
+    End Function
+
     Public Sub decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_DecidirSolicitud"
