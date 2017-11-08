@@ -81,7 +81,7 @@
                 ElseIf String.Equals(Session("Usuario"), "a") Then
                                     %>
                                     <li><a href="frm_VerParqueo.aspx">Ver parqueo</a></li>
-                                    <li><a href="frm_AdministrarParqueo.aspx">Administrar parqueo</a></li>
+                                    <li><a href="frm_AdministrarParqueo.aspx?id=1">Administrar parqueo</a></li>
                                     <li><a href="frm_AdministrarSolicitudes.aspx?id=0">Administrar solicitudes</a></li>
                                     <li><a href="frm_RegistrarUsuario.aspx">Registrar usuarios</a></li>
                                     <li><a href="frm_Reporte.aspx">Reportes</a></li>

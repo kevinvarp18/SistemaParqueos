@@ -27,19 +27,7 @@ Public Class administrarParqueo
             Dim parqueoNegocios As New SP_Parqueo_Negocios(connectionString)
             If IsPostBack Then
                 Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
-                Me.gstrParqueoSelecion = DwnEspacio.SelectedItem.ToString()
-                For Each parqueoActual As Parqueo In parqueo
-                    If Me.gstrParqueoSelecion.Equals("Numero Parqueo: " + parqueoActual.GintIdentificadorSG.ToString()) Then
-                        Me.gintParqueoIdentificador = parqueoActual.GintIdentificadorSG
-                    End If
-                Next
             Else
-                DwnEspacio.Items.Clear()
-                DwnEspacio.Items.Add("Sin Seleccionar")
-                Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
-                For Each item As Parqueo In parqueo
-                    DwnEspacio.Items.Add("Numero Parqueo: " + item.GintIdentificadorSG.ToString)
-                Next
                 DwnLstTipos.Items.Clear()
                 DwnLstEstado.Items.Clear()
                 DwnLstTipos.Items.Add("Seleccione una opción")
@@ -54,12 +42,6 @@ Public Class administrarParqueo
                 DwnLstEstado.Items.Add("Seleccione una opción")
                 DwnLstEstado.Items.Add("Habilitado")
                 DwnLstEstado.Items.Add("Deshabilitado")
-                Me.gstrParqueoSelecion = DwnEspacio.SelectedItem.ToString()
-                For Each parqueoActual As Parqueo In parqueo
-                    If Me.gstrParqueoSelecion.Equals("Numero Parqueo: " + parqueoActual.GintIdentificadorSG.ToString()) Then
-                        Me.gintParqueoIdentificador = parqueoActual.GintIdentificadorSG
-                    End If
-                Next
             End If
         Else
             Response.BufferOutput = True
@@ -97,7 +79,7 @@ Public Class administrarParqueo
     Protected Sub btnActualizar_Click(sender As Object, e As EventArgs) Handles btnActualizar.Click
         Dim titulo, mensaje, tipo As String
 
-        If (DwnEspacio.SelectedItem.ToString().Equals("Sin Seleccionar") Or DwnLstTipos.SelectedItem.ToString.Equals("Seleccione una opción") Or
+        If (DwnLstTipos.SelectedItem.ToString.Equals("Seleccione una opción") Or
             DwnLstEstado.SelectedItem.ToString.Equals("Seleccione una opción")) Then
 
             titulo = "ERROR"
@@ -125,7 +107,7 @@ Public Class administrarParqueo
     Protected Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim titulo, mensaje, tipo As String
 
-        If (DwnEspacio.SelectedItem.ToString().Equals("Sin Seleccionar") Or DwnLstTipos.SelectedItem.ToString.Equals("Seleccione una opción") Or
+        If (DwnLstTipos.SelectedItem.ToString.Equals("Seleccione una opción") Or
             DwnLstEstado.SelectedItem.ToString.Equals("Seleccione una opción")) Then
 
             titulo = "ERROR"

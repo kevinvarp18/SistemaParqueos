@@ -23,33 +23,6 @@ Partial Public Class administrarParqueo
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''lblNumEspacio control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblNumEspacio As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''DwnEspacio control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents DwnEspacio As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''btnCrear control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCrear As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
     '''lblTipo control.
     '''</summary>
     '''<remarks>
@@ -102,6 +75,15 @@ Partial Public Class administrarParqueo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnEliminar As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnCrear control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCrear As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''lblMensaje control.
