@@ -45,6 +45,9 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\Desktop\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -131,7 +134,7 @@
     <Content Include="public\js\script.js" />
     <Content Include="view\frm_ActualizarEliminarParqueo.aspx" />
     <Content Include="view\frm_AdministrarSolicitudes.aspx" />
-    <Content Include="view\frm_BrindarParqueo.aspx" />
+    <Content Include="view\frm_BrindarAcceso.aspx" />
     <Content Include="view\frm_ListaVisitantes.aspx" />
     <Content Include="view\frm_RegistrarUsuario.aspx" />
     <Content Include="view\frm_Reporte.aspx" />
@@ -158,12 +161,11 @@
       <DependentUpon>frm_AdministrarSolicitudes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="view\frm_BrindarParqueo.aspx.designer.vb">
-      <DependentUpon>frm_BrindarParqueo.aspx</DependentUpon>
+    <Compile Include="view\frm_BrindarAcceso.aspx.designer.vb">
+      <DependentUpon>frm_BrindarAcceso.aspx</DependentUpon>
     </Compile>
-    <Compile Include="view\frm_BrindarParqueo.aspx.vb">
-      <DependentUpon>frm_BrindarParqueo.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+    <Compile Include="view\frm_BrindarAcceso.aspx.vb">
+      <DependentUpon>frm_BrindarAcceso.aspx</DependentUpon>
     </Compile>
     <Compile Include="view\frm_ListaVisitantes.aspx.designer.vb">
       <DependentUpon>frm_ListaVisitantes.aspx</DependentUpon>

@@ -48,6 +48,12 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
+                     <asp:UpdatePanel ID="UpdatePanel8" runat="server" Visible="true">
+                        <ContentTemplate>
+                            <asp:Button ID="Button1" runat="server" style="width: 15%; margin-left: 10%;" OnClick="btnBuscar_Click" Text="Exportar" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
                     <asp:UpdatePanel ID="UpdatePanel6" runat="server" Visible="true">
                         <ContentTemplate>
                             <div class="container">
