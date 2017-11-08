@@ -48,18 +48,12 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
-               <asp:UpdatePanel ID="UpdatePanel8" runat="server" Visible="true">
-                        <ContentTemplate>
-                            <asp:Button ID="Button1" runat="server" style="width: 15%; margin-left: 10%;" OnClick="btnBuscar_Click2" Text="exportar" />
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-
                     <asp:UpdatePanel ID="UpdatePanel6" runat="server" Visible="true">
                         <ContentTemplate>
                             <div class="container">
                                 <div class="page w3-4">
                                     <div class="bs-example " data-example-id="simple-table">
-                                        <asp:Table ID="table" runat="server"  CssClass="table">
+                                        <asp:Table ID="table" runat="server" CssClass="table">
                                         </asp:Table>
                                     </div>
                                 </div>

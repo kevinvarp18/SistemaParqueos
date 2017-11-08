@@ -785,6 +785,7 @@ ul.top-icons {
         color: #253b50;
         letter-spacing: 1px;
         background: #efd12f;
+        text-decoration: none;
         transition: 0.5s all ease;
         -webkit-transition: 0.5s all ease;
         -moz-transition: 0.5s all ease;

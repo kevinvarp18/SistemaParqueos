@@ -1,6 +1,7 @@
 ﻿Imports System.Web.Configuration
 Imports Entidad
 Imports Negocios
+<<<<<<< HEAD
 Imports iTextSharp.text.pdf
 Imports iTextSharp.text
 Imports iTextSharp.text.html.simpleparser
@@ -28,10 +29,14 @@ Public Class frm_Reporte
 
     Dim parsedHtmlElements As List(Of String)
 
+=======
+Public Class frm_Reporte
+    Inherits System.Web.UI.Page
+>>>>>>> 9e00f7ec8c2b81ae8ade3a781eb12b8125e7ffd4
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'If String.Equals(Session("Usuario"), "a") Then
-        ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
+        If String.Equals(Session("Usuario"), "a") Then
+            ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
             Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Dim sn As New SP_Usuario_Negocios(strconnectionString)
 
@@ -92,10 +97,10 @@ Public Class frm_Reporte
             DwnLstInstitucion.Items.Add("Seleccione una opción")
 
             End If
-        'Else
-        '    Response.BufferOutput = True
-        '    Response.Redirect("http://localhost:52086/view/frm_index.aspx")
-        'End If
+        Else
+                Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+        End If
     End Sub
 
     Protected Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -156,7 +161,6 @@ Public Class frm_Reporte
                 faltanDatos = True
             Else
                 Me.construyeTabla(solicitudes)
-
                 faltanDatos = False
             End If
         Else
@@ -165,8 +169,6 @@ Public Class frm_Reporte
             tipo = "warning"
             faltanDatos = True
         End If
-
-
 
         If faltanDatos Then
             ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
@@ -232,7 +234,6 @@ Public Class frm_Reporte
                 tCell7.Text = solicitudAct.GstrHoraFSG
                 tCell8.Text = solicitudAct.GintIdParqueoSG
 
-
                 tRow.Cells.Add(tCell)
                 tRow.Cells.Add(tCell2)
                 tRow.Cells.Add(tCell3)
@@ -248,6 +249,7 @@ Public Class frm_Reporte
 
 
     End Function
+<<<<<<< HEAD
 
 
 
@@ -299,4 +301,6 @@ Public Class frm_Reporte
 
 
     End Sub
+=======
+>>>>>>> 9e00f7ec8c2b81ae8ade3a781eb12b8125e7ffd4
 End Class
