@@ -1,12 +1,24 @@
 ﻿Imports System.Web.Configuration
 Imports Entidad
 Imports Negocios
+Imports iTextSharp.text.pdf
+Imports iTextSharp.text
+Imports iTextSharp.text.html.simpleparser
+
+Imports System.IO
+
+
+
+
+
+
 Public Class frm_Reporte
     Inherits System.Web.UI.Page
+    Dim cadenaFinal As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If String.Equals(Session("Usuario"), "a") Then
-            ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
+        'If String.Equals(Session("Usuario"), "a") Then
+        ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
             Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Dim sn As New SP_Usuario_Negocios(strconnectionString)
 
@@ -68,10 +80,10 @@ Public Class frm_Reporte
                 DwnLstInstitucion.Items.Add("Seleccione una opción")
 
             End If
-        Else
-                Response.BufferOutput = True
-            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
-        End If
+        'Else
+        '    Response.BufferOutput = True
+        '    Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+        'End If
     End Sub
 
     Protected Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -129,6 +141,7 @@ Public Class frm_Reporte
                 faltanDatos = True
             Else
                 Me.construyeTabla(solicitudes)
+
                 faltanDatos = False
             End If
         Else
@@ -137,6 +150,8 @@ Public Class frm_Reporte
             tipo = "warning"
             faltanDatos = True
         End If
+
+
 
         If faltanDatos Then
             ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
@@ -200,6 +215,7 @@ Public Class frm_Reporte
                 tCell7.Text = solicitudAct.GstrHoraFSG
                 tCell8.Text = solicitudAct.GintIdParqueoSG
 
+
                 tRow.Cells.Add(tCell)
                 tRow.Cells.Add(tCell2)
                 tRow.Cells.Add(tCell3)
@@ -212,4 +228,87 @@ Public Class frm_Reporte
             Next
         Next
     End Function
+
+
+
+    Protected Sub btnBuscar_Click2(sender As Object, e As EventArgs) Handles Button1.Click
+        Try
+            ' generar el documento.
+            Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
+            'path para guardar en escritorio
+            Dim filename As String = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\Reporte de parqueo.pdf"
+            Dim file As New FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)
+            PdfWriter.GetInstance(doc, file)
+            doc.Open()
+            ExportarDatosPDF(doc)
+            doc.Close()
+            Process.Start(filename)
+        Catch ex As Exception
+
+
+        End Try
+    End Sub
+
+    Public Sub ExportarDatosPDF(ByVal document As Document)
+
+        Dim fuente As iTextSharp.text.pdf.BaseFont
+        fuente = FontFactory.GetFont(FontFactory.HELVETICA, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL).BaseFont
+        'Se crea el encabezado en el PDF.
+        Dim encabezado As New Paragraph("                           Reporte de Parqueo", New Font(fuente, 20, Font.BOLD))
+
+        'Se crea el texto abajo del encabezado.
+        Dim texto As New Phrase("Reporte de ventas realizadas de la fecha :" + Now.Date(), New Font(fuente, 14, Font.BOLD))
+
+        'Se agrega el PDFTable al documento.
+
+
+        Dim strContent As String
+        Dim parsedHtmlElements As List(Of IElement)
+
+
+
+        cadenaFinal = ""
+
+        cadenaFinal += " <div><h1> Reporte de Parqueo</h1></div>  
+        <TABLE BORDER='1' >
+        <tr>
+            <th><strong>Nombre</strong></th>
+            <th><strong>Instituci&oacute;n</strong></th>
+            <th><strong>Placa</strong></th>
+            <th><strong>Fecha Entrada</strong></th>
+            <th><strong>Hora Entrada</strong></th>
+            <th><strong>Fecha Salida</strong></th>
+            <th><strong>Hora Salida</strong></th>
+            <th><strong>Espacio</strong></th>
+        </tr>
+        <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+         </tr>
+    </TABLE> >"
+        ' asigna conenido de html
+        strContent = cadenaFinal
+
+        'lee el string  y cnviente los elementos a la lista
+        parsedHtmlElements = HTMLWorker.ParseToList(New StringReader(strContent), Nothing)
+
+
+        'toma cada uno de los valores parseados y los agrega al documento pdf
+
+        For Each htmlElement As IElement In parsedHtmlElements
+            document.Add(htmlElement)
+        Next
+
+
+
+        'document.Add(encabezado)
+        'document.Add(texto)
+
+    End Sub
 End Class
