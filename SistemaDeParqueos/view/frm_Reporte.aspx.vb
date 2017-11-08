@@ -9,12 +9,25 @@ Imports System.IO
 
 
 
-
-
-
 Public Class frm_Reporte
     Inherits System.Web.UI.Page
-    Dim cadenaFinal As String
+    Dim cadenaFinal As String = " <div><h1> Reporte de Parqueo</h1></div>  
+           <TABLE BORDER='1' >
+           <tr>
+               <th><strong>Nombre</strong></th>
+               <th><strong>Instituci&oacute;n</strong></th>
+               <th><strong>Placa</strong></th>
+               <th><strong>Fecha Entrada</strong></th>
+               <th><strong>Hora Entrada</strong></th>
+               <th><strong>Fecha Salida</strong></th>
+               <th><strong>Hora Salida</strong></th>
+               <th><strong>Espacio</strong></th>
+           </tr>
+
+       </TABLE> "
+
+    Dim parsedHtmlElements As List(Of String)
+
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'If String.Equals(Session("Usuario"), "a") Then
@@ -76,8 +89,7 @@ Public Class frm_Reporte
                     DwnLstCorreo.Items.Add(usuarioCorreo.GstrCorreoSG)
                 Next
 
-
-                DwnLstInstitucion.Items.Add("Seleccione una opción")
+            DwnLstInstitucion.Items.Add("Seleccione una opción")
 
             End If
         'Else
@@ -113,6 +125,8 @@ Public Class frm_Reporte
                     faltanDatos = True
                 Else
                     Me.construyeTabla(solicitudes)
+
+
                     faltanDatos = False
                 End If
             Else
@@ -130,6 +144,7 @@ Public Class frm_Reporte
                 faltanDatos = True
             Else
                 Me.construyeTabla(solicitudes)
+
                 faltanDatos = False
             End If
         ElseIf (Not DwnLstCorreo.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo") Then
@@ -194,6 +209,7 @@ Public Class frm_Reporte
         tERow.Cells.Add(num_p)
         table.Rows.Add(tERow)
         For Each solicitudAct As Solicitud In solicitudes
+            AgregaDatos("<tr>")
 
             For rowCtr = 1 To rowCnt
                 Dim tRow As New TableRow()
@@ -210,6 +226,7 @@ Public Class frm_Reporte
                 tCell2.Text = " "
                 tCell3.Text = solicitudAct.GstrPlacaSG
                 tCell4.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
+                AgregaDatos("<td>" + solicitudAct.GstrPlacaSG + "</td>")
                 tCell5.Text = solicitudAct.GstrHoraISG
                 tCell6.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
                 tCell7.Text = solicitudAct.GstrHoraFSG
@@ -226,7 +243,10 @@ Public Class frm_Reporte
                 tRow.Cells.Add(tCell8)
                 table.Rows.Add(tRow)
             Next
+            AgregaDatos("</tr>")
         Next
+
+
     End Function
 
 
@@ -249,55 +269,27 @@ Public Class frm_Reporte
         End Try
     End Sub
 
+    Public Sub AgregaDatos(cadena As String)
+        Me.cadenaFinal += cadena
+    End Sub
+
+
+
     Public Sub ExportarDatosPDF(ByVal document As Document)
 
         Dim fuente As iTextSharp.text.pdf.BaseFont
         fuente = FontFactory.GetFont(FontFactory.HELVETICA, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL).BaseFont
-        'Se crea el encabezado en el PDF.
-        Dim encabezado As New Paragraph("                           Reporte de Parqueo", New Font(fuente, 20, Font.BOLD))
-
-        'Se crea el texto abajo del encabezado.
-        Dim texto As New Phrase("Reporte de ventas realizadas de la fecha :" + Now.Date(), New Font(fuente, 14, Font.BOLD))
 
         'Se agrega el PDFTable al documento.
-
-
-        Dim strContent As String
+        Dim strContent As String = ""
         Dim parsedHtmlElements As List(Of IElement)
 
 
 
-        cadenaFinal = ""
-
-        cadenaFinal += " <div><h1> Reporte de Parqueo</h1></div>  
-        <TABLE BORDER='1' >
-        <tr>
-            <th><strong>Nombre</strong></th>
-            <th><strong>Instituci&oacute;n</strong></th>
-            <th><strong>Placa</strong></th>
-            <th><strong>Fecha Entrada</strong></th>
-            <th><strong>Hora Entrada</strong></th>
-            <th><strong>Fecha Salida</strong></th>
-            <th><strong>Hora Salida</strong></th>
-            <th><strong>Espacio</strong></th>
-        </tr>
-        <tr>
-            <td>Jill</td>
-            <td>Smith</td>
-            <td>50</td>
-        </tr>
-        <tr>
-            <td>Eve</td>
-            <td>Jackson</td>
-            <td>94</td>
-         </tr>
-    </TABLE> >"
-        ' asigna conenido de html
-        strContent = cadenaFinal
+        strContent += cadenaFinal
 
         'lee el string  y cnviente los elementos a la lista
         parsedHtmlElements = HTMLWorker.ParseToList(New StringReader(strContent), Nothing)
-
 
         'toma cada uno de los valores parseados y los agrega al documento pdf
 
@@ -305,10 +297,6 @@ Public Class frm_Reporte
             document.Add(htmlElement)
         Next
 
-
-
-        'document.Add(encabezado)
-        'document.Add(texto)
 
     End Sub
 End Class
