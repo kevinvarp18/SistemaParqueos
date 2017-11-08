@@ -9,46 +9,58 @@ Public Class frm_ActualizarEliminarParqueo
     Public gstrParqueoSelecion As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         If String.Equals(Session("Usuario"), "a") Then
+
+            Dim idPagina As String
+            idPagina = Request.QueryString("id")
+            Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
+            idPagina = datosSolicitud(0)
+
             Dim connectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_AdministrarParqueo", ResolveUrl("~") + "public/js/" + "script.js")
-
             Dim parqueoNegocios As New SP_Parqueo_Negocios(connectionString)
-            If IsPostBack Then
-                Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
-                Me.gstrParqueoSelecion = DwnEspacio.SelectedItem.ToString()
-                For Each parqueoActual As Parqueo In parqueo
-                    If Me.gstrParqueoSelecion.Equals("Numero Parqueo: " + parqueoActual.GintIdentificadorSG.ToString()) Then
-                        Me.gintParqueoIdentificador = parqueoActual.GintIdentificadorSG
-                    End If
-                Next
-            Else
-                DwnEspacio.Items.Clear()
-                DwnEspacio.Items.Add("Sin Seleccionar")
-                Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
-                For Each item As Parqueo In parqueo
-                    DwnEspacio.Items.Add("Numero Parqueo: " + item.GintIdentificadorSG.ToString)
-                Next
-                DwnLstTipos.Items.Clear()
-                DwnLstEstado.Items.Clear()
-                DwnLstTipos.Items.Add("Seleccione una opción")
-                DwnLstTipos.Items.Add("Jefatura")
-                DwnLstTipos.Items.Add("PIP")
-                DwnLstTipos.Items.Add("UPRO")
-                DwnLstTipos.Items.Add("OPO")
-                DwnLstTipos.Items.Add("SERT")
-                DwnLstTipos.Items.Add("UPROV")
-                DwnLstTipos.Items.Add("UVISE")
-                DwnLstTipos.Items.Add("Visitas")
-                DwnLstEstado.Items.Add("Seleccione una opción")
-                DwnLstEstado.Items.Add("Habilitado")
-                DwnLstEstado.Items.Add("Deshabilitado")
-                Me.gstrParqueoSelecion = DwnEspacio.SelectedItem.ToString()
-                For Each parqueoActual As Parqueo In parqueo
-                    If Me.gstrParqueoSelecion.Equals("Numero Parqueo: " + parqueoActual.GintIdentificadorSG.ToString()) Then
-                        Me.gintParqueoIdentificador = parqueoActual.GintIdentificadorSG
-                    End If
-                Next
+            Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
+
+            If (idPagina.Equals("1")) Then
+
+                If IsPostBack Then
+
+                    Me.gstrParqueoSelecion = DwnEspacio.SelectedItem.ToString()
+                    For Each parqueoActual As Parqueo In Parqueo
+                        If Me.gstrParqueoSelecion.Equals("Numero Parqueo: " + parqueoActual.GintIdentificadorSG.ToString()) Then
+                            Me.gintParqueoIdentificador = parqueoActual.GintIdentificadorSG
+                        End If
+                    Next
+                Else
+                    DwnLstEstado.Items.Clear()
+                    Me.gstrParqueoSelecion = DwnEspacio.SelectedItem.ToString()
+                    For Each parqueoActual As Parqueo In Parqueo
+                        If Me.gstrParqueoSelecion.Equals("Numero Parqueo: " + parqueoActual.GintIdentificadorSG.ToString()) Then
+                            Me.gintParqueoIdentificador = parqueoActual.GintIdentificadorSG
+                        End If
+                    Next
+                End If
+            ElseIf (idPagina.Equals("0")) Then
+                If IsPostBack Then
+
+                Else
+                    DwnLstTipos.Items.Clear()
+                    DwnLstEstado.Items.Clear()
+                    DwnLstTipos.Items.Add("Seleccione una opción")
+                    DwnLstTipos.Items.Add("Jefatura")
+                    DwnLstTipos.Items.Add("PIP")
+                    DwnLstTipos.Items.Add("UPRO")
+                    DwnLstTipos.Items.Add("OPO")
+                    DwnLstTipos.Items.Add("SERT")
+                    DwnLstTipos.Items.Add("UPROV")
+                    DwnLstTipos.Items.Add("UVISE")
+                    DwnLstTipos.Items.Add("Visitas")
+                    DwnLstEstado.Items.Add("Seleccione una opción")
+                    DwnLstEstado.Items.Add("Habilitado")
+                    DwnLstEstado.Items.Add("Deshabilitado")
+
+                End If
             End If
         Else
             Response.BufferOutput = True
