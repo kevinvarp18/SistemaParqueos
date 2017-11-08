@@ -9,26 +9,11 @@ Public Class frm_AdministrarSolicitudes
     Dim solicitudNegocios As SP_Solicitud_Parqueo_Negocios
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
         If String.Equals(Session("Usuario"), "a") Then
-            Dim idPagina As String
-            idPagina = Request.QueryString("id")
-            Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
-            idPagina = datosSolicitud(0)
-
-            If (idPagina.Equals("1")) Then
-                decidirSolicitud(datosSolicitud(1), datosSolicitud(2), datosSolicitud(3), datosSolicitud(4), datosSolicitud(5), datosSolicitud(6), datosSolicitud(7), datosSolicitud(8), datosSolicitud(9))
-            End If
-
-            If IsPostBack Then
-                tomarParqueoSeleccionado()
-            Else
-                Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-                Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
-                Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
-                llenarTablaSolicitudes()
-            End If
-
+            Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
+            Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
+            llenarTablaSolicitudes()
         Else
             Response.BufferOutput = True
             Response.Redirect("http://localhost:52086/view/frm_index.aspx")
@@ -40,6 +25,7 @@ Public Class frm_AdministrarSolicitudes
         Dim rowCtr As Integer
         Dim contador As Integer
         Dim solicitudes As LinkedList(Of Solicitud) = Me.solicitudNegocios.obtenerAdSolicitud()
+        Dim listaDwnLstParqueos As New LinkedList(Of DropDownList)
         rowCnt = 1
         contador = 1
 
@@ -67,7 +53,7 @@ Public Class frm_AdministrarSolicitudes
 
                 Dim DwnLstParqueos As New DropDownList()
                 DwnLstParqueos.Width = 75%
-                DwnLstParqueos.AutoPostBack = True
+                DwnLstParqueos.AutoPostBack = False
                 DwnLstParqueos.ID = "DwnLstParqueo" + contador.ToString()
                 If IsPostBack Then
                 Else
@@ -86,21 +72,24 @@ Public Class frm_AdministrarSolicitudes
                 columnaEspaciosParqueo.Controls.Add(literalControl)
                 columnaHypLnk.Controls.Add(literalControl)
 
-                Dim lnkBtnRechazar As New HyperLink()
-                lnkBtnRechazar.ID = "lnkBtnRechazar" + contador.ToString()
-                lnkBtnRechazar.Text = "(Rechazar)"
-                lnkBtnRechazar.NavigateUrl = "http://localhost:52086/view/frm_AdministrarSolicitudes.aspx?id=1;" + contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + columnaFechaI.Text + ";" + columnaFechaS.Text + ";" + DwnLstParqueos.SelectedItem.Text + ";0"
-                lnkBtnRechazar.Style("color") = "#ff0000"
+                Dim btnRechazar As Button = New Button
+                btnRechazar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + columnaFechaI.Text + ";" + columnaFechaS.Text + ";0"
+                btnRechazar.Text = "(Rechazar)"
+                btnRechazar.Width = 90%
+                btnRechazar.Style("color") = "#ff0000"
+                AddHandler btnRechazar.Click, AddressOf Me.button_Click
 
-                Dim lnkBtnAceptar As New HyperLink()
-                lnkBtnAceptar.ID = "lnkBtnAceptar" + contador.ToString()
-                lnkBtnAceptar.Text = "(Aceptar)"
-                lnkBtnAceptar.NavigateUrl = "http://localhost:52086/view/frm_AdministrarSolicitudes.aspx?id=1;" + contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + columnaFechaI.Text + ";" + columnaFechaS.Text + ";" + DwnLstParqueos.SelectedItem.Text + ";1"
-                lnkBtnAceptar.Style("color") = "#00fe00"
+                Dim btnAceptar As Button = New Button
+                btnAceptar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + columnaFechaI.Text + ";" + columnaFechaS.Text + ";1"
+                btnAceptar.Text = "(Aceptar)"
+                btnAceptar.Width = 90%
+                btnAceptar.Style("color") = "#00fe00"
+                AddHandler btnAceptar.Click, AddressOf Me.button_Click
 
                 columnaEspaciosParqueo.Controls.Add(DwnLstParqueos)
-                columnaHypLnk.Controls.Add(lnkBtnRechazar)
-                columnaHypLnk.Controls.Add(lnkBtnAceptar)
+                listaDwnLstParqueos.AddLast(DwnLstParqueos)
+                columnaHypLnk.Controls.Add(btnRechazar)
+                columnaHypLnk.Controls.Add(btnAceptar)
 
                 filaTabla.Cells.Add(columnaMarca)
                 filaTabla.Cells.Add(columnaPlaca)
@@ -168,79 +157,26 @@ Public Class frm_AdministrarSolicitudes
         End If
     End Sub
 
-    Public Sub tomarParqueoSeleccionado()
-        'Dim rowCtr, rowCnt As Integer
-        'Dim contador As Integer
-        'Dim tabla As Table
-        'Dim filas As New LinkedList(Of TableRow)
-
-        'contador = 1
-        'tabla = Session("tabla")
-        'rowCnt = tabla.Rows.Count
-
-        'For rowCtr = 1 To rowCnt - 1
-        '    Dim fila As TableRow
-        '    Dim columnaAcciones, columnaEspaciosParqueo As TableCell
-        '    Dim columnaHypLnk As New TableCell()
-        '    Dim literalControl As New LiteralControl()
-        '    Dim lnkBtnAceptar, lnkBtnRechazar As HyperLink
-        '    Dim dwnLstParqueo As DropDownList
-
-        '    fila = tabla.Rows.Item(contador)
-        '    columnaHypLnk.ID = "columnaHypLnk" + contador.ToString()
-        '    literalControl.Text = ""
-        '    columnaHypLnk.Controls.Add(literalControl)
-
-        '    columnaAcciones = DirectCast(fila.FindControl("columnaHypLnk" + contador.ToString()), TableCell)
-        '    columnaEspaciosParqueo = DirectCast(fila.FindControl("columnaParqueo" + contador.ToString()), TableCell)
-        '    lnkBtnRechazar = DirectCast(columnaAcciones.FindControl("lnkBtnRechazar" + contador.ToString()), HyperLink)
-        '    lnkBtnAceptar = DirectCast(columnaAcciones.FindControl("lnkBtnAceptar" + contador.ToString()), HyperLink)
-        '    dwnLstParqueo = DirectCast(columnaEspaciosParqueo.FindControl("DwnLstParqueo" + contador.ToString()), DropDownList)
-
-        '    Dim navigateUrl As String
-        '    navigateUrl = lnkBtnRechazar.NavigateUrl.Substring(0, 121) + ";" + dwnLstParqueo.SelectedItem.Text + ";"
-        '    lnkBtnRechazar.NavigateUrl = navigateUrl + "0"
-        '    lnkBtnAceptar.NavigateUrl = navigateUrl + "1"
-        '    columnaHypLnk.Controls.Add(lnkBtnRechazar)
-        '    columnaHypLnk.Controls.Add(lnkBtnAceptar)
-        '    fila.Cells.Remove(columnaAcciones)
-        '    fila.Cells.Remove(columnaEspaciosParqueo)
-        '    fila.Cells.Add(columnaEspaciosParqueo)
-        '    fila.Cells.Add(columnaHypLnk)
-        '    filas.AddLast(fila)
-        '    contador = contador + 1
-        'Next
-
-        'For Each filaActual As TableRow In filas
-        '    tablaSolicitudes.Rows.Add(filaActual)
-        'Next
-        'Session("tabla") = tablaSolicitudes
-    End Sub
-
-    Public Sub decidirSolicitud(idControl As String, marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String)
+    Protected Sub button_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Dim botonSeleccionado As Button = CType(sender, Button)
+        Dim datosSolictud As String() = botonSeleccionado.CssClass.Split(New String() {";"}, StringSplitOptions.None)
         Dim contentPlaceHolder As ContentPlaceHolder
-        contentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
         Dim updatePanel As UpdatePanel
-        updatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel1"), UpdatePanel)
         Dim tabla As Table
-        tabla = DirectCast(updatePanel.FindControl("tablaSolicitudes"), Table)
         Dim fila As TableRow
-        fila = tablaSolicitudes.Rows.Item(Integer.Parse(idControl))
-        'Dim columnaEspacioD As TableCell
-        'columnaEspacioD = DirectCast(fila.FindControl("columnaParqueo" + idControl), TableCell)
-        'Dim dwnLstParqueo As DropDownList
-        'dwnLstParqueo = DirectCast(columnaEspacioD.FindControl("DwnLstParqueo" + idControl), DropDownList)
-        'Dim idParqueo As String
-        'idParqueo = dwnLstParqueo.SelectedItem.Value
-        Me.solicitudNegocios.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
-        tablaSolicitudes.Rows.Remove(fila)
-        'Response.BufferOutput = True
-        'Response.Redirect("http://localhost:52086/view/frm_index.aspx?idParqueo=" + idParqueo)
-    End Sub
+        Dim columnaEspacioD As TableCell
+        Dim dwnLstParqueo As DropDownList
+        Dim idParqueo As String
 
-    Public Sub rod()
-        Response.BufferOutput = True
-        Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+        contentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
+        updatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel1"), UpdatePanel)
+        tabla = DirectCast(updatePanel.FindControl("tablaSolicitudes"), Table)
+        fila = tablaSolicitudes.Rows.Item(Integer.Parse(datosSolictud(0)))
+        columnaEspacioD = DirectCast(fila.FindControl("columnaParqueo" + datosSolictud(0)), TableCell)
+        dwnLstParqueo = DirectCast(columnaEspacioD.FindControl("DwnLstParqueo" + datosSolictud(0)), DropDownList)
+        idParqueo = dwnLstParqueo.SelectedItem.Value
+        tablaSolicitudes.Rows.Remove(fila)
+        Me.solicitudNegocios.decidirSolicitud(datosSolictud(1), datosSolictud(2), datosSolictud(3), datosSolictud(4), datosSolictud(5), datosSolictud(6), idParqueo, datosSolictud(7))
     End Sub
 
 End Class
