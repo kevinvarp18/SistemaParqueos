@@ -8,8 +8,8 @@ Imports System.IO
 
 Public Class frm_Reporte
     Inherits System.Web.UI.Page
-    Dim cadenaFinal As String = ""
-
+    Dim cadenaFinal As String = "<div></div>"
+    'Dim lista As ArrayList = New ArrayList
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -17,8 +17,9 @@ Public Class frm_Reporte
                 ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
                 Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
                 Dim sn As New SP_Usuario_Negocios(strconnectionString)
-            Me.cadenaFinal = " <div><h1> Reporte de Parqueo</h1></div>  
-                   <TABLE BORDER='1' >
+
+            Me.cadenaFinal = Me.cadenaFinal + """<div><h1> Reporte de Parqueo</h1></div>  
+                   <table BORDER='1' >
                    <tr>
                        <th><strong>Nombre</strong></th>
                        <th><strong>Instituci&oacute;n</strong></th>
@@ -30,50 +31,46 @@ Public Class frm_Reporte
                        <th><strong>Espacio</strong></th>
                    </tr>"
 
-
             If IsPostBack Then
 
-                    Dim contentPlaceHolder As ContentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
-                    Dim updatePanelPlaca As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel2"), UpdatePanel)
-                    Dim updatePanelCorreo As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel3"), UpdatePanel)
-                    Dim updatePanelInstitucion As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel4"), UpdatePanel)
-                    Dim updatePanelFecha As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel5"), UpdatePanel)
-                    Dim updatePanelTabla As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel6"), UpdatePanel)
+                Dim contentPlaceHolder As ContentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
+                Dim updatePanelPlaca As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel2"), UpdatePanel)
+                Dim updatePanelCorreo As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel3"), UpdatePanel)
+                Dim updatePanelInstitucion As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel4"), UpdatePanel)
+                Dim updatePanelFecha As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel5"), UpdatePanel)
+                Dim updatePanelTabla As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel6"), UpdatePanel)
 
-                    If (DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa")) Then
-                        updatePanelPlaca.Visible = True
-                        updatePanelCorreo.Visible = False
-                        updatePanelInstitucion.Visible = False
-                        updatePanelFecha.Visible = False
-                    ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo")) Then
-                        updatePanelPlaca.Visible = False
-                        updatePanelCorreo.Visible = True
-                        updatePanelInstitucion.Visible = False
-                        updatePanelFecha.Visible = False
-                    ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Institución")) Then
-                        updatePanelPlaca.Visible = False
-                        updatePanelCorreo.Visible = False
-                        updatePanelInstitucion.Visible = True
-                        updatePanelFecha.Visible = False
-                    ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Fecha")) Then
-                        updatePanelPlaca.Visible = False
-                        updatePanelCorreo.Visible = False
-                        updatePanelInstitucion.Visible = False
-                        updatePanelFecha.Visible = True
-                    ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Seleccione una opción")) Then
-                        updatePanelPlaca.Visible = False
-                        updatePanelCorreo.Visible = False
-                        updatePanelInstitucion.Visible = False
-                        updatePanelFecha.Visible = False
-                    End If
-                Else
-                    DwnLstTipoReporte.Items.Add("Seleccione una opción")
+                If (DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa")) Then
+                    updatePanelPlaca.Visible = True
+                    updatePanelCorreo.Visible = False
+                    updatePanelInstitucion.Visible = False
+                    updatePanelFecha.Visible = False
+                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo")) Then
+                    updatePanelPlaca.Visible = False
+                    updatePanelCorreo.Visible = True
+                    updatePanelInstitucion.Visible = False
+                    updatePanelFecha.Visible = False
+
+                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Fecha")) Then
+                    updatePanelPlaca.Visible = False
+                    updatePanelCorreo.Visible = False
+                    updatePanelInstitucion.Visible = False
+                    updatePanelFecha.Visible = True
+                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Seleccione una opción")) Then
+                    updatePanelPlaca.Visible = False
+                    updatePanelCorreo.Visible = False
+                    updatePanelInstitucion.Visible = False
+                    updatePanelFecha.Visible = False
+                End If
+            Else
+
+
+                DwnLstTipoReporte.Items.Add("Seleccione una opción")
                     DwnLstTipoReporte.Items.Add("Placa")
                     DwnLstTipoReporte.Items.Add("Correo")
-                    DwnLstTipoReporte.Items.Add("Institución")
-                    DwnLstTipoReporte.Items.Add("Fecha")
+                DwnLstTipoReporte.Items.Add("Fecha")
 
-                    DwnLstPlaca.Items.Add("Seleccione una opción")
+                DwnLstPlaca.Items.Add("Seleccione una opción")
                     Dim placas As LinkedList(Of String) = sn.obtenerPlacas()
                     For Each placa As String In placas
                         DwnLstPlaca.Items.Add(placa)
@@ -85,9 +82,8 @@ Public Class frm_Reporte
                         DwnLstCorreo.Items.Add(usuarioCorreo.GstrCorreoSG)
                     Next
 
-                    DwnLstInstitucion.Items.Add("Seleccione una opción")
 
-                End If
+            End If
             Else
                 Response.BufferOutput = True
                 Response.Redirect("http://localhost:52086/view/frm_index.aspx")
@@ -218,9 +214,10 @@ Public Class frm_Reporte
                     tCell.Text = solicitudAct.GstrMarcaSG
                     tCell2.Text = " "
                     tCell3.Text = solicitudAct.GstrPlacaSG
-                    tCell4.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
-                    AgregaDatos("<td>" + solicitudAct.GstrPlacaSG + "</td>")
-                    tCell5.Text = solicitudAct.GstrHoraISG
+                tCell4.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
+                AgregaDatos("<td>asd</td>")
+                AgregaDatos("<td>""" + solicitudAct.GstrPlacaSG + """</td>")
+                tCell5.Text = solicitudAct.GstrHoraISG
                     tCell6.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
                     tCell7.Text = solicitudAct.GstrHoraFSG
                     tCell8.Text = solicitudAct.GintIdParqueoSG
@@ -238,7 +235,7 @@ Public Class frm_Reporte
                 AgregaDatos("</tr>")
             Next
 
-        Me.cadenaFinal += "</TABLE>"
+        AgregaDatos("</table>")
 
     End Function
 
@@ -261,35 +258,39 @@ Public Class frm_Reporte
             End Try
         End Sub
 
-        Public Sub AgregaDatos(cadena As String)
-            Me.cadenaFinal += cadena
-        End Sub
+    Public Function AgregaDatos(cadena As String)
+        Me.cadenaFinal = Me.cadenaFinal + """""" + cadena
+    End Function
 
 
 
-        Public Sub ExportarDatosPDF(ByVal document As Document)
+    Public Function ExportarDatosPDF(ByVal document As Document)
 
-            Dim fuente As iTextSharp.text.pdf.BaseFont
-            fuente = FontFactory.GetFont(FontFactory.HELVETICA, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL).BaseFont
+        Dim fuente As iTextSharp.text.pdf.BaseFont
+        fuente = FontFactory.GetFont(FontFactory.HELVETICA, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL).BaseFont
 
-            'Se agrega el PDFTable al documento.
-            Dim strContent As String = ""
-            Dim parsedHtmlElements As List(Of IElement)
+        'Se agrega el PDFTable al documento.
+        Dim strContent As String = "<div></div>"
+        Dim parsedHtmlElements As List(Of IElement)
 
 
+        'For Each str As String In Me.lista
+        'strContent = strContent + """" + str.ToString()
+        'Next
 
-        strContent += Me.cadenaFinal
+        'mensaje + """,""" + tipo
+        strContent = strContent + """""" + Me.cadenaFinal
 
         'lee el string  y cnviente los elementos a la lista
         parsedHtmlElements = HTMLWorker.ParseToList(New StringReader(strContent), Nothing)
 
-            'toma cada uno de los valores parseados y los agrega al documento pdf
+        'toma cada uno de los valores parseados y los agrega al documento pdf
 
-            For Each htmlElement As IElement In parsedHtmlElements
-                document.Add(htmlElement)
-            Next
+        For Each htmlElement As IElement In parsedHtmlElements
+            document.Add(htmlElement)
+        Next
 
 
-        End Sub
+    End Function
 
 End Class
