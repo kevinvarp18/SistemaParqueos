@@ -8,7 +8,7 @@ Imports System.IO
 
 Public Class frm_Reporte
     Inherits System.Web.UI.Page
-    Dim cadenaFinal As String = "<div></div>"
+    'Dim cadenaFinal As String = "<div></div>"
     'Dim lista As ArrayList = New ArrayList
 
 
@@ -18,48 +18,43 @@ Public Class frm_Reporte
                 Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
                 Dim sn As New SP_Usuario_Negocios(strconnectionString)
 
-            Me.cadenaFinal = Me.cadenaFinal + """<div><h1> Reporte de Parqueo</h1></div>  
-                   <table BORDER='1' >
-                   <tr>
-                       <th><strong>Nombre</strong></th>
-                       <th><strong>Instituci&oacute;n</strong></th>
-                       <th><strong>Placa</strong></th>
-                       <th><strong>Fecha Entrada</strong></th>
-                       <th><strong>Hora Entrada</strong></th>
-                       <th><strong>Fecha Salida</strong></th>
-                       <th><strong>Hora Salida</strong></th>
-                       <th><strong>Espacio</strong></th>
-                   </tr>"
+            'Me.cadenaFinal = Me.cadenaFinal + """<div><h1> Reporte de Parqueo</h1></div>  
+            '       <table BORDER='1' >
+            '       <tr>
+            '           <th><strong>Nombre</strong></th>
+            '           <th><strong>Instituci&oacute;n</strong></th>
+            '           <th><strong>Placa</strong></th>
+            '           <th><strong>Fecha Entrada</strong></th>
+            '           <th><strong>Hora Entrada</strong></th>
+            '           <th><strong>Fecha Salida</strong></th>
+            '           <th><strong>Hora Salida</strong></th>
+            '           <th><strong>Espacio</strong></th>
+            '       </tr>"
 
             If IsPostBack Then
 
                 Dim contentPlaceHolder As ContentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
                 Dim updatePanelPlaca As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel2"), UpdatePanel)
                 Dim updatePanelCorreo As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel3"), UpdatePanel)
-                Dim updatePanelInstitucion As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel4"), UpdatePanel)
                 Dim updatePanelFecha As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel5"), UpdatePanel)
                 Dim updatePanelTabla As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel6"), UpdatePanel)
 
                 If (DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa")) Then
                     updatePanelPlaca.Visible = True
                     updatePanelCorreo.Visible = False
-                    updatePanelInstitucion.Visible = False
                     updatePanelFecha.Visible = False
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = True
-                    updatePanelInstitucion.Visible = False
                     updatePanelFecha.Visible = False
 
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Fecha")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = False
-                    updatePanelInstitucion.Visible = False
                     updatePanelFecha.Visible = True
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Seleccione una opción")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = False
-                    updatePanelInstitucion.Visible = False
                     updatePanelFecha.Visible = False
                 End If
             Else
@@ -136,8 +131,8 @@ Public Class frm_Reporte
                     faltanDatos = True
                 Else
                     Me.construyeTabla(solicitudes)
-
-                    faltanDatos = False
+                'Label1.Text = solicitudes.ToString()
+                faltanDatos = False
                 End If
             ElseIf (Not DwnLstCorreo.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo") Then
                 solicitudes = sn.obtenerReporteCorreo(DwnLstCorreo.SelectedItem.ToString())
@@ -198,9 +193,9 @@ Public Class frm_Reporte
             tERow.Cells.Add(num_p)
             Table.Rows.Add(tERow)
             For Each solicitudAct As Solicitud In solicitudes
-                AgregaDatos("<tr>")
+            'AgregaDatos("<tr>")
 
-                For rowCtr = 1 To rowCnt
+            For rowCtr = 1 To rowCnt
                     Dim tRow As New TableRow()
                     Dim tCell As New TableCell()
                     Dim tCell2 As New TableCell()
@@ -215,8 +210,8 @@ Public Class frm_Reporte
                     tCell2.Text = " "
                     tCell3.Text = solicitudAct.GstrPlacaSG
                 tCell4.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
-                AgregaDatos("<td>asd</td>")
-                AgregaDatos("<td>""" + solicitudAct.GstrPlacaSG + """</td>")
+                'AgregaDatos("<td>asd</td>")
+                'AgregaDatos("<td>""" + solicitudAct.GstrPlacaSG + """</td>")
                 tCell5.Text = solicitudAct.GstrHoraISG
                     tCell6.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
                     tCell7.Text = solicitudAct.GstrHoraFSG
@@ -232,34 +227,37 @@ Public Class frm_Reporte
                     tRow.Cells.Add(tCell8)
                     Table.Rows.Add(tRow)
                 Next
-                AgregaDatos("</tr>")
-            Next
+            'AgregaDatos("</tr>")
+        Next
 
-        AgregaDatos("</table>")
+        'AgregaDatos("</table>")
 
     End Function
 
 
     Protected Sub btnBuscar_Click2(sender As Object, e As EventArgs) Handles Button1.Click
-            Try
-                ' generar el documento.
-                Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
-                'path para guardar en escritorio
-                Dim filename As String = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\Reporte de parqueo.pdf"
-                Dim file As New FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)
-                PdfWriter.GetInstance(doc, file)
-                doc.Open()
-                ExportarDatosPDF(doc)
-                doc.Close()
-                Process.Start(filename)
-            Catch ex As Exception
+        'Try
+        '    ' generar el documento.
+        '    Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
+        '    'path para guardar en escritorio
+        '    Dim filename As String = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\Reporte de parqueo.pdf"
+        '    Dim file As New FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)
+        '    PdfWriter.GetInstance(doc, file)
+        '    doc.Open()
+        '    ExportarDatosPDF(doc)
+        '    doc.Close()
+        '    Process.Start(filename)
+        'Catch ex As Exception
 
 
-            End Try
-        End Sub
+        'End Try
+
+        'Label1.Text = lista.ToString()
+
+    End Sub
 
     Public Function AgregaDatos(cadena As String)
-        Me.cadenaFinal = Me.cadenaFinal + """""" + cadena
+        'Me.cadenaFinal = Me.cadenaFinal + """""" + cadena
     End Function
 
 
@@ -279,7 +277,9 @@ Public Class frm_Reporte
         'Next
 
         'mensaje + """,""" + tipo
-        strContent = strContent + """""" + Me.cadenaFinal
+        'strContent = strContent + """""" + Me.cadenaFinal
+
+        strContent += "<div></div>"
 
         'lee el string  y cnviente los elementos a la lista
         parsedHtmlElements = HTMLWorker.ParseToList(New StringReader(strContent), Nothing)
