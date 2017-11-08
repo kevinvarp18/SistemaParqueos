@@ -128,8 +128,8 @@ Public Class SP_Parqueo_Datos
         sqlDataAdapterClient.SelectCommand.Connection = connection
         sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
         sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@fechaInicio", strFecha))
-        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@horaInicio", strHorai))
-        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@horaFinal", strHoraf))
+        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@horaInicio", CDate(strHorai)))
+        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@horaFinal", CDate(strHoraf)))
 
         Dim dataSetAttendant As New DataSet()
         sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Disponibilidad_Parqueo_X_TSP_Parqueo")
