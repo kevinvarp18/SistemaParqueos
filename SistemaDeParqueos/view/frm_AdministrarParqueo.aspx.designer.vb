@@ -41,6 +41,15 @@ Partial Public Class administrarParqueo
     Protected WithEvents DwnEspacio As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''btnCrear control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCrear As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''lblTipo control.
     '''</summary>
     '''<remarks>
@@ -75,15 +84,6 @@ Partial Public Class administrarParqueo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DwnLstEstado As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''btnCrear control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCrear As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''btnActualizar control.

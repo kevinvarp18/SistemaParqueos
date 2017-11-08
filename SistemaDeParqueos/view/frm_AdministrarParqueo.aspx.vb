@@ -9,6 +9,17 @@ Public Class administrarParqueo
     Public gstrParqueoSelecion As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim idPagina As String
+        idPagina = Request.QueryString("id")
+        Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
+        idPagina = datosSolicitud(0)
+        If (idPagina.Equals("1")) Then
+            Page.ClientScript.RegisterStartupScript(
+            Page.ClientScript.GetType(), "onLoad", "RegistrarParqueo();", True)
+        ElseIf (idPagina.Equals("0")) Then
+            Page.ClientScript.RegisterStartupScript(
+            Page.ClientScript.GetType(), "onLoad", "ActualizarEliminarParqueo();", True)
+        End If
         If String.Equals(Session("Usuario"), "a") Then
             Dim connectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_AdministrarParqueo", ResolveUrl("~") + "public/js/" + "script.js")

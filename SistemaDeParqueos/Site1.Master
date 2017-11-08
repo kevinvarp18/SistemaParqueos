@@ -5,6 +5,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Sistema de Parqueos - OIJ</title>
+    <script type="text/javascript" language="javascript">
+                        
+                        function RegistrarParqueo() {
+                            var msj = document.getElementById("DivRegistrar");
+                            msj.style.visibility = "visible";
+                            var msj2 = document.getElementById("DivActualizaElimina");
+                            msj2.style.visibility = "hidden";
+                        }
+
+                        function ActualizarEliminarParqueo() {
+                            var msj = document.getElementById("DivActualizaElimina");
+                            msj.style.visibility = "visible";
+                            var msj2 = document.getElementById("DivRegistrar");
+                            msj2.style.visibility = "hidden";
+                        }
+                    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Cognate Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
