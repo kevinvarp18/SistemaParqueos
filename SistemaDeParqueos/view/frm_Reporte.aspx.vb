@@ -1,31 +1,14 @@
 ﻿Imports System.Web.Configuration
 Imports Entidad
 Imports Negocios
-
 Imports iTextSharp.text.pdf
 Imports iTextSharp.text
 Imports iTextSharp.text.html.simpleparser
-
 Imports System.IO
-
-
 
 Public Class frm_Reporte
     Inherits System.Web.UI.Page
-    Dim cadenaFinal As String = " <div><h1> Reporte de Parqueo</h1></div>  
-           <TABLE BORDER='1' >
-           <tr>
-               <th><strong>Nombre</strong></th>
-               <th><strong>Instituci&oacute;n</strong></th>
-               <th><strong>Placa</strong></th>
-               <th><strong>Fecha Entrada</strong></th>
-               <th><strong>Hora Entrada</strong></th>
-               <th><strong>Fecha Salida</strong></th>
-               <th><strong>Hora Salida</strong></th>
-               <th><strong>Espacio</strong></th>
-           </tr>
-
-       </TABLE> "
+    Dim cadenaFinal As String = ""
 
 
 
@@ -34,8 +17,21 @@ Public Class frm_Reporte
                 ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
                 Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
                 Dim sn As New SP_Usuario_Negocios(strconnectionString)
+            Me.cadenaFinal = " <div><h1> Reporte de Parqueo</h1></div>  
+                   <TABLE BORDER='1' >
+                   <tr>
+                       <th><strong>Nombre</strong></th>
+                       <th><strong>Instituci&oacute;n</strong></th>
+                       <th><strong>Placa</strong></th>
+                       <th><strong>Fecha Entrada</strong></th>
+                       <th><strong>Hora Entrada</strong></th>
+                       <th><strong>Fecha Salida</strong></th>
+                       <th><strong>Hora Salida</strong></th>
+                       <th><strong>Espacio</strong></th>
+                   </tr>"
 
-                If IsPostBack Then
+
+            If IsPostBack Then
 
                     Dim contentPlaceHolder As ContentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
                     Dim updatePanelPlaca As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel2"), UpdatePanel)
@@ -242,10 +238,9 @@ Public Class frm_Reporte
                 AgregaDatos("</tr>")
             Next
 
+        Me.cadenaFinal += "</TABLE>"
 
-        End Function
-
-
+    End Function
 
 
     Protected Sub btnBuscar_Click2(sender As Object, e As EventArgs) Handles Button1.Click
@@ -283,10 +278,10 @@ Public Class frm_Reporte
 
 
 
-            strContent += cadenaFinal
+        strContent += Me.cadenaFinal
 
-            'lee el string  y cnviente los elementos a la lista
-            parsedHtmlElements = HTMLWorker.ParseToList(New StringReader(strContent), Nothing)
+        'lee el string  y cnviente los elementos a la lista
+        parsedHtmlElements = HTMLWorker.ParseToList(New StringReader(strContent), Nothing)
 
             'toma cada uno de los valores parseados y los agrega al documento pdf
 
