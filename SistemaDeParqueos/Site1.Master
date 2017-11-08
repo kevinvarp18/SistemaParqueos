@@ -74,7 +74,7 @@
                 ElseIf String.Equals(Session("Usuario"), "o") Then
                                     %>
                                     <li><a href="frm_ListaVisitantes.aspx">Lista visitantes</a></li>
-                                    <li><a href="frm_BrindarAcceso.aspx">Brindar parqueo</a></li>
+                                    <li><a href="frm_BrindarParqueo.aspx">Brindar parqueo</a></li>
                                     <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>
                                     <%
                 End If
