@@ -14,8 +14,28 @@ Public Class administrarParqueo
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_AdministrarParqueo", ResolveUrl("~") + "public/js/" + "script.js")
 
             Dim parqueoNegocios As New SP_Parqueo_Negocios(connectionString)
+            Dim idPagina As String
+            Dim intIDparqueo As String
+            Dim strEstadoP As String
+            Dim strtipoParqueo As String
+            idPagina = Request.QueryString("id")
+            Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
+            idPagina = datosSolicitud(0)
             If IsPostBack Then
                 Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
+                If (idPagina.Equals("0")) Then
+                    Page.ClientScript.RegisterStartupScript(
+                    Page.ClientScript.GetType(), "onLoad", "ActualizarEliminarParqueo();", True)
+                    intIDparqueo = datosSolicitud(1)
+                    If (idPagina.Equals("1")) Then
+                        Page.ClientScript.RegisterStartupScript(
+                        Page.ClientScript.GetType(), "onLoad", "RegistrarParqueo();", True)
+                    ElseIf (idPagina.Equals("0")) Then
+                        Page.ClientScript.RegisterStartupScript(
+                        Page.ClientScript.GetType(), "onLoad", "ActualizarEliminarParqueo();", True)
+                    End If
+                    Me.gintParqueoIdentificador = Long.Parse(intIDparqueo)
+                End If
             Else
                 DwnLstTipos.Items.Clear()
                 DwnLstEstado.Items.Clear()
@@ -31,13 +51,7 @@ Public Class administrarParqueo
                 DwnLstEstado.Items.Add("Seleccione una opción")
                 DwnLstEstado.Items.Add("Habilitado")
                 DwnLstEstado.Items.Add("Deshabilitado")
-                Dim idPagina As String
-                Dim intIDparqueo As String
-                Dim strEstadoP As String
-                Dim strtipoParqueo As String
-                idPagina = Request.QueryString("id")
-                Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
-                idPagina = datosSolicitud(0)
+
                 If (idPagina.Equals("1")) Then
                     Page.ClientScript.RegisterStartupScript(
                     Page.ClientScript.GetType(), "onLoad", "RegistrarParqueo();", True)
