@@ -288,7 +288,7 @@ Public Class frm_Reporte
 
         Dim llenar As String = "
         <div><h1> Reporte de Parqueo</h1></div>
-        '           <table BORDER ='1' >
+                   <table BORDER ='1' >
         '           <tr>
         '               <th><strong>Nombre</strong></th>
         '               <th><strong>Instituci&oacute;n</strong></th>
@@ -313,18 +313,11 @@ Public Class frm_Reporte
 
 
 
-            llenar += "<tr>" + "<td>" + solicitudAct.GstrMarcaSG + "</td>" +
-                "<td>" + " " + "</td>" +
-                "<td>" + solicitudAct.GstrPlacaSG + "</td>" +
-                 "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" +
-                 "<td>" + solicitudAct.GstrHoraISG + "</td>" +
-                 "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" +
-                 "<td>" + solicitudAct.GstrHoraFSG + "</td>" +
-                 "<td>" + solicitudAct.GintIdParqueoSG + "</td>" +
-                "</tr>"
+            llenar += "<tr>" + "<td>" + solicitudAct.GstrMarcaSG + "</td>" + "<td>" + " " + "</td>" + "<td>" + solicitudAct.GstrPlacaSG +
+            "</td>" + "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraISG + "</td>" + "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraFSG + "</td>" + "<td>" + solicitudAct.GintIdParqueoSG.ToString()+ "</td>" + "</tr>"
         Next
 
-        llenar += "</table><br>"
+        llenar += "</table>" + "<br>"
         strContent = llenar
 
 
