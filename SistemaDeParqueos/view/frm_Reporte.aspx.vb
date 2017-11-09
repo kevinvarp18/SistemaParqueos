@@ -8,15 +8,14 @@ Imports System.IO
 
 Public Class frm_Reporte
     Inherits System.Web.UI.Page
-    'Dim cadenaFinal As String = "<div></div>"
     Dim lista As ArrayList = New ArrayList
     Dim str As String = ""
 
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-            If String.Equals(Session("Usuario"), "a") Then
-                ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
+        'If String.Equals(Session("Usuario"), "a") Then
+        ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
                 Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
                 Dim sn As New SP_Usuario_Negocios(strconnectionString)
 
@@ -74,84 +73,15 @@ Public Class frm_Reporte
 
 
             End If
-            Else
-                Response.BufferOutput = True
-                Response.Redirect("http://localhost:52086/view/frm_index.aspx")
-            End If
+            'Else
+            '    Response.BufferOutput = True
+            '    Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+            'End If
         End Sub
 
         Protected Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-            Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-            Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
-            Dim titulo As String = "ERROR"
-            Dim mensaje As String = "Ha ocurrido un error"
-            Dim tipo As String = "error"
-            Dim sn As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
-            Dim solicitudes As LinkedList(Of Solicitud)
-            Dim faltanDatos As Boolean = True
+        selecciones("reporte")
 
-            If DwnLstTipoReporte.SelectedItem.ToString().Equals("Seleccione una opción") Then
-                titulo = "Incompleto"
-                mensaje = "Debe seleccionar un tipo de reporte"
-                tipo = "warning"
-                faltanDatos = True
-            ElseIf tbFechaI.Text <> "" AndAlso tbFechaF.Text <> "" AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Fecha") Then
-
-                If (tbFechaI.Text <= tbFechaF.Text) Then
-                    solicitudes = sn.obtenerReporte(tbFechaI.Text, tbFechaF.Text)
-
-                    If solicitudes.Count.Equals(0) Then
-                        titulo = "Vacio"
-                        mensaje = "No se encontraron datos para las fecha seleccionadas"
-                        tipo = "info"
-                        faltanDatos = True
-                    Else
-                        Me.construyeTabla(solicitudes)
-
-
-                        faltanDatos = False
-                    End If
-                Else
-                    titulo = "ERROR"
-                    mensaje = "La fecha de salida debe ser mayor a la fecha de ingreso"
-                    tipo = "error"
-                    faltanDatos = True
-                End If
-            ElseIf (Not DwnLstPlaca.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa") Then
-                solicitudes = sn.obtenerReportePlaca(DwnLstPlaca.SelectedItem.ToString())
-                If solicitudes.Count.Equals(0) Then
-                    titulo = "Vacio"
-                    mensaje = "No se encontraron datos para la placa seleccionada"
-                    tipo = "info"
-                    faltanDatos = True
-                Else
-                Me.construyeTabla(solicitudes)
-                faltanDatos = False
-                End If
-            ElseIf (Not DwnLstCorreo.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo") Then
-                solicitudes = sn.obtenerReporteCorreo(DwnLstCorreo.SelectedItem.ToString())
-                If solicitudes.Count.Equals(0) Then
-                    titulo = "Vacio"
-                    mensaje = "No se encontraron entradas para el correo seleccionado"
-                    tipo = "info"
-                    faltanDatos = True
-                Else
-                    Me.construyeTabla(solicitudes)
-                    faltanDatos = False
-                End If
-            Else
-                titulo = "Incompleto"
-                mensaje = "Debe completar todos los campos"
-                tipo = "warning"
-                faltanDatos = True
-            End If
-
-        If faltanDatos Then
-            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
-        End If
-
-
-        Label1.Text = String.Join("", Me.lista.ToArray()).ToString
 
     End Sub
 
@@ -160,6 +90,8 @@ Public Class frm_Reporte
         Dim rowCnt As Integer
         Dim rowCtr As Integer
         Dim cellCnt As Integer
+
+        Dim llenar As String = ""
 
         rowCnt = 1
         cellCnt = 7
@@ -191,29 +123,8 @@ Public Class frm_Reporte
         tERow.Cells.Add(num_p)
         table.Rows.Add(tERow)
 
-
-        Me.lista.Add("<div><h1>Reporte de Parqueo</h1></div>  
-                   <table BORDER ='1'>")
-
-        Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
-
-
-        Me.lista.Add("<tr>
-                       <th><strong>Nombre</strong></th>
-                       <th><strong>Instituci&oacute;n</strong></th>
-                       <th><strong>Placa</strong></th>
-                       <th><strong>Fecha Entrada</strong></th>
-                       <th><strong>Hora Entrada</strong></th>
-                       <th><strong>Fecha Salida</strong></th>
-                       <th><strong>Hora Salida</strong></th>
-                       <th><strong>Espacio</strong></th>
-                   </tr>")
-        Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
-
         For Each solicitudAct As Solicitud In solicitudes
 
-            Me.lista.Add("<tr>")
-            Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
 
             For rowCtr = 1 To rowCnt
                 Dim tRow As New TableRow()
@@ -236,18 +147,6 @@ Public Class frm_Reporte
                 tCell8.Text = solicitudAct.GintIdParqueoSG
 
 
-                Me.lista.Add("<td>" + solicitudAct.GstrMarcaSG + "</td>" +
-                             "<td></td>" +
-                             "<td>" + solicitudAct.GstrPlacaSG + "</td>" +
-                             "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" +
-                             "<td>" + solicitudAct.GstrHoraISG + "</td>" +
-                             "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" +
-                             "<td>" + solicitudAct.GstrHoraFSG + "</td>" +
-                             "<td>" + solicitudAct.GintIdParqueoSG.ToString + "</td>")
-                Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
-                'Me.lista.Add("<td>""" + solicitudAct.GstrMarcaSG + """</td>")
-
-
                 tRow.Cells.Add(tCell)
                 tRow.Cells.Add(tCell2)
                 tRow.Cells.Add(tCell3)
@@ -258,18 +157,17 @@ Public Class frm_Reporte
                 tRow.Cells.Add(tCell8)
                 Table.Rows.Add(tRow)
             Next
-            Me.lista.Add("</tr>")
-            Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
-        Next
 
-        Me.lista.Add("</table>")
-        Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
+        Next
 
     End Function
 
 
 
     Protected Sub btnBuscar_Click2(sender As Object, e As EventArgs) Handles Button1.Click
+        selecciones("pdf")
+        'empieza  a generar el documento
+
         Try
             ' generar el documento.
             Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
@@ -280,30 +178,102 @@ Public Class frm_Reporte
             doc.Open()
 
 
-            ExportarDatosPDF(doc, Me.str)
+            ExportarDatosPDF(doc, Me.str, selecciones("pdf"))
             doc.Close()
             Process.Start(filename)
         Catch ex As Exception
 
-            'Label1.Text = ex.ToString
-
         End Try
 
-        'Dim aux = ""
-
-        'For Each li As String In Me.lista
-        'aux += """" + li.ToString()
-        'Next
-
-        'Label1.Text = Me.lista.ToString
-
-        'Label1.Text = String.Join("", Me.lista.ToArray())
 
     End Sub
 
+    Public Function selecciones(accion As String) As LinkedList(Of Solicitud)
+        Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+        Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
+        Dim titulo As String = "ERROR"
+        Dim mensaje As String = "Ha ocurrido un error"
+        Dim tipo As String = "error"
+        Dim sn As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
+        Dim solicitudes As LinkedList(Of Solicitud)
+        Dim faltanDatos As Boolean = True
+
+        If DwnLstTipoReporte.SelectedItem.ToString().Equals("Seleccione una opción") Then
+            titulo = "Incompleto"
+            mensaje = "Debe seleccionar un tipo de reporte"
+            tipo = "warning"
+            faltanDatos = True
+        ElseIf tbFechaI.Text <> "" AndAlso tbFechaF.Text <> "" AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Fecha") Then
+
+            If (tbFechaI.Text <= tbFechaF.Text) Then
+                solicitudes = sn.obtenerReporte(tbFechaI.Text, tbFechaF.Text)
+
+                If solicitudes.Count.Equals(0) Then
+                    titulo = "Vacio"
+                    mensaje = "No se encontraron datos para las fecha seleccionadas"
+                    tipo = "info"
+                    faltanDatos = True
+                Else
+                    If accion.Equals("reporte") Then
+                        Me.construyeTabla(solicitudes)
+                    End If
+                    faltanDatos = False
+                End If
+            Else
+                titulo = "ERROR"
+                mensaje = "La fecha de salida debe ser mayor a la fecha de ingreso"
+                tipo = "error"
+                faltanDatos = True
+            End If
+        ElseIf (Not DwnLstPlaca.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa") Then
+            solicitudes = sn.obtenerReportePlaca(DwnLstPlaca.SelectedItem.ToString())
+            If solicitudes.Count.Equals(0) Then
+                titulo = "Vacio"
+                mensaje = "No se encontraron datos para la placa seleccionada"
+                tipo = "info"
+                faltanDatos = True
+            Else
+                If accion.Equals("reporte") Then
+                    Me.construyeTabla(solicitudes)
+                End If
+                faltanDatos = False
+            End If
+        ElseIf (Not DwnLstCorreo.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo") Then
+            solicitudes = sn.obtenerReporteCorreo(DwnLstCorreo.SelectedItem.ToString())
+            If solicitudes.Count.Equals(0) Then
+                titulo = "Vacio"
+                mensaje = "No se encontraron entradas para el correo seleccionado"
+                tipo = "info"
+                faltanDatos = True
+            Else
+                If accion.Equals("reporte") Then
+                    Me.construyeTabla(solicitudes)
+                End If
+                faltanDatos = False
+            End If
+        Else
+            titulo = "Incompleto"
+            mensaje = "Debe completar todos los campos"
+            tipo = "warning"
+            faltanDatos = True
+        End If
+
+        If faltanDatos Then
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
+        End If
 
 
-    Public Function ExportarDatosPDF(ByVal document As Document, ByVal str As String)
+        Label1.Text = String.Join("", Me.lista.ToArray()).ToString
+
+        Return solicitudes
+
+
+    End Function
+
+
+
+
+    Public Function ExportarDatosPDF(ByVal document As Document, ByVal str As String, solicitudes As LinkedList(Of Solicitud))
 
         Dim fuente As iTextSharp.text.pdf.BaseFont
         fuente = FontFactory.GetFont(FontFactory.HELVETICA, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL).BaseFont
@@ -312,33 +282,52 @@ Public Class frm_Reporte
         Dim strContent As String = str
         Dim parsedHtmlElements As List(Of IElement)
 
+        'selecciones contruye la tabla
 
-        'For Each str As String In Me.lista
-        'strContent = strContent + """" + str.ToString()
-        'Next
+        Dim cellCnt As Integer
 
-        'mensaje + """,""" + tipo
-        'strContent = Me.cadenaFinal
+        Dim llenar As String = "
+        <div><h1> Reporte de Parqueo</h1></div>
+        '           <table BORDER ='1' >
+        '           <tr>
+        '               <th><strong>Nombre</strong></th>
+        '               <th><strong>Instituci&oacute;n</strong></th>
+        '               <th><strong>Placa</strong></th>
+        '               <th><strong>Fecha Entrada</strong></th>
+        '               <th><strong>Hora Entrada</strong></th>
+        '               <th><strong>Fecha Salida</strong></th>
+        '               <th><strong>Hora Salida</strong></th>
+        '               <th><strong>Espacio</strong></th>
+        '           </tr>"
+
+        For Each solicitudAct As Solicitud In solicitudes
+
+            'tCell.Text = solicitudAct.GstrMarcaSG
+            'tCell2.Text = " "
+            'tCell3.Text = solicitudAct.GstrPlacaSG
+            'tCell4.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
+            'tCell5.Text = solicitudAct.GstrHoraISG
+            'tCell6.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
+            'tCell7.Text = solicitudAct.GstrHoraFSG
+            'tCell8.Text = solicitudAct.GintIdParqueoSG
 
 
-        strContent = "<div><h1> Reporte de Parqueo</h1></div>  
-                   <table BORDER ='1' >
-                   <tr>
-                       <th><strong>Nombre</strong></th>
-                       <th><strong>Instituci&oacute;n</strong></th>
-                       <th><strong>Placa</strong></th>
-                       <th><strong>Fecha Entrada</strong></th>
-                       <th><strong>Hora Entrada</strong></th>
-                       <th><strong>Fecha Salida</strong></th>
-                       <th><strong>Hora Salida</strong></th>
-                       <th><strong>Espacio</strong></th>
-                   </tr></table>"
+
+            llenar += "<tr>" + "<td>" + solicitudAct.GstrMarcaSG + "</td>" +
+                "<td>" + " " + "</td>" +
+                "<td>" + solicitudAct.GstrPlacaSG + "</td>" +
+                 "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" +
+                 "<td>" + solicitudAct.GstrHoraISG + "</td>" +
+                 "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" +
+                 "<td>" + solicitudAct.GstrHoraFSG + "</td>" +
+                 "<td>" + solicitudAct.GintIdParqueoSG + "</td>" +
+                "</tr>"
+        Next
+
+        llenar += "</table><br>"
+        strContent = llenar
 
 
-
-
-        'Me.lista.Add("<div></div>")
-        'strContent = str
 
         'lee el string  y cnviente los elementos a la lista
         parsedHtmlElements = HTMLWorker.ParseToList(New StringReader(strContent), Nothing)
