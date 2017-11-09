@@ -234,10 +234,10 @@ Public Class SP_Usuario_Datos
                 correo.SubjectEncoding = System.Text.Encoding.UTF8
                 If (accion = 0) Then
                     correo.Subject = "Solicitud rechazada"
-                    correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "." + vbCrLf + "Lamentamos informarle que su solicitud ha sido rechazada por el siguiente motivo:" + vbCrLf + strRetroalimentacion)
+                    correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "." + "Lamentamos informarle que su solicitud ha sido rechazada por el siguiente motivo: " + vbCrLf + strRetroalimentacion)
                 Else
                     correo.Subject = "Solicitud aceptada"
-                    correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "." + vbCrLf + "Nos da gusto informarle que su solicitud ha sido aceptada " + strRetroalimentacion)
+                    correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "." + "Nos da gusto informarle que su solicitud ha sido aceptada para ingresar al parqueo " + strRetroalimentacion)
                 End If
 
                 correo.BodyEncoding = System.Text.Encoding.UTF8

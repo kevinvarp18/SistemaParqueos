@@ -602,6 +602,7 @@ ul.top-icons {
     font-size: 1em;
     overflow: hidden;
     outline: none;
+    padding: 0px 0px;
 }
 
 .multipleTextBox {

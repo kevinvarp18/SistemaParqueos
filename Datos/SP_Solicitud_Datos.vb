@@ -267,4 +267,23 @@ Public Class SP_Solicitud_Datos
         Return solicitudes
     End Function
 
+    Public Sub marcarEntrada_Salida(marca As String, placa As String, modelo As String, espacioParqueo As Integer, horaEntrada As String, horaSalida As String, accion As Integer)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlStoredProcedure As [String] = "PA_MarcarEntrada_Salida"
+        Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
+
+        cmdInsert.Parameters.Add(New SqlParameter("@marca", marca))
+        cmdInsert.Parameters.Add(New SqlParameter("@placa", placa))
+        cmdInsert.Parameters.Add(New SqlParameter("@modelo", modelo))
+        cmdInsert.Parameters.Add(New SqlParameter("@espacioParqueo", espacioParqueo))
+        cmdInsert.Parameters.Add(New SqlParameter("@horaEntrada", horaEntrada))
+        cmdInsert.Parameters.Add(New SqlParameter("@horaSalida", horaSalida))
+        cmdInsert.Parameters.Add(New SqlParameter("@accion", Integer.Parse(accion)))
+
+        cmdInsert.Connection.Open()
+        cmdInsert.ExecuteNonQuery()
+        cmdInsert.Connection.Close()
+    End Sub
+
 End Class

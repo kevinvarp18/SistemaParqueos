@@ -57,6 +57,7 @@ Public Class frm_AdministrarSolicitudes
                 Dim DwnLstParqueos As New DropDownList()
                 DwnLstParqueos.Width = 75%
                 DwnLstParqueos.AutoPostBack = False
+                DwnLstParqueos.Style("padding") = "0px 0px"
                 DwnLstParqueos.ID = "DwnLstParqueo" + contador.ToString()
                 If IsPostBack Then
                 Else
@@ -213,9 +214,9 @@ Public Class frm_AdministrarSolicitudes
 
         If (accion.Equals("1")) Then
             If (fechaI.Equals(fechaF)) Then
-                retroalimentacion = "para el día " + fechaI + "de " + horaI + "a " + horaF + "."
+                retroalimentacion = "el día " + fechaI + " de las " + horaI + " a las " + horaF + " en el espacio " + idParqueo + " del parqueo."
             Else
-                retroalimentacion = "para los días del " + fechaI + " al " + fechaF + "de " + horaI + "a " + horaF + "."
+                retroalimentacion = "para los días del " + fechaI + " al " + fechaF + "de " + horaI + "a " + horaF + " en el espacio " + idParqueo + " del parqueo."
             End If
         Else
             retroalimentacion = tbRetroalimentacion.Text

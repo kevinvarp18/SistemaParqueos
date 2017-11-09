@@ -13,18 +13,20 @@
                     <div class="container">
                         <div class="page w3-4">
                             <div class="bs-example " data-example-id="simple-table">
-                                <asp:Table ID="tabla" style="margin-left: 4%;" runat="server" CssClass="table">
-                                    <asp:TableHeaderRow>
-                                        <asp:TableHeaderCell>Nombre</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Marca</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Placa</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Modelo</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Espacio</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Hora Entrada</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Hora Salida</asp:TableHeaderCell>
-                                        <asp:TableHeaderCell>Accion</asp:TableHeaderCell>
-                                    </asp:TableHeaderRow>
-                                </asp:Table>
+                                <div class="botonTabla">
+                                    <asp:Table ID="tabla" Style="margin-left: 4%;" runat="server" CssClass="table">
+                                        <asp:TableHeaderRow>
+                                            <asp:TableHeaderCell>Nombre</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Marca</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Placa</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Modelo</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Espacio</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Hora Entrada</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Hora Salida</asp:TableHeaderCell>
+                                            <asp:TableHeaderCell>Accion</asp:TableHeaderCell>
+                                        </asp:TableHeaderRow>
+                                    </asp:Table>
+                                </div>
                             </div>
                         </div>
                     </div>
