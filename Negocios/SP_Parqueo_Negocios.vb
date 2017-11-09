@@ -44,7 +44,7 @@ Public Class SP_Parqueo_Negocios
         If strHorai.Length < 6 Then
             strHorai = strHorai + ":00"
         End If
-        If strHoraf.Length < 5 Then
+        If strHoraf.Length < 6 Then
             strHoraf = strHoraf + ":00"
         End If
         Return Me.parqueo_Acceso_a_Datos.obtenerParqueoOcupado(strfecha, strHorai, strHoraf)
