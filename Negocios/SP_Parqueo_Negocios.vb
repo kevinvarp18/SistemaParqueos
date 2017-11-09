@@ -41,7 +41,7 @@ Public Class SP_Parqueo_Negocios
     End Function
 
     Public Function obtenerParqueoOcupado(strfecha As String, strHorai As String, strHoraf As String) As LinkedList(Of Parqueo)
-        If strHorai.Length < 5 Then
+        If strHorai.Length < 6 Then
             strHorai = strHorai + ":00"
         End If
         If strHoraf.Length < 5 Then
