@@ -118,7 +118,7 @@ Public Class SP_Parqueo_Datos
     End Function
 
     Public Function obtenerParqueoOcupado(strFecha As String, strHorai As String, strHoraf As String) As LinkedList(Of Parqueo)
-
+        
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As [String] = "PA_VerParqueosOcupados"
 
