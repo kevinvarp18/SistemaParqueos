@@ -10,7 +10,7 @@ Public Class SP_Solicitud_Datos
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  04-Noviembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  08-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public gstrconnString As String
@@ -88,14 +88,13 @@ Public Class SP_Solicitud_Datos
         Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Solicitud").Rows
         Dim solicitud As New LinkedList(Of Solicitud)()
 
-        'nombre,placa,fecha_e,hora_e,fecha_s,hora_s
-
         For Each currentRow As DataRow In dataRowCollection
             Dim solicitudActual As New Solicitud()
             solicitudActual.GstrHoraISG = currentRow("hora_e").ToString()
             solicitudActual.GstrHoraFSG = currentRow("hora_s").ToString()
             solicitudActual.GstrPlacaSG = currentRow("placa").ToString()
-            solicitudActual.GstrMarcaSG = currentRow("nombre").ToString() 'voy a usar este para el nombre
+            solicitudActual.GstrMarcaSG = currentRow("nombre").ToString()
+            solicitudActual.GstrModeloSG = currentRow("correo").ToString()
             solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
             solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
             solicitud.AddLast(solicitudActual)

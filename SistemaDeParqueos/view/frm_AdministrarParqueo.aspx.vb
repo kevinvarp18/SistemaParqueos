@@ -9,17 +9,6 @@ Public Class administrarParqueo
     Public gstrParqueoSelecion As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Dim idPagina As String
-        idPagina = Request.QueryString("id")
-        Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
-        idPagina = datosSolicitud(0)
-        If (idPagina.Equals("1")) Then
-            Page.ClientScript.RegisterStartupScript(
-            Page.ClientScript.GetType(), "onLoad", "RegistrarParqueo();", True)
-        ElseIf (idPagina.Equals("0")) Then
-            Page.ClientScript.RegisterStartupScript(
-            Page.ClientScript.GetType(), "onLoad", "ActualizarEliminarParqueo();", True)
-        End If
         If String.Equals(Session("Usuario"), "a") Then
             Dim connectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_AdministrarParqueo", ResolveUrl("~") + "public/js/" + "script.js")
@@ -42,6 +31,34 @@ Public Class administrarParqueo
                 DwnLstEstado.Items.Add("Seleccione una opción")
                 DwnLstEstado.Items.Add("Habilitado")
                 DwnLstEstado.Items.Add("Deshabilitado")
+                Dim idPagina As String
+                Dim intIDparqueo As String
+                Dim strEstadoP As String
+                Dim strtipoParqueo As String
+                idPagina = Request.QueryString("id")
+                Dim datosSolicitud As String() = idPagina.Split(New String() {";"}, StringSplitOptions.None)
+                idPagina = datosSolicitud(0)
+                If (idPagina.Equals("1")) Then
+                    Page.ClientScript.RegisterStartupScript(
+                    Page.ClientScript.GetType(), "onLoad", "RegistrarParqueo();", True)
+                ElseIf (idPagina.Equals("0")) Then
+                    Page.ClientScript.RegisterStartupScript(
+                    Page.ClientScript.GetType(), "onLoad", "ActualizarEliminarParqueo();", True)
+                    intIDparqueo = datosSolicitud(1)
+                    Me.gintParqueoIdentificador = Long.Parse(intIDparqueo)
+                    strEstadoP = datosSolicitud(2)
+                    If strEstadoP.Equals("True") Then
+                        strEstadoP = "Habilitado"
+                        DwnLstEstado.Items.Remove("Habilitado")
+                    Else
+                        strEstadoP = "Deshabilitado"
+                        DwnLstEstado.Items.Remove("Deshabilitado")
+                    End If
+                    strtipoParqueo = datosSolicitud(3)
+                    DwnLstEstado.SelectedItem.Text = strEstadoP
+                    DwnLstTipos.Items.Remove(strtipoParqueo)
+                    DwnLstTipos.SelectedItem.Text = strtipoParqueo
+                End If
             End If
         Else
             Response.BufferOutput = True
@@ -94,7 +111,7 @@ Public Class administrarParqueo
             If (DwnLstEstado.Text.Equals("Habilitado")) Then
                 Blnestado = 1
             End If
-            parqueoNegocios.actualizarParqueo(New Parqueo(Me.gintParqueoIdentificador, Blnestado, DwnLstTipos.Text))
+            parqueoNegocios.actualizarParqueo(New Parqueo(Me.gintParqueoIdentificador, Blnestado, DwnLstTipos.SelectedItem.Text))
 
             titulo = "Correcto"
             mensaje = "Se ha actualizado el parqueo exitosamente"

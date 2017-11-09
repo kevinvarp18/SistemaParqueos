@@ -11,7 +11,7 @@ Public Class SP_Solicitud_Parqueo_Negocios
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  04-Noviembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  08-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public solicitud_Acceso_a_Datos As SP_Solicitud_Datos

@@ -7,12 +7,15 @@ Public Class frm_AdministrarSolicitudes
     Dim strConnectionString As String
     Dim parqueoNegocios As SP_Parqueo_Negocios
     Dim solicitudNegocios As SP_Solicitud_Parqueo_Negocios
+    Dim usuarioNegocios As SP_Usuario_Negocios
+    Dim marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, correo, accion As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If String.Equals(Session("Usuario"), "a") Then
             Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
             Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
+            Me.usuarioNegocios = New SP_Usuario_Negocios(Me.strConnectionString)
             llenarTablaSolicitudes()
         Else
             Response.BufferOutput = True
@@ -73,14 +76,16 @@ Public Class frm_AdministrarSolicitudes
                 columnaHypLnk.Controls.Add(literalControl)
 
                 Dim btnRechazar As Button = New Button
-                btnRechazar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + columnaFechaI.Text + ";" + columnaFechaS.Text + ";0"
+                btnRechazar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + columnaFechaI.Text + ";" + columnaFechaS.Text + ";" + solicitudAct.GstrModeloSG + ";0"
                 btnRechazar.Text = "(Rechazar)"
                 btnRechazar.Width = 90%
                 btnRechazar.Style("color") = "#ff0000"
+                btnRechazar.Attributes("data-toggle") = "modal"
+                btnRechazar.Attributes("data-target") = "#myModal2"
                 AddHandler btnRechazar.Click, AddressOf Me.button_Click
 
                 Dim btnAceptar As Button = New Button
-                btnAceptar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + columnaFechaI.Text + ";" + columnaFechaS.Text + ";1"
+                btnAceptar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + columnaFechaI.Text + ";" + columnaFechaS.Text + ";" + solicitudAct.GstrModeloSG + ";1"
                 btnAceptar.Text = "(Aceptar)"
                 btnAceptar.Width = 90%
                 btnAceptar.Style("color") = "#00fe00"
@@ -156,10 +161,10 @@ Public Class frm_AdministrarSolicitudes
             Next 'For Each parqueosAct As Parqueo In parqueosTotales
         End If
     End Sub
-
     Protected Sub button_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim botonSeleccionado As Button = CType(sender, Button)
         Dim datosSolictud As String() = botonSeleccionado.CssClass.Split(New String() {";"}, StringSplitOptions.None)
+
         Dim contentPlaceHolder As ContentPlaceHolder
         Dim updatePanel As UpdatePanel
         Dim tabla As Table
@@ -175,8 +180,50 @@ Public Class frm_AdministrarSolicitudes
         columnaEspacioD = DirectCast(fila.FindControl("columnaParqueo" + datosSolictud(0)), TableCell)
         dwnLstParqueo = DirectCast(columnaEspacioD.FindControl("DwnLstParqueo" + datosSolictud(0)), DropDownList)
         idParqueo = dwnLstParqueo.SelectedItem.Value
-        tablaSolicitudes.Rows.Remove(fila)
-        Me.solicitudNegocios.decidirSolicitud(datosSolictud(1), datosSolictud(2), datosSolictud(3), datosSolictud(4), datosSolictud(5), datosSolictud(6), idParqueo, datosSolictud(7))
+
+        marca = datosSolictud(1)
+        placa = datosSolictud(2)
+        horaI = datosSolictud(3)
+        horaF = datosSolictud(4)
+        fechaI = datosSolictud(5)
+        fechaF = datosSolictud(6)
+        Me.idParqueo = idParqueo
+        correo = datosSolictud(7)
+        accion = datosSolictud(8)
+
+        If (accion.Equals("0")) Then
+        Else
+            decidirSolicitud()
+            tablaSolicitudes.Rows.Remove(fila)
+        End If
+    End Sub
+
+    Public Sub decidirSolicitud()
+        Dim titulo, mensaje, tipo, retroalimentacion As String
+
+        If (accion.Equals("0")) Then
+            titulo = "Correcto"
+            mensaje = "La solicitud se ha rechazado exitosamente"
+            tipo = "error"
+        Else
+            titulo = "Correcto"
+            mensaje = "La solicitud se ha aceptado exitosamente"
+            tipo = "success"
+        End If
+
+        If (accion.Equals("1")) Then
+            If (fechaI.Equals(fechaF)) Then
+                retroalimentacion = "para el día " + fechaI + "de " + horaI + "a " + horaF + "."
+            Else
+                retroalimentacion = "para los días del " + fechaI + " al " + fechaF + "de " + horaI + "a " + horaF + "."
+            End If
+        Else
+            retroalimentacion = tbRetroalimentacion.Text
+        End If
+
+        Me.usuarioNegocios.envioCorreoSolicitud(Me.correo, retroalimentacion, accion)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
+        Me.solicitudNegocios.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
     End Sub
 
 End Class
