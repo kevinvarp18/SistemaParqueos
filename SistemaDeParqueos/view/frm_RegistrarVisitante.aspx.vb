@@ -74,6 +74,15 @@ Public Class registrarVisitante
             titulo = "Correcto"
             mensaje = "Se ha registrado el visitante exitosamente"
             tipo = "success"
+
+            tbNombre.Text = ""
+            tbApellidos.Text = ""
+            tbIdentificacion.Text = ""
+            tbTelefono.Text = ""
+            tbEmail.Text = ""
+            tbContrasena.Text = ""
+            tbUbicacion.Text = ""
+            tbProcedencia.Text = ""
         End If
 
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)

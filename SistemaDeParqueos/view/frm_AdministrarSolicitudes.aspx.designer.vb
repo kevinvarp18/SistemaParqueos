@@ -120,4 +120,31 @@ Partial Public Class frm_AdministrarSolicitudes
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents tablaParqueos As Global.System.Web.UI.WebControls.Table
+    
+    '''<summary>
+    '''UpdatePanel3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''tbRetroalimentacion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tbRetroalimentacion As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnEnviar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnEnviar As Global.System.Web.UI.WebControls.Button
 End Class

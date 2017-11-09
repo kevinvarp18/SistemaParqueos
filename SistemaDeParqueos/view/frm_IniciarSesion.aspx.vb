@@ -68,7 +68,7 @@ Public Class loginView
             Dim strCorreo = tbUsuario.Text
             Dim connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Dim usuario_Negocios = New SP_Usuario_Negocios(Me.connectionString)
-            Dim blnRespuesta = usuarioNegocios.EnvioMail(strCorreo)
+            Dim blnRespuesta = usuarioNegocios.recuperacionContrasenaMail(strCorreo)
             If (blnRespuesta) Then
                 titulo = "Correcto"
                 mensaje = "Se ha recuperado su contraseña y enviado a su dirección de correo electrónico"

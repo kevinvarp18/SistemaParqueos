@@ -29,6 +29,15 @@
                             </div>
                         </div>
                     </div>
+                    <script>
+                        function muestraMensaje(titulo, mensaje, tipo) {
+                            swal(
+                              titulo,
+                              mensaje,
+                              tipo
+                            )
+                        }
+                    </script>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
@@ -76,6 +85,52 @@
                                             </asp:Table>
                                         </div>
                                     </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <footer>
+                    <p class="copy-right wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">Organismo de Investigaci&oacute;n Judicial - Poder Judicial - San Jos&eacute; - Costa Rica- Copyright ©</p>
+                    <br />
+                    <br />
+                </footer>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-info">
+                <div class="top-bar w3agile-1" id="home">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <nav class="navbar navbar-default">
+                                <div class="navbar-header wow fadeInLeft animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInLeft;">
+                                    <a href="frm_index.aspx" style="margin-left: 30%;">
+                                        <img src="../public/images/placa.png" alt=" " /></a>
+                                </div>
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
+                                    <br />
+                                    <br />
+                                    <h1 style="margin-left: 35%;">Retroalimentación</h1>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </nav>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="newsletter wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                        <div class="container">
+                            <asp:UpdatePanel ID="UpdatePanel3" runat="server" Visible="true">
+                                <ContentTemplate>
+                                    <asp:TextBox ID="tbRetroalimentacion" type="text" required="" runat="server" TextMode="MultiLine" Style="margin-left: 23%; resize: none; height: 200px; width: 50%;"></asp:TextBox><br />
+                                    <asp:Button ID="btnEnviar" runat="server" Style="margin-left: 40%; margin-top: 4%; width: 15%;" Text="Enviar" OnClick="decidirSolicitud" />
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>

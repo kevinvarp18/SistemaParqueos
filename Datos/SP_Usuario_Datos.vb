@@ -14,7 +14,7 @@ Public Class SP_Usuario_Datos
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  04-Noviembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  08-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public gstrconnString As String
@@ -145,8 +145,7 @@ Public Class SP_Usuario_Datos
         Return usuarios
     End Function
 
-    Public Function EnvioMail(strCorreo As String) As Boolean
-
+    Public Function recuperacionContrasenaMail(strCorreo As String) As Boolean
         Dim correo As New MailMessage
         Dim smtp As New SmtpClient()
 
@@ -181,7 +180,6 @@ Public Class SP_Usuario_Datos
 
         Return blnExite
     End Function
-
     Public Function obtenerCorreoUsuariosVisitantes() As LinkedList(Of Usuario)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As [String] = "PA_Vercorreos;"
@@ -203,7 +201,6 @@ Public Class SP_Usuario_Datos
         Next
         Return usuarios
     End Function
-
     Public Function obtenerPlacas() As LinkedList(Of String)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As [String] = "PA_VerPlacas;"
@@ -223,5 +220,41 @@ Public Class SP_Usuario_Datos
         Next
         Return placas
     End Function
+    Public Sub envioRespuestaSolicitud(strCorreo As String, strRetroalimentacion As String, accion As Integer)
+        Dim correo As New MailMessage
+        Dim smtp As New SmtpClient()
+
+        Dim usuarios As New LinkedList(Of Usuario)
+        usuarios = obtenerCorreosUsuarios(strCorreo)
+
+        If (usuarios.Count > 0) Then
+            For Each usuarioActual As Usuario In usuarios
+                correo.From = New MailAddress("sistemaparqueosoij@gmail.com", "Sistema Parqueos OIJ", System.Text.Encoding.UTF8)
+                correo.[To].Add(usuarioActual.gstrCorreo)
+                correo.SubjectEncoding = System.Text.Encoding.UTF8
+                If (accion = 0) Then
+                    correo.Subject = "Solicitud rechazada"
+                    correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "." + vbCrLf + "Lamentamos informarle que su solicitud ha sido rechazada por el siguiente motivo:" + vbCrLf + strRetroalimentacion)
+                Else
+                    correo.Subject = "Solicitud aceptada"
+                    correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "." + vbCrLf + "Nos da gusto informarle que su solicitud ha sido aceptada " + strRetroalimentacion)
+                End If
+
+                correo.BodyEncoding = System.Text.Encoding.UTF8
+                correo.IsBodyHtml = (True)
+                correo.Priority = MailPriority.High
+                smtp.Credentials = New System.Net.NetworkCredential("sistemaparqueosoij@gmail.com", "OIJ.SistemaParqueos")
+                smtp.Port = 587
+                smtp.Host = "smtp.gmail.com"
+                smtp.EnableSsl = True
+
+                Try
+                    smtp.Send(correo)
+                Catch
+                End Try
+            Next
+        End If
+
+    End Sub
 
 End Class

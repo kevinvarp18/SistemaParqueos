@@ -24,7 +24,7 @@
                     <asp:Label ID="lblUbicacion" runat="server" Text="Ubicación:"></asp:Label>
                     <asp:TextBox ID="tbUbicacion" type="text" runat="server" style="margin-left: 6.4%; width:27%;"></asp:TextBox><br />
                     <asp:Label ID="lblProcedenciaDwnLst" runat="server" Text="Procedencia:"></asp:Label>
-                    <asp:DropDownList ID="DwnLstProcedencia" runat="server" style="margin-left:3.5%; width:27%;" AutoPostBack="false" ></asp:DropDownList><br />
+                    <asp:DropDownList ID="DwnLstProcedencia" runat="server" style="margin-left:4.8%; width:27%;" AutoPostBack="false" ></asp:DropDownList><br />
                     <asp:Label ID="lblProcedenciatb" runat="server" Text="Nombre Dept:"></asp:Label>
                     <asp:TextBox ID="tbProcedencia" type="text" runat="server" style="margin-left:4%; width:27%;"></asp:TextBox><br />
                     <asp:Button ID="btnRegistrar" runat="server" CssClass="singleTextBox" OnClick="btnRegistrar_Click" Text="Registrarse" /><br /><br />

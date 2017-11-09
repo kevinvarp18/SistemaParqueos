@@ -33,20 +33,22 @@ Public Class frm_SolicitarParqueo
             If tbFechaE.Text <> "" AndAlso tbHoraE.Text <> "" AndAlso tbHoraS.Text <> "" AndAlso tbFechaS.Text <> "" AndAlso tbPlaca.Text <> "" AndAlso tbPlaca.Text <> "" AndAlso tbMarca.Text <> "" AndAlso tbModelo.Text <> "" Then
                 solicitudNegocios.insertarSolicitud(Session("Correo"), New Solicitud(0, 0, 0, tbHoraE.Text, tbHoraS.Text, tbPlaca.Text, tbModelo.Text, tbMarca.Text, fechai.ToString("dd/MM/yyyy"), fechaf.ToString("dd/MM/yyyy")))
                 titulo = "Correcto"
-                mensaje = "Se ha registrado el usuario exitosamente"
+                mensaje = "La solicitud se ha enviado exitosamente"
                 tipo = "success"
             Else
                 titulo = "ERROR"
                 mensaje = "Debe completar todos los campos"
                 tipo = "error"
             End If
+
+            tbFechaE.Text = ""
+            tbFechaS.Text = ""
             tbHoraE.Text = ""
             tbHoraS.Text = ""
             tbPlaca.Text = ""
             tbModelo.Text = ""
-            tbFechaE.Text = ""
-            tbFechaS.Text = ""
-            tbMarca.Text = "Registro"
+            tbMarca.Text = ""
+            tbModelo.Text = ""
         End If
 
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
