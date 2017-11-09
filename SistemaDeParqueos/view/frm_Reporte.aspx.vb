@@ -9,7 +9,9 @@ Imports System.IO
 Public Class frm_Reporte
     Inherits System.Web.UI.Page
     'Dim cadenaFinal As String = "<div></div>"
-    'Dim lista As ArrayList = New ArrayList
+    Dim lista As ArrayList = New ArrayList
+    Dim str As String = ""
+
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -18,20 +20,11 @@ Public Class frm_Reporte
                 Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
                 Dim sn As New SP_Usuario_Negocios(strconnectionString)
 
-            'Me.cadenaFinal = Me.cadenaFinal + """<div><h1> Reporte de Parqueo</h1></div>  
-            '       <table BORDER='1' >
-            '       <tr>
-            '           <th><strong>Nombre</strong></th>
-            '           <th><strong>Instituci&oacute;n</strong></th>
-            '           <th><strong>Placa</strong></th>
-            '           <th><strong>Fecha Entrada</strong></th>
-            '           <th><strong>Hora Entrada</strong></th>
-            '           <th><strong>Fecha Salida</strong></th>
-            '           <th><strong>Hora Salida</strong></th>
-            '           <th><strong>Espacio</strong></th>
-            '       </tr>"
 
             If IsPostBack Then
+
+                Me.lista = Me.lista
+                Me.str = Me.str
 
                 Dim contentPlaceHolder As ContentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
                 Dim updatePanelPlaca As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel2"), UpdatePanel)
@@ -59,6 +52,8 @@ Public Class frm_Reporte
                 End If
             Else
 
+                Me.lista = New ArrayList
+                Me.str = ""
 
                 DwnLstTipoReporte.Items.Add("Seleccione una opción")
                     DwnLstTipoReporte.Items.Add("Placa")
@@ -130,8 +125,7 @@ Public Class frm_Reporte
                     tipo = "info"
                     faltanDatos = True
                 Else
-                    Me.construyeTabla(solicitudes)
-                'Label1.Text = solicitudes.ToString()
+                Me.construyeTabla(solicitudes)
                 faltanDatos = False
                 End If
             ElseIf (Not DwnLstCorreo.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo") Then
@@ -152,123 +146,170 @@ Public Class frm_Reporte
                 faltanDatos = True
             End If
 
-            If faltanDatos Then
-                ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
-            End If
-        End Sub
+        If faltanDatos Then
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
+        End If
 
 
-        Public Function construyeTabla(solicitudes As LinkedList(Of Solicitud))
-            Dim rowCnt As Integer
-            Dim rowCtr As Integer
-            Dim cellCnt As Integer
-
-            rowCnt = 1
-            cellCnt = 7
-            Dim tERow As New TableRow()
-            Dim nom As New TableHeaderCell()
-            Dim inst As New TableHeaderCell()
-            Dim pla As New TableHeaderCell()
-            Dim fecha_e As New TableHeaderCell()
-            Dim hora_e As New TableHeaderCell()
-            Dim fecha_s As New TableHeaderCell()
-            Dim hora_s As New TableHeaderCell()
-            Dim num_p As New TableHeaderCell()
-            nom.Text = "Nombre"
-            inst.Text = "Institución"
-            pla.Text = "Placa"
-            fecha_e.Text = "Fecha Entrada"
-            hora_e.Text = "Hora Entrada"
-            fecha_s.Text = "Fecha Salida"
-            hora_s.Text = "Hora Salida"
-            num_p.Text = "Espacio"
-
-            tERow.Cells.Add(nom)
-            tERow.Cells.Add(inst)
-            tERow.Cells.Add(pla)
-            tERow.Cells.Add(fecha_e)
-            tERow.Cells.Add(hora_e)
-            tERow.Cells.Add(fecha_s)
-            tERow.Cells.Add(hora_s)
-            tERow.Cells.Add(num_p)
-            Table.Rows.Add(tERow)
-            For Each solicitudAct As Solicitud In solicitudes
-            'AgregaDatos("<tr>")
-
-            For rowCtr = 1 To rowCnt
-                    Dim tRow As New TableRow()
-                    Dim tCell As New TableCell()
-                    Dim tCell2 As New TableCell()
-                    Dim tCell3 As New TableCell()
-                    Dim tCell4 As New TableCell()
-                    Dim tCell5 As New TableCell()
-                    Dim tCell6 As New TableCell()
-                    Dim tCell7 As New TableCell()
-                    Dim tCell8 As New TableCell()
-
-                    tCell.Text = solicitudAct.GstrMarcaSG
-                    tCell2.Text = " "
-                    tCell3.Text = solicitudAct.GstrPlacaSG
-                tCell4.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
-                'AgregaDatos("<td>asd</td>")
-                'AgregaDatos("<td>""" + solicitudAct.GstrPlacaSG + """</td>")
-                tCell5.Text = solicitudAct.GstrHoraISG
-                    tCell6.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
-                    tCell7.Text = solicitudAct.GstrHoraFSG
-                    tCell8.Text = solicitudAct.GintIdParqueoSG
-
-                    tRow.Cells.Add(tCell)
-                    tRow.Cells.Add(tCell2)
-                    tRow.Cells.Add(tCell3)
-                    tRow.Cells.Add(tCell4)
-                    tRow.Cells.Add(tCell5)
-                    tRow.Cells.Add(tCell6)
-                    tRow.Cells.Add(tCell7)
-                    tRow.Cells.Add(tCell8)
-                    Table.Rows.Add(tRow)
-                Next
-            'AgregaDatos("</tr>")
-        Next
-
-        'AgregaDatos("</table>")
-
-    End Function
-
-
-    Protected Sub btnBuscar_Click2(sender As Object, e As EventArgs) Handles Button1.Click
-        'Try
-        '    ' generar el documento.
-        '    Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
-        '    'path para guardar en escritorio
-        '    Dim filename As String = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\Reporte de parqueo.pdf"
-        '    Dim file As New FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)
-        '    PdfWriter.GetInstance(doc, file)
-        '    doc.Open()
-        '    ExportarDatosPDF(doc)
-        '    doc.Close()
-        '    Process.Start(filename)
-        'Catch ex As Exception
-
-
-        'End Try
-
-        'Label1.Text = lista.ToString()
+        Label1.Text = String.Join("", Me.lista.ToArray()).ToString
 
     End Sub
 
-    Public Function AgregaDatos(cadena As String)
-        'Me.cadenaFinal = Me.cadenaFinal + """""" + cadena
+
+    Public Function construyeTabla(solicitudes As LinkedList(Of Solicitud))
+        Dim rowCnt As Integer
+        Dim rowCtr As Integer
+        Dim cellCnt As Integer
+
+        rowCnt = 1
+        cellCnt = 7
+        Dim tERow As New TableRow()
+        Dim nom As New TableHeaderCell()
+        Dim inst As New TableHeaderCell()
+        Dim pla As New TableHeaderCell()
+        Dim fecha_e As New TableHeaderCell()
+        Dim hora_e As New TableHeaderCell()
+        Dim fecha_s As New TableHeaderCell()
+        Dim hora_s As New TableHeaderCell()
+        Dim num_p As New TableHeaderCell()
+        nom.Text = "Nombre"
+        inst.Text = "Institución"
+        pla.Text = "Placa"
+        fecha_e.Text = "Fecha Entrada"
+        hora_e.Text = "Hora Entrada"
+        fecha_s.Text = "Fecha Salida"
+        hora_s.Text = "Hora Salida"
+        num_p.Text = "Espacio"
+
+        tERow.Cells.Add(nom)
+        tERow.Cells.Add(inst)
+        tERow.Cells.Add(pla)
+        tERow.Cells.Add(fecha_e)
+        tERow.Cells.Add(hora_e)
+        tERow.Cells.Add(fecha_s)
+        tERow.Cells.Add(hora_s)
+        tERow.Cells.Add(num_p)
+        table.Rows.Add(tERow)
+
+
+        Me.lista.Add("<div><h1>Reporte de Parqueo</h1></div>  
+                   <table BORDER ='1'>")
+
+        Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
+
+
+        Me.lista.Add("<tr>
+                       <th><strong>Nombre</strong></th>
+                       <th><strong>Instituci&oacute;n</strong></th>
+                       <th><strong>Placa</strong></th>
+                       <th><strong>Fecha Entrada</strong></th>
+                       <th><strong>Hora Entrada</strong></th>
+                       <th><strong>Fecha Salida</strong></th>
+                       <th><strong>Hora Salida</strong></th>
+                       <th><strong>Espacio</strong></th>
+                   </tr>")
+        Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
+
+        For Each solicitudAct As Solicitud In solicitudes
+
+            Me.lista.Add("<tr>")
+            Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
+
+            For rowCtr = 1 To rowCnt
+                Dim tRow As New TableRow()
+                Dim tCell As New TableCell()
+                Dim tCell2 As New TableCell()
+                Dim tCell3 As New TableCell()
+                Dim tCell4 As New TableCell()
+                Dim tCell5 As New TableCell()
+                Dim tCell6 As New TableCell()
+                Dim tCell7 As New TableCell()
+                Dim tCell8 As New TableCell()
+
+                tCell.Text = solicitudAct.GstrMarcaSG
+                tCell2.Text = " "
+                tCell3.Text = solicitudAct.GstrPlacaSG
+                tCell4.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
+                tCell5.Text = solicitudAct.GstrHoraISG
+                tCell6.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
+                tCell7.Text = solicitudAct.GstrHoraFSG
+                tCell8.Text = solicitudAct.GintIdParqueoSG
+
+
+                Me.lista.Add("<td>" + solicitudAct.GstrMarcaSG + "</td>" +
+                             "<td></td>" +
+                             "<td>" + solicitudAct.GstrPlacaSG + "</td>" +
+                             "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" +
+                             "<td>" + solicitudAct.GstrHoraISG + "</td>" +
+                             "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" +
+                             "<td>" + solicitudAct.GstrHoraFSG + "</td>" +
+                             "<td>" + solicitudAct.GintIdParqueoSG.ToString + "</td>")
+                Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
+                'Me.lista.Add("<td>""" + solicitudAct.GstrMarcaSG + """</td>")
+
+
+                tRow.Cells.Add(tCell)
+                tRow.Cells.Add(tCell2)
+                tRow.Cells.Add(tCell3)
+                tRow.Cells.Add(tCell4)
+                tRow.Cells.Add(tCell5)
+                tRow.Cells.Add(tCell6)
+                tRow.Cells.Add(tCell7)
+                tRow.Cells.Add(tCell8)
+                Table.Rows.Add(tRow)
+            Next
+            Me.lista.Add("</tr>")
+            Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
+        Next
+
+        Me.lista.Add("</table>")
+        Me.str += String.Join(" ", Me.lista.ToArray()).ToString()
+
     End Function
 
 
 
-    Public Function ExportarDatosPDF(ByVal document As Document)
+    Protected Sub btnBuscar_Click2(sender As Object, e As EventArgs) Handles Button1.Click
+        Try
+            ' generar el documento.
+            Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
+            'path para guardar en escritorio
+            Dim filename As String = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\Reporte de parqueo.pdf"
+            Dim file As New FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)
+            PdfWriter.GetInstance(doc, file)
+            doc.Open()
+
+
+            ExportarDatosPDF(doc, Me.str)
+            doc.Close()
+            Process.Start(filename)
+        Catch ex As Exception
+
+            'Label1.Text = ex.ToString
+
+        End Try
+
+        'Dim aux = ""
+
+        'For Each li As String In Me.lista
+        'aux += """" + li.ToString()
+        'Next
+
+        'Label1.Text = Me.lista.ToString
+
+        'Label1.Text = String.Join("", Me.lista.ToArray())
+
+    End Sub
+
+
+
+    Public Function ExportarDatosPDF(ByVal document As Document, ByVal str As String)
 
         Dim fuente As iTextSharp.text.pdf.BaseFont
         fuente = FontFactory.GetFont(FontFactory.HELVETICA, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL).BaseFont
 
         'Se agrega el PDFTable al documento.
-        Dim strContent As String = "<div></div>"
+        Dim strContent As String = str
         Dim parsedHtmlElements As List(Of IElement)
 
 
@@ -277,9 +318,27 @@ Public Class frm_Reporte
         'Next
 
         'mensaje + """,""" + tipo
-        'strContent = strContent + """""" + Me.cadenaFinal
+        'strContent = Me.cadenaFinal
 
-        strContent += "<div></div>"
+
+        strContent = "<div><h1> Reporte de Parqueo</h1></div>  
+                   <table BORDER ='1' >
+                   <tr>
+                       <th><strong>Nombre</strong></th>
+                       <th><strong>Instituci&oacute;n</strong></th>
+                       <th><strong>Placa</strong></th>
+                       <th><strong>Fecha Entrada</strong></th>
+                       <th><strong>Hora Entrada</strong></th>
+                       <th><strong>Fecha Salida</strong></th>
+                       <th><strong>Hora Salida</strong></th>
+                       <th><strong>Espacio</strong></th>
+                   </tr></table>"
+
+
+
+
+        'Me.lista.Add("<div></div>")
+        'strContent = str
 
         'lee el string  y cnviente los elementos a la lista
         parsedHtmlElements = HTMLWorker.ParseToList(New StringReader(strContent), Nothing)
