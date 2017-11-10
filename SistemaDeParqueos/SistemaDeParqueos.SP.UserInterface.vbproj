@@ -134,7 +134,7 @@
   <ItemGroup>
     <Content Include="public\js\script.js" />
     <Content Include="view\frm_AdministrarSolicitudes.aspx" />
-    <Content Include="view\frm_BrindarAcceso.aspx" />
+    <Content Include="view\frm_BrindarParqueo.aspx" />
     <Content Include="view\frm_ListaVisitantes.aspx" />
     <Content Include="view\frm_RegistrarUsuario.aspx" />
     <Content Include="view\frm_Reporte.aspx" />
@@ -154,11 +154,11 @@
       <DependentUpon>frm_AdministrarSolicitudes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="view\frm_BrindarAcceso.aspx.designer.vb">
-      <DependentUpon>frm_BrindarAcceso.aspx</DependentUpon>
+    <Compile Include="view\frm_BrindarParqueo.aspx.designer.vb">
+      <DependentUpon>frm_BrindarParqueo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="view\frm_BrindarAcceso.aspx.vb">
-      <DependentUpon>frm_BrindarAcceso.aspx</DependentUpon>
+    <Compile Include="view\frm_BrindarParqueo.aspx.vb">
+      <DependentUpon>frm_BrindarParqueo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="view\frm_ListaVisitantes.aspx.designer.vb">

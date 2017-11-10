@@ -81,8 +81,8 @@ Public Class frm_AdministrarSolicitudes
                 btnRechazar.Text = "(Rechazar)"
                 btnRechazar.Width = 90%
                 btnRechazar.Style("color") = "#ff0000"
-                btnRechazar.Attributes("data-toggle") = "modal"
-                btnRechazar.Attributes("data-target") = "#myModal2"
+                'btnRechazar.Attributes("data-toggle") = "modal"
+                'btnRechazar.Attributes("data-target") = "#myModal2"
                 AddHandler btnRechazar.Click, AddressOf Me.button_Click
 
                 Dim btnAceptar As Button = New Button
@@ -193,12 +193,12 @@ Public Class frm_AdministrarSolicitudes
         accion = datosSolictud(8)
 
         If (accion.Equals("0")) Then
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "abrirModal();", True)
         Else
             decidirSolicitud()
             tablaSolicitudes.Rows.Remove(fila)
         End If
     End Sub
-
     Public Sub decidirSolicitud()
         Dim titulo, mensaje, tipo, retroalimentacion As String
 

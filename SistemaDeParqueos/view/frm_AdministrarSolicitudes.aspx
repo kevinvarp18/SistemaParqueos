@@ -37,6 +37,11 @@
                               tipo
                             )
                         }
+
+                        function abrirModal() {
+                            //alert('hola');
+                            $('#myModal2').modal('show');
+                        }
                     </script>
                 </ContentTemplate>
             </asp:UpdatePanel>

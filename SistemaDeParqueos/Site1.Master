@@ -6,21 +6,20 @@
 <head runat="server">
     <title>Sistema de Parqueos - OIJ</title>
     <script type="text/javascript" language="javascript">
-                        
-                        function RegistrarParqueo() {
-                            var msj = document.getElementById("DivRegistrar");
-                            msj.style.visibility = "visible";
-                            var msj2 = document.getElementById("DivActualizaElimina");
-                            msj2.style.visibility = "hidden";
-                        }
+        function RegistrarParqueo() {
+            var msj = document.getElementById("DivRegistrar");
+            msj.style.visibility = "visible";
+            var msj2 = document.getElementById("DivActualizaElimina");
+            msj2.style.visibility = "hidden";
+        }
 
-                        function ActualizarEliminarParqueo() {
-                            var msj = document.getElementById("DivActualizaElimina");
-                            msj.style.visibility = "visible";
-                            var msj2 = document.getElementById("DivRegistrar");
-                            msj2.style.visibility = "hidden";
-                        }
-                    </script>
+        function ActualizarEliminarParqueo() {
+            var msj = document.getElementById("DivActualizaElimina");
+            msj.style.visibility = "visible";
+            var msj2 = document.getElementById("DivRegistrar");
+            msj2.style.visibility = "hidden";
+        }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Cognate Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -82,7 +81,7 @@
                                     %>
                                     <li><a href="frm_VerParqueo.aspx">Ver parqueo</a></li>
                                     <li><a href="frm_AdministrarParqueo.aspx?id=1">Administrar parqueo</a></li>
-                                    <li><a href="frm_AdministrarSolicitudes.aspx?id=0">Administrar solicitudes</a></li>
+                                    <li><a href="frm_AdministrarSolicitudes.aspx">Administrar solicitudes</a></li>
                                     <li><a href="frm_RegistrarUsuario.aspx">Registrar usuarios</a></li>
                                     <li><a href="frm_Reporte.aspx">Reportes</a></li>
                                     <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>
@@ -111,7 +110,7 @@
                 <br>
             </footer>
 
-            
+
         </div>
     </form>
 </body>
