@@ -38,7 +38,7 @@ Public Class VerParqueo
             Dim tableRow As New TableRow()
             For rowCtr = 0 To cantidadTiposParqueo.Count - 1
                 Dim tableCell As New TableCell()
-                For cellCtr = 0 To parqueosOcupados.Count - 1
+                For cellCtr = 0 To parqueosOcupados.Count - 2
                     For Each parqueoActual As Parqueo In parqueosTotales
                         Dim tipoParqueo As String
                         tipoParqueo = table.Rows.Item(0).Cells.Item(rowCtr).ID
@@ -63,8 +63,8 @@ Public Class VerParqueo
                             tableCell.Controls.Add(hyperLink)
                         End If
                     Next 'For rowCtr = 0 To rowCnt
+                    tableRow.Cells.Add(tableCell)
                 Next
-                tableRow.Cells.Add(tableCell)
             Next 'For Each parqueosAct As Parqueo In parqueosTotales
             table.Rows.Add(tableRow)
         End If
