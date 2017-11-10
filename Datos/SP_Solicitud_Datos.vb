@@ -262,6 +262,8 @@ Public Class SP_Solicitud_Datos
             solicitudActual.GintIdParqueoSG = Integer.Parse(currentRow("TN_Idparqueo_TSP_Solicitud").ToString())
             solicitudActual.GstrHoraISG = currentRow("TF_Horai_TSP_Solicitud").ToString()
             solicitudActual.GstrHoraFSG = currentRow("TF_Horaf_TSP_Solicitud").ToString()
+            solicitudActual.GintIdSolicutudSG = Integer.Parse(currentRow("TN_MarcaE_TSP_Entradas_Parqueo_X_TSP_Solicitud"))
+            solicitudActual.GintIdVisitanteSG = Integer.Parse(currentRow("TN_MarcaS_TSP_Entradas_Parqueo_X_TSP_Solicitud"))
             solicitudes.AddLast(solicitudActual)
         Next
         Return solicitudes

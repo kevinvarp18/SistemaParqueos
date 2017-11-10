@@ -53,15 +53,27 @@ Public Class frm_ListaVisitantes
                 columnaHypLnk.Controls.Add(literalControl)
 
                 Dim btnMarcarEntrada As New Button()
-                btnMarcarEntrada.Text = "(Marcar Entrada)"
+                If (solicitudAct.GintIdSolicutudSG = 0) Then
+                    btnMarcarEntrada.Text = "Marcar Entrada"
+                    btnMarcarEntrada.Style("font-size") = "0.70em"
+                Else
+                    btnMarcarEntrada.Text = "Desmarcar Entrada"
+                    btnMarcarEntrada.Style("font-size") = "0.60em"
+                End If
                 btnMarcarEntrada.Width = 100%
                 btnMarcarEntrada.CssClass = solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GintIdParqueoSG.ToString() + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";1"
                 btnMarcarEntrada.Style("color") = "#ff0000"
-                btnMarcarEntrada.Style("font-size") = "0.70em"
+
                 AddHandler btnMarcarEntrada.Click, AddressOf Me.button_Click
 
                 Dim btnMarcarSalida As New Button()
-                btnMarcarSalida.Text = "(Marcar Salida)"
+                If (solicitudAct.GintIdVisitanteSG = 0) Then
+                    btnMarcarSalida.Text = "Marcar Salida"
+                    btnMarcarSalida.Style("font-size") = "0.70em"
+                Else
+                    btnMarcarSalida.Text = "Desmarcar Salida"
+                    btnMarcarSalida.Style("font-size") = "0.60em"
+                End If
                 btnMarcarSalida.Width = 100%
                 btnMarcarSalida.CssClass = solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GintIdParqueoSG.ToString() + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";0"
                 btnMarcarSalida.Style("color") = "#00fe00"
@@ -91,14 +103,18 @@ Public Class frm_ListaVisitantes
         Dim datosSolictud As String() = botonSeleccionado.CssClass.Split(New String() {";"}, StringSplitOptions.None)
         solicitudNegocios.marcarEntrada_Salida(datosSolictud(0), datosSolictud(1), datosSolictud(2), Integer.Parse(datosSolictud(3)), datosSolictud(4), datosSolictud(5), Integer.Parse(datosSolictud(6)))
 
-        If (botonSeleccionado.Text.Equals("(Marcar Entrada)")) Then
-            botonSeleccionado.Text = "(Desmarcar Entrada)"
-        ElseIf (botonSeleccionado.Text.Equals("(Desmarcar Entrada)")) Then
-            botonSeleccionado.Text = "(Marcar Entrada)"
-        ElseIf (botonSeleccionado.Text.Equals("(Marcar Salida)")) Then
-            botonSeleccionado.Text = "(Desmarcar Salida)"
-        ElseIf (botonSeleccionado.Text.Equals("(Desmarcar Salida)")) Then
-            botonSeleccionado.Text = "(Marcar Salida)"
+        If (botonSeleccionado.Text.Equals("Marcar Entrada")) Then
+            botonSeleccionado.Text = "Desmarcar Entrada"
+            botonSeleccionado.Style("font-size") = "0.60em"
+        ElseIf (botonSeleccionado.Text.Equals("Desmarcar Entrada")) Then
+            botonSeleccionado.Text = "Marcar Entrada"
+            botonSeleccionado.Style("font-size") = "0.70em"
+        ElseIf (botonSeleccionado.Text.Equals("Marcar Salida")) Then
+            botonSeleccionado.Text = "Desmarcar Salida"
+            botonSeleccionado.Style("font-size") = "0.60em"
+        ElseIf (botonSeleccionado.Text.Equals("Desmarcar Salida")) Then
+            botonSeleccionado.Style("font-size") = "0.70em"
+            botonSeleccionado.Text = "Marcar Salida"
         End If
     End Sub
 
