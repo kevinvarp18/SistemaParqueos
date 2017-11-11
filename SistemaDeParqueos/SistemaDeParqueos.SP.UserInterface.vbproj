@@ -136,6 +136,7 @@
     <Content Include="view\frm_AdministrarSolicitudes.aspx" />
     <Content Include="view\frm_BrindarParqueo.aspx" />
     <Content Include="view\frm_ListaVisitantes.aspx" />
+    <Content Include="view\frm_ManejarPermisos.aspx" />
     <Content Include="view\frm_RegistrarUsuario.aspx" />
     <Content Include="view\frm_Reporte.aspx" />
     <Content Include="view\frm_SolicitarParqueo.aspx" />
@@ -166,6 +167,13 @@
     </Compile>
     <Compile Include="view\frm_ListaVisitantes.aspx.vb">
       <DependentUpon>frm_ListaVisitantes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_ManejarPermisos.aspx.designer.vb">
+      <DependentUpon>frm_ManejarPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_ManejarPermisos.aspx.vb">
+      <DependentUpon>frm_ManejarPermisos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="view\frm_RegistrarUsuario.aspx.designer.vb">

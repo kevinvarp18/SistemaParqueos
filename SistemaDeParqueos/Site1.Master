@@ -57,13 +57,15 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
                                 
                                 <%
-                If String.Equals(Session("Usuario"), "a") Then
+                                    Dim cerrar As Boolean = False
+                                    If String.Equals(Session("Usuario"), "a") Then
+                                        cerrar = True
                                 %>
                                 <ul class="nav navbar-nav navbar-right">
                                     <asp:HyperLink ID="HypLnkSolicitudes" Style="color: #efd12f" NavigateUrl="http://localhost:52086/view/frm_AdministrarSolicitudes.aspx?id=0" Text="Pendientes: " runat="server" />
                                 </ul>
                                 <%
-                End If
+    End If
                                 %>
                                 <br>
                                 <ul class="nav navbar-nav navbar-right">
@@ -73,9 +75,21 @@
                                     <li><a href="frm_IniciarSesion.aspx">Iniciar Sesión</a></li>
                                     <li><a href="frm_RegistrarVisitante.aspx">Registrarse</a></li>
                                     <%
-                                        End If
+                End If
 
-                                        Dim cerrar As Boolean = False
+                %>
+
+                                    <%
+                                        If String.Equals(Session("Usuario"), "a") Then
+                                            cerrar = True
+                                         %>
+                                    <li><a href="frm_ManejarPermisos.aspx">Permisos</a></li>
+                                    <%
+                    End If
+                                         %>
+
+                                    <%
+
                                         'ElseIf String.Equals(Session("Usuario"), "v") Then
                                         Dim frm_SolicitarParqueo As Boolean = False
 

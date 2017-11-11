@@ -149,6 +149,29 @@ Public Class SP_Usuario_Datos
         Return permisos
     End Function
 
+    Public Function ObtenerRolesYPermisos() As LinkedList(Of PermisoYRoles)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As String = "PA_ObtenerRolesYPermisos"
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Permiso")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Permiso").Rows
+        Dim roles As New LinkedList(Of PermisoYRoles)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim rolActual As New PermisoYRoles()
+            rolActual.GstrPermiso = currentRow("TC_Tipo_TSP_Permiso")
+            rolActual.GstrRol = currentRow("TC_Rol_TSP_Permiso_X_Rol")
+            roles.AddLast(rolActual)
+        Next
+        Return roles
+    End Function
+
     Public Function obtenerUsuarios(correo As String, contrasenna As String) As LinkedList(Of Usuario)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As String = "PA_ObtenerUsuarios"

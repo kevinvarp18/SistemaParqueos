@@ -41,6 +41,10 @@ Public Class SP_Usuario_Negocios
         Return Me.usuario_Acceso_a_Datos.obtenerPermisosPorRol(rol)
     End Function
 
+    Public Function ObtenerRolesYPermisos() As LinkedList(Of PermisoYRoles)
+        Return Me.usuario_Acceso_a_Datos.ObtenerRolesYPermisos()
+    End Function
+
     Public Function insertarAdministrador(administrador As Administrador) As Boolean
         Return Me.usuario_Acceso_a_Datos.insertarAdministrador(administrador)
     End Function
