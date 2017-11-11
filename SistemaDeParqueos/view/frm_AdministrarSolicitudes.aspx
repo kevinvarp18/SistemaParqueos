@@ -39,8 +39,11 @@
                         }
 
                         function abrirModal() {
-                            //alert('hola');
                             $('#myModal2').modal('show');
+                        }
+
+                        function cerrarModal() {
+                            $('#myModal2').modal('hide');
                         }
                     </script>
                 </ContentTemplate>

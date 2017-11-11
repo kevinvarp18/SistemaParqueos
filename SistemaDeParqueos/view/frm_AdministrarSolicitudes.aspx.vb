@@ -8,7 +8,7 @@ Public Class frm_AdministrarSolicitudes
     Dim parqueoNegocios As SP_Parqueo_Negocios
     Dim solicitudNegocios As SP_Solicitud_Parqueo_Negocios
     Dim usuarioNegocios As SP_Usuario_Negocios
-    Dim marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, correo, accion As String
+    Shared marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, correo, accion As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If String.Equals(Session("Usuario"), "a") Then
@@ -21,7 +21,6 @@ Public Class frm_AdministrarSolicitudes
             Response.BufferOutput = True
             Response.Redirect("http://localhost:52086/view/frm_index.aspx")
         End If
-
     End Sub
     Public Sub llenarTablaSolicitudes()
         Dim rowCnt As Integer
@@ -81,8 +80,6 @@ Public Class frm_AdministrarSolicitudes
                 btnRechazar.Text = "(Rechazar)"
                 btnRechazar.Width = 90%
                 btnRechazar.Style("color") = "#ff0000"
-                'btnRechazar.Attributes("data-toggle") = "modal"
-                'btnRechazar.Attributes("data-target") = "#myModal2"
                 AddHandler btnRechazar.Click, AddressOf Me.button_Click
 
                 Dim btnAceptar As Button = New Button
@@ -225,6 +222,8 @@ Public Class frm_AdministrarSolicitudes
         Me.usuarioNegocios.envioCorreoSolicitud(Me.correo, retroalimentacion, accion)
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
         Me.solicitudNegocios.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
+
+        tbRetroalimentacion.Text = ""
     End Sub
 
 End Class
