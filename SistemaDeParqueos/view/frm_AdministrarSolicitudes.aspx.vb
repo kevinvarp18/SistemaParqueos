@@ -11,7 +11,15 @@ Public Class frm_AdministrarSolicitudes
     Shared marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, correo, accion As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If String.Equals(Session("Usuario"), "a") Then
+        Dim permitido As Boolean = False
+
+        For Each variableSesion As String In Session.Keys
+            If (String.Equals(variableSesion, "frm_AdministrarSolicitudes")) Then
+                permitido = True
+            End If
+        Next
+
+        If (permitido) Then
             Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
             Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)

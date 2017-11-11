@@ -22,7 +22,7 @@
     End Sub
 
     Public Sub New()
-        Me.GintIdentificador1 = ""
+        Me.GintIdentificador1 = 0
         Me.GstrTipo1 = ""
     End Sub
 

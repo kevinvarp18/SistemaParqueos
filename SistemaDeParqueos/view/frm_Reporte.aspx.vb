@@ -14,10 +14,18 @@ Public Class frm_Reporte
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'If String.Equals(Session("Usuario"), "a") Then
-        ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
-                Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-                Dim sn As New SP_Usuario_Negocios(strconnectionString)
+        Dim permitido As Boolean = False
+
+        For Each variableSesion As String In Session.Keys
+            If (String.Equals(variableSesion, "frm_Reporte")) Then
+                permitido = True
+            End If
+        Next
+
+        If (permitido) Then
+            ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
+            Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Dim sn As New SP_Usuario_Negocios(strconnectionString)
 
 
             If IsPostBack Then
@@ -55,29 +63,29 @@ Public Class frm_Reporte
                 Me.str = ""
 
                 DwnLstTipoReporte.Items.Add("Seleccione una opción")
-                    DwnLstTipoReporte.Items.Add("Placa")
-                    DwnLstTipoReporte.Items.Add("Correo")
+                DwnLstTipoReporte.Items.Add("Placa")
+                DwnLstTipoReporte.Items.Add("Correo")
                 DwnLstTipoReporte.Items.Add("Fecha")
 
                 DwnLstPlaca.Items.Add("Seleccione una opción")
-                    Dim placas As LinkedList(Of String) = sn.obtenerPlacas()
-                    For Each placa As String In placas
-                        DwnLstPlaca.Items.Add(placa)
-                    Next
+                Dim placas As LinkedList(Of String) = sn.obtenerPlacas()
+                For Each placa As String In placas
+                    DwnLstPlaca.Items.Add(placa)
+                Next
 
-                    DwnLstCorreo.Items.Add("Seleccione una opción")
-                    Dim usuariosCorreo As LinkedList(Of Usuario) = sn.obtenerCorreoUsuariosVisitantes()
-                    For Each usuarioCorreo As Usuario In usuariosCorreo
-                        DwnLstCorreo.Items.Add(usuarioCorreo.GstrCorreoSG)
-                    Next
+                DwnLstCorreo.Items.Add("Seleccione una opción")
+                Dim usuariosCorreo As LinkedList(Of Usuario) = sn.obtenerCorreoUsuariosVisitantes()
+                For Each usuarioCorreo As Usuario In usuariosCorreo
+                    DwnLstCorreo.Items.Add(usuarioCorreo.GstrCorreoSG)
+                Next
 
 
             End If
-            'Else
-            '    Response.BufferOutput = True
-            '    Response.Redirect("http://localhost:52086/view/frm_index.aspx")
-            'End If
-        End Sub
+        Else
+            Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+        End If
+    End Sub
 
         Protected Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         selecciones("reporte")

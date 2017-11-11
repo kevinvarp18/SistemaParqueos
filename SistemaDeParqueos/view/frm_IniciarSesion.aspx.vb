@@ -39,6 +39,15 @@ Public Class loginView
                 For Each usuarioActual As Usuario In usuarios
                     Session("Correo") = usuarioActual.gstrCorreo
                     Session("Usuario") = usuarioActual.gstrTipoUsuario
+
+                    Dim listaPermisos As New LinkedList(Of Permiso)()
+                    listaPermisos = usuarioNegocios.obtenerPermisosPorRol(usuarioActual.gstrTipoUsuario.ToString)
+
+                    If listaPermisos.Count > 0 Then
+                        For Each permiso As Permiso In listaPermisos
+                            Session(permiso.GstrTipo1.ToString) = permiso.GstrTipo1.ToString
+                        Next
+                    End If
                 Next
 
                 Response.BufferOutput = True

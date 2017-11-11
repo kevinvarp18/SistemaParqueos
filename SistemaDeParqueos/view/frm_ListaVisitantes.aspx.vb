@@ -12,7 +12,16 @@ Public Class frm_ListaVisitantes
         Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
 
-        If String.Equals(Session("Usuario"), "o") Then
+        Dim permitido As Boolean = False
+
+        For Each variableSesion As String In Session.Keys
+            If (String.Equals(variableSesion, "frm_ListaVisitantes")) Then
+                permitido = True
+            End If
+        Next
+
+        If (permitido) Then
+
             llenarTabla()
         Else
             Response.BufferOutput = True

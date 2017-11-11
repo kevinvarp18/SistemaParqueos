@@ -135,15 +135,15 @@ Public Class SP_Usuario_Datos
         sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
         sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@rol", rol))
         Dim dataSetAttendant As New DataSet()
-        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Usuario")
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Permiso")
         sqlDataAdapterClient.SelectCommand.Connection.Close()
-        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Usuario").Rows
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Permiso").Rows
         Dim permisos As New LinkedList(Of Permiso)()
 
         For Each currentRow As DataRow In dataRowCollection
             Dim permisoActual As New Permiso()
-            permisoActual.GintIdentificador1 = currentRow("TN_IdPermiso_TSP_Permiso_X_Rol").ToString()
-            permisoActual.GstrTipo1 = currentRow("TC_Rol_TSP_Permiso_X_Rol").ToString()
+            permisoActual.GintIdentificador1 = Int(currentRow("TN_Id_TSP_Permiso"))
+            permisoActual.GstrTipo1 = currentRow("TC_Tipo_TSP_Permiso").ToString()
             permisos.AddLast(permisoActual)
         Next
         Return permisos
