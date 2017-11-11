@@ -17,9 +17,10 @@ Public Class VerParqueo
         Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
         Dim sn As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
+        Dim fechai As DateTime = Convert.ToDateTime(tbFechaI.Text)
         If tbFechaI.Text <> "" AndAlso tbHoraI.Text <> "" AndAlso tbHoraF.Text <> "" Then
 
-            Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(tbFechaI.Text, tbHoraI.Text, tbHoraF.Text)
+            Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(fechai.ToString("dd/MM/yyyy"), tbHoraI.Text, tbHoraF.Text)
             Dim parqueosTotales As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
             Dim cantidadTiposParqueo As LinkedList(Of String) = parqueoNegocios.cantidadTiposParqueo()
 
