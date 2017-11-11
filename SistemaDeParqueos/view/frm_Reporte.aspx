@@ -61,7 +61,7 @@
                     </asp:UpdatePanel>
 
 
-                    <asp:Label ID="Label1" runat="server" style="margin-left: 10%;" Text="salida"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" style="margin-left: 10%;" Text=""></asp:Label>
 
                 </ContentTemplate>
             </asp:UpdatePanel>
