@@ -23,7 +23,8 @@ Public Class Site1
     End Sub
 
     Protected Sub cerrarSesion(sender As Object, e As EventArgs)
-        Session("Usuario") = "N"
+        'Session("Usuario") = "N"
+        Session.RemoveAll()
         Response.BufferOutput = True
         Response.Redirect("http://localhost:52086/view/frm_index.aspx")
     End Sub
