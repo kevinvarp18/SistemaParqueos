@@ -9,33 +9,34 @@ Public Class frm_ManejarPermisos
     Dim usuarioNegocios As SP_Usuario_Negocios
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'If String.Equals(Session("Usuario"), "a") Then
-        Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-        Me.usuarioNegocios = New SP_Usuario_Negocios(Me.strConnectionString)
-        ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_ManejarPermisos", ResolveUrl("~") + "public/js/" + "script.js")
+        If String.Equals(Session("Usuario"), "a") Then
+            Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+            Me.usuarioNegocios = New SP_Usuario_Negocios(Me.strConnectionString)
+            ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_ManejarPermisos", ResolveUrl("~") + "public/js/" + "script.js")
 
 
 
-        If Not IsPostBack Then
-            DwnLstPermisos.Items.Add("Seleccione una opción")
+            If Not IsPostBack Then
+                llenarTabla()
 
-            For Each rol As PermisoYRoles In Me.usuarioNegocios.ObtenerRolesYPermisos()
-                DwnLstPermisos.Items.Add(rol.GstrPermiso.ToString)
-            Next
+                DwnLstPermisos.Items.Add("Seleccione una opción")
 
-            DwnLstRoles.Items.Add("Seleccione una opción")
-            DwnLstRoles.Items.Add("Administrador")
-            DwnLstRoles.Items.Add("Oficial de Seguridad")
-            DwnLstRoles.Items.Add("Visitante")
+                For Each rol As PermisoYRoles In Me.usuarioNegocios.ObtenerRolesYPermisos()
+                    DwnLstPermisos.Items.Add(rol.GstrPermiso.ToString)
+                Next
+
+                DwnLstRoles.Items.Add("Seleccione una opción")
+                DwnLstRoles.Items.Add("Administrador")
+                DwnLstRoles.Items.Add("Oficial de Seguridad")
+                DwnLstRoles.Items.Add("Visitante")
+
+            End If
+
+
         Else
-            llenarTabla()
+            Response.BufferOutput = True
+            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
         End If
-
-
-        'Else
-        'Response.BufferOutput = True
-        'Response.Redirect("http://localhost:52086/view/frm_index.aspx")
-        'End If
     End Sub
 
     Public Sub llenarTabla()
