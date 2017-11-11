@@ -50,6 +50,15 @@ Partial Public Class Site1
     Protected WithEvents HypLnkSolicitudes As Global.System.Web.UI.WebControls.HyperLink
     
     '''<summary>
+    '''HypLinkVisitantes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HypLinkVisitantes As Global.System.Web.UI.WebControls.HyperLink
+    
+    '''<summary>
     '''ContentPlaceHolder1 control.
     '''</summary>
     '''<remarks>

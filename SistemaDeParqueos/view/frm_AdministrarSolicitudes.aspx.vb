@@ -201,20 +201,19 @@ Public Class frm_AdministrarSolicitudes
             ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "abrirModal();", True)
         Else
             decidirSolicitud()
-            tablaSolicitudes.Rows.Remove(fila)
         End If
+
+        Session("fila") = fila
     End Sub
     Public Sub decidirSolicitud()
         Dim titulo, mensaje, tipo, retroalimentacion As String
+        Dim resultadoAccion As Integer
 
         If (accion.Equals("0")) Then
-            titulo = "Correcto"
             mensaje = "La solicitud se ha rechazado exitosamente"
-            tipo = "error"
         Else
-            titulo = "Correcto"
             mensaje = "La solicitud se ha aceptado exitosamente"
-            tipo = "success"
+
         End If
 
         If (accion.Equals("1")) Then
@@ -228,9 +227,20 @@ Public Class frm_AdministrarSolicitudes
         End If
 
         Me.usuarioNegocios.envioCorreoSolicitud(Me.correo, retroalimentacion, accion)
-        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
-        Me.solicitudNegocios.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
+        resultadoAccion = Me.solicitudNegocios.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
 
+        If (resultadoAccion = 1 Or accion.Equals("0")) Then
+            titulo = "Correcto"
+            tipo = "success"
+
+            tablaSolicitudes.Rows.Remove(Session("fila"))
+        Else
+            titulo = "Error"
+            mensaje = "No se pudo aceptar la solicitud porque ese espacio ya está reservado"
+            tipo = "error"
+        End If
+
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
         tbRetroalimentacion.Text = ""
     End Sub
 

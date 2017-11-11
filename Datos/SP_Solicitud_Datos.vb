@@ -218,11 +218,12 @@ Public Class SP_Solicitud_Datos
         Return solicitudes
     End Function
 
-    Public Sub decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String)
+    Public Function decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String) As Integer
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_DecidirSolicitud"
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
+        Dim resultado As Integer
 
         cmdInsert.Parameters.Add(New SqlParameter("@marca", marca))
         cmdInsert.Parameters.Add(New SqlParameter("@placa", placa))
@@ -232,11 +233,14 @@ Public Class SP_Solicitud_Datos
         cmdInsert.Parameters.Add(New SqlParameter("@fechaSalida", fechaF))
         cmdInsert.Parameters.Add(New SqlParameter("@idParqueo", Integer.Parse(idParqueo)))
         cmdInsert.Parameters.Add(New SqlParameter("@accion", Integer.Parse(accion)))
-
+        cmdInsert.Parameters.Add("@valorRetorno", SqlDbType.Int).Direction = ParameterDirection.Output
         cmdInsert.Connection.Open()
         cmdInsert.ExecuteNonQuery()
+        resultado = Convert.ToInt32(cmdInsert.Parameters("@valorRetorno").Value)
         cmdInsert.Connection.Close()
-    End Sub
+
+        Return resultado
+    End Function
     Public Function obtenerSolicitudesHoy() As LinkedList(Of Solicitud)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As [String] = "PA_VerSolicitudesHoy"

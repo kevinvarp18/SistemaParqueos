@@ -44,13 +44,12 @@ Public Class SP_Solicitud_Parqueo_Negocios
         Return Me.solicitud_Acceso_a_Datos.obtenerReporteCorreo(correo)
     End Function
 
-    Public Sub decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String)
-        Me.solicitud_Acceso_a_Datos.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
-    End Sub
+    Public Function decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String) As Integer
+        Return Me.solicitud_Acceso_a_Datos.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
+    End Function
     Public Function obtenerSolicitudesHoy() As LinkedList(Of Solicitud)
         Return Me.solicitud_Acceso_a_Datos.obtenerSolicitudesHoy()
     End Function
-
     Public Sub marcarEntrada_Salida(marca As String, placa As String, modelo As String, espacioParqueo As Integer, horaEntrada As String, horaSalida As String, accion As Integer)
         Me.solicitud_Acceso_a_Datos.marcarEntrada_Salida(marca, placa, modelo, espacioParqueo, horaEntrada, horaSalida, accion)
     End Sub
