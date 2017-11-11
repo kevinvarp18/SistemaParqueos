@@ -28,6 +28,19 @@ Public Class SP_Usuario_Negocios
     Public Function insertarVisitante(visitante As Visitante) As Boolean
         Return Me.usuario_Acceso_a_Datos.insertarVisitante(visitante)
     End Function
+
+    Public Function insertarPermisoRol(id_permiso As Integer, rol As String) As Boolean
+        Return Me.usuario_Acceso_a_Datos.insertarPermisoRol(id_permiso, rol)
+    End Function
+
+    Public Function eliminarPermisoRol(id_permiso As Integer, rol As String) As Boolean
+        Return Me.usuario_Acceso_a_Datos.eliminarPermisoRol(id_permiso, rol)
+    End Function
+
+    Public Function obtenerPermisosPorRol(rol As String) As LinkedList(Of Permiso)
+        Return Me.usuario_Acceso_a_Datos.obtenerPermisosPorRol(rol)
+    End Function
+
     Public Function insertarAdministrador(administrador As Administrador) As Boolean
         Return Me.usuario_Acceso_a_Datos.insertarAdministrador(administrador)
     End Function

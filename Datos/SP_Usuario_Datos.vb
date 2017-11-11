@@ -90,6 +90,65 @@ Public Class SP_Usuario_Datos
         Return result
     End Function
 
+    Public Function insertarPermisoRol(id_permiso As Integer, rol As String) As Boolean
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlStoredProcedure As [String] = "PA_InsertarPermisoRol"
+        Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        Dim result As Integer
+        cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
+        cmdInsert.Parameters.Add(New SqlParameter("@id_permiso", id_permiso))
+        cmdInsert.Parameters.Add(New SqlParameter("@rol", rol))
+        cmdInsert.Parameters.Add("@resultado", SqlDbType.Int).Direction = ParameterDirection.Output
+        cmdInsert.Connection.Open()
+        cmdInsert.ExecuteNonQuery()
+        result = Convert.ToInt32(cmdInsert.Parameters("@resultado").Value)
+        cmdInsert.Connection.Close()
+        Return result
+    End Function
+
+    Public Function eliminarPermisoRol(id_permiso As Integer, rol As String) As Boolean
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlStoredProcedure As [String] = "PA_EliminarPermisoRol"
+        Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        Dim result As Integer
+
+        cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
+
+        cmdInsert.Parameters.Add(New SqlParameter("@id_permiso", id_permiso))
+        cmdInsert.Parameters.Add(New SqlParameter("@rol", rol))
+        cmdInsert.Connection.Open()
+        cmdInsert.ExecuteNonQuery()
+
+        result = Convert.ToInt32(cmdInsert.Parameters("@resultado").Value)
+        cmdInsert.Connection.Close()
+
+        Return result
+    End Function
+
+    Public Function obtenerPermisosPorRol(rol As String) As LinkedList(Of Permiso)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As String = "PA_ObtenerPermisosRol"
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@rol", rol))
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Usuario")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Usuario").Rows
+        Dim permisos As New LinkedList(Of Permiso)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim permisoActual As New Permiso()
+            permisoActual.GintIdentificador1 = currentRow("TN_IdPermiso_TSP_Permiso_X_Rol").ToString()
+            permisoActual.GstrTipo1 = currentRow("TC_Rol_TSP_Permiso_X_Rol").ToString()
+            permisos.AddLast(permisoActual)
+        Next
+        Return permisos
+    End Function
+
     Public Function obtenerUsuarios(correo As String, contrasenna As String) As LinkedList(Of Usuario)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As String = "PA_ObtenerUsuarios"

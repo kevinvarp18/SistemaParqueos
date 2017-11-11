@@ -21,6 +21,10 @@
         Me.GstrTipo1 = gstrTipo
     End Sub
 
+    Public Sub New()
+        Me.GintIdentificador1 = ""
+        Me.GstrTipo1 = ""
+    End Sub
 
     'Metodos accesores
     Public Property GintIdentificador1 As Integer
