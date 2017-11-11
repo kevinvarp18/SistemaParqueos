@@ -8,24 +8,26 @@
                 <ContentTemplate>
                     <h3>Administrar Parqueo</h3>
                     <div>
-                        <div>
                             <asp:Label ID="lblTipo" runat="server" Text="Tipo:"></asp:Label>
                             <asp:DropDownList ID="DwnLstTipos" runat="server" style="margin-left: 8.4%;" AutoPostBack="false"></asp:DropDownList><br />
                             <asp:Label ID="lblEstado" runat="server" Text="Estado:"></asp:Label>
-                            <asp:DropDownList ID="DwnLstEstado" runat="server" style="margin-left: 7%;" AutoPostBack="false"></asp:DropDownList> <br />                                                
-                        </div>
-                    <div id="DivActualizaElimina" style="visibility:hidden;"> 
-                        <asp:Button ID="btnActualizar" runat="server" style="margin-left: 28%;" CssClass="multipleTextBox" OnClick="btnActualizar_Click" Text="Actualizar" />
-                        <asp:Button ID="btnEliminar" runat="server"  CssClass="multipleTextBox" OnClick="btnEliminar_Click" Text="Eliminar" />
-                    </div>
-                        <div id="DivRegistrar" style="visibility:hidden;">
-                            <asp:Button ID="btnCrear" runat="server" CssClass="multipleTextBox" style="margin-top: -50%;margin-left: 40%;" OnClick="btnCrear_Click" Text="Crear" />
-                        </div>      
+                            <asp:DropDownList ID="DwnLstEstado" runat="server" style="margin-left: 7%;" AutoPostBack="false"></asp:DropDownList> <br />                        
                     </div>                                  
                     <br />
                     <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
                 </ContentTemplate>
             </asp:UpdatePanel>
+             <asp:updatepanel id="UpdatePanel2" runat="server" visible="false">
+                <ContentTemplate>
+                       <asp:Button ID="btnActualizar" runat="server" style="margin-left: 28%;" CssClass="multipleTextBox" OnClick="btnActualizar_Click" Text="Actualizar" />
+                        <asp:Button ID="btnEliminar"  runat="server"  CssClass="multipleTextBox" OnClick="btnEliminar_Click" Text="Eliminar" />
+                </ContentTemplate>
+            </asp:updatepanel>
+            <asp:updatepanel id="UpdatePanel3" runat="server" visible="false">
+                <ContentTemplate>
+                       <asp:Button ID="btnCrear"  runat="server" CssClass="multipleTextBox" style="margin-top: -50%;margin-left: 40%;" OnClick="btnCrear_Click" Text="Crear" />
+                </ContentTemplate>
+            </asp:updatepanel>
         </div>
     </div>
 </asp:Content>

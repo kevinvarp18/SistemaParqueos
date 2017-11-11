@@ -59,6 +59,24 @@ Partial Public Class administrarParqueo
     Protected WithEvents DwnLstEstado As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''lblMensaje control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''UpdatePanel2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
     '''btnActualizar control.
     '''</summary>
     '''<remarks>
@@ -77,6 +95,15 @@ Partial Public Class administrarParqueo
     Protected WithEvents btnEliminar As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''UpdatePanel3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
     '''btnCrear control.
     '''</summary>
     '''<remarks>
@@ -84,13 +111,4 @@ Partial Public Class administrarParqueo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCrear As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''lblMensaje control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
 End Class
