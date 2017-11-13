@@ -10,7 +10,7 @@ Public Class SP_Solicitud_Datos
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  08-Noviembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  11-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public gstrconnString As String
@@ -19,7 +19,6 @@ Public Class SP_Solicitud_Datos
     Public Sub New(gstrconnString As String)
         Me.gstrconnString = gstrconnString
     End Sub
-
     Public Function insertarSolicitud(correo As String, solicitud As Solicitud) As Solicitud
 
         Dim connection As New SqlConnection(Me.gstrconnString)
@@ -42,7 +41,6 @@ Public Class SP_Solicitud_Datos
 
         Return solicitud
     End Function
-
     Public Function obtenerSolicitud() As LinkedList(Of Solicitud)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As [String] = "PA_VerSolicitud;" 'hay q hacer otro procedimiento
@@ -121,6 +119,26 @@ Public Class SP_Solicitud_Datos
         Next
         Return cantidad
     End Function
+    Public Function obtenerNumeroVisitantesAtrasados() As String
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As String = "PA_CantVisitantesAtrasados"
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Entradas_Parqueo_X_TSP_Solicitud")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Entradas_Parqueo_X_TSP_Solicitud").Rows
+        Dim cantidad As String
+        cantidad = ""
+        For Each currentRow As DataRow In dataRowCollection
+            Dim usuarioActual As New Usuario()
+            cantidad = currentRow("Cantidad").ToString()
+        Next
+        Return cantidad
+    End Function
     Public Function obtenerReporte(fecha_i As String, fecha_f As String) As LinkedList(Of Solicitud)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As [String] = "PA_ReporteFechas"
@@ -153,7 +171,6 @@ Public Class SP_Solicitud_Datos
         Next
         Return solicitud
     End Function
-
     Public Function obtenerReportePlaca(placa As String) As LinkedList(Of Solicitud)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As [String] = "PA_ReportePlaca"
@@ -185,7 +202,6 @@ Public Class SP_Solicitud_Datos
         Next
         Return solicitudes
     End Function
-
     Public Function obtenerReporteCorreo(correo As String) As LinkedList(Of Solicitud)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As [String] = "PA_ReporteCorreo"
@@ -217,7 +233,6 @@ Public Class SP_Solicitud_Datos
         Next
         Return solicitudes
     End Function
-
     Public Function decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String) As Integer
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_DecidirSolicitud"
@@ -272,7 +287,6 @@ Public Class SP_Solicitud_Datos
         Next
         Return solicitudes
     End Function
-
     Public Sub marcarEntrada_Salida(marca As String, placa As String, modelo As String, espacioParqueo As Integer, horaEntrada As String, horaSalida As String, accion As Integer)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_MarcarEntrada_Salida"

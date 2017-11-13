@@ -11,7 +11,7 @@ Public Class SP_Solicitud_Parqueo_Negocios
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  08-Noviembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  11-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public solicitud_Acceso_a_Datos As SP_Solicitud_Datos
@@ -39,7 +39,6 @@ Public Class SP_Solicitud_Parqueo_Negocios
     Public Function obtenerReportePlaca(placa As String) As LinkedList(Of Solicitud)
         Return Me.solicitud_Acceso_a_Datos.obtenerReportePlaca(placa)
     End Function
-
     Public Function obtenerReporteCorreo(correo As String) As LinkedList(Of Solicitud)
         Return Me.solicitud_Acceso_a_Datos.obtenerReporteCorreo(correo)
     End Function
@@ -53,4 +52,7 @@ Public Class SP_Solicitud_Parqueo_Negocios
     Public Sub marcarEntrada_Salida(marca As String, placa As String, modelo As String, espacioParqueo As Integer, horaEntrada As String, horaSalida As String, accion As Integer)
         Me.solicitud_Acceso_a_Datos.marcarEntrada_Salida(marca, placa, modelo, espacioParqueo, horaEntrada, horaSalida, accion)
     End Sub
+    Public Function obtenerNumeroVisitantesAtrasados() As String
+        Return Me.solicitud_Acceso_a_Datos.obtenerNumeroVisitantesAtrasados()
+    End Function
 End Class

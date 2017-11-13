@@ -23,11 +23,11 @@ Partial Public Class frm_SolicitudesAtrasadas
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''tablaSolicitudes control.
+    '''tabla control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tablaSolicitudes As Global.System.Web.UI.WebControls.Table
+    Protected WithEvents tabla As Global.System.Web.UI.WebControls.Table
 End Class

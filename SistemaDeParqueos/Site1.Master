@@ -30,7 +30,6 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <div>
-
             <div class="top-bar w3agile-1" id="home">
                 <div class="container">
                     <div class="row">
@@ -40,173 +39,85 @@
                                     <img src="../public/images/placa.png" alt=" " /></a>
                             </div>
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1 wow fadeInRight animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInRight;">
-                                
-                                <%
-                                    Dim cerrar As Boolean = False
-                                    If String.Equals(Session("Usuario"), "a") Then
-                                        cerrar = True
-                                %>
                                 <ul class="nav navbar-nav navbar-right">
-                                    <asp:HyperLink ID="HypLnkSolicitudes" Style="color: #efd12f" NavigateUrl="http://localhost:52086/view/frm_AdministrarSolicitudes.aspx?id=0" Text="Pendientes: " runat="server" />
-                                    <asp:HyperLink ID="HypLinkVisitantes" Style="color: #efd12f" NavigateUrl="http://localhost:52086/view/frm_SolicitudesAtrasadas.aspx?" Text="Atrasados: " runat="server" />
+                                    <%
+                                        If String.Equals(Session("Usuario"), "a") Then
+                                    %>
+                                    <asp:HyperLink ID="HypLnkSolicitudes" Style="color: #efd12f" NavigateUrl="http://localhost:52086/view/frm_AdministrarSolicitudes.aspx" Text="S. Pendientes: " runat="server" />
+                                    <asp:HyperLink ID="HypLinkVisitantes" Style="color: #efd12f; padding-left: 30px; padding-right: 18px;" NavigateUrl="http://localhost:52086/view/frm_SolicitudesAtrasadas.aspx" Text="V. Atrasados: " runat="server" />
+                                    <%
+                                        End If
+                                    %>
                                 </ul>
-                                <%
-    End If
-                                %>
                                 <br>
-                                <ul class="nav navbar-nav navbar-right">
+                                <ul class="nav navbar-nav navbar-right" style="margin-left: -3.5%; margin-right: 0%;">
                                     <%
                 If String.Equals(Session("Usuario"), "N") Then
                                     %>
                                     <li><a href="frm_IniciarSesion.aspx">Iniciar Sesión</a></li>
                                     <li><a href="frm_RegistrarVisitante.aspx">Registrarse</a></li>
                                     <%
-                End If
-
-                %>
-
-                                    <%
-                                        If String.Equals(Session("Usuario"), "a") Then
-                                            cerrar = True
-                                         %>
-                                    <li><a href="frm_ManejarPermisos.aspx">Permisos</a></li>
-                                    <%
-                    End If
-                                         %>
-
-                                    <%
-
-                                        'ElseIf String.Equals(Session("Usuario"), "v") Then
-                                        Dim frm_SolicitarParqueo As Boolean = False
-
-                                        For Each sesionfrm_SolicitarParqueo As String In Session.Keys
-                                            If (String.Equals(sesionfrm_SolicitarParqueo, "frm_SolicitarParqueo")) Then
-                                                frm_SolicitarParqueo = True
-                                                cerrar = True
-                                            End If
-                                        Next
-
-                                        If (frm_SolicitarParqueo) Then
+                Else
+                    If String.Equals(Session("Usuario"), "a") Then
                                     %>
-                                    <li><a href="frm_SolicitarParqueo.aspx">Solicitar parqueo</a></li> 
-                                    <%
-                                        End If
-
-                                        'If String.Equals(Session("Usuario"), "a") Then
-                                        Dim frm_VerParqueo As Boolean = False
-
-                                        For Each sesionfrm_VerParqueo As String In Session.Keys
-                                            If (String.Equals(sesionfrm_VerParqueo, "frm_VerParqueo")) Then
-                                                frm_VerParqueo = True
-                                                cerrar = True
-                                            End If
-                                        Next
-
-                                        If (frm_VerParqueo) Then
+                                    <li><a href="frm_ManejarPermisos.aspx">Permisos</a></li>
+                                    <% 
+                End If
+                For Each vistaSistema As String In Session.Keys
+                    Select Case vistaSistema
+                        Case "frm_SolicitarParqueo"
+                                    %>
+                                    <li><a href="frm_SolicitarParqueo.aspx">Solicitar parqueo</a></li>
+                                    <% 
+                    Exit Select
+                Case "frm_VerParqueo"
                                     %>
                                     <li><a href="frm_VerParqueo.aspx">Ver parqueo</a></li>
-                                    <%
-                                        End If
-
-                                        Dim frm_AdministrarParqueo As Boolean = False
-
-                                        For Each sesionfrm_AdministrarParqueo As String In Session.Keys
-                                            If (String.Equals(sesionfrm_AdministrarParqueo, "frm_AdministrarParqueo")) Then
-                                                frm_AdministrarParqueo = True
-                                                cerrar = True
-                                            End If
-                                        Next
-
-                                        If (frm_AdministrarParqueo) Then
+                                    <% 
+                    Exit Select
+                Case "frm_AdministrarParqueo"
                                     %>
                                     <li><a href="frm_AdministrarParqueo.aspx?id=1">Administrar parqueo</a></li>
-                                    <%
-                                        End If
-
-                                        Dim frm_AdministrarSolicitudes As Boolean = False
-
-                                        For Each sesionfrm_AdministrarSolicitudes As String In Session.Keys
-                                            If (String.Equals(sesionfrm_AdministrarSolicitudes, "frm_AdministrarSolicitudes")) Then
-                                                frm_AdministrarSolicitudes = True
-                                                cerrar = True
-                                            End If
-                                        Next
-
-                                        If (frm_AdministrarSolicitudes) Then
-                                    %>                
+                                    <% 
+                    Exit Select
+                Case "frm_AdministrarSolicitudes"
+                                    %>
                                     <li><a href="frm_AdministrarSolicitudes.aspx">Administrar solicitudes</a></li>
-                                    <%
-                                        End If
-
-                                        Dim frm_RegistrarUsuario As Boolean = False
-
-                                        For Each sesionfrm_RegistrarUsuario As String In Session.Keys
-                                            If (String.Equals(sesionfrm_RegistrarUsuario, "frm_RegistrarUsuario")) Then
-                                                frm_RegistrarUsuario = True
-                                                cerrar = True
-                                            End If
-                                        Next
-
-                                        If (frm_RegistrarUsuario) Then
-                                        %>                
-                                    <li><a href="frm_RegistrarUsuario.aspx">Registrar usuarios</a></li>
-                                    <%
-                                        End If
-
-                                        Dim frm_Reporte As Boolean = False
-
-                                        For Each sesionfrm_Reporte As String In Session.Keys
-                                            If (String.Equals(sesionfrm_Reporte, "frm_Reporte")) Then
-                                                frm_Reporte = True
-                                                cerrar = True
-                                            End If
-                                        Next
-
-                                        If (frm_Reporte) Then
-                                        %>                
+                                    <% 
+                    Exit Select
+                Case "frm_SolicitudesAtrasadas"
+                                    %>
+                                    <li><a href="frm_SolicitudesAtrasadas.aspx">Visitantes atrasadas</a></li>
+                                    <% 
+                    Exit Select
+                Case "frm_RegistrarUsuario"
+                                    %>
+                                    <li><a href="frm_RegistrarUsuario.aspx">Registrar usuario</a></li>
+                                    <% 
+                    Exit Select
+                Case "frm_Reporte"
+                                    %>
                                     <li><a href="frm_Reporte.aspx">Reportes</a></li>
                                     <%
-                                        End If
-
-                                        'If String.Equals(Session("Usuario"), "o") Then
-                                        Dim frm_ListaVisitantes As Boolean = False
-
-                                        For Each sesionfrm_ListaVisitantes As String In Session.Keys
-                                            If (String.Equals(sesionfrm_ListaVisitantes, "frm_ListaVisitantes")) Then
-                                                frm_ListaVisitantes = True
-                                                cerrar = True
-                                            End If
-                                        Next
-
-                                        If (frm_ListaVisitantes) Then
+                    Exit Select
+                Case "frm_ListaVisitantes"
                                     %>
                                     <li><a href="frm_ListaVisitantes.aspx">Lista visitantes</a></li>
+
                                     <%
-                                        End If
-
-                                        Dim frm_BrindarParqueo As Boolean = False
-
-                                        For Each sesionfrm_BrindarParqueo As String In Session.Keys
-                                            If (String.Equals(sesionfrm_BrindarParqueo, "frm_BrindarParqueo")) Then
-                                                frm_BrindarParqueo = True
-                                                cerrar = True
-                                            End If
-                                        Next
-
-                                        If (frm_BrindarParqueo) Then
-                                        %>
+                    Exit Select
+                Case "frm_BrindarParqueo"
+                                    %>
                                     <li><a href="frm_BrindarParqueo.aspx">Brindar parqueo</a></li>
-<%
-                End If
-    %>
                                     <%
-                If cerrar Then
-                                         %>
-                                    <li><a href="#" runat="server" onserverclick="cerrarSesion">Cerrar sesión</a></li>
+                        Exit Select
+                    End Select
+                Next
+                                    %>
+                                    <li><a href="#" runat="server" onserverclick="cerrarSesion">Salir</a></li>
                                     <%
                 End If
-                                         %>
-
+                                    %>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
@@ -222,8 +133,6 @@
                 <br>
                 <br>
             </footer>
-
-
         </div>
     </form>
 </body>

@@ -8,12 +8,12 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Administrar Solicitudes</h3>
-                    <asp:HyperLink ID="lblParqueoModal" class="new-gri" data-toggle="modal" Style="text-decoration: underline; color: #000000; margin-left: 84%; font-size: 1.5em; font-family: 'Cabin', sans-serif;" data-target="#myModal1" NavigateUrl="#" Text="Ver Parqueo" runat="server" />
+                    <asp:HyperLink ID="lblParqueoModal" class="new-gri" data-toggle="modal" Style="text-decoration: underline; color: #000000; margin-left: 85%; font-size: 1.5em; font-family: 'Cabin', sans-serif;" data-target="#myModal1" NavigateUrl="#" Text="Ver Parqueo" runat="server" />
                     <div class="container">
                         <div class="page w3-4">
                             <div class="bs-example " data-example-id="simple-table">
                                 <div class="botonTabla">
-                                    <asp:Table ID="tablaSolicitudes" Style="text-align: center;" runat="server" CssClass="table">
+                                    <asp:Table ID="tablaSolicitudes" Style="margin-left: -3%;" runat="server" CssClass="table">
                                         <asp:TableHeaderRow>
                                             <asp:TableHeaderCell>Nombre</asp:TableHeaderCell>
                                             <asp:TableHeaderCell>Placa</asp:TableHeaderCell>

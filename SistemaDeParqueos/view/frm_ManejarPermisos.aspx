@@ -15,7 +15,7 @@
                         
                             <div class="bs-example " data-example-id="simple-table">
                                 <div class="botonTabla">
-                                    <asp:Table ID="tabla" Style="margin-left: 4%;" runat="server" CssClass="table">
+                                    <asp:Table ID="tabla" Style="margin-left: -2%;" runat="server" CssClass="table">
                                         <asp:TableHeaderRow>
                                             <asp:TableHeaderCell>Permiso</asp:TableHeaderCell>
                                             <asp:TableHeaderCell>Rol</asp:TableHeaderCell>

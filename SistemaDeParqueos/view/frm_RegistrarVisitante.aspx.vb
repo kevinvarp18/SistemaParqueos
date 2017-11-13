@@ -17,7 +17,6 @@ Public Class registrarVisitante
             Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
 
             If Not IsPostBack Then
-
                 DwnLstProcedencia.Items.Add("Seleccione una opción")
                 DwnLstProcedencia.Items.Add("Externo")
                 DwnLstProcedencia.Items.Add("Interno")
@@ -26,8 +25,24 @@ Public Class registrarVisitante
                 DwnLstTipoIdentificacion.Items.Add("Cédula")
                 DwnLstTipoIdentificacion.Items.Add("Pasaporte")
                 DwnLstTipoIdentificacion.Items.Add("Licencia de conducir")
-            End If
+            Else
+                Dim contentPlaceHolder As ContentPlaceHolder
+                Dim updatePanel As UpdatePanel
+                contentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
+                updatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel2"), UpdatePanel)
 
+                If (DwnLstProcedencia.SelectedItem.ToString().Equals("Seleccione una opción")) Then
+                    updatePanel.Visible = False
+                ElseIf (DwnLstProcedencia.SelectedItem.ToString().Equals("Interno")) Then
+                    updatePanel.Visible = True
+                    lblProcedenciatb.Text = "Nombre Dept:"
+                    tbProcedencia.Style("margin-left") = "3.9%"
+                Else
+                    updatePanel.Visible = True
+                    lblProcedenciatb.Text = "Institución:"
+                    tbProcedencia.Style("margin-left") = "5.7%"
+                End If
+            End If
         Else
             Response.BufferOutput = True
             Response.Redirect("http://localhost:52086/view/frm_index.aspx")

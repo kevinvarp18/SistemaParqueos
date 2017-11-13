@@ -18,12 +18,12 @@ Public Class Site1
                 Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(connectionString)
 
                 HypLnkSolicitudes.Text = HypLnkSolicitudes.Text + Me.solicitudNegocios.obtenerNumeroSolicitudes()
+                HypLinkVisitantes.Text = HypLinkVisitantes.Text + Me.solicitudNegocios.obtenerNumeroVisitantesAtrasados()
             End If 'Si la session es nula, lo inicia en N.
         End If
     End Sub
 
     Protected Sub cerrarSesion(sender As Object, e As EventArgs)
-        'Session("Usuario") = "N"
         Session.RemoveAll()
         Response.BufferOutput = True
         Response.Redirect("http://localhost:52086/view/frm_index.aspx")
