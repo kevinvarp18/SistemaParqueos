@@ -173,7 +173,7 @@ Public Class frm_AdministrarSolicitudes
     End Sub
     Protected Sub button_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim botonSeleccionado As Button = CType(sender, Button)
-        Dim datosSolictud As String() = botonSeleccionado.CssClass.Split(New String() {";"}, StringSplitOptions.None)
+        Dim datosSolicitud As String() = botonSeleccionado.CssClass.Split(New String() {";"}, StringSplitOptions.None)
 
         Dim contentPlaceHolder As ContentPlaceHolder
         Dim updatePanel As UpdatePanel
@@ -186,31 +186,30 @@ Public Class frm_AdministrarSolicitudes
         contentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
         updatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel1"), UpdatePanel)
         tabla = DirectCast(updatePanel.FindControl("tablaSolicitudes"), Table)
-        fila = tablaSolicitudes.Rows.Item(Integer.Parse(datosSolictud(0)))
-        columnaEspacioD = DirectCast(fila.FindControl("columnaParqueo" + datosSolictud(0)), TableCell)
-        dwnLstParqueo = DirectCast(columnaEspacioD.FindControl("DwnLstParqueo" + datosSolictud(0)), DropDownList)
+        fila = tablaSolicitudes.Rows.Item(Integer.Parse(datosSolicitud(0)))
+        columnaEspacioD = DirectCast(fila.FindControl("columnaParqueo" + datosSolicitud(0)), TableCell)
+        dwnLstParqueo = DirectCast(columnaEspacioD.FindControl("DwnLstParqueo" + datosSolicitud(0)), DropDownList)
         idParqueo = dwnLstParqueo.SelectedItem.Value
 
-        marca = datosSolictud(1)
-        placa = datosSolictud(2)
-        horaI = datosSolictud(3)
-        horaF = datosSolictud(4)
-        fechaI = datosSolictud(5)
-        fechaF = datosSolictud(6)
+        marca = datosSolicitud(1)
+        placa = datosSolicitud(2)
+        horaI = datosSolicitud(3)
+        horaF = datosSolicitud(4)
+        fechaI = datosSolicitud(5)
+        fechaF = datosSolicitud(6)
         Me.idParqueo = idParqueo
-        correo = datosSolictud(7)
-        accion = datosSolictud(8)
+        correo = datosSolicitud(7)
+        accion = datosSolicitud(8)
+        Session("fila") = datosSolicitud(0)
 
         If (accion.Equals("0")) Then
             ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "abrirModal();", True)
         Else
             decidirSolicitud()
         End If
-
-        Session("fila") = datosSolictud(0)
     End Sub
     Public Sub decidirSolicitud()
-        Dim titulo, mensaje, tipo, retroalimentacion As String
+        Dim titulo, mensaje, tipo, asuntoCorreo, mensajeCorreo As String
         Dim resultadoAccion As Integer
 
         If (accion.Equals("0")) Then
@@ -221,13 +220,16 @@ Public Class frm_AdministrarSolicitudes
         End If
 
         If (accion.Equals("1")) Then
+            asuntoCorreo = "Solicitud aceptada"
+            mensajeCorreo = " Nos da gusto informarle que su solicitud ha sido aceptada para ingresar al parqueo "
             If (fechaI.Equals(fechaF)) Then
-                retroalimentacion = "el día " + fechaI + " de las " + horaI + " a las " + horaF + " en el espacio " + idParqueo + " del parqueo."
+                mensajeCorreo = mensajeCorreo + "el día " + fechaI + " de las " + horaI + " a las " + horaF + " en el espacio " + idParqueo + " del parqueo."
             Else
-                retroalimentacion = "para los días del " + fechaI + " al " + fechaF + "de " + horaI + "a " + horaF + " en el espacio " + idParqueo + " del parqueo."
+                mensajeCorreo = mensajeCorreo + "para los días del " + fechaI + " al " + fechaF + "de " + horaI + "a " + horaF + " en el espacio " + idParqueo + " del parqueo."
             End If
         Else
-            retroalimentacion = tbRetroalimentacion.Text
+            asuntoCorreo = "Solicitud rechazada"
+            mensajeCorreo = " Lamentamos informarle que su solicitud ha sido rechazada por el siguiente motivo: " + tbRetroalimentacion.Text
         End If
 
         resultadoAccion = Me.solicitudNegocios.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
@@ -235,7 +237,7 @@ Public Class frm_AdministrarSolicitudes
         If (resultadoAccion = 1 Or accion.Equals("0")) Then
             titulo = "Correcto"
             tipo = "success"
-            Me.usuarioNegocios.envioCorreoSolicitud(Me.correo, retroalimentacion, accion)
+            Me.usuarioNegocios.envioCorreoSolicitud(asuntoCorreo, Me.correo, mensajeCorreo)
             tablaSolicitudes.Rows.RemoveAt(Integer.Parse(Session("fila")))
         Else
             titulo = "Error"

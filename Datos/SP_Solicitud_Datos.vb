@@ -10,7 +10,7 @@ Public Class SP_Solicitud_Datos
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  11-Noviembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  13-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public gstrconnString As String
@@ -308,5 +308,57 @@ Public Class SP_Solicitud_Datos
         cmdInsert.ExecuteNonQuery()
         cmdInsert.Connection.Close()
     End Sub
+    Public Function obtenerVisitantesAtrasados() As LinkedList(Of Solicitud)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_ObtenerVisitantesAtrasados"
 
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Solicitud")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Solicitud").Rows
+        Dim solicitudes As New LinkedList(Of Solicitud)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim solicitudActual As New Solicitud()
+            solicitudActual.GstrFechaISG = currentRow("TC_Nombre_TSP_Usuario").ToString() 'Se usa este para el nombre
+            solicitudActual.GstrFechaFSG = currentRow("TC_Correo_TSP_Usuario").ToString()
+            solicitudActual.GstrMarcaSG = currentRow("TC_Marca_TSP_Solicitud").ToString()
+            solicitudActual.GstrPlacaSG = currentRow("TC_Placa_TSP_Solicitud").ToString()
+            solicitudActual.GstrModeloSG = currentRow("TC_Modelo_TSP_Solicitud").ToString()
+            solicitudActual.GintIdParqueoSG = Integer.Parse(currentRow("TN_Idparqueo_TSP_Solicitud").ToString())
+            solicitudActual.GstrHoraISG = currentRow("TF_Horai_TSP_Entradas_Parqueo_X_TSP_Solicitud").ToString()
+            solicitudActual.GstrHoraFSG = currentRow("TF_Horaf_TSP_Entradas_Parqueo_X_TSP_Solicitud").ToString()
+            solicitudes.AddLast(solicitudActual)
+        Next
+        Return solicitudes
+    End Function
+    Public Function decidirSolicitudAtrasada(marca As String, placa As String, modelo As String, idParqueo As Integer, horaI As String, horaF As String, horaNueva As String, accion As String) As Integer
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlStoredProcedure As [String] = "PA_DecidirSolicitudAtrasada"
+        Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
+        Dim resultado As Integer
+
+        cmdInsert.Parameters.Add(New SqlParameter("@marca", marca))
+        cmdInsert.Parameters.Add(New SqlParameter("@placa", placa))
+        cmdInsert.Parameters.Add(New SqlParameter("@modelo", modelo))
+        cmdInsert.Parameters.Add(New SqlParameter("@idParqueo", idParqueo))
+        cmdInsert.Parameters.Add(New SqlParameter("@horaEntrada", horaI))
+        cmdInsert.Parameters.Add(New SqlParameter("@horaSalida", horaF))
+        cmdInsert.Parameters.Add(New SqlParameter("@nuevaHora", horaNueva))
+        cmdInsert.Parameters.Add(New SqlParameter("@accion", Integer.Parse(accion)))
+        cmdInsert.Parameters.Add("@valorRetorno", SqlDbType.Int).Direction = ParameterDirection.Output
+        cmdInsert.Connection.Open()
+        cmdInsert.ExecuteNonQuery()
+        resultado = Convert.ToInt32(cmdInsert.Parameters("@valorRetorno").Value)
+        cmdInsert.Connection.Close()
+
+        Return resultado
+    End Function
 End Class

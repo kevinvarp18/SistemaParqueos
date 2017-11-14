@@ -11,7 +11,7 @@ Public Class SP_Usuario_Negocios
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  08-Octubre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  13-Octubre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public usuario_Acceso_a_Datos As SP_Usuario_Datos
@@ -66,7 +66,7 @@ Public Class SP_Usuario_Negocios
         Return Me.usuario_Acceso_a_Datos.obtenerPlacas()
     End Function
 
-    Public Sub envioCorreoSolicitud(strCorreo As String, strRetroalimentacion As String, accion As Integer)
-        Me.usuario_Acceso_a_Datos.envioRespuestaSolicitud(strCorreo, strRetroalimentacion, accion)
+    Public Sub envioCorreoSolicitud(strAsunto As String, strCorreo As String, strMensaje As String)
+        Me.usuario_Acceso_a_Datos.envioRespuestaSolicitud(strAsunto, strCorreo, strMensaje)
     End Sub
 End Class

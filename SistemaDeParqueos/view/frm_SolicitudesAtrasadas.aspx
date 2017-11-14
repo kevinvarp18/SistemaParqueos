@@ -8,8 +8,6 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Visitantes Atrasados</h3>
-                    </div>
-                    </div>
                     <div class="container">
                         <div class="page w3-4">
                             <div class="bs-example " data-example-id="simple-table">
@@ -31,8 +29,18 @@
                             </div>
                         </div>
                     </div>
+                    <script>
+                        function muestraMensaje(titulo, mensaje, tipo) {
+                            swal(
+                              titulo,
+                              mensaje,
+                              tipo
+                            )
+                        }
+                    </script>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
+    </div>
 </asp:Content>
 

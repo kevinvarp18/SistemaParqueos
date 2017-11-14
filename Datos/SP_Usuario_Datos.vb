@@ -14,7 +14,7 @@ Public Class SP_Usuario_Datos
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
     'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  08-Noviembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  13-Noviembre-2017
     '******************************************************************
     'Declaracion de Varaiables.
     Public gstrconnString As String
@@ -303,7 +303,7 @@ Public Class SP_Usuario_Datos
         Next
         Return placas
     End Function
-    Public Sub envioRespuestaSolicitud(strCorreo As String, strRetroalimentacion As String, accion As Integer)
+    Public Sub envioRespuestaSolicitud(strAsunto As String, strCorreo As String, strMensaje As String)
         Dim correo As New MailMessage
         Dim smtp As New SmtpClient()
 
@@ -315,14 +315,8 @@ Public Class SP_Usuario_Datos
                 correo.From = New MailAddress("sistemaparqueosoij@gmail.com", "Sistema Parqueos OIJ", System.Text.Encoding.UTF8)
                 correo.[To].Add(usuarioActual.gstrCorreo)
                 correo.SubjectEncoding = System.Text.Encoding.UTF8
-                If (accion = 0) Then
-                    correo.Subject = "Solicitud rechazada"
-                    correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "." + " Lamentamos informarle que su solicitud ha sido rechazada por el siguiente motivo: " + strRetroalimentacion)
-                Else
-                    correo.Subject = "Solicitud aceptada"
-                    correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "." + " Nos da gusto informarle que su solicitud ha sido aceptada para ingresar al parqueo " + strRetroalimentacion)
-                End If
-
+                correo.Subject = strAsunto
+                correo.Body = Convert.ToString("Hola " + usuarioActual.gstrNombre + " " + usuarioActual.gstrApellido + "." + strMensaje)
                 correo.BodyEncoding = System.Text.Encoding.UTF8
                 correo.IsBodyHtml = (True)
                 correo.Priority = MailPriority.High
@@ -337,7 +331,6 @@ Public Class SP_Usuario_Datos
                 End Try
             Next
         End If
-
     End Sub
 
 End Class
