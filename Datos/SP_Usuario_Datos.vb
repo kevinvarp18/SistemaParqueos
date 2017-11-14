@@ -110,16 +110,17 @@ Public Class SP_Usuario_Datos
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_EliminarPermisoRol"
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
-        Dim result As Integer
+        Dim result As Boolean
 
         cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
 
         cmdInsert.Parameters.Add(New SqlParameter("@id_permiso", id_permiso))
         cmdInsert.Parameters.Add(New SqlParameter("@rol", rol))
+        cmdInsert.Parameters.Add(New SqlParameter("@resultado", 1))
         cmdInsert.Connection.Open()
         cmdInsert.ExecuteNonQuery()
 
-        result = Convert.ToInt32(cmdInsert.Parameters("@resultado").Value)
+        result = cmdInsert.Parameters("@resultado").Value
         cmdInsert.Connection.Close()
 
         Return result

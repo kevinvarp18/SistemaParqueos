@@ -170,7 +170,7 @@ Public Class frm_ManejarPermisos
             End If
 
 
-            If Me.usuarioNegocios.insertarPermisoRol(idPermiso, rol) Then
+            If Me.usuarioNegocios.eliminarPermisoRol(idPermiso, rol) Then
                 titulo = "Correcto"
                 mensaje = "Se ha eliminado exitosamente"
                 tipo = "success"

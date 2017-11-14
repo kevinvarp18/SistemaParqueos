@@ -146,7 +146,7 @@ Public Class frm_Reporte
                 Dim tCell8 As New TableCell()
 
                 tCell.Text = solicitudAct.GstrMarcaSG
-                tCell2.Text = " "
+                tCell2.Text = solicitudAct.GstrModeloSG
                 tCell3.Text = solicitudAct.GstrPlacaSG
                 tCell4.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
                 tCell5.Text = solicitudAct.GstrHoraISG

@@ -166,6 +166,7 @@ Public Class SP_Solicitud_Datos
             solicitudActual.GstrMarcaSG = currentRow("nombre").ToString()
             solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
             solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
+            solicitudActual.GstrModeloSG = currentRow("tipo_visistante").ToString()
             solicitud.AddLast(solicitudActual)
 
         Next
@@ -197,6 +198,7 @@ Public Class SP_Solicitud_Datos
             solicitudActual.GstrMarcaSG = currentRow("nombre").ToString()
             solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
             solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
+            solicitudActual.GstrModeloSG = currentRow("tipo_visistante").ToString()
             solicitudes.AddLast(solicitudActual)
 
         Next
@@ -228,6 +230,7 @@ Public Class SP_Solicitud_Datos
             solicitudActual.GstrMarcaSG = currentRow("nombre").ToString()
             solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
             solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
+            solicitudActual.GstrModeloSG = currentRow("tipo_visistante").ToString()
             solicitudes.AddLast(solicitudActual)
 
         Next
