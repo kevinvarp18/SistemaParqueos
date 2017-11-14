@@ -150,7 +150,31 @@ Public Class SP_Usuario_Datos
         Return permisos
     End Function
 
-    Public Function ObtenerRolesYPermisos() As LinkedList(Of PermisoYRoles)
+    Public Function ObtenerPermisos() As LinkedList(Of Permiso)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As String = "PA_ObtenerPermisos"
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Permiso")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Permiso").Rows
+        Dim permisos As New LinkedList(Of Permiso)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim permiso As New Permiso()
+            permiso.GintIdentificador1 = currentRow("TN_Id_TSP_Permiso")
+            permiso.GstrTipo1 = currentRow("TC_Tipo_TSP_Permiso")
+            permisos.AddLast(permiso)
+        Next
+        Return permisos
+    End Function
+
+
+    Public Function ObtenerRolesYPermisos() As LinkedList(Of RolYPermiso)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As String = "PA_ObtenerRolesYPermisos"
         Dim sqlDataAdapterClient As New SqlDataAdapter()
@@ -162,15 +186,15 @@ Public Class SP_Usuario_Datos
         sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Permiso")
         sqlDataAdapterClient.SelectCommand.Connection.Close()
         Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Permiso").Rows
-        Dim roles As New LinkedList(Of PermisoYRoles)()
+        Dim permisos As New LinkedList(Of RolYPermiso)()
 
         For Each currentRow As DataRow In dataRowCollection
-            Dim rolActual As New PermisoYRoles()
-            rolActual.GstrPermiso = currentRow("TC_Tipo_TSP_Permiso")
-            rolActual.GstrRol = currentRow("TC_Rol_TSP_Permiso_X_Rol")
-            roles.AddLast(rolActual)
+            Dim permiso As New RolYPermiso()
+            permiso.GstrPermiso1 = currentRow("TC_Tipo_TSP_Permiso")
+            permiso.GstrRol1 = currentRow("TC_Rol_TSP_Permiso_X_Rol")
+            permisos.AddLast(permiso)
         Next
-        Return roles
+        Return permisos
     End Function
 
     Public Function obtenerUsuarios(correo As String, contrasenna As String) As LinkedList(Of Usuario)
