@@ -26,8 +26,9 @@ Public Class frm_SolicitudesAtrasadas
             Me.usuarioNegocios = New SP_Usuario_Negocios(Me.strConnectionString)
             llenarTablaSolicitudes()
         Else
+            Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
             Response.BufferOutput = True
-            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+            Response.Redirect(url & Convert.ToString("/view/frm_index.aspx"))
         End If
     End Sub
     Public Sub llenarTablaSolicitudes()

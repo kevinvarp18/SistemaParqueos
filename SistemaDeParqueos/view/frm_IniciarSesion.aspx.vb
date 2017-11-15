@@ -14,8 +14,9 @@ Public Class loginView
             Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
             Response.BufferOutput = True
         Else
+            Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
             Response.BufferOutput = True
-            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+            Response.Redirect(url & Convert.ToString("/view/frm_index.aspx"))
         End If
 
         email = New Regex("([\w-+]+(?:\.[\w-+]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7})")
@@ -49,9 +50,9 @@ Public Class loginView
                         Next
                     End If
                 Next
-
+                Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
                 Response.BufferOutput = True
-                Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+                Response.Redirect(url & Convert.ToString("/view/frm_index.aspx"))
             Else
                 titulo = "ERROR"
                 mensaje = "Los datos del usuario no existen"
