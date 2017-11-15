@@ -25,7 +25,7 @@ Public Class SP_Usuario_Negocios
         Return Me.usuario_Acceso_a_Datos.insertarOficial(oficial)
     End Function
 
-    Public Function insertarVisitante(visitante As Visitante) As Boolean
+    Public Function insertarVisitante(visitante As Visitante) As Integer
         Return Me.usuario_Acceso_a_Datos.insertarVisitante(visitante)
     End Function
 
@@ -52,8 +52,8 @@ Public Class SP_Usuario_Negocios
     Public Function insertarAdministrador(administrador As Administrador) As Boolean
         Return Me.usuario_Acceso_a_Datos.insertarAdministrador(administrador)
     End Function
-    Public Function obtenerUsuarios(correo As String, contrasenna As String) As LinkedList(Of Usuario)
-        Return Me.usuario_Acceso_a_Datos.obtenerUsuarios(correo, contrasenna)
+    Public Function obtenerUsuarios(correo As String) As LinkedList(Of Usuario)
+        Return Me.usuario_Acceso_a_Datos.obtenerUsuarios(correo)
     End Function
     Public Function obtenerCorreosUsuarios(strcorreo As String) As LinkedList(Of Usuario)
         Return Me.usuario_Acceso_a_Datos.obtenerCorreosUsuarios(strcorreo)
