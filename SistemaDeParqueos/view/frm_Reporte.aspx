@@ -32,6 +32,13 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
 
+                    <asp:UpdatePanel ID="UpdatePanel9" runat="server" Visible="false">
+                        <ContentTemplate>
+                            <asp:Label ID="lblInstitucion" runat="server" style="margin-left: 10%;" Text="Seleccione el correo"></asp:Label>
+                            <asp:DropDownList ID="DwnLstInstitucion" runat="server" Style="margin-left: 4.3%; width: 27%;" AutoPostBack="true"></asp:DropDownList><br />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
                     <asp:UpdatePanel ID="UpdatePanel5" runat="server" Visible="false">
                         <ContentTemplate>
                             <asp:Label ID="lblFecha" runat="server" style="margin-left: 10%;" Text="Seleccione la fecha"></asp:Label>

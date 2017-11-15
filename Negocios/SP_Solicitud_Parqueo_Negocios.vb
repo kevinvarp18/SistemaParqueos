@@ -69,4 +69,15 @@ Public Class SP_Solicitud_Parqueo_Negocios
     Public Function ObtenerCedulasYNombres() As LinkedList(Of Usuario)
         Return Me.solicitud_Acceso_a_Datos.ObtenerCedulasYNombres()
     End Function
+
+    Public Function ObtenerDepartamentos() As LinkedList(Of String)
+        Return Me.solicitud_Acceso_a_Datos.ObtenerDepartamentos()
+    End Function
+
+    Public Function ObtenerInstituciones() As LinkedList(Of String)
+        Return Me.solicitud_Acceso_a_Datos.ObtenerInstituciones()
+    End Function
+
+
+
 End Class

@@ -294,6 +294,50 @@ Public Class SP_Solicitud_Datos
         Return usuarios
     End Function
 
+    Public Function ObtenerDepartamentos() As LinkedList(Of String)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As String = "PA_VerDepartamentos"
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Usuario")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Usuario").Rows
+        Dim departamentos As New LinkedList(Of String)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim departamento As String = ""
+            departamento = currentRow("TC_Departamento_TSP_Vinterno")
+            departamentos.AddLast(departamento)
+        Next
+        Return departamentos
+    End Function
+
+    Public Function ObtenerInstituciones() As LinkedList(Of String)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As String = "PA_VerInstituciones"
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Usuario")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Usuario").Rows
+        Dim instituciones As New LinkedList(Of String)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim institucion As String = ""
+            institucion = currentRow("TC_Institucion_TSP_Vexterno")
+            instituciones.AddLast(institucion)
+        Next
+        Return instituciones
+    End Function
+
     Public Function decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String) As Integer
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_DecidirSolicitud"
