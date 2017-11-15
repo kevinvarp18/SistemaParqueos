@@ -82,22 +82,28 @@ Public Class registrarVisitante
                 tipoVisitante = "Interno"
             End If
 
-            Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
+            Dim resultado As Integer = Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text,
             tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v",
             Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, tbProcedencia.Text))
 
-            titulo = "Correcto"
-            mensaje = "Se ha registrado el visitante exitosamente"
-            tipo = "success"
+            If (resultado = 1) Then
+                titulo = "Correcto"
+                mensaje = "Se ha registrado el visitante exitosamente"
+                tipo = "success"
 
-            tbNombre.Text = ""
-            tbApellidos.Text = ""
-            tbIdentificacion.Text = ""
-            tbTelefono.Text = ""
-            tbEmail.Text = ""
-            tbContrasena.Text = ""
-            tbUbicacion.Text = ""
-            tbProcedencia.Text = ""
+                tbNombre.Text = ""
+                tbApellidos.Text = ""
+                tbIdentificacion.Text = ""
+                tbTelefono.Text = ""
+                tbEmail.Text = ""
+                tbContrasena.Text = ""
+                tbUbicacion.Text = ""
+                tbProcedencia.Text = ""
+            Else
+                titulo = "Error"
+                mensaje = "Ese correo ya existe en el sistema"
+                tipo = "error"
+            End If
         End If
 
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
