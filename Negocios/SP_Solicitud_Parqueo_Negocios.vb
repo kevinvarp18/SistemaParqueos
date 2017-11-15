@@ -61,4 +61,12 @@ Public Class SP_Solicitud_Parqueo_Negocios
     Public Function decidirSolicitudAtrasada(marca As String, placa As String, modelo As String, idParqueo As Integer, horaI As String, horaF As String, horaNueva As String, accion As String) As Integer
         Return Me.solicitud_Acceso_a_Datos.decidirSolicitudAtrasada(marca, placa, modelo, idParqueo, horaI, horaF, horaNueva, accion)
     End Function
+
+    Public Function obtenerReporteCedula(cedula As String) As LinkedList(Of Solicitud)
+        Return Me.solicitud_Acceso_a_Datos.obtenerReporteCedula(cedula)
+    End Function
+
+    Public Function ObtenerCedulasYNombres() As LinkedList(Of Usuario)
+        Return Me.solicitud_Acceso_a_Datos.ObtenerCedulasYNombres()
+    End Function
 End Class

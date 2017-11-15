@@ -236,6 +236,64 @@ Public Class SP_Solicitud_Datos
         Next
         Return solicitudes
     End Function
+
+    Public Function obtenerReporteCedula(cedula As String) As LinkedList(Of Solicitud)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_ReporteCedula"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@cedula_", cedula))
+
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Solicitud")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Solicitud").Rows
+        Dim solicitudes As New LinkedList(Of Solicitud)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim solicitudActual As New Solicitud()
+            solicitudActual.GintIdParqueoSG = Integer.Parse(currentRow("num_parqueo").ToString())
+            solicitudActual.GstrHoraISG = currentRow("hora_e").ToString()
+            solicitudActual.GstrHoraFSG = currentRow("hora_s").ToString()
+            solicitudActual.GstrPlacaSG = currentRow("placa").ToString()
+            solicitudActual.GstrMarcaSG = currentRow("nombre").ToString()
+            solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
+            solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
+            solicitudActual.GstrModeloSG = currentRow("tipo_visistante").ToString()
+            solicitudes.AddLast(solicitudActual)
+
+        Next
+        Return solicitudes
+    End Function
+
+    Public Function ObtenerCedulasYNombres() As LinkedList(Of Usuario)
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As String = "PA_VerCedulasYNombres"
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Usuario")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("SP.TSP_Usuario").Rows
+        Dim usuarios As New LinkedList(Of Usuario)()
+
+        For Each currentRow As DataRow In dataRowCollection
+            Dim usuario As New Usuario()
+            usuario.GstrNombreSG = currentRow("TC_Nombre_TSP_Usuario")
+            usuario.GstrApellidoSG = currentRow("TC_Apellido_TSP_Usuario")
+            usuario.GstrIdSG = currentRow("TC_Identificacion_TSP_Tipoid")
+            usuarios.AddLast(usuario)
+        Next
+        Return usuarios
+    End Function
+
     Public Function decidirSolicitud(marca As String, placa As String, horaI As String, horaF As String, fechaI As String, fechaF As String, idParqueo As String, accion As String) As Integer
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_DecidirSolicitud"
