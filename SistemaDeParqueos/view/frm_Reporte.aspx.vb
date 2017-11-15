@@ -40,6 +40,8 @@ Public Class frm_Reporte
                 Dim updatePanelNombre As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel4"), UpdatePanel)
                 Dim updatePanelFecha As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel5"), UpdatePanel)
                 Dim updatePanelTabla As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel6"), UpdatePanel)
+                Dim updatePanelInstitucion As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel9"), UpdatePanel)
+                Dim updatePanelDepartamento As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel10"), UpdatePanel)
 
 
 
@@ -48,26 +50,50 @@ Public Class frm_Reporte
                     updatePanelCorreo.Visible = False
                     updatePanelFecha.Visible = False
                     updatePanelNombre.Visible = False
+                    updatePanelInstitucion.Visible = False
+                    updatePanelDepartamento.Visible = False
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = True
                     updatePanelFecha.Visible = False
                     updatePanelNombre.Visible = False
+                    updatePanelInstitucion.Visible = False
+                    updatePanelDepartamento.Visible = False
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Nombre")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = False
                     updatePanelFecha.Visible = False
                     updatePanelNombre.Visible = True
+                    updatePanelInstitucion.Visible = False
+                    updatePanelDepartamento.Visible = False
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Fecha")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = False
                     updatePanelFecha.Visible = True
                     updatePanelNombre.Visible = False
+                    updatePanelInstitucion.Visible = False
+                    updatePanelDepartamento.Visible = False
+                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Institucion")) Then
+                    updatePanelPlaca.Visible = False
+                    updatePanelCorreo.Visible = False
+                    updatePanelFecha.Visible = False
+                    updatePanelNombre.Visible = False
+                    updatePanelInstitucion.Visible = True
+                    updatePanelDepartamento.Visible = False
+                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Departamento")) Then
+                    updatePanelPlaca.Visible = False
+                    updatePanelCorreo.Visible = False
+                    updatePanelFecha.Visible = False
+                    updatePanelNombre.Visible = False
+                    updatePanelInstitucion.Visible = False
+                    updatePanelDepartamento.Visible = True
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Seleccione una opción")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = False
                     updatePanelFecha.Visible = False
                     updatePanelNombre.Visible = False
+                    updatePanelInstitucion.Visible = False
+                    updatePanelDepartamento.Visible = False
                 End If
             Else
 
@@ -78,6 +104,8 @@ Public Class frm_Reporte
                 DwnLstTipoReporte.Items.Add("Placa")
                 DwnLstTipoReporte.Items.Add("Nombre")
                 DwnLstTipoReporte.Items.Add("Correo")
+                DwnLstTipoReporte.Items.Add("Institucion")
+                DwnLstTipoReporte.Items.Add("Departamento")
                 DwnLstTipoReporte.Items.Add("Fecha")
 
                 DwnLstPlaca.Items.Add("Seleccione una opción")
@@ -98,6 +126,17 @@ Public Class frm_Reporte
                     DwnLstNombre.Items.Add(uc.GstrIdSG + " - " + uc.GstrNombreSG + " " + uc.GstrApellidoSG)
                 Next
 
+                DwnLstDepartamento.Items.Add("Seleccione una opción")
+                Dim departamentos As LinkedList(Of String) = snSol.ObtenerDepartamentos()
+                For Each departamento As String In departamentos
+                    DwnLstDepartamento.Items.Add(departamento)
+                Next
+
+                DwnLstInstitucion.Items.Add("Seleccione una opción")
+                Dim instituciones As LinkedList(Of String) = snSol.ObtenerInstituciones()
+                For Each institucion As String In instituciones
+                    DwnLstInstitucion.Items.Add(institucion)
+                Next
 
             End If
         Else
@@ -268,6 +307,32 @@ Public Class frm_Reporte
             End If
         ElseIf (Not DwnLstNombre.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Nombre") Then
             solicitudes = sn.obtenerReporteCedula(DwnLstNombre.SelectedItem.ToString())
+            If solicitudes.Count.Equals(0) Then
+                titulo = "Vacio"
+                mensaje = "No se encontraron datos para el usuario seleccionado"
+                tipo = "info"
+                faltanDatos = True
+            Else
+                If accion.Equals("reporte") Then
+                    Me.construyeTabla(solicitudes)
+                End If
+                faltanDatos = False
+            End If
+        ElseIf (Not DwnLstInstitucion.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Institucion") Then
+            solicitudes = sn.obtenerReporteInstitucion(DwnLstInstitucion.SelectedItem.ToString())
+            If solicitudes.Count.Equals(0) Then
+                titulo = "Vacio"
+                mensaje = "No se encontraron datos para el usuario seleccionado"
+                tipo = "info"
+                faltanDatos = True
+            Else
+                If accion.Equals("reporte") Then
+                    Me.construyeTabla(solicitudes)
+                End If
+                faltanDatos = False
+            End If
+        ElseIf (Not DwnLstDepartamento.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Departamento") Then
+            solicitudes = sn.obtenerReporteDepartamento(DwnLstDepartamento.SelectedItem.ToString())
             If solicitudes.Count.Equals(0) Then
                 titulo = "Vacio"
                 mensaje = "No se encontraron datos para el usuario seleccionado"

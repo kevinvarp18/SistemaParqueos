@@ -149,6 +149,33 @@ Partial Public Class frm_Reporte
     Protected WithEvents DwnLstInstitucion As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''UpdatePanel10 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel10 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''lblDepartamento control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDepartamento As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''DwnLstDepartamento control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DwnLstDepartamento As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''UpdatePanel5 control.
     '''</summary>
     '''<remarks>

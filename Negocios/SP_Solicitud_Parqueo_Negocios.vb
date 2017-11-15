@@ -78,6 +78,12 @@ Public Class SP_Solicitud_Parqueo_Negocios
         Return Me.solicitud_Acceso_a_Datos.ObtenerInstituciones()
     End Function
 
+    Public Function obtenerReporteInstitucion(institucion As String) As LinkedList(Of Solicitud)
+        Return Me.solicitud_Acceso_a_Datos.obtenerReporteInstitucion(institucion)
+    End Function
 
+    Public Function obtenerReporteDepartamento(departamento As String) As LinkedList(Of Solicitud)
+        Return Me.solicitud_Acceso_a_Datos.obtenerReporteDepartamento(departamento)
+    End Function
 
 End Class
