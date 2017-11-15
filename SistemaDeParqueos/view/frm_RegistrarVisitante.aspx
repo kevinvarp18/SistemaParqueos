@@ -17,7 +17,7 @@
                     <asp:Label ID="lblApellidos" runat="server" Text="Apellidos:"></asp:Label>
                     <asp:TextBox ID="tbApellidos" type="text" Style="margin-left: 6.8%; width: 27%;" runat="server"></asp:TextBox><br />
                     <asp:Label ID="lblTelefono" runat="server" Text="Teléfono:"></asp:Label>
-                    <asp:TextBox ID="tbTelefono" type="text" runat="server" Style="margin-left: 7.2%; width: 27%;"></asp:TextBox><br />
+                    <asp:TextBox ID="tbTelefono" type="number" runat="server" Style="margin-left: 7.2%; width: 27%;"></asp:TextBox><br />
                     <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label>
                     <asp:TextBox ID="tbEmail" type="text" runat="server" Style="margin-left: 9.1%; width: 27%;"></asp:TextBox><br />
                     <asp:Label ID="lblContrasena" runat="server" Text="Contraseña:"></asp:Label>

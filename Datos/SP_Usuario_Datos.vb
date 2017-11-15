@@ -65,8 +65,7 @@ Public Class SP_Usuario_Datos
         cmdInsert.Connection.Close()
         Return result
     End Function
-
-    Public Function insertarVisitante(visitante As Visitante) As Boolean
+    Public Function insertarVisitante(visitante As Visitante) As Integer
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_RegistrarVisitante"
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
@@ -89,7 +88,6 @@ Public Class SP_Usuario_Datos
         cmdInsert.Connection.Close()
         Return result
     End Function
-
     Public Function insertarPermisoRol(id_permiso As Integer, rol As String) As Boolean
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_InsertarPermisoRol"
@@ -105,7 +103,6 @@ Public Class SP_Usuario_Datos
         cmdInsert.Connection.Close()
         Return result
     End Function
-
     Public Function eliminarPermisoRol(id_permiso As Integer, rol As String) As Boolean
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_EliminarPermisoRol"
@@ -125,7 +122,6 @@ Public Class SP_Usuario_Datos
 
         Return result
     End Function
-
     Public Function obtenerPermisosPorRol(rol As String) As LinkedList(Of Permiso)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As String = "PA_ObtenerPermisosRol"
@@ -149,7 +145,6 @@ Public Class SP_Usuario_Datos
         Next
         Return permisos
     End Function
-
     Public Function ObtenerPermisos() As LinkedList(Of Permiso)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As String = "PA_ObtenerPermisos"
@@ -172,8 +167,6 @@ Public Class SP_Usuario_Datos
         Next
         Return permisos
     End Function
-
-
     Public Function ObtenerRolesYPermisos() As LinkedList(Of RolYPermiso)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As String = "PA_ObtenerRolesYPermisos"
@@ -196,8 +189,7 @@ Public Class SP_Usuario_Datos
         Next
         Return permisos
     End Function
-
-    Public Function obtenerUsuarios(correo As String, contrasenna As String) As LinkedList(Of Usuario)
+    Public Function obtenerUsuarios(correo As String) As LinkedList(Of Usuario)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As String = "PA_ObtenerUsuarios"
         Dim sqlDataAdapterClient As New SqlDataAdapter()
@@ -206,7 +198,6 @@ Public Class SP_Usuario_Datos
         sqlDataAdapterClient.SelectCommand.Connection = connection
         sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
         sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@correo", correo))
-        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@contrasena", contrasenna))
         Dim dataSetAttendant As New DataSet()
         sqlDataAdapterClient.Fill(dataSetAttendant, "SP.TSP_Usuario")
         sqlDataAdapterClient.SelectCommand.Connection.Close()
@@ -224,7 +215,6 @@ Public Class SP_Usuario_Datos
         Next
         Return usuarios
     End Function
-
     Public Function obtenerCorreosUsuarios(strcorreo As String) As LinkedList(Of Usuario)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlSelect As String = "PA_VerCorreosExistentes"
@@ -251,7 +241,6 @@ Public Class SP_Usuario_Datos
         Next
         Return usuarios
     End Function
-
     Public Function recuperacionContrasenaMail(strCorreo As String) As Boolean
         Dim correo As New MailMessage
         Dim smtp As New SmtpClient()

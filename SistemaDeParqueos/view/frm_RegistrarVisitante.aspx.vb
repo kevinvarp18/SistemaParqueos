@@ -11,9 +11,7 @@ Public Class registrarVisitante
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If String.Equals(Session("Usuario"), "N") Then
             Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_RegistrarVisitante", ResolveUrl("~") + "public/js/" + "script.js")
-
             Me.usuarioNegocios = New SP_Usuario_Negocios(connectionString)
 
             If Not IsPostBack Then
@@ -22,7 +20,7 @@ Public Class registrarVisitante
                 DwnLstProcedencia.Items.Add("Interno")
 
                 DwnLstTipoIdentificacion.Items.Add("Seleccione una opción")
-                DwnLstTipoIdentificacion.Items.Add("Cédula")
+                DwnLstTipoIdentificacion.Items.Add("Numero de Cedula")
                 DwnLstTipoIdentificacion.Items.Add("Pasaporte")
                 DwnLstTipoIdentificacion.Items.Add("Licencia de conducir")
             Else
@@ -100,6 +98,8 @@ Public Class registrarVisitante
                 tbContrasena.Text = ""
                 tbUbicacion.Text = ""
                 tbProcedencia.Text = ""
+                DwnLstProcedencia.SelectedIndex = 0
+                DwnLstTipoIdentificacion.SelectedIndex = 0
             Else
                 titulo = "Error"
                 mensaje = "Ese correo ya existe en el sistema"
