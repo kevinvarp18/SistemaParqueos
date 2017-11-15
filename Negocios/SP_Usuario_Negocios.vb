@@ -41,7 +41,11 @@ Public Class SP_Usuario_Negocios
         Return Me.usuario_Acceso_a_Datos.obtenerPermisosPorRol(rol)
     End Function
 
-    Public Function ObtenerRolesYPermisos() As LinkedList(Of PermisoYRoles)
+    Public Function ObtenerPermisos() As LinkedList(Of Permiso)
+        Return Me.usuario_Acceso_a_Datos.ObtenerPermisos()
+    End Function
+
+    Public Function ObtenerRolesYPermisos() As LinkedList(Of RolYPermiso)
         Return Me.usuario_Acceso_a_Datos.ObtenerRolesYPermisos()
     End Function
 

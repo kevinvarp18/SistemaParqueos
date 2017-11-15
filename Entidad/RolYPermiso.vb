@@ -1,4 +1,4 @@
-﻿Public Class PermisoYRoles
+﻿Public Class RolYPermiso
     '**********************************************************************
     'NOMBRE DEL SISTEMA:  SistemaDeParqueos.
     'NOMBRE DEL PAQUETE:  SistemaDeParqueos.
@@ -7,48 +7,42 @@
 
     'NOMBRE DEL DESARROLLADOR:                       Adrian Serrano
     '
-    'FECHA DE CREACIÓN                               10-Noviembre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  10-Noviembre-2017
+    'FECHA DE CREACIÓN                               14-Noviembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  14-Noviembre-2017
     '******************************************************************
     'Declaracion Declare variables
-
-    Private permiso As String
-    Private rol As String
+    Private gstrPermiso As String
+    Private gstrRol As String
 
     'Declaracion Declare constructor sobrecargado
-    Public Sub New(permiso As String, rol As String)
-        Me.permiso = permiso
-        Me.rol = rol
+    Public Sub New(gstrPermiso As String, gstrRol As String)
+        Me.GstrPermiso1 = gstrPermiso
+        Me.GstrRol1 = gstrRol
     End Sub
 
     Public Sub New()
-        Me.permiso = ""
-        Me.rol = ""
+        Me.GstrPermiso1 = ""
+        Me.GstrRol1 = ""
     End Sub
 
     'Metodos accesores
-    Public Property GstrPermiso As String
+    Public Property GstrPermiso1 As String
         Get
-            Return permiso
+            Return gstrPermiso
         End Get
         Set(value As String)
-            permiso = value
+            gstrPermiso = value
         End Set
     End Property
 
-    Public Property GstrRol As String
+    Public Property GstrRol1 As String
         Get
-            Return rol
+            Return gstrRol
         End Get
         Set(value As String)
-            rol = value
+            gstrRol = value
         End Set
     End Property
-
-
-
-
-
 
 
 End Class

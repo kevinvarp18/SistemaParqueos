@@ -21,8 +21,8 @@ Public Class frm_ManejarPermisos
 
                 DwnLstPermisos.Items.Add("Seleccione una opción")
 
-                For Each rol As PermisoYRoles In Me.usuarioNegocios.ObtenerRolesYPermisos()
-                    DwnLstPermisos.Items.Add(rol.GstrPermiso.ToString)
+                For Each permiso As Permiso In Me.usuarioNegocios.ObtenerPermisos()
+                    DwnLstPermisos.Items.Add(permiso.GstrTipo1.ToString)
                 Next
 
                 DwnLstRoles.Items.Add("Seleccione una opción")
@@ -34,8 +34,9 @@ Public Class frm_ManejarPermisos
 
 
         Else
+            Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
             Response.BufferOutput = True
-            Response.Redirect("http://localhost:52086/view/frm_index.aspx")
+            Response.Redirect(url & Convert.ToString("/view/frm_index.aspx"))
         End If
     End Sub
 
@@ -43,11 +44,11 @@ Public Class frm_ManejarPermisos
         Dim rowCnt As Integer
         Dim rowCtr As Integer
         Dim contador As Integer
-        Dim roles As LinkedList(Of PermisoYRoles) = usuarioNegocios.ObtenerRolesYPermisos()
+        Dim roles As LinkedList(Of RolYPermiso) = usuarioNegocios.ObtenerRolesYPermisos()
         rowCnt = 1
         contador = 1
 
-        For Each rolActual As PermisoYRoles In roles
+        For Each rolActual As RolYPermiso In roles
             For rowCtr = 1 To rowCnt
                 Dim filaTabla As New TableRow()
                 Dim columnaPermiso As New TableCell()
@@ -55,15 +56,15 @@ Public Class frm_ManejarPermisos
 
                 Dim rol As String = ""
 
-                If String.Equals(rolActual.GstrRol, "a") Then
+                If String.Equals(rolActual.GstrRol1, "a") Then
                     rol = "Administrador"
-                ElseIf String.Equals(rolActual.GstrRol, "o") Then
+                ElseIf String.Equals(rolActual.GstrRol1, "o") Then
                     rol = "Oficial de Seguridad"
-                ElseIf String.Equals(rolActual.GstrRol, "v") Then
+                ElseIf String.Equals(rolActual.GstrRol1, "v") Then
                     rol = "Visitante"
                 End If
 
-                columnaPermiso.Text = rolActual.GstrPermiso
+                columnaPermiso.Text = rolActual.GstrPermiso1
                 columnaRol.Text = rol
 
                 filaTabla.Cells.Add(columnaPermiso)
@@ -88,31 +89,8 @@ Public Class frm_ManejarPermisos
             Dim idPermiso As Integer = 0
             Dim rol As String = ""
 
-            If (DwnLstPermisos.SelectedItem.ToString().Equals("frm_AdministrarParqueo")) Then
-                idPermiso = 4
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_AdministrarSolicitudes")) Then
-                idPermiso = 5
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_BrindarParqueo")) Then
-                idPermiso = 6
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_ListaVisitantes")) Then
-                idPermiso = 7
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_RegistrarUsuario")) Then
-                idPermiso = 8
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_Reporte")) Then
-                idPermiso = 11
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_SolicitarParqueo")) Then
-                idPermiso = 12
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_VerParqueo")) Then
-                idPermiso = 13
-            End If
-
-            If (DwnLstRoles.SelectedItem.ToString().Equals("Administrador")) Then
-                rol = "a"
-            ElseIf (DwnLstRoles.SelectedItem.ToString().Equals("Oficial de Seguridad")) Then
-                rol = "o"
-            ElseIf (DwnLstRoles.SelectedItem.ToString().Equals("Visitante")) Then
-                rol = "v"
-            End If
+            idPermiso = Me.establecerPermiso(DwnLstPermisos.SelectedItem.ToString())
+            rol = establecerRol(DwnLstRoles.SelectedItem.ToString())
 
 
             If Me.usuarioNegocios.insertarPermisoRol(idPermiso, rol) Then
@@ -143,31 +121,8 @@ Public Class frm_ManejarPermisos
             Dim idPermiso As Integer = 0
             Dim rol As String = ""
 
-            If (DwnLstPermisos.SelectedItem.ToString().Equals("frm_AdministrarParqueo")) Then
-                idPermiso = 4
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_AdministrarSolicitudes")) Then
-                idPermiso = 5
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_BrindarParqueo")) Then
-                idPermiso = 6
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_ListaVisitantes")) Then
-                idPermiso = 7
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_RegistrarUsuario")) Then
-                idPermiso = 8
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_Reporte")) Then
-                idPermiso = 11
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_SolicitarParqueo")) Then
-                idPermiso = 12
-            ElseIf (DwnLstPermisos.SelectedItem.ToString().Equals("frm_VerParqueo")) Then
-                idPermiso = 13
-            End If
-
-            If (DwnLstRoles.SelectedItem.ToString().Equals("Administrador")) Then
-                rol = "a"
-            ElseIf (DwnLstRoles.SelectedItem.ToString().Equals("Oficial de Seguridad")) Then
-                rol = "o"
-            ElseIf (DwnLstRoles.SelectedItem.ToString().Equals("Visitante")) Then
-                rol = "v"
-            End If
+            idPermiso = Me.establecerPermiso(DwnLstPermisos.SelectedItem.ToString())
+            rol = establecerRol(DwnLstRoles.SelectedItem.ToString())
 
 
             If Me.usuarioNegocios.eliminarPermisoRol(idPermiso, rol) Then
@@ -183,6 +138,43 @@ Public Class frm_ManejarPermisos
         End If
 
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
+
     End Sub
+
+    Public Function establecerPermiso(permiso As String) As Integer
+        If (permiso.Equals("frm_AdministrarParqueo")) Then
+            Return 4
+        ElseIf (permiso.Equals("frm_AdministrarSolicitudes")) Then
+            Return 5
+        ElseIf (permiso.Equals("frm_BrindarParqueo")) Then
+            Return 6
+        ElseIf (permiso.Equals("frm_ListaVisitantes")) Then
+            Return 7
+        ElseIf (permiso.Equals("frm_RegistrarUsuario")) Then
+            Return 8
+        ElseIf (permiso.Equals("frm_Reporte")) Then
+            Return 11
+        ElseIf (permiso.Equals("frm_SolicitarParqueo")) Then
+            Return 12
+        ElseIf (permiso.Equals("frm_VerParqueo")) Then
+            Return 13
+        ElseIf (permiso.Equals("frm_SolicitudesAtrasadas")) Then
+            Return 14
+        End If
+
+        Return 0
+    End Function
+
+    Public Function establecerRol(rol As String) As String
+        If (rol.Equals("Administrador")) Then
+            Return "a"
+        ElseIf (rol.Equals("Oficial de Seguridad")) Then
+            Return "o"
+        ElseIf (rol.Equals("Visitante")) Then
+            Return "v"
+        End If
+
+        Return ""
+    End Function
 
 End Class
