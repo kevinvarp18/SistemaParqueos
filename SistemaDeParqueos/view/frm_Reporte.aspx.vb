@@ -26,6 +26,7 @@ Public Class frm_Reporte
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
             Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Dim sn As New SP_Usuario_Negocios(strconnectionString)
+            Dim snSol As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
 
 
             If IsPostBack Then
@@ -36,26 +37,37 @@ Public Class frm_Reporte
                 Dim contentPlaceHolder As ContentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
                 Dim updatePanelPlaca As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel2"), UpdatePanel)
                 Dim updatePanelCorreo As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel3"), UpdatePanel)
+                Dim updatePanelNombre As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel4"), UpdatePanel)
                 Dim updatePanelFecha As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel5"), UpdatePanel)
                 Dim updatePanelTabla As UpdatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel6"), UpdatePanel)
+
+
 
                 If (DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa")) Then
                     updatePanelPlaca.Visible = True
                     updatePanelCorreo.Visible = False
                     updatePanelFecha.Visible = False
+                    updatePanelNombre.Visible = False
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = True
                     updatePanelFecha.Visible = False
-
+                    updatePanelNombre.Visible = False
+                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Nombre")) Then
+                    updatePanelPlaca.Visible = False
+                    updatePanelCorreo.Visible = False
+                    updatePanelFecha.Visible = False
+                    updatePanelNombre.Visible = True
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Fecha")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = False
                     updatePanelFecha.Visible = True
+                    updatePanelNombre.Visible = False
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Seleccione una opción")) Then
                     updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = False
                     updatePanelFecha.Visible = False
+                    updatePanelNombre.Visible = False
                 End If
             Else
 
@@ -64,6 +76,7 @@ Public Class frm_Reporte
 
                 DwnLstTipoReporte.Items.Add("Seleccione una opción")
                 DwnLstTipoReporte.Items.Add("Placa")
+                DwnLstTipoReporte.Items.Add("Nombre")
                 DwnLstTipoReporte.Items.Add("Correo")
                 DwnLstTipoReporte.Items.Add("Fecha")
 
@@ -77,6 +90,12 @@ Public Class frm_Reporte
                 Dim usuariosCorreo As LinkedList(Of Usuario) = sn.obtenerCorreoUsuariosVisitantes()
                 For Each usuarioCorreo As Usuario In usuariosCorreo
                     DwnLstCorreo.Items.Add(usuarioCorreo.GstrCorreoSG)
+                Next
+
+                DwnLstNombre.Items.Add("Seleccione una opción")
+                Dim usuariosCedulas As LinkedList(Of Usuario) = snSol.ObtenerCedulasYNombres()
+                For Each uc As Usuario In usuariosCedulas
+                    DwnLstNombre.Items.Add(uc.GstrIdSG + " - " + uc.GstrNombreSG + " " + uc.GstrApellidoSG)
                 Next
 
 
@@ -239,6 +258,19 @@ Public Class frm_Reporte
             If solicitudes.Count.Equals(0) Then
                 titulo = "Vacio"
                 mensaje = "No se encontraron datos para la placa seleccionada"
+                tipo = "info"
+                faltanDatos = True
+            Else
+                If accion.Equals("reporte") Then
+                    Me.construyeTabla(solicitudes)
+                End If
+                faltanDatos = False
+            End If
+        ElseIf (Not DwnLstNombre.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Nombre") Then
+            solicitudes = sn.obtenerReporteCedula(DwnLstNombre.SelectedItem.ToString())
+            If solicitudes.Count.Equals(0) Then
+                titulo = "Vacio"
+                mensaje = "No se encontraron datos para el usuario seleccionado"
                 tipo = "info"
                 faltanDatos = True
             Else
