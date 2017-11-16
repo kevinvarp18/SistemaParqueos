@@ -248,6 +248,15 @@ Partial Public Class frm_Reporte
     Protected WithEvents btnBuscar As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''btnExportar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExportar As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''UpdatePanel8 control.
     '''</summary>
     '''<remarks>
@@ -255,15 +264,6 @@ Partial Public Class frm_Reporte
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UpdatePanel8 As Global.System.Web.UI.UpdatePanel
-    
-    '''<summary>
-    '''Button1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Button1 As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''UpdatePanel6 control.

@@ -22,8 +22,8 @@ Public Class frm_Reporte
             End If
         Next
 
-        If (permitido) Then
-            ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
+        'If (permitido) Then
+        ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_Reporte", ResolveUrl("~") + "public/js/" + "script.js")
             Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Dim sn As New SP_Usuario_Negocios(strconnectionString)
             Dim snSol As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
@@ -139,14 +139,14 @@ Public Class frm_Reporte
                 Next
 
             End If
-        Else
-            Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
-            Response.BufferOutput = True
-            Response.Redirect(url & Convert.ToString("/view/frm_index.aspx"))
-        End If
+        'Else
+        '    Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
+        '    Response.BufferOutput = True
+        '    Response.Redirect(url & Convert.ToString("/view/frm_index.aspx"))
+        'End If
     End Sub
 
-        Protected Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
+    Protected Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         selecciones("reporte")
 
 
@@ -222,7 +222,7 @@ Public Class frm_Reporte
                 tRow.Cells.Add(tCell6)
                 tRow.Cells.Add(tCell7)
                 tRow.Cells.Add(tCell8)
-                Table.Rows.Add(tRow)
+                table.Rows.Add(tRow)
             Next
 
         Next
@@ -231,7 +231,7 @@ Public Class frm_Reporte
 
 
 
-    Protected Sub btnBuscar_Click2(sender As Object, e As EventArgs) Handles Button1.Click
+    Protected Sub btnBuscar_Click2(sender As Object, e As EventArgs) Handles btnExportar.Click
         selecciones("pdf")
         'empieza  a generar el documento
 
@@ -420,7 +420,7 @@ Public Class frm_Reporte
 
 
             llenar += "<tr>" + "<td>" + solicitudAct.GstrMarcaSG + "</td>" + "<td>" + " " + "</td>" + "<td>" + solicitudAct.GstrPlacaSG +
-            "</td>" + "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraISG + "</td>" + "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraFSG + "</td>" + "<td>" + solicitudAct.GintIdParqueoSG.ToString()+ "</td>" + "</tr>"
+            "</td>" + "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraISG + "</td>" + "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraFSG + "</td>" + "<td>" + solicitudAct.GintIdParqueoSG.ToString() + "</td>" + "</tr>"
         Next
 
         llenar += "</table>" + "<br>"
