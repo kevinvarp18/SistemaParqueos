@@ -45,22 +45,22 @@ Public Class frm_Reporte
 
 
 
-                If (DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa")) Then
-                    updatePanelPlaca.Visible = True
-                    updatePanelCorreo.Visible = False
-                    updatePanelFecha.Visible = False
-                    updatePanelNombre.Visible = False
-                    updatePanelInstitucion.Visible = False
-                    updatePanelDepartamento.Visible = False
-                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo")) Then
-                    updatePanelPlaca.Visible = False
-                    updatePanelCorreo.Visible = True
-                    updatePanelFecha.Visible = False
-                    updatePanelNombre.Visible = False
-                    updatePanelInstitucion.Visible = False
-                    updatePanelDepartamento.Visible = False
-                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Nombre")) Then
-                    updatePanelPlaca.Visible = False
+            If (DwnLstTipoReporte.SelectedItem.ToString().Equals("Placa")) Then
+                updatePanelPlaca.Visible = True
+                updatePanelCorreo.Visible = False
+                updatePanelFecha.Visible = False
+                updatePanelNombre.Visible = False
+                updatePanelInstitucion.Visible = False
+                updatePanelDepartamento.Visible = False
+            ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Correo")) Then
+                updatePanelPlaca.Visible = False
+                updatePanelCorreo.Visible = True
+                updatePanelFecha.Visible = False
+                updatePanelNombre.Visible = False
+                updatePanelInstitucion.Visible = False
+                updatePanelDepartamento.Visible = False
+            ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Cedula")) Then
+                updatePanelPlaca.Visible = False
                     updatePanelCorreo.Visible = False
                     updatePanelFecha.Visible = False
                     updatePanelNombre.Visible = True
@@ -102,8 +102,8 @@ Public Class frm_Reporte
 
                 DwnLstTipoReporte.Items.Add("Seleccione una opción")
                 DwnLstTipoReporte.Items.Add("Placa")
-                DwnLstTipoReporte.Items.Add("Nombre")
-                DwnLstTipoReporte.Items.Add("Correo")
+            DwnLstTipoReporte.Items.Add("Cedula")
+            DwnLstTipoReporte.Items.Add("Correo")
                 DwnLstTipoReporte.Items.Add("Institucion")
                 DwnLstTipoReporte.Items.Add("Departamento")
                 DwnLstTipoReporte.Items.Add("Fecha")
@@ -123,8 +123,8 @@ Public Class frm_Reporte
                 DwnLstNombre.Items.Add("Seleccione una opción")
                 Dim usuariosCedulas As LinkedList(Of Usuario) = snSol.ObtenerCedulasYNombres()
                 For Each uc As Usuario In usuariosCedulas
-                    DwnLstNombre.Items.Add(uc.GstrIdSG + " - " + uc.GstrNombreSG + " " + uc.GstrApellidoSG)
-                Next
+                DwnLstNombre.Items.Add(uc.GstrIdSG)
+            Next
 
                 DwnLstDepartamento.Items.Add("Seleccione una opción")
                 Dim departamentos As LinkedList(Of String) = snSol.ObtenerDepartamentos()
@@ -305,7 +305,7 @@ Public Class frm_Reporte
                 End If
                 faltanDatos = False
             End If
-        ElseIf (Not DwnLstNombre.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Nombre") Then
+        ElseIf (Not DwnLstNombre.SelectedItem.ToString().Equals("Seleccione una opción")) AndAlso DwnLstTipoReporte.SelectedItem.ToString().Equals("Cedula") Then
             solicitudes = sn.obtenerReporteCedula(DwnLstNombre.SelectedItem.ToString())
             If solicitudes.Count.Equals(0) Then
                 titulo = "Vacio"
