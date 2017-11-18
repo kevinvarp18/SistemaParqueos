@@ -409,7 +409,7 @@ Public Class frm_Reporte
         For Each solicitudAct As Solicitud In solicitudes
 
             'tCell.Text = solicitudAct.GstrMarcaSG
-            'tCell2.Text = " "
+            'tCell2.Text = solicitudAct.GstrModeloSG
             'tCell3.Text = solicitudAct.GstrPlacaSG
             'tCell4.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
             'tCell5.Text = solicitudAct.GstrHoraISG
@@ -419,7 +419,7 @@ Public Class frm_Reporte
 
 
 
-            llenar += "<tr>" + "<td>" + solicitudAct.GstrMarcaSG + "</td>" + "<td>" + " " + "</td>" + "<td>" + solicitudAct.GstrPlacaSG +
+            llenar += "<tr>" + "<td>" + solicitudAct.GstrMarcaSG + "</td>" + "<td>" + solicitudAct.GstrModeloSG + "</td>" + "<td>" + solicitudAct.GstrPlacaSG +
             "</td>" + "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraISG + "</td>" + "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraFSG + "</td>" + "<td>" + solicitudAct.GintIdParqueoSG.ToString() + "</td>" + "</tr>"
         Next
 
