@@ -8,6 +8,10 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Administrar Parqueo</h3>
+                    <asp:Label ID="lblCantidad" runat="server" Text="Numero Parqueo: " Width="173px"></asp:Label>
+                    <br />
+                    <br />
+                    <br />
                     <asp:Label ID="lblTipo" runat="server" Text="Tipo:"></asp:Label>
                     <asp:DropDownList ID="DwnLstTipos" runat="server" AutoPostBack="false"></asp:DropDownList><br />
                     <asp:Label ID="lblEstado" runat="server" Text="Estado:"></asp:Label>

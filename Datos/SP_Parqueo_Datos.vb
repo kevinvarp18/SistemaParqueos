@@ -167,4 +167,24 @@ Public Class SP_Parqueo_Datos
         Return parqueo
     End Function
 
+    Public Function obtenerIDMayorParqueo() As Integer
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_VerParqueo;"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Parqueo")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Parqueo").Rows
+        Dim parqueo As Integer
+
+        For Each currentRow As DataRow In dataRowCollection
+            parqueo = Long.Parse(currentRow("TN_Identificador_TSP_Parqueo").ToString())
+        Next
+        Return parqueo
+    End Function
+
 End Class
