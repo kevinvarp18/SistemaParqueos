@@ -3,8 +3,8 @@ Imports Entidad
 Imports Negocios
 Imports iTextSharp.text.pdf
 Imports iTextSharp.text
-Imports iTextSharp.text.html.simpleparser
 Imports System.IO
+Imports iTextSharp.tool.xml
 
 Public Class frm_Reporte
     Inherits System.Web.UI.Page
@@ -16,7 +16,7 @@ Public Class frm_Reporte
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim permitido As Boolean = False
-
+        'ScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnExportar)
         For Each variableSesion As String In Session.Keys
             If (String.Equals(variableSesion, "frm_Reporte")) Then
                 permitido = True
@@ -144,26 +144,87 @@ Public Class frm_Reporte
     Protected Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
         selecciones("pdf")
         Try
-            Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
-            Dim filename As String = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\Reporte de parqueo.pdf"
-            Dim file As New FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)
-            PdfWriter.GetInstance(doc, file)
-            doc.Open()
-            ExportarDatosPDF(doc, Me.cadena, selecciones("pdf"))
-            doc.Close()
-            Process.Start(filename)
+            'Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
+            'Dim filename As String = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\Reporte de parqueo.pdf"
+            'Dim file As New FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)
+            'PdfWriter.GetInstance(doc, file)
+            'doc.Open()
+            'ExportarDatosPDF(doc, Me.cadena, selecciones("pdf"))
+            'doc.Close()
+            'Process.Start(filename)
+            Dim strHtml As String
+            Dim strContent As String = Me.cadena
+            Dim solicitudes As LinkedList(Of Solicitud) = selecciones("pdf")
+            Dim memStream As New MemoryStream()
+            strHtml = "
+            <!DOCTYPE html>
+            <html lang='es'>
+            <head>
+                <link href='.../public/css/style.css' rel='stylesheet' type='text/css' />
+                <link href='.../public/css/bootstrap.css' rel='stylesheet' type='text/css' />
+            </head>
+            <body>
+                <div class='container'>
+                    <h3> Reporte de Parqueo</h3>
+                    <div class='page w3-4'>
+                        <div class='bs-example ' data-example-id='simple-table'>
+                            <table BORDER ='1'  class='table'>
+                            <tr>
+                                <th><strong>Nombre</strong></th>
+                                <th><strong>Instituci&oacute;n</strong></th>
+                                <th><strong>Placa</strong></th>
+                                <th><strong>Fecha Entrada</strong></th>
+                                <th><strong>Hora Entrada</strong></th>
+                                <th><strong>Fecha Salida</strong></th>
+                                <th><strong>Hora Salida</strong></th>
+                                <th><strong>Espacio</strong></th>
+                            </tr>"
+
+            For Each solicitudAct As Solicitud In solicitudes
+                strHtml += "<tr>" + "<td>" + solicitudAct.GstrMarcaSG + "</td>" + "<td>" + solicitudAct.GstrModeloSG + "</td>" + "<td>" + solicitudAct.GstrPlacaSG +
+            "</td>" + "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraISG + "</td>" + "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraFSG + "</td>" + "<td>" + solicitudAct.GintIdParqueoSG.ToString() + "</td>" + "</tr>"
+            Next
+
+            strHtml += "</table>" + " </div>" + " </div>" + " </div>" + "<body>" + "</html>" + "<br>"
+            strContent = strHtml
+            Dim strFileShortName As String = "test" & DateTime.Now.Ticks & ".pdf"
+            Dim strFileName As String = HttpContext.Current.Server.MapPath("" & strFileShortName)
+            Dim docWorkingDocument As iTextSharp.text.Document = New iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 1, 1, 0, 0)
+            Dim srdDocToString As StringReader = Nothing
+            Try
+                Dim pdfWrite As PdfWriter
+                pdfWrite = PdfWriter.GetInstance(docWorkingDocument, New FileStream(strFileName, FileMode.Create))
+                srdDocToString = New StringReader(strHtml)
+                docWorkingDocument.Open()
+                XMLWorkerHelper.GetInstance().ParseXHtml(pdfWrite, docWorkingDocument, srdDocToString)
+            Catch ex As Exception
+                Response.Write(ex.Message)
+            Finally
+                If Not docWorkingDocument Is Nothing Then
+                    docWorkingDocument.Close()
+                    docWorkingDocument.Dispose()
+                End If
+                If Not srdDocToString Is Nothing Then
+                    srdDocToString.Close()
+                    srdDocToString.Dispose()
+                End If
+            End Try
+            Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
+            Process.Start(url + "/view/" + strFileShortName)
+            'Page.ClientScript.RegisterClientScriptBlock(Me.GetType(), "myscript", "window.open('" & strFileShortName & "','_blank','location=0,menubar=0,status=0,titlebar=0,toolbar=0');", True)
         Catch ex As Exception
         End Try
     End Sub
     Public Function selecciones(accion As String) As LinkedList(Of Solicitud)
         Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
-        Dim mensaje, reporteSeleccionado As String
+        Dim reporteSeleccionado As String
         Dim solicitudNegocios As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
-        Dim solicitudes As LinkedList(Of Solicitud)
+        Dim solicitudes As LinkedList(Of Solicitud) = Nothing
         Dim faltanDatos As Boolean = True
         Dim titulo As String = "ERROR"
         Dim tipo As String = "error"
+        Dim mensaje As String = ""
 
         If (DwnLstTipoReporte.SelectedItem.ToString().Equals("Seleccione una opción")) Then
             titulo = "INCOMPLETO"
@@ -229,36 +290,5 @@ Public Class frm_Reporte
         End If
         Return solicitudes
     End Function
-    Public Sub ExportarDatosPDF(ByVal document As Document, ByVal str As String, solicitudes As LinkedList(Of Solicitud))
-        Dim fuente As iTextSharp.text.pdf.BaseFont
-        Dim strContent As String = str
-        Dim parsedHtmlElements As List(Of IElement)
-        fuente = FontFactory.GetFont(FontFactory.HELVETICA, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL).BaseFont
-        Dim llenar As String = "
-        <div><h1> Reporte de Parqueo</h1></div>
-                   <table BORDER ='1' >
-        '           <tr>
-        '               <th><strong>Nombre</strong></th>
-        '               <th><strong>Instituci&oacute;n</strong></th>
-        '               <th><strong>Placa</strong></th>
-        '               <th><strong>Fecha Entrada</strong></th>
-        '               <th><strong>Hora Entrada</strong></th>
-        '               <th><strong>Fecha Salida</strong></th>
-        '               <th><strong>Hora Salida</strong></th>
-        '               <th><strong>Espacio</strong></th>
-        '           </tr>"
-
-        For Each solicitudAct As Solicitud In solicitudes
-            llenar += "<tr>" + "<td>" + solicitudAct.GstrMarcaSG + "</td>" + "<td>" + solicitudAct.GstrModeloSG + "</td>" + "<td>" + solicitudAct.GstrPlacaSG +
-            "</td>" + "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraISG + "</td>" + "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraFSG + "</td>" + "<td>" + solicitudAct.GintIdParqueoSG.ToString() + "</td>" + "</tr>"
-        Next
-
-        llenar += "</table>" + "<br>"
-        strContent = llenar
-        parsedHtmlElements = HTMLWorker.ParseToList(New StringReader(strContent), Nothing)
-        For Each htmlElement As IElement In parsedHtmlElements
-            document.Add(htmlElement)
-        Next
-    End Sub
 
 End Class
