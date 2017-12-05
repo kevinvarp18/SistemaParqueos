@@ -171,6 +171,7 @@
     <Content Include="view\frm_IniciarSesion.aspx" />
     <Content Include="view\frm_RegistrarVisitante.aspx" />
     <Content Include="view\frm_VerParqueo.aspx" />
+    <Content Include="view\frm_VerParqueoOficialSeguridad.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +290,13 @@
     </Compile>
     <Compile Include="view\frm_VerParqueo.aspx.vb">
       <DependentUpon>frm_VerParqueo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="view\frm_VerParqueoOficialSeguridad.aspx.designer.vb">
+      <DependentUpon>frm_VerParqueoOficialSeguridad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_VerParqueoOficialSeguridad.aspx.vb">
+      <DependentUpon>frm_VerParqueoOficialSeguridad.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
