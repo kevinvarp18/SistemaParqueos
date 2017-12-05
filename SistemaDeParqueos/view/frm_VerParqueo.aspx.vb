@@ -17,7 +17,7 @@ Public Class VerParqueo
         If (permitido) Then
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_VerParqueo", ResolveUrl("~") + "public/js/" + "script.js")
             If Not IsPostBack Then
-                'llenarTablaParqueos(DateTime.Now.ToString("dd/MM/yyyy"), "07:00", "21:00")
+                llenarTablaParqueos(DateTime.Now.ToString("dd/MM/yyyy"), "07:00", "21:00")
             End If
         Else
             Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")

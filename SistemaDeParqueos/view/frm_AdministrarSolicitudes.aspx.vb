@@ -20,8 +20,8 @@ Public Class frm_AdministrarSolicitudes
         Next
 
         If (permitido) Then
-            'tablaParqueos.Rows.Clear()
-            'llenarTablaParqueos(DateTime.Now.ToString("dd/MM/yyyy"), "07:00", "21:00")
+            tablaParqueos.Rows.Clear()
+            llenarTablaParqueos(DateTime.Now.ToString("dd/MM/yyyy"), "07:00", "21:00")
             Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
             Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
