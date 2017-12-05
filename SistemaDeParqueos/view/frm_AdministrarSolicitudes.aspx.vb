@@ -8,7 +8,7 @@ Public Class frm_AdministrarSolicitudes
     Dim parqueoNegocios As SP_Parqueo_Negocios
     Dim solicitudNegocios As SP_Solicitud_Parqueo_Negocios
     Dim usuarioNegocios As SP_Usuario_Negocios
-    Shared marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, correo, accion As String
+    Shared marca, placa, horaI, horaF, fechaI, fechaF, espacioParqueo, correo, accion As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim permitido As Boolean = False
@@ -20,6 +20,8 @@ Public Class frm_AdministrarSolicitudes
         Next
 
         If (permitido) Then
+            'tablaParqueos.Rows.Clear()
+            'llenarTablaParqueos(DateTime.Now.ToString("dd/MM/yyyy"), "07:00", "21:00")
             Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
             Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
@@ -43,29 +45,27 @@ Public Class frm_AdministrarSolicitudes
         For Each solicitudAct As Solicitud In solicitudes
             For rowCtr = 1 To rowCnt
                 Dim filaTabla As New TableRow()
-                Dim columnaMarca As New TableCell()
-                Dim columnaPlaca As New TableCell()
-                Dim columnaFechaI As New TableCell()
-                Dim columnaHoraI As New TableCell()
-                Dim columnaFechaS As New TableCell()
-                Dim columnaHoraS As New TableCell()
-                Dim columnaEspaciosParqueo As New TableCell()
-                Dim columnaHypLnk As New TableCell()
+                Dim celdaMarca As New TableCell()
+                Dim celdaPlaca As New TableCell()
+                Dim celdaFechaI As New TableCell()
+                Dim celdaHoraI As New TableCell()
+                Dim celdaFechaS As New TableCell()
+                Dim celdaHoraS As New TableCell()
+                Dim celdaEspaciosParqueo As New TableCell()
+                Dim celdaBotones As New TableCell()
 
-                columnaMarca.Text = solicitudAct.GstrMarcaSG
-                columnaPlaca.Text = solicitudAct.GstrPlacaSG
-                columnaFechaI.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
-                columnaHoraI.Text = solicitudAct.GstrHoraISG
-                columnaFechaS.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
-                columnaHoraS.Text = solicitudAct.GstrHoraFSG
+                celdaMarca.Text = solicitudAct.GstrMarcaSG
+                celdaPlaca.Text = solicitudAct.GstrPlacaSG
+                celdaFechaI.Text = solicitudAct.GstrFechaISG.Substring(0, 10)
+                celdaHoraI.Text = solicitudAct.GstrHoraISG
+                celdaFechaS.Text = solicitudAct.GstrFechaFSG.Substring(0, 10)
+                celdaHoraS.Text = solicitudAct.GstrHoraFSG
                 filaTabla.ID = "filaTabla" + contador.ToString()
-                columnaEspaciosParqueo.ID = "columnaParqueo" + contador.ToString()
-                columnaHypLnk.ID = "columnaHypLnk" + contador.ToString()
+                celdaEspaciosParqueo.ID = "celdaParqueo" + contador.ToString()
 
                 Dim DwnLstParqueos As New DropDownList()
-                DwnLstParqueos.Width = 75%
+                DwnLstParqueos.CssClass = "parqueosModal"
                 DwnLstParqueos.AutoPostBack = False
-                DwnLstParqueos.Style("padding") = "0px 0px"
                 DwnLstParqueos.ID = "DwnLstParqueo" + contador.ToString()
                 If IsPostBack Then
                 Else
@@ -81,96 +81,106 @@ Public Class frm_AdministrarSolicitudes
 
                 Dim literalControl As New LiteralControl()
                 literalControl.Text = ""
-                columnaEspaciosParqueo.Controls.Add(literalControl)
-                columnaHypLnk.Controls.Add(literalControl)
+                celdaEspaciosParqueo.Controls.Add(literalControl)
+                celdaBotones.Controls.Add(literalControl)
 
                 Dim btnRechazar As Button = New Button
-                btnRechazar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + columnaFechaI.Text + ";" + columnaFechaS.Text + ";" + solicitudAct.GstrModeloSG + ";0"
+                btnRechazar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + celdaFechaI.Text + ";" + celdaFechaS.Text + ";" + solicitudAct.GstrModeloSG + ";0"
                 btnRechazar.Text = "(Rechazar)"
                 btnRechazar.Width = 90%
                 btnRechazar.Style("color") = "#ff0000"
+                btnRechazar.Style("font-size") = "90%"
                 AddHandler btnRechazar.Click, AddressOf Me.button_Click
 
                 Dim btnAceptar As Button = New Button
-                btnAceptar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + columnaFechaI.Text + ";" + columnaFechaS.Text + ";" + solicitudAct.GstrModeloSG + ";1"
+                btnAceptar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + celdaFechaI.Text + ";" + celdaFechaS.Text + ";" + solicitudAct.GstrModeloSG + ";1"
                 btnAceptar.Text = "(Aceptar)"
                 btnAceptar.Width = 90%
                 btnAceptar.Style("color") = "#00fe00"
+                btnAceptar.Style("font-size") = "90%"
                 AddHandler btnAceptar.Click, AddressOf Me.button_Click
 
-                columnaEspaciosParqueo.Controls.Add(DwnLstParqueos)
+                celdaEspaciosParqueo.Controls.Add(DwnLstParqueos)
                 listaDwnLstParqueos.AddLast(DwnLstParqueos)
-                columnaHypLnk.Controls.Add(btnRechazar)
-                columnaHypLnk.Controls.Add(btnAceptar)
+                celdaBotones.Controls.Add(btnRechazar)
+                celdaBotones.Controls.Add(btnAceptar)
 
-                filaTabla.Cells.Add(columnaMarca)
-                filaTabla.Cells.Add(columnaPlaca)
-                filaTabla.Cells.Add(columnaFechaI)
-                filaTabla.Cells.Add(columnaHoraI)
-                filaTabla.Cells.Add(columnaFechaS)
-                filaTabla.Cells.Add(columnaHoraS)
-                filaTabla.Cells.Add(columnaEspaciosParqueo)
-                filaTabla.Cells.Add(columnaHypLnk)
+                filaTabla.Cells.Add(celdaMarca)
+                filaTabla.Cells.Add(celdaPlaca)
+                filaTabla.Cells.Add(celdaFechaI)
+                filaTabla.Cells.Add(celdaHoraI)
+                filaTabla.Cells.Add(celdaFechaS)
+                filaTabla.Cells.Add(celdaHoraS)
+                filaTabla.Cells.Add(celdaEspaciosParqueo)
+                filaTabla.Cells.Add(celdaBotones)
                 tablaSolicitudes.Rows.Add(filaTabla)
 
                 contador = contador + 1
             Next
         Next
     End Sub
-    Protected Sub llenarTablaParqueos()
+    Protected Sub btnBuscarP_Click(sender As Object, e As EventArgs) Handles btnBuscarP.Click
         Dim fechai As DateTime = Convert.ToDateTime(tbFechaI.Text)
         If tbFechaI.Text <> "" AndAlso tbHoraI.Text <> "" AndAlso tbHoraF.Text <> "" Then
+            tablaParqueos.Rows.Clear()
+            llenarTablaParqueos(fechai, tbHoraI.Text, tbHoraF.Text)
+        Else
+            Dim titulo As String = "ERROR"
+            Dim mensaje As String = "Debe completar todos los campos"
+            Dim tipo As String = "error"
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
+        End If
+    End Sub
+    Protected Sub llenarTablaParqueos(fechai As DateTime, horaI As String, horaF As String)
+        Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+        Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
+        Dim solicitudNegocios As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
+        Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(fechai.ToString("dd/MM/yyyy"), horaI, horaF)
+        Dim parqueosTotales As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
+        Dim cantidadTiposParqueo As LinkedList(Of String) = parqueoNegocios.cantidadTiposParqueo()
 
-            Dim parqueosOcupados As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueoOcupado(fechai.ToString("dd/MM/yyyy"), tbHoraI.Text, tbHoraF.Text)
-            Dim parqueosTotales As LinkedList(Of Parqueo) = Me.parqueoNegocios.obtenerParqueo()
-            Dim cantidadTiposParqueo As LinkedList(Of String) = Me.parqueoNegocios.cantidadTiposParqueo()
+        Dim rowCnt As Integer
 
-            Dim rowCnt As Integer
+        rowCnt = 1
 
-            rowCnt = 1
-
-            Dim tableHeaderRow As New TableHeaderRow()
-            For Each tipos As String In cantidadTiposParqueo
-                Dim tableHeaderCell As New TableHeaderCell()
-                tableHeaderCell.Text = tipos
-                tableHeaderCell.ID = tipos
-                tableHeaderRow.Cells.Add(tableHeaderCell)
-            Next 'Agrega los tipos de parqueos a la primera fila.
-            tablaParqueos.Rows.Add(tableHeaderRow)
-            Dim tableRow As New TableRow()
-            For rowCtr = 0 To cantidadTiposParqueo.Count - 1
-                Dim tableCell As New TableCell()
-                'tableCell.Style("display") = "block"
-                'For cellCtr = 0 To 1
-                For Each parqueoActual As Parqueo In parqueosTotales
-                    Dim tipoParqueo As String
-                    tipoParqueo = tablaParqueos.Rows.Item(0).Cells.Item(rowCtr).ID
-                    Dim hyperLink As New HyperLink()
-                    If parqueoActual.GstrTipoSG.Equals(tipoParqueo) Then
-                        Dim ocu = False
-                        For Each parqueoOcupado As Parqueo In parqueosOcupados
-                            If parqueoActual.GintIdentificadorSG = parqueoOcupado.GintIdentificadorSG Then
-                                ocu = True
-                            End If
-                        Next 'Busca en todos los parqueos ocupados, para ver si el parqueo actual está ocupado.
-                        hyperLink.Text = String.Concat("Espacio ", parqueoActual.GintIdentificadorSG.ToString(), "<br/>", " ")
-                        hyperLink.NavigateUrl = "frm_AdministrarParqueo.aspx?id=0;" + parqueoActual.GintIdentificadorSG.ToString() + ";" + parqueoActual.GintDisponibleSG.ToString() + ";" + parqueoActual.GstrTipoSG.ToString()
-                        If parqueoActual.GintDisponibleSG = 0 Then
+        Dim tableHeaderRow As New TableHeaderRow()
+        For Each tipos As String In cantidadTiposParqueo
+            Dim tableHeaderCell As New TableHeaderCell()
+            tableHeaderCell.Text = tipos
+            tableHeaderCell.ID = tipos
+            tableHeaderRow.Cells.Add(tableHeaderCell)
+        Next
+        tablaParqueos.Rows.Add(tableHeaderRow)
+        Dim filaTabla As New TableRow()
+        For rowCtr = 0 To cantidadTiposParqueo.Count - 1
+            Dim celdaTabla As New TableCell()
+            For Each parqueoActual As Parqueo In parqueosTotales
+                Dim tipoParqueo As String
+                tipoParqueo = tablaParqueos.Rows.Item(0).Cells.Item(rowCtr).ID
+                Dim hyperLink As New HyperLink()
+                If parqueoActual.GstrTipoSG.Equals(tipoParqueo) Then
+                    Dim ocu = False
+                    For Each parqueoOcupado As Parqueo In parqueosOcupados
+                        If parqueoActual.GintIdentificadorSG = parqueoOcupado.GintIdentificadorSG Then
                             ocu = True
                         End If
-                        If ocu = True Then
-                            hyperLink.Style("color") = "#a30404"
-                        Else
-                            hyperLink.Style("color") = "#03ba03"
-                        End If
-                        tableCell.Controls.Add(hyperLink)
+                    Next
+                    hyperLink.Text = String.Concat("Espacio ", parqueoActual.GintIdentificadorSG.ToString(), "<br/>", " ")
+                    hyperLink.NavigateUrl = "frm_AdministrarParqueo.aspx?id=0;" + parqueoActual.GintIdentificadorSG.ToString() + ";" + parqueoActual.GintDisponibleSG.ToString() + ";" + parqueoActual.GstrTipoSG.ToString()
+                    If parqueoActual.GintDisponibleSG = 0 Then
+                        ocu = True
                     End If
-                Next 'For rowCtr = 0 To rowCnt
-                'Next
-                tableRow.Cells.Add(tableCell)
-            Next 'For Each parqueosAct As Parqueo In parqueosTotales
-            tablaParqueos.Rows.Add(tableRow)
-        End If
+                    If ocu = True Then
+                        hyperLink.Style("color") = "#a30404"
+                    Else
+                        hyperLink.Style("color") = "#03ba03"
+                    End If
+                    celdaTabla.Controls.Add(hyperLink)
+                End If
+            Next
+            filaTabla.Cells.Add(celdaTabla)
+        Next
+        tablaParqueos.Rows.Add(filaTabla)
     End Sub
     Protected Sub button_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim botonSeleccionado As Button = CType(sender, Button)
@@ -188,7 +198,7 @@ Public Class frm_AdministrarSolicitudes
         updatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel1"), UpdatePanel)
         tabla = DirectCast(updatePanel.FindControl("tablaSolicitudes"), Table)
         fila = tablaSolicitudes.Rows.Item(Integer.Parse(datosSolicitud(0)))
-        columnaEspacioD = DirectCast(fila.FindControl("columnaParqueo" + datosSolicitud(0)), TableCell)
+        columnaEspacioD = DirectCast(fila.FindControl("celdaParqueo" + datosSolicitud(0)), TableCell)
         dwnLstParqueo = DirectCast(columnaEspacioD.FindControl("DwnLstParqueo" + datosSolicitud(0)), DropDownList)
         idParqueo = dwnLstParqueo.SelectedItem.Value
 
@@ -198,7 +208,7 @@ Public Class frm_AdministrarSolicitudes
         horaF = datosSolicitud(4)
         fechaI = datosSolicitud(5)
         fechaF = datosSolicitud(6)
-        Me.idParqueo = idParqueo
+        espacioParqueo = idParqueo
         correo = datosSolicitud(7)
         accion = datosSolicitud(8)
         Session("fila") = datosSolicitud(0)
@@ -210,7 +220,9 @@ Public Class frm_AdministrarSolicitudes
         End If
     End Sub
     Public Sub decidirSolicitud()
-        Dim titulo, mensaje, tipo, asuntoCorreo, mensajeCorreo As String
+        Dim titulo As String = "ERROR"
+        Dim mensaje, asuntoCorreo, mensajeCorreo As String
+        Dim tipo As String = "error"
         Dim resultadoAccion As Integer
 
         If (accion.Equals("0")) Then
@@ -224,26 +236,28 @@ Public Class frm_AdministrarSolicitudes
             asuntoCorreo = "Solicitud aceptada"
             mensajeCorreo = " Nos da gusto informarle que su solicitud ha sido aceptada para ingresar al parqueo "
             If (fechaI.Equals(fechaF)) Then
-                mensajeCorreo = mensajeCorreo + "el día " + fechaI + " de las " + horaI + " a las " + horaF + " en el espacio " + idParqueo + " del parqueo."
+                mensajeCorreo = mensajeCorreo + "el día " + fechaI + " de las " + horaI + " a las " + horaF + " en el espacio " + espacioParqueo + " del parqueo."
             Else
-                mensajeCorreo = mensajeCorreo + "para los días del " + fechaI + " al " + fechaF + "de " + horaI + "a " + horaF + " en el espacio " + idParqueo + " del parqueo."
+                mensajeCorreo = mensajeCorreo + "para los días del " + fechaI + " al " + fechaF + "de " + horaI + "a " + horaF + " en el espacio " + espacioParqueo + " del parqueo."
             End If
         Else
             asuntoCorreo = "Solicitud rechazada"
             mensajeCorreo = " Lamentamos informarle que su solicitud ha sido rechazada por el siguiente motivo: " + tbRetroalimentacion.Text
         End If
 
-        resultadoAccion = Me.solicitudNegocios.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, idParqueo, accion)
-
-        If (resultadoAccion = 1 Or accion.Equals("0")) Then
-            titulo = "Correcto"
-            tipo = "success"
-            Me.usuarioNegocios.envioCorreoSolicitud(asuntoCorreo, Me.correo, mensajeCorreo)
-            tablaSolicitudes.Rows.RemoveAt(Integer.Parse(Session("fila")))
+        If (tbRetroalimentacion.Text.Equals("") And accion.Equals("0")) Then
+            mensaje = "Debe completar todos los campos"
         Else
-            titulo = "Error"
-            mensaje = "No se pudo aceptar la solicitud porque ese espacio ya está reservado"
-            tipo = "error"
+            resultadoAccion = Me.solicitudNegocios.decidirSolicitud(marca, placa, horaI, horaF, fechaI, fechaF, espacioParqueo, accion)
+
+            If (resultadoAccion = 1 Or accion.Equals("0")) Then
+                titulo = "Correcto"
+                tipo = "success"
+                Me.usuarioNegocios.envioCorreoSolicitud(asuntoCorreo, correo, mensajeCorreo)
+                tablaSolicitudes.Rows.RemoveAt(Integer.Parse(Session("fila")))
+            Else
+                mensaje = "No se pudo aceptar la solicitud porque ese espacio ya está reservado"
+            End If
         End If
 
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
