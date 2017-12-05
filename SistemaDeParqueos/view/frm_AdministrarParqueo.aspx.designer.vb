@@ -23,6 +23,15 @@ Partial Public Class administrarParqueo
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
+    '''lblCantidad control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCantidad As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lblTipo control.
     '''</summary>
     '''<remarks>

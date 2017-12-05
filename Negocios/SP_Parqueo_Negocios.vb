@@ -54,4 +54,8 @@ Public Class SP_Parqueo_Negocios
         Return Me.parqueo_Acceso_a_Datos.cantidadTiposParqueo()
     End Function
 
+    Public Function obtenerIDMayorParqueo() As Integer
+        Return Me.parqueo_Acceso_a_Datos.obtenerIDMayorParqueo()
+    End Function
+
 End Class

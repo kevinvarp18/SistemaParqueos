@@ -144,14 +144,6 @@ Public Class frm_Reporte
     Protected Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
         selecciones("pdf")
         Try
-            'Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
-            'Dim filename As String = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\Reporte de parqueo.pdf"
-            'Dim file As New FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)
-            'PdfWriter.GetInstance(doc, file)
-            'doc.Open()
-            'ExportarDatosPDF(doc, Me.cadena, selecciones("pdf"))
-            'doc.Close()
-            'Process.Start(filename)
             Dim strHtml As String
             Dim strContent As String = Me.cadena
             Dim solicitudes As LinkedList(Of Solicitud) = selecciones("pdf")

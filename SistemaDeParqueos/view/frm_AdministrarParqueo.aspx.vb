@@ -40,9 +40,12 @@ Public Class administrarParqueo
                     updatePanel3.Visible = False
                     intIDparqueo = datosSolicitud(1)
                     Me.gintParqueoIdentificador = Long.Parse(intIDparqueo)
+                    lblCantidad.Text = "Numero Parqueo: " & Me.gintParqueoIdentificador
                 ElseIf (idPagina.Equals("1")) Then
                     updatePanel2.Visible = False
                     updatePanel3.Visible = True
+                    Dim parqueosTotales As Integer = parqueoNegocios.obtenerIDMayorParqueo() + 1
+                    lblCantidad.Text = "Numero Parqueo: " & parqueosTotales
                 End If
             Else
                 DwnLstTipos.Items.Clear()
@@ -63,11 +66,14 @@ Public Class administrarParqueo
                 If (idPagina.Equals("1")) Then
                     updatePanel2.Visible = False
                     updatePanel3.Visible = True
+                    Dim parqueosTotales As Integer = parqueoNegocios.obtenerIDMayorParqueo() + 1
+                    lblCantidad.Text = "Numero Parqueo: " & parqueosTotales
                 ElseIf (idPagina.Equals("0")) Then
                     updatePanel2.Visible = True
                     updatePanel3.Visible = False
                     intIDparqueo = datosSolicitud(1)
                     Me.gintParqueoIdentificador = Long.Parse(intIDparqueo)
+                    lblCantidad.Text = "Numero Parqueo: " & Me.gintParqueoIdentificador
                     If (datosSolicitud(2).Equals("True")) Then
                         strEstadoP = "Habilitado"
                         DwnLstEstado.Items.Remove("Habilitado")
