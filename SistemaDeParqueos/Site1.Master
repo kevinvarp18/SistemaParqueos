@@ -108,8 +108,8 @@
                                     <%
                                         If String.Equals(Session("Usuario"), "a") Then
                                     %>
-                                    <asp:HyperLink ID="HypLnkSolicitudes" Style="color: #efd12f" NavigateUrl="http://localhost:52086/view/frm_AdministrarSolicitudes.aspx" Text="S. Pendientes: " runat="server" />
-                                    <asp:HyperLink ID="HypLinkVisitantes" Style="color: #efd12f; padding-left: 30px; padding-right: 18px;" NavigateUrl="http://localhost:52086/view/frm_SolicitudesAtrasadas.aspx" Text="V. Atrasados: " runat="server" />
+                                    <asp:HyperLink ID="HypLnkSolicitudes" Style="color: #efd12f" Text="S. Pendientes: " runat="server" />
+                                    <asp:HyperLink ID="HypLinkVisitantes" Style="color: #efd12f; padding-left: 30px; padding-right: 18px;" Text="V. Atrasados: " runat="server" />
                                     <%
                                         End If
                                     %>

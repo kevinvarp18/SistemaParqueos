@@ -49,8 +49,8 @@ Public Class SP_Solicitud_Parqueo_Negocios
     Public Function obtenerSolicitudesHoy() As LinkedList(Of Solicitud)
         Return Me.solicitud_Acceso_a_Datos.obtenerSolicitudesHoy()
     End Function
-    Public Sub marcarEntrada_Salida(marca As String, placa As String, modelo As String, espacioParqueo As Integer, horaEntrada As String, horaSalida As String, accion As Integer)
-        Me.solicitud_Acceso_a_Datos.marcarEntrada_Salida(marca, placa, modelo, espacioParqueo, horaEntrada, horaSalida, accion)
+    Public Sub marcarEntrada_Salida(marca As String, placa As String, modelo As String, espacioParqueo As Integer, horaEntrada As String, horaSalida As String, correoOficial As String, accion As Integer)
+        Me.solicitud_Acceso_a_Datos.marcarEntrada_Salida(marca, placa, modelo, espacioParqueo, horaEntrada, horaSalida, correoOficial, accion)
     End Sub
     Public Function obtenerNumeroVisitantesAtrasados() As String
         Return Me.solicitud_Acceso_a_Datos.obtenerNumeroVisitantesAtrasados()

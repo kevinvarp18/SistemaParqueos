@@ -70,7 +70,7 @@ Public Class frm_ListaVisitantes
                     btnMarcarEntrada.Style("font-size") = "0.60em"
                 End If
                 btnMarcarEntrada.Width = 100%
-                btnMarcarEntrada.CssClass = solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GintIdParqueoSG.ToString() + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";1"
+                btnMarcarEntrada.CssClass = solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GintIdParqueoSG.ToString() + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + Session("Correo") + ";1"
                 btnMarcarEntrada.Style("color") = "#ff0000"
 
                 AddHandler btnMarcarEntrada.Click, AddressOf Me.button_Click
@@ -84,14 +84,14 @@ Public Class frm_ListaVisitantes
                     btnMarcarSalida.Style("font-size") = "0.60em"
                 End If
                 btnMarcarSalida.Width = 100%
-                btnMarcarSalida.CssClass = solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GintIdParqueoSG.ToString() + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";0"
+                btnMarcarSalida.CssClass = solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GintIdParqueoSG.ToString() + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + Session("Correo") + ";0"
                 btnMarcarSalida.Style("color") = "#00fe00"
                 AddHandler btnMarcarSalida.Click, AddressOf Me.button_Click
 
                 Dim btnRechazar As New Button()
                 btnRechazar.Text = "Rechazar"
                 btnRechazar.Style("font-size") = "0.70em"
-                btnRechazar.CssClass = solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GintIdParqueoSG.ToString() + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";2"
+                btnRechazar.CssClass = solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GintIdParqueoSG.ToString() + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + Session("Correo") + ";2"
                 btnRechazar.Style("color") = "#61210B"
                 AddHandler btnRechazar.Click, AddressOf Me.button_Click
 
@@ -117,7 +117,7 @@ Public Class frm_ListaVisitantes
     Protected Sub button_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim botonSeleccionado As Button = CType(sender, Button)
         Dim datosSolictud As String() = botonSeleccionado.CssClass.Split(New String() {";"}, StringSplitOptions.None)
-        solicitudNegocios.marcarEntrada_Salida(datosSolictud(0), datosSolictud(1), datosSolictud(2), Integer.Parse(datosSolictud(3)), datosSolictud(4), datosSolictud(5), Integer.Parse(datosSolictud(6)))
+        solicitudNegocios.marcarEntrada_Salida(datosSolictud(0), datosSolictud(1), datosSolictud(2), Integer.Parse(datosSolictud(3)), datosSolictud(4), datosSolictud(5), datosSolictud(6), Integer.Parse(datosSolictud(7)))
 
         If (botonSeleccionado.Text.Equals("Marcar Entrada")) Then
             botonSeleccionado.Text = "Desmarcar Entrada"

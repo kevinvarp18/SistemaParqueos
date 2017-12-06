@@ -464,7 +464,7 @@ Public Class SP_Solicitud_Datos
         Next
         Return solicitudes
     End Function
-    Public Sub marcarEntrada_Salida(marca As String, placa As String, modelo As String, espacioParqueo As Integer, horaEntrada As String, horaSalida As String, accion As Integer)
+    Public Sub marcarEntrada_Salida(marca As String, placa As String, modelo As String, espacioParqueo As Integer, horaEntrada As String, horaSalida As String, correoOficial As String, accion As Integer)
         Dim connection As New SqlConnection(Me.gstrconnString)
         Dim sqlStoredProcedure As [String] = "PA_MarcarEntrada_Salida"
         Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
@@ -476,6 +476,7 @@ Public Class SP_Solicitud_Datos
         cmdInsert.Parameters.Add(New SqlParameter("@espacioParqueo", espacioParqueo))
         cmdInsert.Parameters.Add(New SqlParameter("@horaEntrada", horaEntrada))
         cmdInsert.Parameters.Add(New SqlParameter("@horaSalida", horaSalida))
+        cmdInsert.Parameters.Add(New SqlParameter("@correoOficial", correoOficial))
         cmdInsert.Parameters.Add(New SqlParameter("@accion", Integer.Parse(accion)))
 
         cmdInsert.Connection.Open()

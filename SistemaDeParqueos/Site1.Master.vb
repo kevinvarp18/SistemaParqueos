@@ -23,7 +23,7 @@ Public Class Site1
 
                 url = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
                 HypLnkSolicitudes.NavigateUrl = url + "/view/frm_AdministrarSolicitudes.aspx"
-                HypLinkVisitantes.NavigateUrl = url + "/view/frm_SolicitudesAtrasadas.aspx"
+                HypLinkVisitantes.NavigateUrl = url + "/view/frm_VisitantesAtrasados.aspx"
             End If 'Si la session es nula, lo inicia en N.
         End If
     End Sub
