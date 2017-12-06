@@ -191,16 +191,20 @@ Public Class SP_Solicitud_Datos
 
         For Each currentRow As DataRow In dataRowCollection
             Dim solicitudActual As New Solicitud()
-            solicitudActual.GintIdParqueoSG = Integer.Parse(currentRow("num_parqueo").ToString())
-            solicitudActual.GstrHoraISG = currentRow("hora_e").ToString()
-            solicitudActual.GstrHoraFSG = currentRow("hora_s").ToString()
-            solicitudActual.GstrPlacaSG = currentRow("placa").ToString()
-            solicitudActual.GstrMarcaSG = currentRow("nombre").ToString()
-            solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
-            solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
-            solicitudActual.GstrModeloSG = currentRow("tipo_visistante").ToString()
-            solicitudes.AddLast(solicitudActual)
+            Dim strNumP As String = currentRow("num_parqueo").ToString()
+            If strNumP = "" Then
 
+            Else
+                solicitudActual.GintIdParqueoSG = Integer.Parse(strNumP)
+                solicitudActual.GstrHoraISG = currentRow("hora_e").ToString()
+                solicitudActual.GstrHoraFSG = currentRow("hora_s").ToString()
+                solicitudActual.GstrPlacaSG = currentRow("placa").ToString()
+                solicitudActual.GstrMarcaSG = currentRow("nombre").ToString()
+                solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
+                solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
+                solicitudActual.GstrModeloSG = currentRow("tipo_visistante").ToString()
+                solicitudes.AddLast(solicitudActual)
+            End If
         Next
         Return solicitudes
     End Function
