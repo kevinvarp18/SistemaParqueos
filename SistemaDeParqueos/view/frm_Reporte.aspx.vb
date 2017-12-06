@@ -13,6 +13,7 @@ Public Class frm_Reporte
     Shared tipoReporte As String = ""
     Dim listaDatos As New LinkedList(Of String)
     Dim listaUsuarios As New LinkedList(Of Usuario)
+    Dim urlr As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim permitido As Boolean = False
@@ -152,8 +153,8 @@ Public Class frm_Reporte
             <!DOCTYPE html>
             <html lang='es'>
             <head>
-                <link href='.../public/css/style.css' rel='stylesheet' type='text/css' />
-                <link href='.../public/css/bootstrap.css' rel='stylesheet' type='text/css' />
+                <link href='" & urlr & "/public/css/style.css' rel='stylesheet' type='text/css' />
+                <link href='" & urlr & "/public/css/bootstrap.css' rel='stylesheet' type='text/css' />
             </head>
             <body>
                 <div class='container'>
@@ -162,14 +163,14 @@ Public Class frm_Reporte
                         <div class='bs-example ' data-example-id='simple-table'>
                             <table BORDER ='1'  class='table'>
                             <tr>
-                                <th><strong>Nombre</strong></th>
-                                <th><strong>Instituci&oacute;n</strong></th>
-                                <th><strong>Placa</strong></th>
-                                <th><strong>Fecha Entrada</strong></th>
-                                <th><strong>Hora Entrada</strong></th>
-                                <th><strong>Fecha Salida</strong></th>
-                                <th><strong>Hora Salida</strong></th>
-                                <th><strong>Espacio</strong></th>
+                                <th><strong> Nombre </strong></th>
+                                <th><strong> Instituci&oacute;n </strong></th>
+                                <th><strong> Placa </strong></th>
+                                <th><strong> Fecha Entrada </strong></th>
+                                <th><strong> Hora Entrada </strong></th>
+                                <th><strong> Fecha Salida </strong></th>
+                                <th><strong> Hora Salida </strong></th>
+                                <th><strong> Espacio </strong></th>
                             </tr>"
 
             For Each solicitudAct As Solicitud In solicitudes
