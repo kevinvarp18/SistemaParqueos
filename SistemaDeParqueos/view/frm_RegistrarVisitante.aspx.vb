@@ -7,6 +7,7 @@ Public Class registrarVisitante
 
     Dim connectionString As String
     Dim usuarioNegocios As SP_Usuario_Negocios
+    Protected PostBackStr As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If String.Equals(Session("Usuario"), "N") Then
@@ -33,6 +34,11 @@ Public Class registrarVisitante
                 DwnLstDepartamento.Items.Add("UPROV")
                 DwnLstDepartamento.Items.Add("UVISE")
             Else
+                Dim eventArg As String = Request("__EVENTARGUMENT")
+                If eventArg = "MyCustomArgument" Then
+                    registarVisitante()
+                End If
+
                 Dim contentPlaceHolder As ContentPlaceHolder
                 Dim updatePanel As UpdatePanel
                 contentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
@@ -56,7 +62,7 @@ Public Class registrarVisitante
         End If
     End Sub
 
-    Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
+    Protected Sub registarVisitante()
         Dim titulo As String = "ERROR"
         Dim mensaje As String
         Dim tipo As String = "error"

@@ -38,7 +38,7 @@
                             <asp:TextBox ID="tbInstitucion" type="text" runat="server" onkeypress="return validar(event)"></asp:TextBox><br />
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:Button ID="btnRegistrar" runat="server" CssClass="singleButton" OnClick="btnRegistrar_Click" Text="Registrarse" /><br />
+                    <asp:Button ID="btnRegistrar" runat="server" CssClass="singleButton" OnClientClick="confirmar('', '¿Está seguro que desea registrarse con esos datos?', 'info')" Text="Registrarse" /><br />
                     <br />
                 </ContentTemplate>
             </asp:UpdatePanel>
