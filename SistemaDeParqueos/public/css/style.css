@@ -514,6 +514,7 @@ agile_count_grid_left span, .agile_count_grid_right p {
     .newsletter span {
         margin-left: 30%;
         margin-top: 0.8%;
+        width: 10%;
         float: left;
     }
 
