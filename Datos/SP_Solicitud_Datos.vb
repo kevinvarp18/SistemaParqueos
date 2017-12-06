@@ -529,4 +529,27 @@ Public Class SP_Solicitud_Datos
 
         Return resultado
     End Function
+
+    Public Function obtenerDatosUsuariosAtrasados(Nombre_Visitante As String) As String
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlSelect As [String] = "PA_VerDatosUsuarioAtrasado"
+
+        Dim sqlDataAdapterClient As New SqlDataAdapter()
+        sqlDataAdapterClient.SelectCommand = New SqlCommand()
+        sqlDataAdapterClient.SelectCommand.CommandText = sqlSelect
+        sqlDataAdapterClient.SelectCommand.Connection = connection
+        sqlDataAdapterClient.SelectCommand.CommandType = System.Data.CommandType.StoredProcedure
+        sqlDataAdapterClient.SelectCommand.Parameters.Add(New SqlParameter("@Nombre_Visitante", Nombre_Visitante))
+
+        Dim dataSetAttendant As New DataSet()
+        sqlDataAdapterClient.Fill(dataSetAttendant, "TSP_Usuario")
+        sqlDataAdapterClient.SelectCommand.Connection.Close()
+        Dim dataRowCollection As DataRowCollection = dataSetAttendant.Tables("TSP_Usuario").Rows
+        Dim solicitud As String = ""
+
+        For Each currentRow As DataRow In dataRowCollection
+            solicitud += currentRow("TC_Nombre_TSP_Usuario").ToString() + ";" + currentRow("TC_Apellido_TSP_Usuario").ToString() + ";" + currentRow("TC_Correo_TSP_Usuario").ToString() + ";" + currentRow("TC_Telefono_TSP_Visitante").ToString() + ";" + currentRow("TC_Ubicacion_TSP_Visitante").ToString()
+        Next
+        Return solicitud
+    End Function
 End Class

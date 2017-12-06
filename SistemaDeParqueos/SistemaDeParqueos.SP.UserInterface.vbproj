@@ -157,6 +157,7 @@
     <Content Include="public\js\sweetalert2.all.min.js" />
     <Content Include="public\js\waypoints.min.js" />
     <Content Include="public\js\wow.min.js" />
+    <Content Include="view\frm_DatosVisitantesAtrasados.aspx" />
     <Content Include="view\frm_SolicitudesAtrasadas.aspx" />
     <Content Include="public\js\script.js" />
     <Content Include="view\frm_AdministrarSolicitudes.aspx" />
@@ -175,6 +176,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="view\frm_DatosVisitantesAtrasados.aspx.designer.vb">
+      <DependentUpon>frm_DatosVisitantesAtrasados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view\frm_DatosVisitantesAtrasados.aspx.vb">
+      <DependentUpon>frm_DatosVisitantesAtrasados.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="view\frm_SolicitudesAtrasadas.aspx.designer.vb">
       <DependentUpon>frm_SolicitudesAtrasadas.aspx</DependentUpon>
     </Compile>

@@ -51,9 +51,14 @@ Public Class frm_SolicitudesAtrasadas
                 Dim celdaHoraS As New TableCell()
                 Dim celdaExtension As New TableCell()
                 Dim celdaBotones As New TableCell()
+                Dim hyperLink As New HyperLink()
 
                 filaTabla.ID = "filaTabla" + contador.ToString()
-                celdaNombre.Text = solicitudAct.GstrFechaISG
+                hyperLink.Text = solicitudAct.GstrFechaISG
+                hyperLink.Style("color") = "#b9b708"
+                Dim datosVisitantes As String = Me.solicitudNegocios.obtenerDatosUsuariosAtrasados(solicitudAct.GstrFechaISG)
+                hyperLink.NavigateUrl = "frm_DatosVisitantesAtrasados.aspx?id=" & datosVisitantes
+                celdaNombre.Controls.Add(hyperLink)
                 celdaPlaca.Text = solicitudAct.GstrPlacaSG
                 celdaMarca.Text = solicitudAct.GstrMarcaSG
                 celdaModelo.Text = solicitudAct.GstrModeloSG

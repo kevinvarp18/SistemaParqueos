@@ -86,4 +86,8 @@ Public Class SP_Solicitud_Parqueo_Negocios
         Return Me.solicitud_Acceso_a_Datos.obtenerReporteDepartamento(departamento)
     End Function
 
+    Public Function obtenerDatosUsuariosAtrasados(Nombre_Visitante As String) As String
+        Return Me.solicitud_Acceso_a_Datos.obtenerDatosUsuariosAtrasados(Nombre_Visitante)
+    End Function
+
 End Class
