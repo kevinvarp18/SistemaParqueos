@@ -14,7 +14,7 @@ Public Class frm_SolicitudesAtrasadas
         Dim permitido As Boolean
 
         For Each variableSesion As String In Session.Keys
-            If (String.Equals(variableSesion, "frm_SolicitudesAtrasadas")) Then
+            If (String.Equals(variableSesion, "frm_VisitantesAtrasados")) Then
                 permitido = True
             End If
         Next

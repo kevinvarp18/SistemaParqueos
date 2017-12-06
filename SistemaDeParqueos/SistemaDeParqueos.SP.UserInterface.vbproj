@@ -158,7 +158,7 @@
     <Content Include="public\js\waypoints.min.js" />
     <Content Include="public\js\wow.min.js" />
     <Content Include="view\frm_DatosVisitantesAtrasados.aspx" />
-    <Content Include="view\frm_SolicitudesAtrasadas.aspx" />
+    <Content Include="view\frm_VisitantesAtrasados.aspx" />
     <Content Include="public\js\script.js" />
     <Content Include="view\frm_AdministrarSolicitudes.aspx" />
     <Content Include="view\frm_BrindarParqueo.aspx" />
@@ -183,11 +183,11 @@
       <DependentUpon>frm_DatosVisitantesAtrasados.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="view\frm_SolicitudesAtrasadas.aspx.designer.vb">
-      <DependentUpon>frm_SolicitudesAtrasadas.aspx</DependentUpon>
+    <Compile Include="view\frm_VisitantesAtrasados.aspx.designer.vb">
+      <DependentUpon>frm_VisitantesAtrasados.aspx</DependentUpon>
     </Compile>
-    <Compile Include="view\frm_SolicitudesAtrasadas.aspx.vb">
-      <DependentUpon>frm_SolicitudesAtrasadas.aspx</DependentUpon>
+    <Compile Include="view\frm_VisitantesAtrasados.aspx.vb">
+      <DependentUpon>frm_VisitantesAtrasados.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="view\frm_AdministrarSolicitudes.aspx.designer.vb">

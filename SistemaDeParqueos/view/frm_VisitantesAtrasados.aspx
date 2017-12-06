@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site1.Master" CodeBehind="frm_SolicitudesAtrasadas.aspx.vb" Inherits="SistemaDeParqueos.frm_SolicitudesAtrasadas" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site1.Master" CodeBehind="frm_VisitantesAtrasados.aspx.vb" Inherits="SistemaDeParqueos.frm_SolicitudesAtrasadas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

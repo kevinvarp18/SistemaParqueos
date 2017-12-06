@@ -41,6 +41,24 @@ Partial Public Class frm_BrindarAcceso
     Protected WithEvents DwnLstSolicitante As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''lblParqueo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblParqueo As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''DwnLstParqueos control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DwnLstParqueos As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''lblFechaE control.
     '''</summary>
     '''<remarks>

@@ -9,6 +9,8 @@
                     <h3>Brindar Parqueo</h3>
                     <asp:Label ID="lblSolicitante" runat="server" Text="Visitante:"></asp:Label>
                     <asp:DropDownList ID="DwnLstSolicitante" runat="server" AutoPostBack="false"></asp:DropDownList><br />
+                    <asp:Label ID="lblParqueo" runat="server" Text="Parqueo:"></asp:Label>
+                    <asp:DropDownList ID="DwnLstParqueos" runat="server" AutoPostBack="false"></asp:DropDownList><br />
                     <asp:Label ID="lblFechaE" runat="server" Text="Fecha Entrada:"></asp:Label>
                     <asp:TextBox ID="tbFechaE" type="date" runat="server"></asp:TextBox><br />
                     <asp:Label ID="lblHoraE" runat="server" Text="Hora Entrada:"></asp:Label>
@@ -25,7 +27,7 @@
                     <asp:TextBox ID="tbModelo" type="text" runat="server"></asp:TextBox><br />
                     <asp:Label ID="lblMotivo" runat="server" Text="Motivo:"></asp:Label>
                     <asp:TextBox ID="tbMotivo" type="text" runat="server" maxlength="100"></asp:TextBox><br />
-                    <asp:Button ID="btnSolicitar" runat="server" CssClass="singleButton" OnClick="btnSolicitar_Click" Text="Solicitar" />                    
+                    <asp:Button ID="btnSolicitar" runat="server" CssClass="singleButton" OnClientClick="confirmar('', '¿Está seguro que desea brindar ese espacio?', 'info')" Text="Solicitar" />                    
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

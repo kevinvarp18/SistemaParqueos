@@ -149,12 +149,12 @@
                                     <li><a href="frm_AdministrarSolicitudes.aspx">Administrar solicitudes</a></li>
                                     <% 
                             Exit Select
-                        Case "frm_SolicitudesAtrasadas"
+                        Case "frm_VisitantesAtrasados"
                                     %>
-                                    <li><a href="frm_SolicitudesAtrasadas.aspx">Visitantes atrasadas</a></li>
+                                    <li><a href="frm_VisitantesAtrasados.aspx">Visitantes atrasados</a></li>
                                     <% 
-                            Exit Select
-                        Case "frm_RegistrarUsuario"
+                                            Exit Select
+                                        Case "frm_RegistrarUsuario"
                                     %>
                                     <li><a href="frm_RegistrarUsuario.aspx">Registrar usuario</a></li>
                                     <% 

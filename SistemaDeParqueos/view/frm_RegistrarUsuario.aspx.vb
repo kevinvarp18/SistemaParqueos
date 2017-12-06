@@ -46,6 +46,12 @@ Public Class frm_RegistrarUsuario
                     updatePanel3.Visible = False
                     updatePanel4.Visible = True
                 End If
+
+                Dim eventArg As String = Request("__EVENTARGUMENT")
+                If eventArg = "MyCustomArgument" Then
+                    registrarUsuario()
+                End If
+
             Else
                 DwnLstTipoUsuario.Items.Add("Seleccione una opción")
                 DwnLstTipoUsuario.Items.Add("Visitante")
@@ -77,7 +83,7 @@ Public Class frm_RegistrarUsuario
         End If
     End Sub
 
-    Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
+    Protected Sub registrarUsuario()
         Dim titulo As String = "ERROR"
         Dim mensaje As String
         Dim tipo As String = "error"

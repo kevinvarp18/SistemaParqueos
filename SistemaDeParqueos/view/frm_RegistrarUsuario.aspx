@@ -45,7 +45,7 @@
                             </asp:UpdatePanel>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:Button ID="btnRegistrar" runat="server" CssClass="singleButton" OnClick="btnRegistrar_Click" Text="Registrar" /><br />
+                    <asp:Button ID="btnRegistrar" runat="server" CssClass="singleButton" OnClientClick="confirmar('', '¿Está seguro que desea registrar ese usuario?', 'info')" Text="Registrar" /><br />
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

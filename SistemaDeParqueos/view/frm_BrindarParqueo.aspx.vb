@@ -20,6 +20,8 @@ Public Class frm_BrindarAcceso
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_BrindarAcceso", ResolveUrl("~") + "public/js/" + "script.js")
 
             Dim usuariosNegocios As New SP_Usuario_Negocios(connectionString)
+            Dim parqueoNegocios As New SP_Parqueo_Negocios(connectionString)
+
             If IsPostBack Then
                 Dim correos As LinkedList(Of Usuario) = usuariosNegocios.obtenerCorreoUsuariosVisitantes()
                 Me.gstrUsuarioSelecion = DwnLstSolicitante.SelectedItem.ToString()
@@ -28,12 +30,24 @@ Public Class frm_BrindarAcceso
                         Me.gstrUsuarioSelecion = usuarioActual.gstrCorreo
                     End If
                 Next
+
+                Dim eventArg As String = Request("__EVENTARGUMENT")
+                If eventArg = "MyCustomArgument" Then
+                    brindarAcceso()
+                End If
             Else
                 DwnLstSolicitante.Items.Clear()
                 DwnLstSolicitante.Items.Add("Seleccione una opción")
                 Dim correos As LinkedList(Of Usuario) = usuariosNegocios.obtenerCorreoUsuariosVisitantes()
                 For Each usuarioActual As Usuario In correos
                     DwnLstSolicitante.Items.Add("Correo Usuario: " + usuarioActual.gstrCorreo.ToString())
+                Next
+
+                Dim parqueo As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
+                For Each item As Parqueo In parqueo
+                    If item.GintDisponibleSG <> 0 Then
+                        DwnLstParqueos.Items.Add(item.GintIdentificadorSG.ToString)
+                    End If
                 Next
             End If
         Else
@@ -44,24 +58,29 @@ Public Class frm_BrindarAcceso
 
     End Sub
 
-    Protected Sub btnSolicitar_Click(sender As Object, e As EventArgs) Handles btnSolicitar.Click
+    Protected Sub brindarAcceso()
         Dim titulo As String = "ERROR"
         Dim tipo As String = "error"
         Dim mensaje As String = "Debe completar todos los campos"
 
-        If (DwnLstSolicitante.SelectedItem.ToString().Equals("") Or tbPlaca.Text.Equals("") Or tbMarca.Text.Equals("") Or tbModelo.Text.Equals("")) Then
+        If (tbPlaca.Text.Equals("") Or tbMarca.Text.Equals("") Or tbModelo.Text.Equals("") Or tbMotivo.Text.Equals("") Or tbFechaE.Text.Equals("") Or tbFechaS.Text.Equals("") Or tbHoraE.Text.Equals("") Or tbHoraS.Text.Equals("")) Then
         Else
             Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Dim solicitudNegocios As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
             Dim fechai As DateTime = Convert.ToDateTime(tbFechaE.Text)
             Dim fechaf As DateTime = Convert.ToDateTime(tbFechaS.Text)
+            Dim correo As String
 
-            If tbFechaE.Text <> "" AndAlso tbHoraE.Text <> "" Then
-                solicitudNegocios.insertarSolicitud(gstrUsuarioSelecion, New Solicitud(0, 0, 0, tbHoraE.Text, tbHoraS.Text, tbPlaca.Text, tbModelo.Text, tbMarca.Text, fechai.ToString("dd/MM/yyyy"), fechaf.ToString("dd/MM/yyyy"), tbMotivo.Text))
-                titulo = "Correcto"
-                mensaje = "Acceso brindado exitosamente"
-                tipo = "success"
+            If (DwnLstSolicitante.SelectedItem.Text.Equals("Seleccione una opción")) Then
+                correo = Session("Correo")
+            Else
+                correo = gstrUsuarioSelecion
             End If
+
+            solicitudNegocios.brindarAcceso(correo, New Solicitud(0, 0, Integer.Parse(DwnLstParqueos.SelectedItem.Text), tbHoraE.Text, tbHoraS.Text, tbPlaca.Text, tbModelo.Text, tbMarca.Text, fechai.ToString("dd/MM/yyyy"), fechaf.ToString("dd/MM/yyyy"), tbMotivo.Text))
+            titulo = "Correcto"
+            mensaje = "Acceso brindado exitosamente"
+            tipo = "success"
 
             tbHoraE.Text = ""
             tbHoraS.Text = ""

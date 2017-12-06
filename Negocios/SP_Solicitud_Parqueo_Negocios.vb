@@ -90,4 +90,7 @@ Public Class SP_Solicitud_Parqueo_Negocios
         Return Me.solicitud_Acceso_a_Datos.obtenerDatosUsuariosAtrasados(Nombre_Visitante)
     End Function
 
+    Public Function brindarAcceso(correo As String, solicitud As Solicitud) As Solicitud
+        Return Me.solicitud_Acceso_a_Datos.brindarAcceso(correo, solicitud)
+    End Function
 End Class

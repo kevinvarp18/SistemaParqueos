@@ -558,4 +558,28 @@ Public Class SP_Solicitud_Datos
         Next
         Return solicitud
     End Function
+    Public Function brindarAcceso(correo As String, solicitud As Solicitud) As Solicitud
+
+        Dim connection As New SqlConnection(Me.gstrconnString)
+        Dim sqlStoredProcedure As [String] = "PA_BrindarAcceso"
+        Dim cmdInsert As New SqlCommand(sqlStoredProcedure, connection)
+        cmdInsert.CommandType = System.Data.CommandType.StoredProcedure
+
+        cmdInsert.Parameters.Add(New SqlParameter("@correo", correo))
+        cmdInsert.Parameters.Add(New SqlParameter("@idParqueo", solicitud.GintIdParqueoSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@fechaE", solicitud.GstrFechaISG))
+        cmdInsert.Parameters.Add(New SqlParameter("@fechaS", solicitud.GstrFechaFSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@horaE", solicitud.GstrHoraISG))
+        cmdInsert.Parameters.Add(New SqlParameter("@horaS", solicitud.GstrHoraFSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@placa", solicitud.GstrPlacaSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@modelo", solicitud.GstrModeloSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@marca", solicitud.GstrMarcaSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@motivo", solicitud.GstrMotivoSG))
+
+        cmdInsert.Connection.Open()
+        cmdInsert.ExecuteNonQuery()
+        cmdInsert.Connection.Close()
+
+        Return solicitud
+    End Function
 End Class

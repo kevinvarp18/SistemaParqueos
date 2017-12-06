@@ -86,11 +86,18 @@ Public Class frm_ListaVisitantes
                 btnMarcarSalida.Width = 100%
                 btnMarcarSalida.CssClass = solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GintIdParqueoSG.ToString() + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";0"
                 btnMarcarSalida.Style("color") = "#00fe00"
-                btnMarcarSalida.Style("font-size") = "0.70em"
                 AddHandler btnMarcarSalida.Click, AddressOf Me.button_Click
+
+                Dim btnRechazar As New Button()
+                btnRechazar.Text = "Rechazar"
+                btnRechazar.Style("font-size") = "0.70em"
+                btnRechazar.CssClass = solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrModeloSG + ";" + solicitudAct.GintIdParqueoSG.ToString() + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";2"
+                btnRechazar.Style("color") = "#61210B"
+                AddHandler btnRechazar.Click, AddressOf Me.button_Click
 
                 celdaBotones.Controls.Add(btnMarcarEntrada)
                 celdaBotones.Controls.Add(btnMarcarSalida)
+                celdaBotones.Controls.Add(btnRechazar)
 
                 filaTabla.Cells.Add(celdaNombre)
                 filaTabla.Cells.Add(celdaMarca)
@@ -125,6 +132,10 @@ Public Class frm_ListaVisitantes
             botonSeleccionado.Style("font-size") = "0.70em"
             botonSeleccionado.Text = "Marcar Salida"
         End If
+
+        Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
+        Response.BufferOutput = True
+        Response.Redirect(url & Convert.ToString("/view/frm_ListaVisitantes.aspx"))
     End Sub
 
 End Class

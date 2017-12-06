@@ -8,7 +8,8 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Administrar Parqueo</h3>
-                    <asp:Label ID="lblCantidad" runat="server" Text="Numero Parqueo: " Width="173px"></asp:Label>
+                    <asp:Label ID="lblParqueo" runat="server" Text="Parqueo: "></asp:Label>
+                    <asp:Label ID="lblNumParqueo" runat="server" Text="" style="margin-left: 3%;"></asp:Label>
                     <br />
                     <br />
                     <br />
