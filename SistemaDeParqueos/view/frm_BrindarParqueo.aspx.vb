@@ -57,7 +57,7 @@ Public Class frm_BrindarAcceso
             Dim fechaf As DateTime = Convert.ToDateTime(tbFechaS.Text)
 
             If tbFechaE.Text <> "" AndAlso tbHoraE.Text <> "" Then
-                solicitudNegocios.insertarSolicitud(gstrUsuarioSelecion, New Solicitud(0, 0, 0, tbHoraE.Text, tbHoraS.Text, tbPlaca.Text, tbModelo.Text, tbMarca.Text, fechai.ToString("dd/MM/yyyy"), fechaf.ToString("dd/MM/yyyy")))
+                solicitudNegocios.insertarSolicitud(gstrUsuarioSelecion, New Solicitud(0, 0, 0, tbHoraE.Text, tbHoraS.Text, tbPlaca.Text, tbModelo.Text, tbMarca.Text, fechai.ToString("dd/MM/yyyy"), fechaf.ToString("dd/MM/yyyy"), tbMotivo.Text))
                 titulo = "Correcto"
                 mensaje = "Acceso brindado exitosamente"
                 tipo = "success"
@@ -70,6 +70,7 @@ Public Class frm_BrindarAcceso
             tbFechaE.Text = ""
             tbFechaS.Text = ""
             tbMarca.Text = ""
+            tbMotivo.Text = ""
         End If
 
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)

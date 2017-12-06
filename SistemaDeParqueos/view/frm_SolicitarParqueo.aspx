@@ -21,7 +21,9 @@
                     <asp:TextBox ID="tbMarca" type="text" runat="server"></asp:TextBox><br />
                     <asp:Label ID="lblModelo" runat="server" Text="Modelo:"></asp:Label>
                     <asp:TextBox ID="tbModelo" type="text" runat="server"></asp:TextBox><br />
-                    <asp:Button ID="btnSolicitar" runat="server" CssClass="singleButton" OnClick="btnSolicitar_Click" Text="Solicitar" />
+                    <asp:Label ID="lblMotivo" runat="server" Text="Motivo:"></asp:Label>
+                    <asp:TextBox ID="tbMotivo" type="text" runat="server" maxlength="100"></asp:TextBox><br />
+                    <asp:Button ID="btnSolicitar" runat="server" CssClass="singleButton" OnClientClick="confirmar('', '¿Está seguro que desea realizar esa solicitud?', 'info')" Text="Solicitar" />
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>

@@ -51,6 +51,7 @@ Public Class frm_AdministrarSolicitudes
                 Dim celdaHoraI As New TableCell()
                 Dim celdaFechaS As New TableCell()
                 Dim celdaHoraS As New TableCell()
+                Dim celdaMotivo As New TableCell()
                 Dim celdaEspaciosParqueo As New TableCell()
                 Dim celdaBotones As New TableCell()
 
@@ -83,6 +84,7 @@ Public Class frm_AdministrarSolicitudes
                 literalControl.Text = ""
                 celdaEspaciosParqueo.Controls.Add(literalControl)
                 celdaBotones.Controls.Add(literalControl)
+                celdaMotivo.Controls.Add(literalControl)
 
                 Dim btnRechazar As Button = New Button
                 btnRechazar.CssClass = contador.ToString() + ";" + solicitudAct.GstrMarcaSG + ";" + solicitudAct.GstrPlacaSG + ";" + solicitudAct.GstrHoraISG + ";" + solicitudAct.GstrHoraFSG + ";" + celdaFechaI.Text + ";" + celdaFechaS.Text + ";" + solicitudAct.GstrModeloSG + ";0"
@@ -100,10 +102,15 @@ Public Class frm_AdministrarSolicitudes
                 btnAceptar.Style("font-size") = "90%"
                 AddHandler btnAceptar.Click, AddressOf Me.button_Click
 
+                Dim lnkBtnMotivo As LinkButton = New LinkButton
+                lnkBtnMotivo.Text = "Ver"
+                lnkBtnMotivo.OnClientClick = "muestraMensaje('Motivo de la solicitud','" + solicitudAct.GstrMotivoSG + "', 'info')"
+
                 celdaEspaciosParqueo.Controls.Add(DwnLstParqueos)
                 listaDwnLstParqueos.AddLast(DwnLstParqueos)
                 celdaBotones.Controls.Add(btnRechazar)
                 celdaBotones.Controls.Add(btnAceptar)
+                celdaMotivo.Controls.Add(lnkBtnMotivo)
 
                 filaTabla.Cells.Add(celdaMarca)
                 filaTabla.Cells.Add(celdaPlaca)
@@ -111,6 +118,7 @@ Public Class frm_AdministrarSolicitudes
                 filaTabla.Cells.Add(celdaHoraI)
                 filaTabla.Cells.Add(celdaFechaS)
                 filaTabla.Cells.Add(celdaHoraS)
+                filaTabla.Cells.Add(celdaMotivo)
                 filaTabla.Cells.Add(celdaEspaciosParqueo)
                 filaTabla.Cells.Add(celdaBotones)
                 tablaSolicitudes.Rows.Add(filaTabla)

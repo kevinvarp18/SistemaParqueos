@@ -7,8 +7,8 @@
 
     'NOMBRE DEL DESARROLLADOR:                       Dylan Zamora
     '
-    'FECHA DE CREACIÓN                               05-Octubre-2017
-    'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Octubre-2017
+    'FECHA DE CREACIÓN                               05-Diciembre-2017
+    'FECHA DE ULTIMA ACTUALIZACIÓN:                  05-Diciembre-2017
     '******************************************************************
 
     'Declaracion de variables.
@@ -22,6 +22,7 @@
     Private gstrMarca As String
     Private gstrFechaI As String
     Private gstrFechaF As String
+    Private gstrMotivo As String
 
     'Declaracion constructor default.
     Public Sub New()
@@ -35,10 +36,11 @@
         Me.gstrMarca = ""
         Me.gstrFechaI = ""
         Me.gstrFechaF = ""
+        Me.gstrMotivo = ""
     End Sub
 
     'Declaracion de constructor sobrecargado.
-    Public Sub New(gintIdSolicutud As Integer, gintIdVisitante As Integer, gintIdParqueo As Integer, gstrHoraI As String, gstrHoraF As String, gstrPlaca As String, gstrModelo As String, gstrMarca As String, gstrFechaI As String, gstrFechaF As String)
+    Public Sub New(gintIdSolicutud As Integer, gintIdVisitante As Integer, gintIdParqueo As Integer, gstrHoraI As String, gstrHoraF As String, gstrPlaca As String, gstrModelo As String, gstrMarca As String, gstrFechaI As String, gstrFechaF As String, gstrMotivo As String)
         Me.gintIdSolicutud = gintIdSolicutud
         Me.gintIdVisitante = gintIdVisitante
         Me.gintIdParqueo = gintIdParqueo
@@ -49,6 +51,7 @@
         Me.gstrMarca = gstrMarca
         Me.gstrFechaI = gstrFechaI
         Me.gstrFechaF = gstrFechaF
+        Me.gstrMotivo = gstrMotivo
     End Sub
 
     'Declaracion de set y Get.
@@ -139,6 +142,15 @@
         End Get
         Set(value As String)
             gstrFechaF = value
+        End Set
+    End Property
+
+    Public Property GstrMotivoSG As String
+        Get
+            Return gstrMotivo
+        End Get
+        Set(value As String)
+            gstrMotivo = value
         End Set
     End Property
 End Class

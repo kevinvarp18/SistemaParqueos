@@ -149,6 +149,24 @@ Partial Public Class frm_SolicitarParqueo
     Protected WithEvents tbModelo As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''lblMotivo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMotivo As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''tbMotivo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tbMotivo As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''btnSolicitar control.
     '''</summary>
     '''<remarks>

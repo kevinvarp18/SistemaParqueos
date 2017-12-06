@@ -34,6 +34,7 @@ Public Class SP_Solicitud_Datos
         cmdInsert.Parameters.Add(New SqlParameter("@marca", solicitud.GstrMarcaSG))
         cmdInsert.Parameters.Add(New SqlParameter("@fecha_i", solicitud.GstrFechaISG))
         cmdInsert.Parameters.Add(New SqlParameter("@fecha_f", solicitud.GstrFechaFSG))
+        cmdInsert.Parameters.Add(New SqlParameter("@motivo", solicitud.GstrMotivoSG))
 
         cmdInsert.Connection.Open()
         cmdInsert.ExecuteNonQuery()
@@ -95,6 +96,7 @@ Public Class SP_Solicitud_Datos
             solicitudActual.GstrModeloSG = currentRow("correo").ToString()
             solicitudActual.GstrFechaISG = currentRow("fecha_e").ToString()
             solicitudActual.GstrFechaFSG = currentRow("fecha_s").ToString()
+            solicitudActual.GstrMotivoSG = currentRow("motivo").ToString()
             solicitud.AddLast(solicitudActual)
         Next
         Return solicitud

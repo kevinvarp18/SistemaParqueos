@@ -20,6 +20,7 @@
                                         <asp:TableHeaderCell>Hora Entrada</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>Fecha Salida</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>Hora Salida</asp:TableHeaderCell>
+                                        <asp:TableHeaderCell>Motivo</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>Espacio</asp:TableHeaderCell>
                                         <asp:TableHeaderCell>Acción</asp:TableHeaderCell>
                                     </asp:TableHeaderRow>
