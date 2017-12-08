@@ -14,6 +14,9 @@ Public Class Site1
         Else
             If (Session("Usuario") Is Nothing) Then
                 Session("Usuario") = "N"
+                Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
+                Response.BufferOutput = True
+                Response.Redirect(url & Convert.ToString("/view/frm_index.aspx"))
             ElseIf (String.Equals(Session("Usuario"), "a")) Then
                 Me.connectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
                 Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(connectionString)

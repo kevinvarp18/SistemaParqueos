@@ -26,22 +26,39 @@
                     <asp:TextBox ID="tbUbicacion" type="text" runat="server"></asp:TextBox><br />
                     <asp:Label ID="lblProcedenciaDwnLst" runat="server" Text="Procedencia:"></asp:Label>
                     <asp:DropDownList ID="DwnLstProcedencia" runat="server" AutoPostBack="true"></asp:DropDownList><br />
-                    <asp:UpdatePanel ID="UpdatePanel3" runat="server" Visible="false">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server" Visible="false">
                         <ContentTemplate>
                             <asp:Label ID="lblDepartamento" runat="server" Text="Nombre Dept:"></asp:Label>
                             <asp:DropDownList ID="DwnLstDepartamento" type="text" runat="server"></asp:DropDownList><br />
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:UpdatePanel ID="UpdatePanel4" runat="server" Visible="false">
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server" Visible="false">
                         <ContentTemplate>
                             <asp:Label ID="lblInstitucion" runat="server" Text="Institucion:"></asp:Label>
                             <asp:TextBox ID="tbInstitucion" type="text" runat="server" onkeypress="return validar(event)"></asp:TextBox><br />
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:Button ID="btnRegistrar" runat="server" CssClass="singleButton" OnClientClick="confirmar('', '¿Está seguro que desea registrarse con esos datos?', 'info')" Text="Registrarse" /><br />
+                    <asp:Button ID="btnRegistrar" runat="server" CssClass="singleButton" OnClick="btnRegistrar_Click" Text="Registrarse" /><br />
                     <br />
                 </ContentTemplate>
             </asp:UpdatePanel>
+        </div>
+    </div>
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog">
+        <div class='modal-dialog' role='document'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h4 class='modal-title' id='myModalLabel'>¿Está seguro de que desea registrar estos datos de usuario?</h4>
+                </div>
+                <div class='modal-footer'>
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server" Visible="true">
+                        <ContentTemplate>
+                            <asp:Button ID='btnConfirmar' CssClass='btn btn-success' runat="server" Text="Confirmar" OnClick='btnAceptar_Click'></asp:Button>
+                            <asp:Button ID='btnCancelar' CssClass='btn btn-danger' runat="server" Text="Cancelar" OnClick='btnCancelar_Click'></asp:Button>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>

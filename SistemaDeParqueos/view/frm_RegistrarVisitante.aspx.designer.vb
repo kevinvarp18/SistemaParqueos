@@ -185,13 +185,13 @@ Partial Public Class registrarVisitante
     Protected WithEvents DwnLstProcedencia As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''UpdatePanel3 control.
+    '''UpdatePanel2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
     '''lblDepartamento control.
@@ -212,13 +212,13 @@ Partial Public Class registrarVisitante
     Protected WithEvents DwnLstDepartamento As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''UpdatePanel4 control.
+    '''UpdatePanel3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UpdatePanel4 As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents UpdatePanel3 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
     '''lblInstitucion control.
@@ -246,4 +246,31 @@ Partial Public Class registrarVisitante
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRegistrar As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''UpdatePanel4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel4 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''btnConfirmar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConfirmar As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnCancelar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCancelar As Global.System.Web.UI.WebControls.Button
 End Class

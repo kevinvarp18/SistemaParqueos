@@ -255,15 +255,15 @@ ul.top-icons {
         margin-top: 2em;
     }
 
-.modal-header {
+/*.modal-header {
     border-bottom: 10px solid #000;
     background: #000;
 }
 
-    .modal-header button {
-        color: #FFF;
-        font-size: 3em;
-    }
+.modal-header button {
+    color: #FFF;
+    font-size: 3em;
+}
 
 .modal-dialog {
     width: 85%;
@@ -273,7 +273,7 @@ ul.top-icons {
     background: #111;
     padding: 2em 0 1em;
     text-align: left;
-}
+}*/
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     cursor: default;

@@ -7,7 +7,6 @@ Public Class registrarVisitante
 
     Dim connectionString As String
     Dim usuarioNegocios As SP_Usuario_Negocios
-    Protected PostBackStr As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If String.Equals(Session("Usuario"), "N") Then
@@ -34,25 +33,15 @@ Public Class registrarVisitante
                 DwnLstDepartamento.Items.Add("UPROV")
                 DwnLstDepartamento.Items.Add("UVISE")
             Else
-                Dim eventArg As String = Request("__EVENTARGUMENT")
-                If eventArg = "MyCustomArgument" Then
-                    registarVisitante()
-                End If
-
-                Dim contentPlaceHolder As ContentPlaceHolder
-                Dim updatePanel As UpdatePanel
-                contentPlaceHolder = DirectCast(Page.Master.FindControl("ContentPlaceHolder1"), ContentPlaceHolder)
-                updatePanel = DirectCast(contentPlaceHolder.FindControl("UpdatePanel2"), UpdatePanel)
-
                 If (DwnLstProcedencia.SelectedItem.ToString().Equals("Seleccione una opción")) Then
+                    UpdatePanel2.Visible = False
                     UpdatePanel3.Visible = False
-                    UpdatePanel4.Visible = False
                 ElseIf (DwnLstProcedencia.SelectedItem.ToString().Equals("Interno")) Then
-                    UpdatePanel3.Visible = True
-                    UpdatePanel4.Visible = False
-                Else
+                    UpdatePanel2.Visible = True
                     UpdatePanel3.Visible = False
-                    UpdatePanel4.Visible = True
+                Else
+                    UpdatePanel2.Visible = False
+                    UpdatePanel3.Visible = True
                 End If
             End If
         Else
@@ -62,13 +51,11 @@ Public Class registrarVisitante
         End If
     End Sub
 
-    Protected Sub registarVisitante()
+    Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
         Dim titulo As String = "ERROR"
         Dim mensaje As String
         Dim tipo As String = "error"
-        Dim tipoVisitante As String
         Dim email As New Regex("([\w-+]+(?:\.[\w-+]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7})")
-        Dim resultado As Integer
 
         If (tbIdentificacion.Text.Equals("") Or tbNombre.Text.Equals("") Or tbApellidos.Text.Equals("") Or
             tbTelefono.Text.Equals("") Or tbEmail.Text.Equals("") Or tbContrasena.Text.Equals("") Or
@@ -76,38 +63,54 @@ Public Class registrarVisitante
             DwnLstTipoIdentificacion.SelectedItem.ToString().Equals("Seleccione una opción") Or
             DwnLstProcedencia.SelectedItem.ToString().Equals("Seleccione una opción")) Then
             mensaje = "Debe completar todos los campos"
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
         ElseIf (Not email.IsMatch(tbEmail.Text)) Then
             mensaje = "Ingrese una dirección de correo válida"
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
         Else
-            If (DwnLstProcedencia.SelectedItem.ToString().Equals("Externo")) Then
-                tipoVisitante = "Externo"
-                resultado = Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v", Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, tbInstitucion.Text))
-            Else
-                tipoVisitante = "Interno"
-                resultado = Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v", Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, DwnLstDepartamento.SelectedItem.Text))
-            End If
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('show');", True)
+        End If
+    End Sub
 
-            If (resultado = 1) Then
-                titulo = "Correcto"
-                mensaje = "Se ha registrado el visitante exitosamente"
-                tipo = "success"
+    Protected Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
+    End Sub
 
-                tbNombre.Text = ""
-                tbApellidos.Text = ""
-                tbIdentificacion.Text = ""
-                tbTelefono.Text = ""
-                tbEmail.Text = ""
-                tbContrasena.Text = ""
-                tbUbicacion.Text = ""
-                tbInstitucion.Text = ""
-                DwnLstProcedencia.SelectedIndex = 0
-                DwnLstTipoIdentificacion.SelectedIndex = 0
-                DwnLstDepartamento.SelectedIndex = 0
-            Else
-                mensaje = "Ese correo ya existe en el sistema"
-            End If
+    Protected Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Dim resultado As Integer
+        Dim tipoVisitante, mensaje As String
+        Dim titulo As String = "ERROR"
+        Dim tipo As String = "error"
+
+        If (DwnLstProcedencia.SelectedItem.ToString().Equals("Externo")) Then
+            tipoVisitante = "Externo"
+            resultado = Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v", Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, tbInstitucion.Text))
+        Else
+            tipoVisitante = "Interno"
+            resultado = Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v", Integer.Parse(tbTelefono.Text), tbUbicacion.Text, tipoVisitante, DwnLstDepartamento.SelectedItem.Text))
         End If
 
+        If (resultado = 1) Then
+            titulo = "Correcto"
+            mensaje = "Se ha registrado el visitante exitosamente"
+            tipo = "success"
+
+            tbNombre.Text = ""
+            tbApellidos.Text = ""
+            tbIdentificacion.Text = ""
+            tbTelefono.Text = ""
+            tbEmail.Text = ""
+            tbContrasena.Text = ""
+            tbUbicacion.Text = ""
+            tbInstitucion.Text = ""
+            DwnLstProcedencia.SelectedIndex = 0
+            DwnLstTipoIdentificacion.SelectedIndex = 0
+            DwnLstDepartamento.SelectedIndex = 0
+        Else
+            mensaje = "Ese correo ya existe en el sistema"
+        End If
+
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
     End Sub
 
