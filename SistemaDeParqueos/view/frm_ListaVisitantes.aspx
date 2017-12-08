@@ -3,12 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="newsletter wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-        <div class="container">
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
-                <ContentTemplate>
-                    <h3>Lista de Visitantes de hoy</h3>
-                    </div>
+    <div class="espaciado2">
+        <div class="newsletter wow fadeInUp animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+            <div class="container">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
+                    <ContentTemplate>
+                        <h3>Lista de Visitantes de hoy</h3>
+                        </div>
                     </div>
                     <div class="container">
                         <div class="page w3-4">
@@ -30,7 +31,8 @@
                             </div>
                         </div>
                     </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
         </div>
 </asp:Content>

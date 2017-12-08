@@ -1755,15 +1755,37 @@ a.read {
 
 /*--responsive--*/
 
+@media (max-width: 1920px) {
+    .espaciado {
+        margin: 18em 0;
+    }
+
+    .espaciado2 {
+        margin: 6.8em 0;
+    }
+}
+
+@media (max-width: 1680px) {
+    .espaciado {
+        margin: 13em 0;
+    }
+}
+
+@media (max-width: 1440px) {
+    .espaciado {
+        margin: 13em 0;
+    }
+}
+
 @media (max-width:1366px) {
-    .infoGeneral {
-        padding: 10em;
+    .espaciado {
+        margin: 10em 0;
     }
 }
 
 @media (max-width: 1366px) and (max-height:1024px) {
-    .infoGeneral {
-        padding: 8.8em 0;
+    .espaciado {
+        padding: 4em 0;
     }
 }
 
@@ -1965,8 +1987,12 @@ a.read {
 }
 
 @media (max-width: 1024px) and (max-height: 1366px) {
-    .infoGeneral {
-        padding: 19.5em 0;
+    .espaciado {
+        margin: 27.1em 0;
+    }
+
+    .espaciado2 {
+        margin: 15.4em 0;
     }
 }
 
@@ -2516,8 +2542,8 @@ a.read {
         font-size: 260%;
     }
 
-    .infoGeneral {
-        padding: 10.7em 0;
+    .espaciado {
+        margin: 14.4em 0;
     }
 
     .recordarContrasena {
@@ -2536,8 +2562,8 @@ a.read {
 }
 
 @media (max-width: 1024px) and (max-height: 768px) {
-    .infoGeneral {
-        padding: 0.8em 0;
+    .espaciado {
+        margin: 0.8em 0;
     }
 }
 
@@ -2655,8 +2681,8 @@ a.read {
         margin-bottom: 4%;
     }
 
-    .infoGeneral {
-        padding: 4em 0;
+    .espaciado {
+        margin: 4em 0;
     }
 
         .infoGeneral h3 {
@@ -2886,6 +2912,10 @@ a.read {
 
 @media (max-width: 600px) {
 
+    .espaciado {
+        margin: 12.6em 0;
+    }
+
     .modal-dialog {
         width: 565px;
     }
@@ -3017,6 +3047,10 @@ a.read {
 }
 
 @media (max-width:480px) {
+
+    .espaciado {
+        margin: 10.5em 0;
+    }
 
     .modal-dialog {
         width: 445px;
@@ -3287,8 +3321,8 @@ a.read {
         margin-left: 37%;
     }
 
-    .infoGeneral {
-        padding: 10.5em 0;
+    .espaciado {
+        margin: 10.5em 0;
     }
 
     .navbar-default {
@@ -3654,8 +3688,8 @@ a.read {
         margin-left: 34%;
     }
 
-    .infoGeneral {
-        padding: 8.5em 0;
+    .espaciado {
+        margin: 8.5em 0;
     }
 
         .infoGeneral p {

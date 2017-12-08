@@ -50,7 +50,6 @@ Public Class registrarVisitante
             Response.Redirect(url & Convert.ToString("/view/frm_index.aspx"))
         End If
     End Sub
-
     Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
         Dim titulo As String = "ERROR"
         Dim mensaje As String
@@ -71,11 +70,9 @@ Public Class registrarVisitante
             ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('show');", True)
         End If
     End Sub
-
     Protected Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs)
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
     End Sub
-
     Protected Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim resultado As Integer
         Dim tipoVisitante, mensaje As String

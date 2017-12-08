@@ -45,9 +45,26 @@
                             </asp:UpdatePanel>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:Button ID="btnRegistrar" runat="server" CssClass="singleButton" OnClientClick="confirmar('', '¿Está seguro que desea registrar ese usuario?', 'info')" Text="Registrar" /><br />
+                    <asp:Button ID="btnRegistrar" runat="server" CssClass="singleButton" OnClick="btnRegistrar_Click" Text="Registrar" /><br />
                 </ContentTemplate>
             </asp:UpdatePanel>
+        </div>
+    </div>
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog">
+        <div class='modal-dialog' role='document'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h4 class='modal-title' id='myModalLabel'>¿Está seguro de que desea registrar estos datos de usuario?</h4>
+                </div>
+                <div class='modal-footer'>
+                    <asp:UpdatePanel ID="UpdatePanel5" runat="server" Visible="true">
+                        <ContentTemplate>
+                            <asp:Button ID='btnConfirmar' CssClass='btn btn-success' runat="server" Text="Confirmar" OnClick='btnAceptar_Click'></asp:Button>
+                            <asp:Button ID='btnCancelar' CssClass='btn btn-danger' runat="server" Text="Cancelar" OnClick='btnCancelar_Click'></asp:Button>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>

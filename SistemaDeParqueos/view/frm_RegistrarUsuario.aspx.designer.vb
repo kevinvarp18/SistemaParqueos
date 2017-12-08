@@ -273,4 +273,31 @@ Partial Public Class frm_RegistrarUsuario
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRegistrar As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''UpdatePanel5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel5 As Global.System.Web.UI.UpdatePanel
+    
+    '''<summary>
+    '''btnConfirmar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConfirmar As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnCancelar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCancelar As Global.System.Web.UI.WebControls.Button
 End Class

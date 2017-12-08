@@ -46,12 +46,6 @@ Public Class frm_RegistrarUsuario
                     updatePanel3.Visible = False
                     updatePanel4.Visible = True
                 End If
-
-                Dim eventArg As String = Request("__EVENTARGUMENT")
-                If eventArg = "MyCustomArgument" Then
-                    registrarUsuario()
-                End If
-
             Else
                 DwnLstTipoUsuario.Items.Add("Seleccione una opción")
                 DwnLstTipoUsuario.Items.Add("Visitante")
@@ -83,7 +77,7 @@ Public Class frm_RegistrarUsuario
         End If
     End Sub
 
-    Protected Sub registrarUsuario()
+    Protected Sub btnRegistrar_Click(sender As Object, e As EventArgs) Handles btnRegistrar.Click
         Dim titulo As String = "ERROR"
         Dim mensaje As String
         Dim tipo As String = "error"
@@ -93,51 +87,61 @@ Public Class frm_RegistrarUsuario
             (DwnLstTipoUsuario.SelectedItem.ToString().Equals("Visitante") And (tbUbicacion.Text.Equals("") Or tbTelefono.Text.Equals("") Or DwnLstProcedencia.SelectedItem.ToString().Equals("Seleccione una opción"))) Or
             (DwnLstTipoUsuario.SelectedItem.ToString().Equals("Visitante") And Not DwnLstProcedencia.SelectedItem.ToString().Equals("Seleccione una opción") And tbInstitucion.Text.Equals("") And DwnLstDepartamento.SelectedItem.ToString().Equals("Seleccione una opción"))) Then
             mensaje = "Debe completar todos los campos"
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
         ElseIf (Not email.IsMatch(tbEmail.Text)) Then
             mensaje = "Ingrese una dirección de correo válida"
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
         Else
-            Dim resultado As Boolean = True
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('show');", True)
+        End If
+    End Sub
 
-            If (DwnLstTipoUsuario.SelectedItem.ToString().Equals("Administrador")) Then
-                resultado = Me.usuarioNegocios.insertarAdministrador(New Administrador(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "a"))
-            ElseIf (DwnLstTipoUsuario.SelectedItem.ToString().Equals("Oficial de Seguridad")) Then
-                resultado = Me.usuarioNegocios.insertarOficial(New Oficial(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "o"))
-            ElseIf (DwnLstTipoUsuario.SelectedItem.ToString().Equals("Visitante")) Then
-                If (DwnLstProcedencia.SelectedItem.ToString().Equals("Interno")) Then
-                    resultado = Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v", tbTelefono.Text, tbUbicacion.Text, DwnLstProcedencia.SelectedItem.ToString(), tbInstitucion.Text))
-                Else
-                    resultado = Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v", tbTelefono.Text, tbUbicacion.Text, DwnLstProcedencia.SelectedItem.ToString(), DwnLstDepartamento.SelectedItem.Text))
-                End If
-            End If
+    Protected Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
+    End Sub
+    Protected Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Dim resultado As Boolean = True
+        Dim mensaje As String
+        Dim titulo As String = "ERROR"
+        Dim tipo As String = "error"
 
-            If resultado Then
-                titulo = "Correcto"
-                mensaje = "Se ha registrado el usuario exitosamente"
-                tipo = "success"
-
-                tbIdentificacion.Text = ""
-                tbNombre.Text = ""
-                tbApellidos.Text = ""
-                tbEmail.Text = ""
-                tbContrasena.Text = ""
-                tbUbicacion.Text = ""
-                tbTelefono.Text = ""
-                tbInstitucion.Text = ""
-                DwnLstDepartamento.SelectedIndex = 0
+        If (DwnLstTipoUsuario.SelectedItem.ToString().Equals("Administrador")) Then
+            resultado = Me.usuarioNegocios.insertarAdministrador(New Administrador(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "a"))
+        ElseIf (DwnLstTipoUsuario.SelectedItem.ToString().Equals("Oficial de Seguridad")) Then
+            resultado = Me.usuarioNegocios.insertarOficial(New Oficial(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "o"))
+        ElseIf (DwnLstTipoUsuario.SelectedItem.ToString().Equals("Visitante")) Then
+            If (DwnLstProcedencia.SelectedItem.ToString().Equals("Interno")) Then
+                resultado = Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v", tbTelefono.Text, tbUbicacion.Text, DwnLstProcedencia.SelectedItem.ToString(), tbInstitucion.Text))
             Else
-                mensaje = "Ya existe un usuario registrado con ese correo"
+                resultado = Me.usuarioNegocios.insertarVisitante(New Visitante(tbIdentificacion.Text, tbNombre.Text, tbApellidos.Text, tbEmail.Text, tbContrasena.Text, DwnLstTipoIdentificacion.SelectedItem.ToString(), "v", tbTelefono.Text, tbUbicacion.Text, DwnLstProcedencia.SelectedItem.ToString(), DwnLstDepartamento.SelectedItem.Text))
             End If
         End If
 
-        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
+        If resultado Then
+            titulo = "Correcto"
+            mensaje = "Se ha registrado el usuario exitosamente"
+            tipo = "success"
 
+            tbIdentificacion.Text = ""
+            tbNombre.Text = ""
+            tbApellidos.Text = ""
+            tbEmail.Text = ""
+            tbContrasena.Text = ""
+            tbUbicacion.Text = ""
+            tbTelefono.Text = ""
+            tbInstitucion.Text = ""
+            DwnLstDepartamento.SelectedIndex = 0
+        Else
+            mensaje = "Ya existe un usuario registrado con ese correo"
+        End If
+
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
     End Sub
 
     Protected Sub DwnLstTipoUsuario_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DwnLstTipoUsuario.SelectedIndexChanged
-
     End Sub
 
     Protected Sub DwnLstProcedencia_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DwnLstProcedencia.SelectedIndexChanged
-
     End Sub
 End Class

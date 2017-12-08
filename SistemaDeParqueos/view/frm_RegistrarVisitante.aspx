@@ -12,10 +12,10 @@
                     <asp:DropDownList ID="DwnLstTipoIdentificacion" runat="server" AutoPostBack="false"></asp:DropDownList><br />
                     <asp:Label ID="lblIdentificacion" runat="server" Text="Identificación:" onkeypress="return justNumbers(event)"></asp:Label>
                     <asp:TextBox ID="tbIdentificacion" type="text" runat="server"></asp:TextBox><br />
-                    <asp:Label ID="lblNombre" runat="server" Text="Nombre:" onkeypress="return validar(event)"></asp:Label>
-                    <asp:TextBox ID="tbNombre" type="text" runat="server"></asp:TextBox><br />
-                    <asp:Label ID="lblApellidos" runat="server" Text="Apellidos:" onkeypress="return validar(event)"></asp:Label>
-                    <asp:TextBox ID="tbApellidos" type="text" runat="server"></asp:TextBox><br />
+                    <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>
+                    <asp:TextBox ID="tbNombre" type="text" runat="server" onkeypress="return validar(event)"></asp:TextBox><br />
+                    <asp:Label ID="lblApellidos" runat="server" Text="Apellidos:"></asp:Label>
+                    <asp:TextBox ID="tbApellidos" type="text" runat="server" onkeypress="return validar(event)"></asp:TextBox><br />
                     <asp:Label ID="lblTelefono" runat="server" Text="Teléfono:"></asp:Label>
                     <asp:TextBox ID="tbTelefono" type="text" runat="server" onkeypress="return justNumbers(event)"></asp:TextBox><br />
                     <asp:Label ID="lblEmail" runat="server" Text="Email:"></asp:Label>
