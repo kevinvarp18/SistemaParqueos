@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog">
-        <div class='modal-dialog' role='document'>
+        <div class='modal-dialog' role='document' style="width: 45%;">
             <div class='modal-content'>
                 <div class='modal-header'>
                     <h4 class='modal-title' id='myModalLabel'>¿Está seguro de que desea registrar estos datos de usuario?</h4>

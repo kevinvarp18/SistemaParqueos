@@ -38,8 +38,9 @@
                     <div class="container">
                         <div class="page w3-4">
                             <div class="bs-example " data-example-id="simple-table">
-                                <asp:Table ID="table" runat="server" CssClass="table">
-                                    <asp:TableHeaderRow>
+                                <div class="table-responsive">
+                                    <asp:Table ID="table" runat="server" CssClass="table">
+                                        <asp:TableHeaderRow>
                                             <asp:TableHeaderCell>Nombre</asp:TableHeaderCell>
                                             <asp:TableHeaderCell>Institución</asp:TableHeaderCell>
                                             <asp:TableHeaderCell>Placa</asp:TableHeaderCell>
@@ -49,7 +50,8 @@
                                             <asp:TableHeaderCell>Hora Salida</asp:TableHeaderCell>
                                             <asp:TableHeaderCell>Espacio</asp:TableHeaderCell>
                                         </asp:TableHeaderRow>
-                                </asp:Table>
+                                    </asp:Table>
+                                </div>
                             </div>
                         </div>
                     </div>

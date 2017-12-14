@@ -21,7 +21,7 @@ Public Class frm_AdministrarSolicitudes
 
         If (permitido) Then
             tablaParqueos.Rows.Clear()
-            llenarTablaParqueos(DateTime.Now.ToString("dd/MM/yyyy"), "07:00", "21:00")
+            llenarTablaParqueos(DateTime.Now.ToString("yyyy-MM-dd"), "07:00", "21:00")
             Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Me.parqueoNegocios = New SP_Parqueo_Negocios(Me.strConnectionString)
             Me.solicitudNegocios = New SP_Solicitud_Parqueo_Negocios(Me.strConnectionString)
@@ -104,6 +104,8 @@ Public Class frm_AdministrarSolicitudes
 
                 Dim lnkBtnMotivo As LinkButton = New LinkButton
                 lnkBtnMotivo.Text = "Ver"
+                lnkBtnMotivo.Style("color") = "#0000ff"
+                lnkBtnMotivo.Style("text-decoration") = "underline"
                 lnkBtnMotivo.OnClientClick = "muestraMensaje('Motivo de la solicitud','" + solicitudAct.GstrMotivoSG + "', 'info')"
 
                 celdaEspaciosParqueo.Controls.Add(DwnLstParqueos)
@@ -143,7 +145,7 @@ Public Class frm_AdministrarSolicitudes
         Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
         Dim solicitudNegocios As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
-        Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(fechai.ToString("dd/MM/yyyy"), horaI, horaF)
+        Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(fechai.ToString("yyyy-MM-dd"), horaI, horaF)
         Dim parqueosTotales As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
         Dim cantidadTiposParqueo As LinkedList(Of String) = parqueoNegocios.cantidadTiposParqueo()
 
@@ -222,7 +224,7 @@ Public Class frm_AdministrarSolicitudes
         Session("fila") = datosSolicitud(0)
 
         If (accion.Equals("0")) Then
-            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "abrirModal();", True)
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalRetroalimentacion').modal('show');", True)
         Else
             decidirSolicitud()
         End If

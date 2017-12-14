@@ -8,15 +8,20 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" Visible="true">
                 <ContentTemplate>
                     <h3>Permisos y Roles</h3>
-                    <div class="bs-example " data-example-id="simple-table">
-                        <asp:Table ID="tabla" runat="server" CssClass="table">
-                            <asp:TableHeaderRow>
-                                <asp:TableHeaderCell>Permiso</asp:TableHeaderCell>
-                                <asp:TableHeaderCell>Rol</asp:TableHeaderCell>
-                            </asp:TableHeaderRow>
-                        </asp:Table>
+                    <div class="page w3-4">
+                        <div class="bs-example " data-example-id="simple-table">
+                            <div class="table-responsive">
+                                <asp:Table ID="tabla" runat="server" CssClass="table" Style="margin-left: -5%;">
+                                    <asp:TableHeaderRow>
+                                        <asp:TableHeaderCell>Permiso</asp:TableHeaderCell>
+                                        <asp:TableHeaderCell>Rol</asp:TableHeaderCell>
+                                    </asp:TableHeaderRow>
+                                </asp:Table>
+                            </div>
+                        </div>
                     </div>
-                    <br /><br />
+                    <br />
+                    <br />
                     <h3>Agregar o Eliminar Permisos a un Rol</h3>
                     <br />
                     <asp:Label ID="lblPermiso" runat="server" Text="Permiso:"></asp:Label>

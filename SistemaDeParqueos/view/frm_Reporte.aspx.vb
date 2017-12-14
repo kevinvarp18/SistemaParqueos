@@ -17,7 +17,6 @@ Public Class frm_Reporte
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim permitido As Boolean = False
-        'ScriptManager.GetCurrent(Me.Page).RegisterPostBackControl(btnExportar)
         For Each variableSesion As String In Session.Keys
             If (String.Equals(variableSesion, "frm_Reporte")) Then
                 permitido = True

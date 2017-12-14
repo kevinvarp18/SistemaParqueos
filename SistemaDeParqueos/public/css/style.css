@@ -64,9 +64,9 @@ ul.top-icons {
 /*--logo--*/
 .navbar h1 {
     color: #efd12f;
-    font-size: 2.7em;
+    font-size: 300%;
     margin-top: 4%;
-    margin-left: 40%;
+    margin-left: 38.4%;
 }
 
 /*--//logo--*/
@@ -255,25 +255,14 @@ ul.top-icons {
         margin-top: 2em;
     }
 
-/*.modal-header {
-    border-bottom: 10px solid #000;
-    background: #000;
+.modal-dialog {
+    width: 85%;
 }
 
 .modal-header button {
     color: #FFF;
     font-size: 3em;
 }
-
-.modal-dialog {
-    width: 85%;
-}
-
-.footModal {
-    background: #111;
-    padding: 2em 0 1em;
-    text-align: left;
-}*/
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     cursor: default;
@@ -569,7 +558,7 @@ agile_count_grid_left span, .agile_count_grid_right p {
 
 .parqueoModal {
     text-decoration: underline;
-    color: #000000;
+    color: #0000ff;
     margin-left: 85%;
     font-size: 1.5em;
     font-family: 'Cabin', sans-serif;
@@ -1757,7 +1746,7 @@ a.read {
 
 @media (max-width: 1920px) {
     .espaciado {
-        margin: 18em 0;
+        margin: 18.2em 0;
     }
 
     .espaciado2 {
@@ -1767,19 +1756,25 @@ a.read {
 
 @media (max-width: 1680px) {
     .espaciado {
-        margin: 13em 0;
+        margin: 18.3em 0;
+    }
+}
+
+@media (max-width: 1676px) {
+    .espaciado {
+        margin: 18.3em 0;
     }
 }
 
 @media (max-width: 1440px) {
     .espaciado {
-        margin: 13em 0;
+        margin: 18.3em 0;
     }
 }
 
 @media (max-width:1366px) {
     .espaciado {
-        margin: 10em 0;
+        margin: 10.2em 0;
     }
 }
 
@@ -1792,6 +1787,10 @@ a.read {
 @media (max-width:1280px) {
     .banner {
         min-height: 661px;
+    }
+
+    .modal-dialog {
+        width: 90%;
     }
 }
 
@@ -1994,12 +1993,20 @@ a.read {
     .espaciado2 {
         margin: 15.4em 0;
     }
+
+    .modal-dialog {
+        width: 92%;
+    }
 }
 
 @media (max-width:991px) {
 
-    .modal-dialog {
-        width: 669px;
+    .navbar h1 {
+        margin-left: 34%;
+    }
+
+    .parqueoModal {
+        margin-left: 83%;
     }
 
     figure.effect-bubba p {
@@ -2457,6 +2464,14 @@ a.read {
 
 @media (max-width:800px) {
 
+    .navbar h1 {
+        margin-left: 32%;
+    }
+
+    .parqueoModal {
+        margin-left: 82%;
+    }
+
     .navbar-brand {
         display: block;
         padding: 0.5em 0 0em 0em;
@@ -2537,6 +2552,10 @@ a.read {
         font-size: 140%;
     }
 
+    .modal-dialog {
+        width: 93%;
+    }
+
     .newsletter h3 {
         margin-left: 1%;
         font-size: 260%;
@@ -2572,8 +2591,8 @@ a.read {
         margin-left: 4%;
     }
 
-    .modal-dialog {
-        width: 700px;
+    .parqueoModal {
+        margin-left: 80%;
     }
 
     .navbar-brand {
@@ -2587,7 +2606,11 @@ a.read {
     }
 
     .navbar-header h1 {
-        margin: 0;
+        margin: 5;
+    }
+
+    .navbar h1 {
+        margin-left: 31%;
     }
 
     .navbar-default .navbar-toggle {
@@ -2685,17 +2708,13 @@ a.read {
         margin: 4em 0;
     }
 
-        .infoGeneral h3 {
-            font-size: 240%;
-        }
+    .infoGeneral h3 {
+        font-size: 240%;
+    }
 
-        .infoGeneral p {
-            font-size: 90%;
-            margin: 0.6em;
-        }
-
-    .modal-dialog {
-        width: 625px;
+    .infoGeneral p {
+        font-size: 90%;
+        margin: 0.6em;
     }
 
     .banner {
@@ -2807,6 +2826,10 @@ a.read {
 
 @media (max-width:640px) {
 
+    .parqueoModal {
+        margin-left: 78%;
+    }
+
     .fashion-grids.one img {
         height: 438px;
     }
@@ -2916,8 +2939,8 @@ a.read {
         margin: 12.6em 0;
     }
 
-    .modal-dialog {
-        width: 565px;
+    .parqueoModal {
+        margin-left: 77%;
     }
 
     .email i, .phone i, .email em, .phone em, .email em a, .location i, .location em, .albums {
@@ -2984,8 +3007,17 @@ a.read {
 
 @media (max-width:568px) {
 
+    .navbar h1 {
+        font-size: 270%;
+        margin-left: 27%;
+    }
+
     .recordarContrasena {
         margin-left: 34%;
+    }
+
+    .parqueoModal {
+        margin-left: 73%;
     }
 
     .newsletter input[type="text"], .newsletter input[type="date"], .newsletter input[type="number"], .newsletter input[type="email"], .newsletter input[type="password"], select, .newsletter input[type="time"], .newsletter input[type="date"] {
@@ -2996,10 +3028,6 @@ a.read {
     .newsletter span {
         margin-left: 29%;
         width: 11%;
-    }
-
-    .modal-dialog {
-        width: 532px;
     }
 
     .fashion-grids {
@@ -3048,12 +3076,16 @@ a.read {
 
 @media (max-width:480px) {
 
+    .navbar h1 {
+        margin-left: 25%;
+    }
+
     .espaciado {
         margin: 10.5em 0;
     }
 
-    .modal-dialog {
-        width: 445px;
+    .parqueoModal {
+        margin-left: 68%;
     }
 
     .email i, .phone i, .email em, .phone em, .email em a, .location i, .location em, .albums {
@@ -3281,12 +3313,12 @@ a.read {
 
 @media (max-width:414px) {
 
-    .multipleButton {
-        margin-left: 15%;
+    .navbar h1 {
+        margin-left: 20%;
     }
 
-    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-        font-size: 35%;
+    .multipleButton {
+        margin-left: 15%;
     }
 
     .parqueoModal {
@@ -3331,10 +3363,6 @@ a.read {
 
     .navbar-header a {
         margin-left: 0%;
-    }
-
-    .modal-dialog {
-        width: 378px;
     }
 
     .fashion-grids.one img {
@@ -3536,8 +3564,9 @@ a.read {
 }
 
 @media (max-width:384px) {
-    .modal-dialog {
-        width: 347px;
+
+    .navbar h1 {
+        margin-left: 13%;
     }
 
     .sub-text {
@@ -3692,13 +3721,13 @@ a.read {
         margin: 8.5em 0;
     }
 
-        .infoGeneral p {
-            font-size: 90%;
-            margin: 0.6em;
-        }
+    .infoGeneral p {
+        font-size: 90%;
+        margin: 0.6em;
+    }
 
-    .modal-dialog {
-        width: 338px;
+    .parqueoModal {
+        margin-left: 70%;
     }
 
     .banner {
@@ -3917,29 +3946,27 @@ a.read {
 }
 
 @media (max-width:360px) {
-    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-        font-size: 20%;
-    }
 
     .parqueoModal {
         font-size: 80%;
-        margin-left: 78%;
+        margin-left: 69%;
     }
 }
 
 @media (max-width:320px) {
 
+    .navbar h1 {
+        text-align: center;
+        margin-left: 0%;
+    }
+
     .parqueoModal {
         font-size: 80%;
-        margin-left: 74%;
+        margin-left: 68%;
     }
 
     .singleButton {
         margin-left: 10%;
-    }
-
-    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-        font-size: 20%;
     }
 
     .multipleButton {
@@ -3969,10 +3996,6 @@ a.read {
     .singleButton {
         margin-top: 4%;
         margin-left: 29%;
-    }
-
-    .modal-dialog {
-        width: 284px;
     }
 
     .banner {

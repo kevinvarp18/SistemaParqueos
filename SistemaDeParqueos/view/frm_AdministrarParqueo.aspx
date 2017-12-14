@@ -36,4 +36,21 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog">
+        <div class='modal-dialog' role='document' style="width: 45%;">
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <h4 class='modal-title' id='myModalLabel'>¿Está seguro de realizar esta acción?</h4>
+                </div>
+                <div class='modal-footer'>
+                    <asp:UpdatePanel ID="UpdatePanel4" runat="server" Visible="true">
+                        <ContentTemplate>
+                            <asp:Button ID='btnConfirmar' CssClass='btn btn-success' runat="server" Text="Confirmar" OnClick='btnAceptar_Click'></asp:Button>
+                            <asp:Button ID='btnCancelar' CssClass='btn btn-danger' runat="server" Text="Cancelar" OnClick='btnCancelar_Click'></asp:Button>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>
