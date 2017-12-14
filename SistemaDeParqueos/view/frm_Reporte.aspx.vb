@@ -164,30 +164,48 @@ Public Class frm_Reporte
             <head>
                 <link href='" & urlr & "/public/css/style.css' rel='stylesheet' type='text/css' />
                 <link href='" & urlr & "/public/css/bootstrap.css' rel='stylesheet' type='text/css' />
+                <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css' />
+                <link href='//fonts.googleapis.com/css?family=Cabin:400,700,500,600' rel='stylesheet' type='text/css' />
+                <link href='//fonts.googleapis.com/css?family=Pacifico|Prata' rel='stylesheet' type='text/css' />
             </head>
             <body>
-                <div class='container'>
-                    <h3> Reporte de Parqueo</h3>
-                    <div class='page w3-4'>
-                        <div class='bs-example ' data-example-id='simple-table'>
-                            <table BORDER ='1'  class='table'>
-                            <tr>
-                                <th><strong> Nombre </strong></th>
-                                <th><strong> Instituci&oacute;n </strong></th>
-                                <th><strong> Placa </strong></th>
-                                <th><strong> Fecha Entrada </strong></th>
-                                <th><strong> Hora Entrada </strong></th>
-                                <th><strong> Fecha Salida </strong></th>
-                                <th><strong> Hora Salida </strong></th>
-                                <th><strong> Espacio </strong></th>
-                            </tr>"
+                <div class='banner-1 agileinfo-4'>
+                    <div class='container'>
+                        <div class='header'>
+                            <nav class='navbar navbar-default'>
+                                <div class='navbar-header' style='background:#000000;'>
+                                    <a><img style='width: 90%; height: 90%;' src='" & urlr & "/public/images/placa.png' alt=' ' /></a>
+                                </div>
+                                <h1 style='text-align: center; background:#000000;'>Reporte de Parqueo</h1>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class='newsletter wow fadeInUp animated animated' data-wow-delay='.5s' style='visibility: Visible; animation-delay: 0.5s; animation-name: fadeInUp;'>
+                    <div class='container'>
+                        <div class='page w3-4'>
+                            <div class='bs-example ' data-example-id='simple-table'>
+                                <table class='table'>
+                                <thead>
+                                    <tr>
+                                        <th><strong> Nombre </strong></th>
+                                        <th><strong> Instituci&oacute;n </strong></th>
+                                        <th><strong> Placa </strong></th>
+                                        <th><strong> Fecha Entrada </strong></th>
+                                        <th><strong> Hora Entrada </strong></th>
+                                        <th><strong> Fecha Salida </strong></th>
+                                        <th><strong> Hora Salida </strong></th>
+                                        <th><strong> Espacio </strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>"
 
             For Each solicitudAct As Solicitud In solicitudes
                 strHtml += "<tr>" + "<td>" + solicitudAct.GstrMarcaSG + "</td>" + "<td>" + solicitudAct.GstrModeloSG + "</td>" + "<td>" + solicitudAct.GstrPlacaSG +
             "</td>" + "<td>" + solicitudAct.GstrFechaISG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraISG + "</td>" + "<td>" + solicitudAct.GstrFechaFSG.Substring(0, 10) + "</td>" + "<td>" + solicitudAct.GstrHoraFSG + "</td>" + "<td>" + solicitudAct.GintIdParqueoSG.ToString() + "</td>" + "</tr>"
             Next
 
-            strHtml += "</table>" + " </div>" + " </div>" + " </div>" + "<body>" + "</html>" + "<br>"
+            strHtml += "</tbody></table></div></div></div></div></body></html>"
             strContent = strHtml
             Dim strFileShortName As String = "test" & DateTime.Now.Ticks & ".pdf"
             Dim strFileName As String = HttpContext.Current.Server.MapPath("" & strFileShortName)
