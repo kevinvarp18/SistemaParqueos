@@ -30,11 +30,6 @@ Public Class frm_BrindarAcceso
                         Me.gstrUsuarioSelecion = usuarioActual.gstrCorreo
                     End If
                 Next
-
-                Dim eventArg As String = Request("__EVENTARGUMENT")
-                If eventArg = "MyCustomArgument" Then
-                    brindarAcceso()
-                End If
             Else
                 DwnLstSolicitante.Items.Clear()
                 DwnLstSolicitante.Items.Add("Seleccione una opción")
@@ -58,40 +53,51 @@ Public Class frm_BrindarAcceso
 
     End Sub
 
-    Protected Sub brindarAcceso()
+    Protected Sub btnSolicitar_Click(sender As Object, e As EventArgs) Handles btnSolicitar.Click
         Dim titulo As String = "ERROR"
         Dim tipo As String = "error"
         Dim mensaje As String = "Debe completar todos los campos"
 
         If (tbPlaca.Text.Equals("") Or tbMarca.Text.Equals("") Or tbModelo.Text.Equals("") Or tbMotivo.Text.Equals("") Or tbFechaE.Text.Equals("") Or tbFechaS.Text.Equals("") Or tbHoraE.Text.Equals("") Or tbHoraS.Text.Equals("")) Then
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
         Else
-            Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
-            Dim solicitudNegocios As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
-            Dim fechai As DateTime = Convert.ToDateTime(tbFechaE.Text)
-            Dim fechaf As DateTime = Convert.ToDateTime(tbFechaS.Text)
-            Dim correo As String
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('show');", True)
+        End If
+    End Sub
 
-            If (DwnLstSolicitante.SelectedItem.Text.Equals("Seleccione una opción")) Then
-                correo = Session("Correo")
-            Else
-                correo = gstrUsuarioSelecion
-            End If
+    Protected Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
+    End Sub
+    Protected Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Dim mensaje, titulo, tipo As String
 
-            solicitudNegocios.brindarAcceso(correo, New Solicitud(0, 0, Integer.Parse(DwnLstParqueos.SelectedItem.Text), tbHoraE.Text, tbHoraS.Text, tbPlaca.Text, tbModelo.Text, tbMarca.Text, fechai.ToString("dd/MM/yyyy"), fechaf.ToString("dd/MM/yyyy"), tbMotivo.Text))
-            titulo = "Correcto"
-            mensaje = "Acceso brindado exitosamente"
-            tipo = "success"
+        Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
+        Dim solicitudNegocios As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
+        Dim fechai As DateTime = Convert.ToDateTime(tbFechaE.Text)
+        Dim fechaf As DateTime = Convert.ToDateTime(tbFechaS.Text)
+        Dim correo As String
 
-            tbHoraE.Text = ""
-            tbHoraS.Text = ""
-            tbPlaca.Text = ""
-            tbModelo.Text = ""
-            tbFechaE.Text = ""
-            tbFechaS.Text = ""
-            tbMarca.Text = ""
-            tbMotivo.Text = ""
+        If (DwnLstSolicitante.SelectedItem.Text.Equals("Seleccione una opción")) Then
+            correo = Session("Correo")
+        Else
+            correo = gstrUsuarioSelecion
         End If
 
+        solicitudNegocios.brindarAcceso(correo, New Solicitud(0, 0, Integer.Parse(DwnLstParqueos.SelectedItem.Text), tbHoraE.Text, tbHoraS.Text, tbPlaca.Text, tbModelo.Text, tbMarca.Text, fechai.ToString("yyyy/MM/dd"), fechaf.ToString("yyyy/MM/dd"), tbMotivo.Text))
+        titulo = "Correcto"
+        mensaje = "Acceso brindado exitosamente"
+        tipo = "success"
+
+        tbHoraE.Text = ""
+        tbHoraS.Text = ""
+        tbPlaca.Text = ""
+        tbModelo.Text = ""
+        tbFechaE.Text = ""
+        tbFechaS.Text = ""
+        tbMarca.Text = ""
+        tbMotivo.Text = ""
+
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
         ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
     End Sub
 End Class

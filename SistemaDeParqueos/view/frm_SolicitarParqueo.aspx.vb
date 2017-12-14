@@ -15,13 +15,6 @@ Public Class frm_SolicitarParqueo
         Next
 
         If (permitido) Then
-            If Not IsPostBack Then
-            Else
-                Dim eventArg As String = Request("__EVENTARGUMENT")
-                If eventArg = "MyCustomArgument" Then
-                    registrarSolicitud()
-                End If
-            End If
         Else
             Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
             Response.BufferOutput = True
@@ -29,34 +22,35 @@ Public Class frm_SolicitarParqueo
         End If
     End Sub
 
-    Protected Sub registrarSolicitud()
-        Dim titulo As String = "ERROR"
-        Dim mensaje As String
-        Dim tipo As String = "error"
+    Protected Sub btnSolicitar_Click(sender As Object, e As EventArgs) Handles btnSolicitar.Click
+        If tbFechaE.Text <> "" AndAlso tbHoraE.Text <> "" AndAlso tbHoraS.Text <> "" AndAlso tbFechaS.Text <> "" AndAlso tbPlaca.Text <> "" AndAlso tbPlaca.Text <> "" AndAlso tbMarca.Text <> "" AndAlso tbModelo.Text <> "" AndAlso tbMotivo.Text <> "" Then
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('show');", True)
+        Else
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje('ERROR', 'Debe completar todos los campos', 'error');", True)
+        End If
+    End Sub
 
+    Protected Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
+    End Sub
+    Protected Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Dim solicitudNegocios As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
         Dim fechai As DateTime = Convert.ToDateTime(tbFechaE.Text)
         Dim fechaf As DateTime = Convert.ToDateTime(tbFechaS.Text)
 
-        If tbFechaE.Text <> "" AndAlso tbHoraE.Text <> "" AndAlso tbHoraS.Text <> "" AndAlso tbFechaS.Text <> "" AndAlso tbPlaca.Text <> "" AndAlso tbPlaca.Text <> "" AndAlso tbMarca.Text <> "" AndAlso tbModelo.Text <> "" AndAlso tbMotivo.Text <> "" Then
-            solicitudNegocios.insertarSolicitud(Session("Correo"), New Solicitud(0, 0, 0, tbHoraE.Text, tbHoraS.Text, tbPlaca.Text, tbModelo.Text, tbMarca.Text, fechai.ToString("dd/MM/yyyy"), fechaf.ToString("dd/MM/yyyy"), tbMotivo.Text))
-            titulo = "Correcto"
-            mensaje = "La solicitud se ha enviado exitosamente"
-            tipo = "success"
-            tbFechaE.Text = ""
-            tbFechaS.Text = ""
-            tbHoraE.Text = ""
-            tbHoraS.Text = ""
-            tbPlaca.Text = ""
-            tbModelo.Text = ""
-            tbMarca.Text = ""
-            tbModelo.Text = ""
-            tbMotivo.Text = ""
-        Else
-            mensaje = "Debe completar todos los campos"
-        End If
+        solicitudNegocios.insertarSolicitud(Session("Correo"), New Solicitud(0, 0, 0, tbHoraE.Text, tbHoraS.Text, tbPlaca.Text, tbModelo.Text, tbMarca.Text, fechai.ToString("yyyy/MM/dd"), fechaf.ToString("yyyy/MM/dd"), tbMotivo.Text))
+        tbFechaE.Text = ""
+        tbFechaS.Text = ""
+        tbHoraE.Text = ""
+        tbHoraS.Text = ""
+        tbPlaca.Text = ""
+        tbModelo.Text = ""
+        tbMarca.Text = ""
+        tbModelo.Text = ""
+        tbMotivo.Text = ""
 
-        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje('CORRECTO', 'La solicitud se ha enviado exitosamente', 'success');", True)
     End Sub
 End Class

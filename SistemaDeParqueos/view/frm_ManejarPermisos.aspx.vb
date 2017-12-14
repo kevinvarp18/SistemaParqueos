@@ -7,9 +7,9 @@ Public Class frm_ManejarPermisos
 
     Dim strConnectionString As String
     Dim usuarioNegocios As SP_Usuario_Negocios
+    Public Shared btnAccion As Integer
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
         If (Session("Usuario").Equals("a")) Then
             Me.strConnectionString = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
             Me.usuarioNegocios = New SP_Usuario_Negocios(Me.strConnectionString)
@@ -69,29 +69,12 @@ Public Class frm_ManejarPermisos
         Next
     End Sub
     Protected Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
-        Dim titulo As String = "ERROR"
-        Dim mensaje As String
-        Dim tipo As String = "error"
-
         If (DwnLstPermisos.SelectedItem.ToString().Equals("Seleccione una opción") Or DwnLstRoles.SelectedItem.ToString().Equals("Seleccione una opción")) Then
-            mensaje = "Debe completar todos los campos"
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje('ERROR', 'Debe completar todos los campos', 'error');", True)
         Else
-            Dim idPermiso As Integer = 0
-            Dim rol As String = ""
-
-            idPermiso = Me.establecerPermiso(DwnLstPermisos.SelectedItem.ToString())
-            rol = establecerRol(DwnLstRoles.SelectedItem.ToString())
-
-            If Me.usuarioNegocios.insertarPermisoRol(idPermiso, rol) Then
-                titulo = "CORRECTO"
-                mensaje = "El usuario " + DwnLstRoles.SelectedItem.ToString() + " ahora tiene permitido acceder a " + DwnLstPermisos.SelectedItem.ToString()
-                tipo = "success"
-            Else
-                mensaje = "La relación entre el permiso y el rol ya existe"
-            End If
+            btnAccion = 1
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('show');", True)
         End If
-
-        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
     End Sub
     Protected Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Dim titulo As String = "ERROR"
@@ -99,23 +82,11 @@ Public Class frm_ManejarPermisos
         Dim tipo As String = "error"
 
         If (DwnLstPermisos.SelectedItem.ToString().Equals("Seleccione una opción") Or DwnLstRoles.SelectedItem.ToString().Equals("Seleccione una opción")) Then
-            mensaje = "Debe completar todos los campos"
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje('ERROR', 'Debe completar todos los campos', 'error');", True)
         Else
-            Dim idPermiso As Integer = 0
-            Dim rol As String = ""
-            idPermiso = Me.establecerPermiso(DwnLstPermisos.SelectedItem.ToString())
-            rol = establecerRol(DwnLstRoles.SelectedItem.ToString())
-
-            If Me.usuarioNegocios.eliminarPermisoRol(idPermiso, rol) Then
-                titulo = "Correcto"
-                mensaje = "El permiso se ha eliminado exitosamente para el usuario " + DwnLstRoles.SelectedItem.ToString()
-                tipo = "success"
-            Else
-                mensaje = "No se ha podido eliminar la relación"
-            End If
+            btnAccion = 0
+            ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('show');", True)
         End If
-
-        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
     End Sub
     Public Function establecerPermiso(permiso As String) As Integer
         If (permiso.Equals("frm_AdministrarParqueo")) Then
@@ -151,4 +122,45 @@ Public Class frm_ManejarPermisos
 
         Return ""
     End Function
+
+    Protected Sub btnCancelar_Click(ByVal sender As Object, ByVal e As EventArgs)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
+    End Sub
+    Protected Sub btnAceptar_Click(ByVal sender As Object, ByVal e As EventArgs)
+        Dim mensaje As String
+        Dim titulo As String = "ERROR"
+        Dim tipo As String = "error"
+
+        If (btnAccion = 1) Then
+            Dim idPermiso As Integer = 0
+            Dim rol As String = ""
+
+            idPermiso = Me.establecerPermiso(DwnLstPermisos.SelectedItem.ToString())
+            rol = establecerRol(DwnLstRoles.SelectedItem.ToString())
+
+            If Me.usuarioNegocios.insertarPermisoRol(idPermiso, rol) Then
+                titulo = "CORRECTO"
+                mensaje = "El usuario " + DwnLstRoles.SelectedItem.ToString() + " ahora tiene permitido acceder a " + DwnLstPermisos.SelectedItem.ToString()
+                tipo = "success"
+            Else
+                mensaje = "La relación entre el permiso y el rol ya existe"
+            End If
+        ElseIf (btnAccion = 0) Then
+            Dim idPermiso As Integer = 0
+            Dim rol As String = ""
+            idPermiso = Me.establecerPermiso(DwnLstPermisos.SelectedItem.ToString())
+            rol = establecerRol(DwnLstRoles.SelectedItem.ToString())
+
+            If Me.usuarioNegocios.eliminarPermisoRol(idPermiso, rol) Then
+                titulo = "CORRECTO"
+                mensaje = "El permiso se ha eliminado exitosamente para el usuario " + DwnLstRoles.SelectedItem.ToString()
+                tipo = "success"
+            Else
+                mensaje = "No se ha podido eliminar la relación"
+            End If
+        End If
+
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "ScriptManager2", "$('#modalConfirmacion').modal('hide');", True)
+        ScriptManager.RegisterClientScriptBlock(Me, Me.GetType(), "ScriptManager2", "muestraMensaje(""" + titulo + """,""" + mensaje + """,""" + tipo + """);", True)
+    End Sub
 End Class
