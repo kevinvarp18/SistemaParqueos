@@ -17,7 +17,7 @@ Public Class VerParqueo
         If (permitido) Then
             ScriptManager.RegisterClientScriptInclude(Me, Me.GetType(), "frm_VerParqueo", ResolveUrl("~") + "public/js/" + "script.js")
             If Not IsPostBack Then
-                llenarTablaParqueos(DateTime.Now.ToString("dd/MM/yyyy"), "07:00", "21:00")
+                llenarTablaParqueos(DateTime.Now.ToString("yyyy/MM/dd"), "07:00", "21:00")
             End If
         Else
             Dim url As String = HttpContext.Current.Request.Url.AbsoluteUri.Replace(HttpContext.Current.Request.Url.AbsolutePath, "")
@@ -42,7 +42,7 @@ Public Class VerParqueo
         Dim strconnectionString As String = WebConfigurationManager.ConnectionStrings("DBOIJ").ToString()
         Dim parqueoNegocios As New SP_Parqueo_Negocios(strconnectionString)
         Dim solicitudNegocios As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
-        Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(fechai.ToString("dd/MM/yyyy"), horaI, horaF)
+        Dim parqueosOcupados As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueoOcupado(fechai.ToString("yyyy/MM/dd"), horaI, horaF)
         Dim parqueosTotales As LinkedList(Of Parqueo) = parqueoNegocios.obtenerParqueo()
         Dim cantidadTiposParqueo As LinkedList(Of String) = parqueoNegocios.cantidadTiposParqueo()
 

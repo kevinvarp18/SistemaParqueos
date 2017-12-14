@@ -1766,6 +1766,16 @@ a.read {
     }
 }
 
+@media (max-width: 1600px) {
+    .espaciado {
+        margin: 22em 0;
+    }
+
+    .espaciado2 {
+        margin: 10.1em 0;
+    }
+}
+
 @media (max-width: 1440px) {
     .espaciado {
         margin: 18.3em 0;
@@ -1785,6 +1795,10 @@ a.read {
 }
 
 @media (max-width:1280px) {
+    .espaciado {
+        margin: 13em 0;
+    }
+
     .banner {
         min-height: 661px;
     }
