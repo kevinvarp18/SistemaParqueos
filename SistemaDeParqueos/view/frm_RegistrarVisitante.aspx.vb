@@ -32,6 +32,7 @@ Public Class registrarVisitante
                 DwnLstDepartamento.Items.Add("SERT")
                 DwnLstDepartamento.Items.Add("UPROV")
                 DwnLstDepartamento.Items.Add("UVISE")
+
             Else
                 If (DwnLstProcedencia.SelectedItem.ToString().Equals("Seleccione una opción")) Then
                     UpdatePanel2.Visible = False

@@ -66,8 +66,8 @@ Public Class SP_Solicitud_Parqueo_Negocios
         Return Me.solicitud_Acceso_a_Datos.obtenerReporteCedula(cedula)
     End Function
 
-    Public Function ObtenerCedulasYNombres() As LinkedList(Of Usuario)
-        Return Me.solicitud_Acceso_a_Datos.ObtenerCedulasYNombres()
+    Public Function ObtenerCedulasYNombres(tipoUsuario As String) As LinkedList(Of Usuario)
+        Return Me.solicitud_Acceso_a_Datos.ObtenerCedulasYNombres(tipoUsuario)
     End Function
 
     Public Function ObtenerDepartamentos() As LinkedList(Of String)
@@ -92,5 +92,9 @@ Public Class SP_Solicitud_Parqueo_Negocios
 
     Public Function brindarAcceso(correo As String, solicitud As Solicitud) As Solicitud
         Return Me.solicitud_Acceso_a_Datos.brindarAcceso(correo, solicitud)
+    End Function
+
+    Public Function obtenerReporteOficial(cedula As String) As LinkedList(Of Solicitud)
+        Return Me.solicitud_Acceso_a_Datos.obtenerReporteOficial(cedula)
     End Function
 End Class

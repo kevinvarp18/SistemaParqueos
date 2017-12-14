@@ -29,6 +29,7 @@ Public Class frm_Reporte
             Dim usuarioNegocios As New SP_Usuario_Negocios(strconnectionString)
             Dim solicitudNegocios As New SP_Solicitud_Parqueo_Negocios(strconnectionString)
 
+
             If IsPostBack Then
                 Me.cadena = Me.cadena
 
@@ -55,8 +56,16 @@ Public Class frm_Reporte
                         Next
                     End If
                 ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Cedula")) Then
-                    lblTipoEscogido.Text = "Cedula"
-                    listaUsuarios = solicitudNegocios.ObtenerCedulasYNombres()
+                    lblTipoEscogido.Text = "Cedula:"
+                    listaUsuarios = solicitudNegocios.ObtenerCedulasYNombres("v")
+                    If (DwnLstDatos.Items.Count = 1) Then
+                        For Each datosUsuario As Usuario In listaUsuarios
+                            DwnLstDatos.Items.Add(datosUsuario.GstrIdSG + " - " + datosUsuario.GstrNombreSG + " " + datosUsuario.GstrApellidoSG)
+                        Next
+                    End If
+                ElseIf (DwnLstTipoReporte.SelectedItem.ToString().Equals("Oficial")) Then
+                    lblTipoEscogido.Text = "Oficial:"
+                    listaUsuarios = solicitudNegocios.ObtenerCedulasYNombres("o")
                     If (DwnLstDatos.Items.Count = 1) Then
                         For Each datosUsuario As Usuario In listaUsuarios
                             DwnLstDatos.Items.Add(datosUsuario.GstrIdSG + " - " + datosUsuario.GstrNombreSG + " " + datosUsuario.GstrApellidoSG)
@@ -88,6 +97,7 @@ Public Class frm_Reporte
                 DwnLstTipoReporte.Items.Add("Seleccione una opción")
                 DwnLstTipoReporte.Items.Add("Placa")
                 DwnLstTipoReporte.Items.Add("Cedula")
+                DwnLstTipoReporte.Items.Add("Oficial")
                 DwnLstTipoReporte.Items.Add("Correo")
                 DwnLstTipoReporte.Items.Add("Institucion")
                 DwnLstTipoReporte.Items.Add("Departamento")
@@ -258,6 +268,10 @@ Public Class frm_Reporte
                     Exit Select
                 Case "departamento"
                     solicitudes = solicitudNegocios.obtenerReporteDepartamento(DwnLstDatos.SelectedItem.ToString())
+                    Exit Select
+                Case "oficial"
+                    Dim cedula As String() = DwnLstDatos.SelectedItem.ToString().Split(New String() {" "}, StringSplitOptions.None)
+                    solicitudes = solicitudNegocios.obtenerReporteOficial(cedula(0))
                     Exit Select
             End Select
 

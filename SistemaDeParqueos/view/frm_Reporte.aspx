@@ -39,7 +39,7 @@
                         <div class="page w3-4">
                             <div class="bs-example " data-example-id="simple-table">
                                 <div class="table-responsive">
-                                    <asp:Table ID="table" runat="server" CssClass="table">
+                                    <asp:Table ID="table" runat="server" CssClass="table" style="margin-left: -3.5%;">
                                         <asp:TableHeaderRow>
                                             <asp:TableHeaderCell>Nombre</asp:TableHeaderCell>
                                             <asp:TableHeaderCell>Institución</asp:TableHeaderCell>
